@@ -1,0 +1,62 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "files.autoSave": "onFocusChange",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "yapf",
+  "editor.detectIndentation": false,
+  "python.unitTest.pyTestEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.formatting.yapfArgs": [
+    "--style",
+    "{based_on_style: chromium, column_limit: 100, indent_width: 4}"
+  ],
+  "files.exclude": {
+    "**/*.pyc": true,
+    "**/__pycache__": true,
+    "build": true,
+    "dist": true,
+    "*.egg-info": true,
+    "log": true,
+    "cover": true,
+    "experiments": false,
+    ".vscode": false,
+    ".coverage": true,
+    ".travis.yml": true,
+    "LICENSE": true,
+    ".flake8": true,
+    "Vagrantfile": true,
+  },
+  "cSpell.ignorePaths": [
+    "**/node_modules/**",
+    "**/vscode-extension/**",
+    "**/.git/**",
+    ".vscode",
+    "typings",
+    "**/Python.framework/**",
+    "*.egg-info",
+    "*.log",
+    "data/"
+  ],
+  "editor.rulers": [
+    100
+  ],
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "build/**": true,
+    "cover/**": true
+  },
+  "python.pythonPath": "/usr/bin/python3.6",
+  "cSpell.words": [
+    "bleu",
+    "correspondence",
+    "functools",
+    "itertools",
+    "spacy",
+    "tqdm",
+    "unsqueeze"
+  ]
+}
