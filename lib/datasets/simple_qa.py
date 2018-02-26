@@ -12,8 +12,14 @@ from lib.utils import urlretrieve_reporthook
 logger = logging.getLogger(__name__)
 
 
-def _download_simple_qa_dataset(directory, train_filename='annotated_fb_data_train.txt'):
-    if os.path.isdir(directory) and os.path.isfile(os.path.join(directory, train_filename)):
+def _download_simple_qa_dataset(directory, critical_filename='annotated_fb_data_train.txt'):
+    """ Download the Simple Questions dataset into `directory`
+
+    Args:
+        directory (str)
+        critical_filename (str) Used to make sure Simple Questions was downloaded and extracted.
+     """
+    if os.path.isdir(directory) and os.path.isfile(os.path.join(directory, critical_filename)):
         # Already downloaded
         return
 
@@ -49,10 +55,10 @@ def simple_qa_dataset(directory='data/simple_qa',
     https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/ 
 
     Sample Row:
-        subject: what is the book e about?
-        relation: www.freebase.com/book/written_work/subjects
-        object: 
-        question:
+        subject: Who was the trump ocean club international hotel and tower named after
+        relation: www.freebase.com/symbols/namesake/named_after
+        object: www.freebase.com/m/0cqt90
+        question: www.freebase.com/m/0f3xg_
     """
     _download_simple_qa_dataset(directory, train_filename)
 

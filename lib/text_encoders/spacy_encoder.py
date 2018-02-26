@@ -1,13 +1,11 @@
 import spacy
+from spacy.lang.en import English
 
 from lib.text_encoders.word_encoder import WordEncoder
 
-NLP = spacy.load('en_core_web_sm')
-
-
-def spacy_tokenize(s):
-    doc = NLP(s, disable=['parser', 'tagger', 'ner'])
-    return [w.text for w in doc]
+# Use the SpacyEncoder by downloading en_core_web_sm via: `python -m spacy download en_core_web_sm`
+_MODEL = spacy.load('en_core_web_sm')
+tokenizer = English().Defaults.create_tokenizer(_MODEL)
 
 
 class SpacyEncoder(WordEncoder):
@@ -15,6 +13,6 @@ class SpacyEncoder(WordEncoder):
 
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
-            raise TypeError('TreebankEncoder defines a tokenize callable Moses')
+            raise TypeError('SpacyEncoder defines a tokenize callable.')
 
-        super().__init__(*args, **kwargs, tokenize=spacy_tokenize)
+        super().__init__(*args, **kwargs, tokenize=lambda s: [w.text for w in tokenizer(s)])

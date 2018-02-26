@@ -15,7 +15,7 @@ def count_dataset(train=False,
 
     Sample Data:
         text: 1 2 3
-        label: 3
+        count: 3
     """
     ret = []
     for is_requested, n_rows in [(train, train_rows), (dev, dev_rows), (test, test_rows)]:
@@ -26,7 +26,7 @@ def count_dataset(train=False,
             for _ in range(length):
                 seq.append(str(random.randint(0, 9)))
             input_ = ' '.join(seq)
-            rows.append({'text': input_, 'label': str(length)})
+            rows.append({'numbers': input_, 'count': str(length)})
 
         # NOTE: Given that `random.randint` is deterministic with the same `random_seed` we need
         # to allow the random generator to create the train, dev and test dataset in order.

@@ -1,5 +1,6 @@
 from lib.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
 from lib.text_encoders.reserved_tokens import RESERVED_STOI
+from lib.text_encoders.reserved_tokens import UNKNOWN_TOKEN
 
 
 class DelimiterEncoder(StaticTokenizerEncoder):
@@ -13,8 +14,11 @@ class DelimiterEncoder(StaticTokenizerEncoder):
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]
-        reserved = []
-        while len(tokens) > 0 and tokens[-1] in RESERVED_STOI:
-            reserved.insert(0, tokens.pop())
-        return self.delimiter.join(tokens) + ''.join(reserved)
 
+        # NOTE: Join reserved tokens like `PAD_TOKEN` and `EOS_TOKEN` with '' instead of delimiter
+        # for aesthetic reasons at the end of the text phrase
+        reserved = []
+        while len(tokens) > 0 and tokens[-1] in RESERVED_STOI and tokens[-1] != UNKNOWN_TOKEN:
+            reserved.insert(0, tokens.pop())
+
+        return self.delimiter.join(tokens) + ''.join(reserved)

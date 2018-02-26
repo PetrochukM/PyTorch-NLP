@@ -7,8 +7,6 @@ from lib.text_encoders.reserved_tokens import RESERVED_STOI
 from lib.text_encoders.subword_text_tokenizer import SubwordTextTokenizer
 from lib.text_encoders.text_encoders import TextEncoder
 
-# TODO: Add reserved tokens to SubwordTextTokenizer like Google did to ensure correct tokenization
-
 
 class SubwordEncoder(TextEncoder):
     """ Use Googles Tensor2Tensor SubwordTextTokenizer """
@@ -17,18 +15,18 @@ class SubwordEncoder(TextEncoder):
                  sample,
                  append_eos=False,
                  lower=True,
-                 target_size=None,
-                 min_val=1,
-                 max_val=1e3):
+                 target_vocab_size=None,
+                 min_occurrences=1,
+                 max_occurrences=1e3):
         """ Given a sample, build the dictionary for the word encoder.
         
         Args:
             sample (list of str)
             append_eos (bool)
             lower (bool)
-            target_size (int): desired vocab_size to approximate
-            min_val (int): lower bound for the minimum token count
-            max_val (int): upper bound for the minimum token count
+            target_vocab_size (int): desired vocab_size to approximate
+            min_occurrences (int): lower bound for the minimum token count
+            max_occurrences (int): upper bound for the minimum token count
         """
         self.lower = lower
         self.append_eos = append_eos
@@ -36,12 +34,15 @@ class SubwordEncoder(TextEncoder):
         if self.lower:
             sample = [text.lower().rstrip('\n') for text in sample]
 
-        if target_size is None:
+        if target_vocab_size is None:
             self.tokenizer = SubwordTextTokenizer()
-            self.tokenizer.build_from_corpus(sample, min_count=min_val)
+            self.tokenizer.build_from_corpus(sample, min_count=min_occurrences)
         else:
             self.tokenizer = SubwordTextTokenizer.build_to_target_size_from_corpus(
-                sample, target_size=target_size, min_val=min_val, max_val=max_val)
+                sample,
+                target_size=target_vocab_size,
+                min_val=min_occurrences,
+                max_val=max_occurrences)
 
         self.stoi = RESERVED_STOI.copy()
         self.itos = RESERVED_ITOS[:]
