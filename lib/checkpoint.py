@@ -38,10 +38,6 @@ class Checkpoint(object):
         for (k, v) in data.items():
             setattr(self, k, v)
 
-        # TODO: This should be recusive looking for any module with flatten_parameters
-        if hasattr(self.model, 'flatten_parameters'):
-            self.model.flatten_parameters()  # make RNN parameters contiguous
-
     @classmethod
     def recent(cls, log_directory, device=None):
         """
@@ -58,9 +54,6 @@ class Checkpoint(object):
         checkpoint_path = os.path.join(log_directory, all_checkpoints[0])
         return cls(checkpoint_path, device)
 
-    # TODO: Checkpoint save should be arbitrary and checkpoint predict can be broken up into utility functions?
-    # TODO: Consider saving as well a predict lambda
-    # The predict lambda takes the saved object with a model and encoders, and makes a prediction...
     @classmethod
     def save(cls, folder, data, device=None):
         """

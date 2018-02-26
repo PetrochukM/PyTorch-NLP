@@ -16,6 +16,11 @@ from lib.text_encoders import PADDING_INDEX
 logger = logging.getLogger(__name__)
 
 
+def flatten_parameters(model):
+    """ Flatten parameters of a model """
+    model.apply(lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None)
+
+
 def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
     """ Deterministic shuffle and split algorithm. 
 
