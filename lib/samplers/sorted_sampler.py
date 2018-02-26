@@ -6,11 +6,12 @@ class SortedSampler(Sampler):
 
     Arguments:
         data_source (Dataset): dataset to sample from
-        sort_key (callable): callable that returns from one row of the data_source a sortable
-            value
+        sort_key (callable): specifies a function of one argument that is used to extract a
+          comparison key from each list element
     """
 
-    def __init__(self, data_source, sort_key, sort_noise=0.1):
+    def __init__(self, data_source, sort_key):
+        super().__init__(data_source)
         self.data_source = data_source
         self.sort_key = sort_key
         zip = [(i, self.sort_key(row)) for i, row in enumerate(self.data_source)]
