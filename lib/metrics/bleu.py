@@ -28,16 +28,21 @@ from six.moves import zip
 logger = logging.getLogger(__name__)
 
 
-def moses_multi_bleu(hypotheses, references, lowercase=False):
+def get_moses_multi_bleu(hypotheses, references, lowercase=False):
     """Calculate the bleu score for hypotheses and references
-    using the MOSES ulti-bleu.perl script.
+    using the MOSES multi-bleu.perl script.
+
     Args:
-      hypotheses: A numpy array of strings where each string is a single example.
-      references: A numpy array of strings where each string is a single example.
+      hypotheses: List of strings where each string is a single example.
+      references: List of strings where each string is a single example.
       lowercase: If true, pass the "-lc" flag to the multi-bleu script
     Returns:
       The BLEU score as a float32 value.
     """
+    if isinstance(hypotheses, list):
+        hypotheses = np.array(hypotheses)
+    if isinstance(references, list):
+        references = np.array(references)
 
     if np.size(hypotheses) == 0:
         return np.float32(0.0)
@@ -86,26 +91,3 @@ def moses_multi_bleu(hypotheses, references, lowercase=False):
     reference_file.close()
 
     return np.float32(bleu_score)
-
-
-def get_bleu(targets, outputs, output_text_encoder, ignore_index=None, print_=False):
-    """ Compute BLEU with standard moses multi-bleu.perl """
-    decoded_targets = []
-    decoded_predictions = []
-    for target, output in zip(targets, outputs):
-        target = target.squeeze(dim=0)
-        output = output.squeeze(dim=0)
-        prediction = output.max(1)[1].view(-1)
-        if ignore_index is not None:
-            mask = target.ne(ignore_index)
-            target = target.masked_select(mask)
-            prediction = prediction.masked_select(mask)
-        decoded_predictions.append(output_text_encoder.decode(prediction))
-        decoded_targets.append(output_text_encoder.decode(target))
-    if decoded_targets == 0:
-        bleu = None
-    else:
-        bleu = moses_multi_bleu(np.array(decoded_predictions), np.array(decoded_targets))
-    if print_:
-        logger.info('BLEU: %s [%d Corpus Size]', bleu, len(decoded_targets))
-    return bleu

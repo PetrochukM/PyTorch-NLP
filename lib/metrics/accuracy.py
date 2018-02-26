@@ -1,50 +1,69 @@
-import logging
 import torch
 
 from lib.utils import torch_equals_ignore_index
 
-logger = logging.getLogger(__name__)
 
-
-def get_accuracy(targets, outputs, ignore_index=None, print_=False):
+def get_accuracy(targets, outputs, k=1, ignore_index=None):
     """
+    Compute the accuracy of o == t {o \in outputs and t \in targets.
+
     Args:
       targets (list of tensors)
       outputs (list of tensors)
+      ignore_index (optional, int): Specifies a target value that is ignored computing equality
+    Returns:
+      accuracy (float)
+      number correct (int)
+      total (int)
     """
-    n_correct = 0
+    n_correct = 0.0
     for target, output in zip(targets, outputs):
-        target = target.squeeze(dim=0)
-        output = output.squeeze(dim=0)
+        if not torch.is_tensor(target):
+            target = torch.LongTensor([target])
 
-        prediction = output.max(output.dim() - 1)[1].view(-1)
-        if torch_equals_ignore_index(target, prediction, ignore_index=ignore_index):
-            n_correct += 1
-    accuracy = float(n_correct) / len(targets)
-    if print_:
-        logger.info('Accuracy: %s [%d of %d]', accuracy, n_correct, len(targets))
-    return accuracy, n_correct, len(targets)
+        if not torch.is_tensor(output):
+            output = torch.LongTensor([[output]])
 
-
-def get_accuracy_top_k(targets, outputs, k=3, ignore_index=None, print_=False):
-    """
-    Args:
-      targets (list of tensors)
-      outputs (list of tensors)
-    """
-    n_correct = 0
-    for target, output in zip(targets, outputs):
-        target = target.squeeze(dim=0)
-        output = output.squeeze(dim=0)
-
-        predictions = output.topk(k=k, dim=output.dim() - 1)[1]
+        predictions = output.topk(k=min(k, len(output)), dim=0)[0]
         for prediction in predictions:
-            if isinstance(prediction, int):
+            if not torch.is_tensor(prediction):
                 prediction = torch.LongTensor([prediction])
+
             if torch_equals_ignore_index(target, prediction, ignore_index=ignore_index):
                 n_correct += 1
                 break
-    accuracy = float(n_correct) / len(targets)
-    if print_:
-        logger.info('Accuracy Top %d: %s [%d of %d]', k, accuracy, n_correct, len(targets))
-    return accuracy, n_correct, len(targets)
+
+    return n_correct / len(targets), n_correct, len(targets)
+
+
+def get_token_accuracy(targets, outputs, ignore_index=None):
+    """ Compute the token accuracy.
+    
+    Args:
+      targets (list of tensors)
+      outputs (list of tensors)
+      ignore_index (optional, int): Specifies a target value that is ignored computing equality
+    Returns:
+      accuracy (float)
+      number correct (int)
+      total (int)
+     """
+    n_correct = 0.0
+    n_total = 0.0
+    for target, output in zip(targets, outputs):
+        if not torch.is_tensor(target):
+            target = torch.LongTensor([target])
+
+        if not torch.is_tensor(output):
+            output = torch.LongTensor([[output]])
+
+        prediction = output.max(dim=0)[0].view(-1)
+        if ignore_index is not None:
+            mask = target.ne(ignore_index)
+            n_correct += prediction.eq(target).masked_select(mask).sum()
+            n_total += mask.sum()
+        else:
+            n_total += len(target)
+            n_correct += prediction.eq(target).sum()
+
+    return n_correct / n_total, n_correct, n_total

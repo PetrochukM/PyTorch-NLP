@@ -75,19 +75,18 @@ target/
 # Checkpoints
 logs/**
 
-# Nose coverage
-cover/** 
+# Coverage
+coverage/** 
+cover/
 
 # Data
 data/**
 
-# Checkpoint files are large
+# Checkpoint files
 *.pt
 
-# Sensitive
-*.pass
-
-experiments/
+# Embeddings
 .pretrained_embeddings_cache/
-results/
-*.pkl
+
+# Test Files
+.pytest_cache

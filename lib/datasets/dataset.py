@@ -1,7 +1,5 @@
 from torch.utils import data
 
-# TODO: Just use Pandas#DataFrame
-
 
 class Dataset(data.Dataset):
 
@@ -12,10 +10,12 @@ class Dataset(data.Dataset):
         self.rows = rows
 
     def __getitem__(self, key):
+        # Given an column string return list of column values.
         if isinstance(key, str):
             if key not in self.columns:
                 raise AttributeError
-            return [row[key] for row in self.rows]
+            return [row[key] if key in row else None for row in self.rows]
+        # Given an row integer return a object of row values.
         else:
             return self.rows[key]
 
@@ -23,4 +23,5 @@ class Dataset(data.Dataset):
         return len(self.rows)
 
     def __contains__(self, key):
+        # Check if `self.columns` contains column
         return key in self.columns

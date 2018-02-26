@@ -3,15 +3,15 @@ import random
 from lib.datasets.dataset import Dataset
 
 
-def reverse(train=False,
-            dev=False,
-            test=False,
-            train_rows=10000,
-            dev_rows=1000,
-            test_rows=1000,
-            seq_max_length=10):
+def reverse_dataset(train=False,
+                    dev=False,
+                    test=False,
+                    train_rows=10000,
+                    dev_rows=1000,
+                    test_rows=1000,
+                    seq_max_length=10):
     """
-    Used for Seq to Seq tests.
+    Used for sequence to sequence tests.
 
     Sample Data:
         Input: 1 2 3

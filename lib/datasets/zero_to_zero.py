@@ -1,7 +1,12 @@
 from lib.datasets.dataset import Dataset
 
 
-def zero_to_zero(train=False, dev=False, test=False, train_rows=256, dev_rows=64, test_rows=64):
+def zero_to_zero_dataset(train=False,
+                         dev=False,
+                         test=False,
+                         train_rows=256,
+                         dev_rows=64,
+                         test_rows=64):
     """
     Used for quick integration testing.
     

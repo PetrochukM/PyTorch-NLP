@@ -12,7 +12,6 @@ import torch
 import numpy as np
 
 from lib.text_encoders import PADDING_INDEX
-from lib.datasets import Dataset
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +32,9 @@ def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
         dataset (lib.datasets.Dataset)
         other_dataset (lib.datasets.Dataset)
     """
+    # Prevent circular dependency
+    from lib.datasets import Dataset
+
     concat = dataset.rows + other_dataset.rows
     # Reference:
     # https://stackoverflow.com/questions/19306976/python-shuffling-with-a-parameter-to-get-the-same-result
@@ -276,3 +278,32 @@ def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):
         tensor_other = tensor_other.masked_select(mask_arr)
 
     return torch.equal(tensor, tensor_other)
+
+
+def urlretrieve_reporthook(t):
+    """Wraps tqdm instance.
+    Don't forget to close() or __exit__()
+    the tqdm instance once you're done with it (easiest using `with` syntax).
+    Example
+    -------
+    >>> with tqdm(...) as t:
+    ...     reporthook = urlretrieve_reporthook(t)
+    ...     urllib.urlretrieve(..., reporthook=reporthook)
+    """
+    last_b = [0]
+
+    def update_to(b=1, bsize=1, tsize=None):
+        """
+        b  : int, optional
+            Number of blocks transferred so far [default: 1].
+        bsize  : int, optional
+            Size of each block (in tqdm units) [default: 1].
+        tsize  : int, optional
+            Total size (in tqdm units). If [default: None] remains unchanged.
+        """
+        if tsize is not None:
+            t.total = tsize
+        t.update((b - last_b[0]) * bsize)
+        last_b[0] = b
+
+    return update_to

@@ -1,18 +1,14 @@
 # `torch` install from http://pytorch.org/
 coverage
 dill
-flask
 git+https://github.com/scikit-optimize/scikit-optimize.git@master
 mock
 nltk
-nose
 numpy
 pandas
-psycopg2
-pyphen
 pyyaml
 setuptools
-sh
 tqdm
 wrapt
 ujson
+pytest-cov

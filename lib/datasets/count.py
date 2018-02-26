@@ -3,19 +3,19 @@ import random
 from lib.datasets.dataset import Dataset
 
 
-def count(train=False,
-          dev=False,
-          test=False,
-          train_rows=10000,
-          dev_rows=1000,
-          test_rows=1000,
-          seq_max_length=10):
+def count_dataset(train=False,
+                  dev=False,
+                  test=False,
+                  train_rows=10000,
+                  dev_rows=1000,
+                  test_rows=1000,
+                  seq_max_length=10):
     """
-    Used for Seq to Label tests.
+    Used for sequence to label tests.
 
     Sample Data:
-        Input: 1 2 3
-        Output: 3
+        text: 1 2 3
+        label: 3
     """
     ret = []
     for is_requested, n_rows in [(train, train_rows), (dev, dev_rows), (test, test_rows)]:
