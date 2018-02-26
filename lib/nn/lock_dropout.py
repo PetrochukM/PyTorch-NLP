@@ -30,19 +30,24 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-# https://github.com/salesforce/awd-lstm-lm/blob/master/locked_dropout.py
+# REFERENCE: https://github.com/salesforce/awd-lstm-lm/blob/master/locked_dropout.py
 
 import torch.nn as nn
 from torch.autograd import Variable
 
 
 class LockedDropout(nn.Module):
+    """ LockedDropout can be used to apply the same dropout mask to every time step. """
 
     def __init__(self, p=0.5):
         self.p = p
         super().__init__()
 
     def forward(self, x):
+        """
+        Args:
+          x (torch.FloatTensor [batch size, sequence length, rnn hidden size])
+        """
         if not self.training or not self.p:
             return x
         x = x.clone()

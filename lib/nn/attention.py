@@ -49,7 +49,7 @@ class Attention(nn.Module):
             input_ = self.linear_in(input_)
             input_ = input_.view(batch_size, output_len, dimensions)
 
-        # TODO: Include mask on padding_indx?
+        # TODO: Include mask on PADDING_INDEX?
 
         # (batch_size, output_len, dimensions) * (batch_size, input_len, dimensions) ->
         # (batch_size, output_len, input_len)
