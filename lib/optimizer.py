@@ -4,6 +4,8 @@ import torch
 
 from lib.configurable import configurable
 
+# TODO: Add increasing batch_size scheduler
+
 
 class Optimizer(object):
     """ The Optimizer class encapsulates torch.optim package and provides functionalities

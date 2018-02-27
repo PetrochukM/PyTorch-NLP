@@ -7,7 +7,7 @@ import pandas as pd
 from tqdm import tqdm
 
 from lib.datasets.dataset import Dataset
-from lib.utils import urlretrieve_reporthook
+from lib.utils import reporthook
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ def _download_simple_qa_dataset(directory, critical_filename='annotated_fb_data_
     filename = os.path.join(directory, 'SimpleQuestions_v2.tgz')
     logger.info('Downloading Simple Questions...')
     with tqdm() as t:  # all optional kwargs
-        urllib.request.urlretrieve(url, filename=filename, reporthook=urlretrieve_reporthook(t))
+        urllib.request.urlretrieve(url, filename=filename, reporthook=reporthook(t))
     logger.info('Extracting Simple Questions...')
     tarfile_ = tarfile.open(filename, mode='r')
     for member in tarfile_.getmembers():

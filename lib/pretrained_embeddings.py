@@ -1,38 +1,21 @@
 from __future__ import unicode_literals
+
 import array
 import io
 import logging
 import os
 import zipfile
 
-import six
 from six.moves.urllib.request import urlretrieve
-import torch
 from tqdm import tqdm
+
+import six
 import tarfile
+import torch
+
+from lib.utils import reporthook
 
 logger = logging.getLogger(__name__)
-
-
-def reporthook(t):
-    """https://github.com/tqdm/tqdm"""
-    last_b = [0]
-
-    def inner(b=1, bsize=1, tsize=None):
-        """
-        b: int, optionala
-        Number of blocks just transferred [default: 1].
-        bsize: int, optional
-        Size of each block (in tqdm units) [default: 1].
-        tsize: int, optional
-        Total size (in tqdm units). If [default: None] remains unchanged.
-        """
-        if tsize is not None:
-            t.total = tsize
-        t.update((b - last_b[0]) * bsize)
-        last_b[0] = b
-
-    return inner
 
 
 class _PretrainedEmbeddings(object):
@@ -52,7 +35,7 @@ class _PretrainedEmbeddings(object):
                    returns a Tensor of the same size
                is_include (callable): callable returns True if to include a token in memory vectors
                    cache; some of these embedding files are gigantic so filtering it can cut
-                   down on the memory usage. 
+                   down on the memory usage. We do not cache on disk if is_include is defined.
          """
         self.unk_init = unk_init
         self.is_include = is_include
@@ -64,6 +47,9 @@ class _PretrainedEmbeddings(object):
             return self.vectors[self.stoi[token]]
         else:
             return self.unk_init(torch.Tensor(1, self.dim))
+
+    def __len__(self):
+        return len(self.vectors)
 
     def __str__(self):
         return self.name
@@ -214,20 +200,3 @@ class CharNGram(_PretrainedEmbeddings):
         else:
             vector = self.unk_init(vector)
         return vector
-
-
-pretrained_aliases = {
-    "charngram.100d": lambda: CharNGram(),
-    "fasttext.en.300d": lambda: FastText(language="en"),
-    "fasttext.simple.300d": lambda: FastText(language="simple"),
-    "glove.42B.300d": lambda: GloVe(name="42B", dim="300"),
-    "glove.840B.300d": lambda: GloVe(name="840B", dim="300"),
-    "glove.twitter.27B.25d": lambda: GloVe(name="twitter.27B", dim="25"),
-    "glove.twitter.27B.50d": lambda: GloVe(name="twitter.27B", dim="50"),
-    "glove.twitter.27B.100d": lambda: GloVe(name="twitter.27B", dim="100"),
-    "glove.twitter.27B.200d": lambda: GloVe(name="twitter.27B", dim="300"),
-    "glove.6B.50d": lambda: GloVe(name="6B", dim="50"),
-    "glove.6B.100d": lambda: GloVe(name="6B", dim="100"),
-    "glove.6B.200d": lambda: GloVe(name="6B", dim="200"),
-    "glove.6B.300d": lambda: GloVe(name="6B", dim="300")
-}

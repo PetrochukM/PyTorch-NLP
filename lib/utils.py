@@ -22,7 +22,7 @@ def flatten_parameters(model):
 
 
 def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
-    """ Deterministic shuffle and split algorithm. 
+    """ Deterministic shuffle and split algorithm.
 
     Given the same two datasets and the same `random_seed`, the split happens the same exact way
     every call.
@@ -78,9 +78,6 @@ def new_experiment_folder(label='', parent_directory='experiments/'):
     name = '%s.%s' % (label, time.strftime('%m_%d_%H:%M:%S', time.localtime()))
     path = os.path.join(parent_directory, name)
     os.makedirs(path)
-
-    # TODO: If the folder is empty then delete it after the execution finishes
-
     return path
 
 
@@ -130,12 +127,12 @@ class StreamFork(object):
         self.stream.close()
 
 
-def save_standard_streams(directory=''):
+def save_standard_streams(directory='', stdout_filename='stdout.log', stderr_filename='stderr.log'):
     """
     Save stdout and stderr to a `{directory}/stdout.log` and `{directory}/stderr.log`.
     """
-    sys.stdout = StreamFork(os.path.join(directory, 'stdout.log'), sys.stdout)
-    sys.stderr = StreamFork(os.path.join(directory, 'stderr.log'), sys.stderr)
+    sys.stdout = StreamFork(os.path.join(directory, stdout_filename), sys.stdout)
+    sys.stderr = StreamFork(os.path.join(directory, stderr_filename), sys.stderr)
 
 
 def device_default(device=None):
@@ -221,18 +218,18 @@ def cuda_devices():
 
 def get_total_parameters(model):
     """ Return the total number of trainable parameters in model """
-    params = filter(lambda p: p.requires_grad, model.parameters())
-    return sum(x.size()[0] * x.size()[1] if len(x.size()) > 1 else x.size()[0] for x in params)
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
 def pad_tensor(tensor, length):
     """ Pad a tensor to length with PADDING_INDEX.
     
     Args:
-        tensor (torch.LongTensor)
+        tensor (1D torch.LongTensor)
     Returns
         torch.LongTensor
     """
+    assert len(tensor.size()) == 1
     n_padding = length - len(tensor)
     padding = torch.LongTensor(n_padding * [PADDING_INDEX])
     return torch.cat((tensor, padding), 0)
@@ -242,9 +239,10 @@ def pad_batch(batch):
     """ Pad a list of tensors with PADDING_INDEX.
     
     Args:
-        batch (list of torch.LongTensor)
+        batch (list of 1D torch.LongTensor)
     Returns
-        list of torch.LongTensor and original lengths
+        (list of torch.LongTensor) padded tensors
+        (list of int) original lengths of rows
     """
     lengths = [len(row) for row in batch]
     max_len = max(lengths)
@@ -285,30 +283,22 @@ def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):
     return torch.equal(tensor, tensor_other)
 
 
-def urlretrieve_reporthook(t):
-    """Wraps tqdm instance.
-    Don't forget to close() or __exit__()
-    the tqdm instance once you're done with it (easiest using `with` syntax).
-    Example
-    -------
-    >>> with tqdm(...) as t:
-    ...     reporthook = urlretrieve_reporthook(t)
-    ...     urllib.urlretrieve(..., reporthook=reporthook)
-    """
+def reporthook(t):
+    """https://github.com/tqdm/tqdm"""
     last_b = [0]
 
-    def update_to(b=1, bsize=1, tsize=None):
+    def inner(b=1, bsize=1, tsize=None):
         """
-        b  : int, optional
-            Number of blocks transferred so far [default: 1].
-        bsize  : int, optional
-            Size of each block (in tqdm units) [default: 1].
-        tsize  : int, optional
-            Total size (in tqdm units). If [default: None] remains unchanged.
+        b: int, optionala
+        Number of blocks just transferred [default: 1].
+        bsize: int, optional
+        Size of each block (in tqdm units) [default: 1].
+        tsize: int, optional
+        Total size (in tqdm units). If [default: None] remains unchanged.
         """
         if tsize is not None:
             t.total = tsize
         t.update((b - last_b[0]) * bsize)
         last_b[0] = b
 
-    return update_to
+    return inner

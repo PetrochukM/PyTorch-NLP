@@ -1,0 +1,6 @@
+coverage
+mock
+pytest
+pytest-cov
+flake8
+yapf

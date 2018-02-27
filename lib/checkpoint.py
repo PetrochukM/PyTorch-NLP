@@ -71,7 +71,7 @@ class Checkpoint(object):
         path = os.path.join(folder, name)
 
         if os.path.exists(path):
-            logger.error('Cannot save checkpoint; directory (%s) already exists.', path)
+            logger.error('Cannot save checkpoint; path (%s) already exists.', path)
             return
 
         logger.info('Saving checkpoint: %s', path)

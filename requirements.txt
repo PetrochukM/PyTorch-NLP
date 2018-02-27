@@ -1,14 +1,9 @@
 # pytorch 3.1 install from http://pytorch.org/
-coverage
 dill
 git+https://github.com/scikit-optimize/scikit-optimize.git@master
-mock
 nltk
 numpy
 pandas
-pyyaml
-setuptools
 tqdm
 wrapt
 ujson
-pytest-cov
