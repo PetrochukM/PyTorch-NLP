@@ -20,7 +20,7 @@ class StaticTokenizerEncoder(TextEncoder):
                  tokenize=(lambda s: s.split())):
         """
         Given a sample, build the dictionary for the word encoder.
-        
+
         Args:
             sample (list of strings): sample of data to build dictionary on
             min_occurrences (int): minimum number of occurrences for a token to be added to dictionary

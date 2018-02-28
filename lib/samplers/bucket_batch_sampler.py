@@ -9,7 +9,7 @@ class BucketBatchSampler(BatchSampler):
     """
     Reference:
     https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py
-    https://github.com/pytorch/text/tree/master/torchtext/data/iterators/#BucketIterator 
+    https://github.com/pytorch/text/tree/master/torchtext/data/iterators/#BucketIterator
 
     `BucketIterator` pools together examples with a similar size length to reduce the padding
     required for each batch. `BucketIterator` typically also includes the ability to add noise to

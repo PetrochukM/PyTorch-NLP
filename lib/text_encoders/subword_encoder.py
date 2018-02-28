@@ -19,7 +19,7 @@ class SubwordEncoder(TextEncoder):
                  min_occurrences=1,
                  max_occurrences=1e3):
         """ Given a sample, build the dictionary for the word encoder.
-        
+
         Args:
             sample (list of str)
             append_eos (bool)

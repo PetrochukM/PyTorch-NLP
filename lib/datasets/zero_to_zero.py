@@ -9,7 +9,7 @@ def zero_to_zero_dataset(train=False,
                          test_rows=64):
     """
     Used for quick integration testing.
-    
+
     Sample Data:
         Input: 0
         Output: 0

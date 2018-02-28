@@ -47,12 +47,6 @@ try:
 except ImportError:
     TEST_NUMPY = False
 
-TEST_SCIPY = True
-try:
-    import scipy
-except ImportError:
-    TEST_SCIPY = False
-
 
 def skipIfNoLapack(fn):
 
@@ -341,7 +335,7 @@ class TestCase(unittest.TestCase):
         If you call this multiple times in a single function, you must
         give a unique subname each time.
         """
-        if not (isinstance(s, str) or (sys.version_info[0] == 2 and isinstance(s, unicode))):
+        if not isinstance(s, str):
             raise TypeError("assertExpected is strings only")
 
         def remove_prefix(text, prefix):

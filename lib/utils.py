@@ -26,7 +26,7 @@ def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
 
     Given the same two datasets and the same `random_seed`, the split happens the same exact way
     every call.
-    
+
     Args:
         dataset (lib.datasets.Dataset)
         other_dataset (lib.datasets.Dataset)
@@ -63,7 +63,7 @@ def config_logging():
 
 def get_root_path():
     """ Get the path to the root directory
-    
+
     Returns (str):
         Root directory path
     """
@@ -223,7 +223,7 @@ def get_total_parameters(model):
 
 def pad_tensor(tensor, length):
     """ Pad a tensor to length with PADDING_INDEX.
-    
+
     Args:
         tensor (1D torch.LongTensor)
     Returns
@@ -237,7 +237,7 @@ def pad_tensor(tensor, length):
 
 def pad_batch(batch):
     """ Pad a list of tensors with PADDING_INDEX.
-    
+
     Args:
         batch (list of 1D torch.LongTensor)
     Returns
@@ -252,8 +252,8 @@ def pad_batch(batch):
 
 def seed(random_seed, is_cuda=False):
     """
-    Attempt to apply a `random_seed` is every possible library that may require it. Our goal is 
-    to make our software reporducible.
+    Attempt to apply a `random_seed` is every possible library that may require it. Our goal is
+    to make our software reproducible.
     """
     random.seed(random_seed)
     torch.manual_seed(random_seed)
@@ -268,7 +268,7 @@ def seed(random_seed, is_cuda=False):
 def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):
     """
     Compute torch.equals with the optional mask parameter.
-   
+
     Args:
         ignore_index (int, optional): specifies a tensor1 index that is ignored
     Returns:

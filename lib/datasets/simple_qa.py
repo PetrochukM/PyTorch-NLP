@@ -52,7 +52,7 @@ def simple_qa_dataset(directory='data/simple_qa',
                       test_filename='annotated_fb_data_test.txt'):
     """
     Dataset introduced by this paper:
-    https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/ 
+    https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/
 
     Sample Row:
         subject: Who was the trump ocean club international hotel and tower named after

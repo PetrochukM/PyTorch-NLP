@@ -17,3 +17,25 @@ from lib.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
 from lib.text_encoders.subword_encoder import SubwordEncoder
 from lib.text_encoders.treebank_encoder import TreebankEncoder
 from lib.text_encoders.word_encoder import WordEncoder
+
+__all__ = [
+    'CharacterEncoder',
+    'DelimiterEncoder',
+    'IdentityEncoder',
+    'MosesEncoder',
+    'COPY_INDEX',
+    'COPY_TOKEN',
+    'EOS_INDEX',
+    'EOS_TOKEN',
+    'PADDING_INDEX',
+    'PADDING_TOKEN',
+    'SOS_INDEX',
+    'SOS_TOKEN',
+    'UNKNOWN_INDEX',
+    'UNKNOWN_TOKEN',
+    'SpacyEncoder',
+    'StaticTokenizerEncoder',
+    'SubwordEncoder',
+    'TreebankEncoder',
+    'WordEncoder',
+]

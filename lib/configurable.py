@@ -15,7 +15,6 @@ TODO: Look into implementing configurable without decoraters:
 from functools import reduce
 from collections import defaultdict
 
-import ast
 import inspect
 import logging
 import operator
@@ -274,7 +273,7 @@ def log_config():
 def clear_config():
     """
     Clear the global configuration
-    
+
     Returns: None
     """
     global _configuration

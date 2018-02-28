@@ -161,11 +161,11 @@ def hyperband(objective,
     given hyperparameters `x` and epochs `y`, we can use one model to evaluate all `y` integers
     with hyperparameters `x`.
 
-    Reference: https://arxiv.org/pdf/1603.06560.pdf 
+    Reference: https://arxiv.org/pdf/1603.06560.pdf
     Reference: http://www.argmin.net/2016/06/23/hyperband/
 
     TODO: Implement extension to hyperband proporting an increase of x4:
-    https://arxiv.org/pdf/1705.10823.pdf 
+    https://arxiv.org/pdf/1705.10823.pdf
     http://www.ijcai.org/Proceedings/15/Papers/487.pdf
 
     Args:

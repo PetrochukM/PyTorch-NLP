@@ -4,3 +4,4 @@ pytest
 pytest-cov
 flake8
 yapf
+codecov

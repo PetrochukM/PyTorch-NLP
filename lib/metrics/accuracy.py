@@ -38,7 +38,7 @@ def get_accuracy(targets, outputs, k=1, ignore_index=None):
 
 def get_token_accuracy(targets, outputs, ignore_index=None):
     """ Compute the token accuracy.
-    
+
     Args:
       targets (list of tensors)
       outputs (list of tensors)

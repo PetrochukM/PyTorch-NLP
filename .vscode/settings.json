@@ -14,8 +14,8 @@
   ],
   "files.exclude": {
     ".coverage": true,
-    ".flake8": true,
-    ".travis.yml": true,
+    ".flake8": false,
+    ".travis.yml": false,
     ".vscode": false,
     "*.egg-info": true,
     "**/__pycache__": true,

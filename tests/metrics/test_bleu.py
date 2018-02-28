@@ -1,4 +1,3 @@
-import torch
 import numpy as np
 
 from lib.metrics import get_moses_multi_bleu

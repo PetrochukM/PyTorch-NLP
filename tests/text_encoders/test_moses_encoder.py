@@ -1,5 +1,4 @@
 from lib.text_encoders import MosesEncoder
-from lib.text_encoders import UNKNOWN_TOKEN
 
 
 def test_moses_encoder():

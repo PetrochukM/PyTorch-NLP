@@ -28,7 +28,8 @@ logger = logging.getLogger(__name__)
 
 # This set contains all letter and number characters.
 _ALPHANUMERIC_CHAR_SET = set(
-    six.unichr(i) for i in xrange(sys.maxunicode)
+    six.unichr(i)
+    for i in xrange(sys.maxunicode)
     if (unicodedata.category(six.unichr(i)).startswith("L") or
         unicodedata.category(six.unichr(i)).startswith("N")))
 
@@ -42,7 +43,7 @@ _ESCAPE_CHARS = set(u"\\_u;0123456789")
 
 def native_to_unicode_py2(s):
     """Python 2: transform native string to Unicode."""
-    return s if isinstance(s, unicode) else s.decode("utf8")
+    return s if isinstance(s, unicode) else s.decode("utf8")  # noqa: F821
 
 
 # Conversion between Unicode and UTF-8, if required (on Python2)

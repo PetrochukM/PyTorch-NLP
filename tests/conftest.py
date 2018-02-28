@@ -1,8 +1,4 @@
-import os
-
 import pytest
-
-from _pytest.capture import CaptureFixture, SysCapture
 
 from lib.utils import config_logging
 
@@ -33,3 +29,20 @@ def pytest_pyfunc_call(pyfuncitem):
         if 'capture_disabled' in pyfuncitem.keywords:
             print('========= Capsys Enabled ========= ')
             print('')
+
+
+# REFERENCE: https://docs.pytest.org/en/latest/example/simple.html
+
+
+def pytest_addoption(parser):
+    parser.addoption("--runslow", action="store_true", default=False, help="run slow tests")
+
+
+def pytest_collection_modifyitems(config, items):
+    if config.getoption("--runslow"):
+        # --runslow given in cli: do not skip slow tests
+        return
+    skip_slow = pytest.mark.skip(reason="need --runslow option to run")
+    for item in items:
+        if "slow" in item.keywords:
+            item.add_marker(skip_slow)

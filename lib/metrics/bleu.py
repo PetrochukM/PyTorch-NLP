@@ -23,7 +23,6 @@ import logging
 import numpy as np
 
 from six.moves import urllib
-from six.moves import zip
 
 logger = logging.getLogger(__name__)
 
