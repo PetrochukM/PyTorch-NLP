@@ -23,7 +23,8 @@ class StaticTokenizerEncoder(TextEncoder):
 
         Args:
             sample (list of strings): sample of data to build dictionary on
-            min_occurrences (int): minimum number of occurrences for a token to be added to dictionary
+            min_occurrences (int): minimum number of occurrences for a token to be added to
+              dictionary
             append_eos (bool): if to append EOS token onto the end to the encoded vector
             lower (bool): if to lower the text
             tokenize (callable): callable to tokenize a string

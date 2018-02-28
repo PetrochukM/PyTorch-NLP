@@ -16,8 +16,8 @@ logger = logging.getLogger(__name__)
 
 def _random_points(dimensions, n_points, random_seed=None):
     """ Generate a random sample of points from dimensions """
-    # NOTE: We supply as `randint` to `random_state`; otherwise, dimensions with the same distribution would
-    # recive the same sequence of random numbers.
+    # NOTE: We supply as `randint` to `random_state`; otherwise, dimensions with the same
+    # distribution would receive the same sequence of random numbers.
     # We seed `random` so the random seeds generated are deterministic.
     random.seed(random_seed)
     points = {
@@ -215,8 +215,6 @@ def hyperband(objective,
         setattr(progress_bar, 'stats', {'min_score': math.inf, 'models_evaluated': 0})
 
     for i in reversed(range(n_hyperband_rounds)):
-        n_successive_halving_rounds = i + 1
-
         # NOTE: Attained by running the below code on https://sandbox.open.wolframcloud.com:
         #   Reduce[Power[d, j - 1] * (x / Power[d, j]) +
         #   Sum[(Power[d, i] - Power[d, i - 1]) * (x / Power[d, i]), {i, j, k}] == e

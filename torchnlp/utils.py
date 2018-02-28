@@ -74,7 +74,6 @@ def new_experiment_folder(label='', parent_directory='experiments/'):
     """
     Get a experiment directory that includes start time.
     """
-    start_time = time.time()
     name = '%s.%s' % (label, time.strftime('%m_%d_%H:%M:%S', time.localtime()))
     path = os.path.join(parent_directory, name)
     os.makedirs(path)
