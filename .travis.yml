@@ -9,5 +9,5 @@ notifications:
   email: false
 
 install: source build_tools/travis/install.sh
-script: bash build_tools/travis/test_script.sh
-after_success: source build_tools/travis/after_success.sh
+script: RUN_SLOW=true RUN_FLAKE8=true bash build_tools/travis/test_script.sh
+after_success: COVERAGE=true source build_tools/travis/after_success.sh
