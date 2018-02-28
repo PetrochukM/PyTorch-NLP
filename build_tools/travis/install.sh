@@ -19,7 +19,7 @@ fi
 
 # Install requirements via pip
 pip install -r requirements.txt
-pip install -r requirements-dev.txt
+pip install -r requirements_dev.txt
 
 # SpaCy English web model
 python -m spacy download en_core_web_sm
