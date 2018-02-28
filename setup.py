@@ -33,9 +33,7 @@ setup_info = dict(
     description='Text utilities and datasets for PyTorch',
     long_description=LONG_DESCRIPTION,
     license='BSD',
-    install_requires=[
-        'dill', 'scikit-optimize', 'nltk', 'numpy', 'pandas', 'tqdm', 'wrapt', 'ujson', 'spacy'
-    ],
+    install_requires=['dill', 'scikit-optimize', 'numpy', 'pandas', 'tqdm', 'wrapt', 'ujson'],
 
     # Package info
     packages=find_packages(exclude=('tests',)),

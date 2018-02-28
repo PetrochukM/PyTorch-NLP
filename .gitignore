@@ -87,7 +87,6 @@ data/**
 
 # Embeddings
 .pretrained_embeddings_cache/
-.test_cache
 
 # Test Files
 .pytest_cache
