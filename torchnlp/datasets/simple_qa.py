@@ -12,14 +12,14 @@ from torchnlp.utils import reporthook
 logger = logging.getLogger(__name__)
 
 
-def _download_simple_qa_dataset(directory, critical_filename='annotated_fb_data_train.txt'):
+def _download_simple_qa_dataset(directory, some_file='annotated_fb_data_train.txt'):
     """ Download the Simple Questions dataset into `directory`
 
     Args:
         directory (str)
-        critical_filename (str) Used to make sure Simple Questions was downloaded and extracted.
+        some_file (str): Used to make sure Simple Questions was downloaded and extracted.
      """
-    if os.path.isdir(directory) and os.path.isfile(os.path.join(directory, critical_filename)):
+    if os.path.isdir(directory) and os.path.isfile(os.path.join(directory, some_file)):
         # Already downloaded
         return
 

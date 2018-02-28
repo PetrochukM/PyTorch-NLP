@@ -9,6 +9,9 @@ from torchnlp.pretrained_embeddings import GloVe
 
 # TODO: Consider making the tests faster by mocking the download
 
+# TODO: MOCK urlretrieve and just ping the server...
+# TODO: Write or have a file in dest to be used
+
 directory = os.path.dirname(os.path.realpath(__file__))
 cache = os.path.join(directory, '.cache')
 
@@ -29,7 +32,7 @@ def test_fasttext_simple():
     assert len(vectors['hi']) == 300
 
     # Test cache and is_include
-    vectors = FastText(language="simple", is_include=lambda w: w == 'hi')
+    vectors = FastText(language="simple", is_include=lambda w: w == 'hi', cache=cache)
     assert len(vectors) == 1
     shutil.rmtree(cache)
 

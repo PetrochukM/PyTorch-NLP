@@ -43,6 +43,7 @@ def test_get_root_path():
 
 
 def test_new_experiment_folder():
+    # TODO: Remove experiment directory created...
     path = new_experiment_folder()
     assert os.path.isdir(path)
     os.rmdir(path)
