@@ -1,7 +1,7 @@
 import spacy
 from spacy.lang.en import English
 
-from lib.text_encoders.word_encoder import WordEncoder
+from torchnlp.text_encoders.word_encoder import WordEncoder
 
 # Use the SpacyEncoder by downloading en_core_web_sm via: `python -m spacy download en_core_web_sm`
 _MODEL = spacy.load('en_core_web_sm')

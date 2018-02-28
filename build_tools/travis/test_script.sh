@@ -16,9 +16,9 @@ fi
 
 run_tests() {
     if [[ "$RUN_SLOW" == "true" ]]; then
-        TEST_CMD="py.test -v --durations=20 --cov=lib --runslow"
+        TEST_CMD="py.test -v --durations=20 --cov=torchnlp --runslow"
     else
-        TEST_CMD="py.test -v --durations=20 --cov=lib"
+        TEST_CMD="py.test -v --durations=20 --cov=torchnlp"
     fi
     $TEST_CMD
 }

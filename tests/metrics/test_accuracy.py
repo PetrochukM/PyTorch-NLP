@@ -1,7 +1,7 @@
 import torch
 
-from lib.metrics import get_accuracy
-from lib.metrics import get_token_accuracy
+from torchnlp.metrics import get_accuracy
+from torchnlp.metrics import get_token_accuracy
 
 
 def test_get_accuracy():

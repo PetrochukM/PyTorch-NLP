@@ -3,20 +3,20 @@ import sys
 
 import torch
 
-from lib.datasets import Dataset
-from lib.text_encoders import PADDING_INDEX
-from lib.utils import batch
-from lib.utils import cuda_devices
-from lib.utils import device_default
-from lib.utils import get_root_path
-from lib.utils import get_total_parameters
-from lib.utils import new_experiment_folder
-from lib.utils import pad_batch
-from lib.utils import pad_tensor
-from lib.utils import resplit_datasets
-from lib.utils import seed
-from lib.utils import torch_equals_ignore_index
-from lib.utils import save_standard_streams
+from torchnlp.datasets import Dataset
+from torchnlp.text_encoders import PADDING_INDEX
+from torchnlp.utils import batch
+from torchnlp.utils import cuda_devices
+from torchnlp.utils import device_default
+from torchnlp.utils import get_root_path
+from torchnlp.utils import get_total_parameters
+from torchnlp.utils import new_experiment_folder
+from torchnlp.utils import pad_batch
+from torchnlp.utils import pad_tensor
+from torchnlp.utils import resplit_datasets
+from torchnlp.utils import seed
+from torchnlp.utils import torch_equals_ignore_index
+from torchnlp.utils import save_standard_streams
 from tests.utils import MockModel
 
 

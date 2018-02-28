@@ -11,7 +11,7 @@ import random
 import torch
 import numpy as np
 
-from lib.text_encoders import PADDING_INDEX
+from torchnlp.text_encoders import PADDING_INDEX
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +38,7 @@ def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
         other_dataset (lib.datasets.Dataset)
     """
     # Prevent circular dependency
-    from lib.datasets import Dataset
+    from torchnlp.datasets import Dataset
 
     concat = dataset.rows + other_dataset.rows
     # Reference:

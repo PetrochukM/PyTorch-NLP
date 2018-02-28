@@ -13,7 +13,7 @@ import six
 import tarfile
 import torch
 
-from lib.utils import reporthook
+from torchnlp.utils import reporthook
 
 logger = logging.getLogger(__name__)
 

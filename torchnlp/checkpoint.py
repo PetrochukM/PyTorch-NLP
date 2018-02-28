@@ -5,7 +5,7 @@ import time
 import dill
 import torch
 
-import lib.utils
+import torchnlp.utils
 
 logger = logging.getLogger(__name__)
 import_time = time.time()
@@ -22,7 +22,7 @@ class Checkpoint(object):
             checkpoint_path (str or None): Given a non-none checkpoint path, the checkpoint is
                 loaded
         """
-        self.device = lib.utils.device_default(device)
+        self.device = torchnlp.utils.device_default(device)
         self.checkpoint_path = checkpoint_path
 
         logger.info("Loading checkpoints from %s onto device %d", self.checkpoint_path, self.device)

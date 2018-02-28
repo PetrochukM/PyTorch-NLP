@@ -1,4 +1,4 @@
-from lib.text_encoders import TreebankEncoder
+from torchnlp.text_encoders import TreebankEncoder
 
 
 def test_treebank_encoder():

@@ -1,6 +1,6 @@
-from lib.text_encoders import DelimiterEncoder
-from lib.text_encoders import UNKNOWN_TOKEN
-from lib.text_encoders import EOS_TOKEN
+from torchnlp.text_encoders import DelimiterEncoder
+from torchnlp.text_encoders import UNKNOWN_TOKEN
+from torchnlp.text_encoders import EOS_TOKEN
 
 
 def test_delimiter_encoder():

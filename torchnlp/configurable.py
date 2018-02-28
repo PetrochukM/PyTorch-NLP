@@ -150,7 +150,7 @@ def _dict_to_flat_config(dict_):
         (dict) shallow dictionary with every key concatenated by "." similar to module names in
         python
     Raises:
-        (TypeError) module names (keys) are formatted improperly (Example: 'lib..models')
+        (TypeError) module names (keys) are formatted improperly (Example: 'torchnlp..models')
         (TypeError) duplicate functions/modules/packages are defined
     """
     flat = {}
@@ -177,7 +177,7 @@ def _check_configuration(dict_, keys=[]):
 
     Cases to handle recursively:
         {
-            'lib.nn': {
+            'torchnlp.nn': {
                 'seq_encoder.SeqEncoder.__init__': {
                     'bidirectional': True,
                 },
@@ -231,7 +231,7 @@ def add_config(dict_):
     Example:
         `dict_`=
               {
-                'lib': {
+                'torchnlp': {
                   'models': {
                     'decoder_rnn.DecoderRNN.__init__': {
                       'embedding_size': 32
@@ -250,7 +250,7 @@ def add_config(dict_):
             configuration.
     Returns: None
     Raises:
-        (TypeError) module names (keys) are formatted improperly (Example: 'lib..models')
+        (TypeError) module names (keys) are formatted improperly (Example: 'torchnlp..models')
         (TypeError) duplicate functions/modules/packages are defined
     """
     global _configuration

@@ -2,11 +2,11 @@ from collections import Counter
 
 import torch
 
-from lib.text_encoders.reserved_tokens import EOS_INDEX
-from lib.text_encoders.reserved_tokens import UNKNOWN_INDEX
-from lib.text_encoders.reserved_tokens import RESERVED_ITOS
-from lib.text_encoders.reserved_tokens import RESERVED_STOI
-from lib.text_encoders.text_encoders import TextEncoder
+from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
+from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
+from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
+from torchnlp.text_encoders.reserved_tokens import RESERVED_STOI
+from torchnlp.text_encoders.text_encoders import TextEncoder
 
 
 class StaticTokenizerEncoder(TextEncoder):

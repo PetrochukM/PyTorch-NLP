@@ -3,7 +3,7 @@ from copy import deepcopy
 import torch
 from torch.autograd import Variable
 
-from lib import optim
+from torchnlp import optim
 from common import TestCase, run_tests
 
 

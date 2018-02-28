@@ -1,6 +1,6 @@
 import numpy as np
 
-from lib.metrics import get_moses_multi_bleu
+from torchnlp.metrics import get_moses_multi_bleu
 
 
 def test_get_moses_multi_bleu():

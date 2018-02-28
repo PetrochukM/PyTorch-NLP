@@ -1,6 +1,6 @@
 import torch
 
-from lib.utils import torch_equals_ignore_index
+from torchnlp.utils import torch_equals_ignore_index
 
 
 def get_accuracy(targets, outputs, k=1, ignore_index=None):

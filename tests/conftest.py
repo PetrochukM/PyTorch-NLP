@@ -1,6 +1,6 @@
 import pytest
 
-from lib.utils import config_logging
+from torchnlp.utils import config_logging
 
 
 # Add test environment variable before all tests

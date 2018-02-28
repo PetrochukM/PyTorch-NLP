@@ -6,8 +6,8 @@ import urllib.request
 import pandas as pd
 from tqdm import tqdm
 
-from lib.datasets.dataset import Dataset
-from lib.utils import reporthook
+from torchnlp.datasets.dataset import Dataset
+from torchnlp.utils import reporthook
 
 logger = logging.getLogger(__name__)
 

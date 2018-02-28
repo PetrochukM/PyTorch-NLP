@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from lib.configurable import configurable
+from torchnlp.configurable import configurable
 
 
 class Attention(nn.Module):

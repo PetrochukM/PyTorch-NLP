@@ -1,4 +1,4 @@
-from lib.datasets import reverse_dataset
+from torchnlp.datasets import reverse_dataset
 from tests.datasets.utils import try_dataset
 
 

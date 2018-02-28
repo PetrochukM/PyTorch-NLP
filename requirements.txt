@@ -1,10 +1,2 @@
 # pytorch 3.1 install from http://pytorch.org/
-dill
-git+https://github.com/scikit-optimize/scikit-optimize.git@master
-nltk
-numpy
-pandas
-tqdm
-wrapt
-ujson
-spacy
+-e .

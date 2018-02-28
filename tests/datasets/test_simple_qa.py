@@ -2,7 +2,7 @@ import shutil
 
 import pytest
 
-from lib.datasets import simple_qa_dataset
+from torchnlp.datasets import simple_qa_dataset
 from tests.datasets.utils import try_dataset
 
 directory = 'tests/data/simple_qa'

@@ -8,7 +8,7 @@ import unittest
 
 import torch
 
-from lib.nn import Attention
+from torchnlp.nn import Attention
 from tests.nn.utils import kwargs_product
 from tests.nn.utils import tensor
 

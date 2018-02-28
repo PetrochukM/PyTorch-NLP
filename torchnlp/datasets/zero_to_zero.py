@@ -1,4 +1,4 @@
-from lib.datasets.dataset import Dataset
+from torchnlp.datasets.dataset import Dataset
 
 
 def zero_to_zero_dataset(train=False,

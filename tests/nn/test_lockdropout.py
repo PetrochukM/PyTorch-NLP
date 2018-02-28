@@ -3,7 +3,7 @@ import unittest
 
 import torch
 
-from lib.nn import LockedDropout
+from torchnlp.nn import LockedDropout
 from tests.nn.utils import tensor
 
 

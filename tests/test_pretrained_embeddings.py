@@ -3,9 +3,9 @@ import numpy as np
 import os
 import shutil
 
-from lib.pretrained_embeddings import FastText
-from lib.pretrained_embeddings import CharNGram
-from lib.pretrained_embeddings import GloVe
+from torchnlp.pretrained_embeddings import FastText
+from torchnlp.pretrained_embeddings import CharNGram
+from torchnlp.pretrained_embeddings import GloVe
 
 # TODO: Consider making the tests faster by mocking the download
 

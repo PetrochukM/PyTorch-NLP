@@ -1,4 +1,4 @@
-from lib.samplers import SortedSampler
+from torchnlp.samplers import SortedSampler
 
 
 def test_sorted_sampler():

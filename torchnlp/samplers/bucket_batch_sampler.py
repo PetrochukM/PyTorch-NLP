@@ -2,7 +2,7 @@ import random
 
 from torch.utils.data.sampler import BatchSampler
 
-from lib.samplers.noisy_sorted_sampler import NoisySortedSampler
+from torchnlp.samplers.noisy_sorted_sampler import NoisySortedSampler
 
 
 class BucketBatchSampler(BatchSampler):

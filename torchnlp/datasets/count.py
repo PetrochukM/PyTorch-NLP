@@ -1,6 +1,6 @@
 import random
 
-from lib.datasets.dataset import Dataset
+from torchnlp.datasets.dataset import Dataset
 
 
 def count_dataset(train=False,

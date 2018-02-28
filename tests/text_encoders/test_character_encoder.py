@@ -1,6 +1,6 @@
-from lib.text_encoders import CharacterEncoder
-from lib.text_encoders import UNKNOWN_TOKEN
-from lib.text_encoders.reserved_tokens import RESERVED_ITOS
+from torchnlp.text_encoders import CharacterEncoder
+from torchnlp.text_encoders import UNKNOWN_TOKEN
+from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
 
 
 def test_character_encoder():

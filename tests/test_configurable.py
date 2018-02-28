@@ -1,12 +1,12 @@
 import unittest
 import numpy as np
 
-from lib.configurable import _dict_to_flat_config
-from lib.configurable import add_config
-from lib.configurable import clear_config
-from lib.configurable import configurable
-from lib.configurable import HyperparameterSpaceConfig
-from lib.configurable import log_config
+from torchnlp.configurable import _dict_to_flat_config
+from torchnlp.configurable import add_config
+from torchnlp.configurable import clear_config
+from torchnlp.configurable import configurable
+from torchnlp.configurable import HyperparameterSpaceConfig
+from torchnlp.configurable import log_config
 
 
 @configurable

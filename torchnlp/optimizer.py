@@ -2,7 +2,7 @@ import itertools
 
 import torch
 
-from lib.configurable import configurable
+from torchnlp.configurable import configurable
 
 # TODO: Add increasing batch_size scheduler
 

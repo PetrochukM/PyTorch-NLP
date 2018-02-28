@@ -1,7 +1,7 @@
 import unittest
 
-from lib.text_encoders import SubwordEncoder
-from lib.text_encoders import EOS_INDEX
+from torchnlp.text_encoders import SubwordEncoder
+from torchnlp.text_encoders import EOS_INDEX
 
 
 class SubwordEncoderTest(unittest.TestCase):

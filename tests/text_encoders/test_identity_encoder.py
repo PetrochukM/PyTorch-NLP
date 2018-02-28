@@ -1,5 +1,5 @@
-from lib.text_encoders import IdentityEncoder
-from lib.text_encoders import UNKNOWN_TOKEN
+from torchnlp.text_encoders import IdentityEncoder
+from torchnlp.text_encoders import UNKNOWN_TOKEN
 
 
 def test_delimiter_encoder_unknown():

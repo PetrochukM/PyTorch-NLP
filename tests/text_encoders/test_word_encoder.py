@@ -1,4 +1,4 @@
-from lib.text_encoders import WordEncoder
+from torchnlp.text_encoders import WordEncoder
 
 
 def test_spacy_encoder():

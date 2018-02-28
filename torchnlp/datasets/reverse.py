@@ -1,6 +1,6 @@
 import random
 
-from lib.datasets.dataset import Dataset
+from torchnlp.datasets.dataset import Dataset
 
 
 def reverse_dataset(train=False,

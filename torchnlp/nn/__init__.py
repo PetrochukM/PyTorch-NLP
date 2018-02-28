@@ -1,4 +1,4 @@
-from lib.nn.attention import Attention
-from lib.nn.lock_dropout import LockedDropout
+from torchnlp.nn.attention import Attention
+from torchnlp.nn.lock_dropout import LockedDropout
 
 __all__ = ['LockedDropout', 'Attention']

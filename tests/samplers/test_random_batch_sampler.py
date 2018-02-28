@@ -1,6 +1,6 @@
-from lib.samplers import RandomBatchSampler
+from torchnlp.samplers import RandomBatchSampler
 
-from lib.samplers import SortedSampler
+from torchnlp.samplers import SortedSampler
 
 
 def test_random_batch_sampler():

@@ -5,13 +5,13 @@ import mock
 
 import six
 
-from lib.text_encoders import subword_text_tokenizer
-from lib.text_encoders.subword_text_tokenizer import encode
-from lib.text_encoders.subword_text_tokenizer import decode
-from lib.text_encoders.subword_text_tokenizer import _escape_token
-from lib.text_encoders.subword_text_tokenizer import _unescape_token
-from lib.text_encoders.subword_text_tokenizer import _ESCAPE_CHARS
-from lib.text_encoders.subword_text_tokenizer import SubwordTextTokenizer
+from torchnlp.text_encoders import subword_text_tokenizer
+from torchnlp.text_encoders.subword_text_tokenizer import encode
+from torchnlp.text_encoders.subword_text_tokenizer import decode
+from torchnlp.text_encoders.subword_text_tokenizer import _escape_token
+from torchnlp.text_encoders.subword_text_tokenizer import _unescape_token
+from torchnlp.text_encoders.subword_text_tokenizer import _ESCAPE_CHARS
+from torchnlp.text_encoders.subword_text_tokenizer import SubwordTextTokenizer
 
 
 class TestTokenCounts(unittest.TestCase):

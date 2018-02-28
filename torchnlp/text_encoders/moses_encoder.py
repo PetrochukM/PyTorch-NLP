@@ -1,4 +1,4 @@
-from lib.text_encoders.word_encoder import WordEncoder
+from torchnlp.text_encoders.word_encoder import WordEncoder
 
 
 class MosesEncoder(WordEncoder):

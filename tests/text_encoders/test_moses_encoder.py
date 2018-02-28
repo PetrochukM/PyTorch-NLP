@@ -1,4 +1,4 @@
-from lib.text_encoders import MosesEncoder
+from torchnlp.text_encoders import MosesEncoder
 
 
 def test_moses_encoder():

@@ -1,4 +1,4 @@
-from lib.samplers import BucketBatchSampler
+from torchnlp.samplers import BucketBatchSampler
 
 
 def test_bucket_batch_sampler():

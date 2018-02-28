@@ -1,6 +1,6 @@
 import os
 
-from lib.checkpoint import Checkpoint
+from torchnlp.checkpoint import Checkpoint
 
 
 def test_checkpoint():

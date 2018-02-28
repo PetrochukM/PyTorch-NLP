@@ -1,6 +1,6 @@
 import pytest
 
-from lib.datasets import count_dataset
+from torchnlp.datasets import count_dataset
 from tests.datasets.utils import try_dataset
 
 

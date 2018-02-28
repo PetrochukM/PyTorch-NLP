@@ -1,4 +1,4 @@
-from lib.datasets import zero_to_zero_dataset
+from torchnlp.datasets import zero_to_zero_dataset
 from tests.datasets.utils import try_dataset
 
 

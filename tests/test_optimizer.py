@@ -4,7 +4,7 @@ import torch
 from torch.optim.lr_scheduler import StepLR
 import mock
 
-from lib.optimizer import Optimizer
+from torchnlp.optimizer import Optimizer
 
 
 class TestOptimizer(unittest.TestCase):

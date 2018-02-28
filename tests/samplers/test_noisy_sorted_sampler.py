@@ -1,4 +1,4 @@
-from lib.samplers import NoisySortedSampler
+from torchnlp.samplers import NoisySortedSampler
 
 
 def test_noisy_sorted_sampler():

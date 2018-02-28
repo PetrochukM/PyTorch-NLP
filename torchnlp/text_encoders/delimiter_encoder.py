@@ -1,6 +1,6 @@
-from lib.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
-from lib.text_encoders.reserved_tokens import RESERVED_STOI
-from lib.text_encoders.reserved_tokens import UNKNOWN_TOKEN
+from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.text_encoders.reserved_tokens import RESERVED_STOI
+from torchnlp.text_encoders.reserved_tokens import UNKNOWN_TOKEN
 
 
 class DelimiterEncoder(StaticTokenizerEncoder):

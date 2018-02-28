@@ -2,9 +2,9 @@ import unittest
 
 from skopt.space import Integer
 
-from lib.utils import config_logging
-from lib.hyperparameter_optim import hyperband
-from lib.hyperparameter_optim import successive_halving
+from torchnlp.utils import config_logging
+from torchnlp.hyperparameter_optim import hyperband
+from torchnlp.hyperparameter_optim import successive_halving
 
 config_logging()
 
