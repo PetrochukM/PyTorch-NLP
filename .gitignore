@@ -90,3 +90,6 @@ data/**
 
 # Test Files
 .pytest_cache
+
+# ReadTheDocs build files
+docs/_build
