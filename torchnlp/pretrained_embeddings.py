@@ -62,17 +62,21 @@ class _PretrainedEmbeddings(object):
             path = os.path.join(cache, name)
             path_pt = path + '.pt'
 
+        print(path)
+
         if not os.path.isfile(path_pt) or self.is_include is not None:
             if not os.path.isfile(path) and url:
                 logger.info('Downloading vectors from {}'.format(url))
                 if not os.path.exists(cache):
                     os.makedirs(cache)
                 dest = os.path.join(cache, os.path.basename(url))
+                print(dest)
                 if not os.path.isfile(dest):
                     with tqdm(unit='B', unit_scale=True, miniters=1, desc=dest) as t:
                         urlretrieve(url, dest, reporthook=reporthook(t))
                 logger.info('Extracting vectors into {}'.format(cache))
                 ext = os.path.splitext(dest)[1][1:]
+                print(ext)
                 if ext == 'zip':
                     with zipfile.ZipFile(dest, "r") as zf:
                         zf.extractall(cache)
@@ -180,7 +184,7 @@ class CharNGram(_PretrainedEmbeddings):
         super(CharNGram, self).__init__(self.name, url=self.url, **kwargs)
 
     def __getitem__(self, token):
-        vector = torch.Tensor(1, self.dim).zero_()
+        vector = torch.Tensor(self.dim).zero_()
         if token == "<unk>":
             return self.unk_init(vector)
         # These literals need to be coerced to unicode for Python 2 compatibility

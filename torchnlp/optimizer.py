@@ -5,6 +5,7 @@ import torch
 from torchnlp.configurable import configurable
 
 # TODO: Add increasing batch_size scheduler
+# TODO: Remove Optimizer as it is not NLP do a PytorchUtils library
 
 
 class Optimizer(object):

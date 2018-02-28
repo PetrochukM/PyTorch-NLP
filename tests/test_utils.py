@@ -43,10 +43,11 @@ def test_get_root_path():
 
 
 def test_new_experiment_folder():
-    # TODO: Remove experiment directory created...
-    path = new_experiment_folder()
+    directory = 'tests/_test_data/experiments'
+    path = new_experiment_folder(parent_directory=directory)
     assert os.path.isdir(path)
     os.rmdir(path)
+    os.rmdir(directory)
 
 
 def test_batch_generator():

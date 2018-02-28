@@ -4,7 +4,6 @@ import os
 import mock
 
 from torchnlp.datasets import simple_qa_dataset
-from tests.datasets.utils import try_dataset
 
 directory = 'tests/_test_data/simple_qa'
 
@@ -17,11 +16,11 @@ def test_simple_qa_dataset_row(mock_urlretrieve):
 
     mock_urlretrieve.side_effect = side_effect
 
-    # Try some basic stuff
-    try_dataset(simple_qa_dataset)
-
     # Check a row are parsed correctly
-    dev = simple_qa_dataset(directory=directory, dev=True)
+    train, dev, test = simple_qa_dataset(directory=directory, test=True, train=True, dev=True)
+    assert len(train) > 0
+    assert len(dev) > 0
+    assert len(test) > 0
     assert dev[0] == {
         'question': 'Who was the trump ocean club international hotel and tower named after',
         'relation': 'www.freebase.com/symbols/namesake/named_after',

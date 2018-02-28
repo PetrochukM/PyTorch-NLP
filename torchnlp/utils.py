@@ -15,6 +15,8 @@ from torchnlp.text_encoders import PADDING_INDEX
 
 logger = logging.getLogger(__name__)
 
+# TODO: Remove configurable and stuff as it is not related to NLP
+
 
 def flatten_parameters(model):
     """ Flatten parameters of a model """

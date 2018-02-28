@@ -10,6 +10,8 @@ import math
 import torch
 from torch.optim import Optimizer
 
+# TODO: Remove optim because it does not make sense for a NLP library
+
 
 class Adam(Optimizer):
     """Implements Adam algorithm.

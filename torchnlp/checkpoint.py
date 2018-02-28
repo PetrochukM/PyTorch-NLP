@@ -10,6 +10,8 @@ import torchnlp.utils
 logger = logging.getLogger(__name__)
 import_time = time.time()
 
+# TODO: Remove Checkpoint as it is not related to NLP
+
 
 class Checkpoint(object):
 

@@ -1,12 +1,16 @@
 import pytest
 
 from torchnlp.datasets import count_dataset
-from tests.datasets.utils import try_dataset
 
 
 def test_count_dataset():
-    # NOTE: Just make sure it works...
-    try_dataset(count_dataset)
+    test_data = count_dataset(test=True)
+    train_data, dev_data, test_data = count_dataset(test=True, train=True, dev=True)
+    # Test if data generated is consistent
+    assert list(test_data) == list(test_data)
+    assert len(train_data) > 0
+    assert len(dev_data) > 0
+    assert len(test_data) > 0
 
 
 def test_count_dataset_rows():
