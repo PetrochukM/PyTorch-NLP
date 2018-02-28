@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 
-from torchnlp.configurable import configurable
-
 
 class Attention(nn.Module):
     r"""
@@ -12,7 +10,6 @@ class Attention(nn.Module):
             :math:`y = Ax + b`.
     """
 
-    @configurable
     def __init__(self, dimensions, attention_type='general'):
         """
         Args:

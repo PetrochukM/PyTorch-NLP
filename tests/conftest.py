@@ -1,11 +1,15 @@
-import pytest
+import logging
+import sys
 
-from torchnlp.utils import config_logging
+import pytest
 
 
 # Add test environment variable before all tests
 def pytest_sessionstart(session):
-    config_logging()
+    logging.basicConfig(
+        format='[%(asctime)s][%(processName)s][%(name)s][%(levelname)s] %(message)s',
+        level=logging.INFO,
+        stream=sys.stdout)
 
 
 def pytest_configure(config):
