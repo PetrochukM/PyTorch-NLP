@@ -7,3 +7,4 @@ pandas
 tqdm
 wrapt
 ujson
+spacy
