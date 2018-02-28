@@ -7,3 +7,5 @@ yapf
 codecov
 sphinx
 sphinx-autobuild
+spacy
+nltk
