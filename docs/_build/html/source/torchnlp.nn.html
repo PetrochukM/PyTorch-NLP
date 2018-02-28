@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchnlp.nn package &mdash; PyTorch-NLP 0.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyTorch-NLP 0.0.0 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyTorch-NLP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">torchnlp.nn package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-torchnlp.nn.attention">torchnlp.nn.attention module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.nn.lock_dropout">torchnlp.nn.lock_dropout module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.nn">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyTorch-NLP</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>torchnlp.nn package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/torchnlp.nn.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="torchnlp-nn-package">
+<h1>torchnlp.nn package<a class="headerlink" href="#torchnlp-nn-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-torchnlp.nn.attention">
+<span id="torchnlp-nn-attention-module"></span><h2>torchnlp.nn.attention module<a class="headerlink" href="#module-torchnlp.nn.attention" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.nn.attention.Attention">
+<em class="property">class </em><code class="descclassname">torchnlp.nn.attention.</code><code class="descname">Attention</code><span class="sig-paren">(</span><em>dimensions</em>, <em>attention_type='general'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/nn/attention.html#Attention"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.nn.attention.Attention" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>Applies an attention mechanism on the output features from the decoder.
+.. attribute:: linear_out</p>
+<blockquote>
+<div><em>torch.nn.Linear</em> – applies a linear transformation to the incoming data:
+<span class="math notranslate">\(y = Ax + b\)</span>.</div></blockquote>
+<dl class="method">
+<dt id="torchnlp.nn.attention.Attention.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>input_</em>, <em>context</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/nn/attention.html#Attention.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.nn.attention.Attention.forward" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> (<em>torch.FloatTensor</em><em> [</em><em>batch_size</em><em>, </em><em>output_len</em><em>, </em><em>dimensions</em><em>]</em>) – the attention input.</li>
+<li><strong>context</strong> (<em>torch.FloatTensor</em><em> [</em><em>batch_size</em><em>, </em><em>input_len</em><em>, </em><em>dimensions</em><em>]</em>) – tensor containing
+features of the encoded input sequence.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>tensor containing the</dt>
+<dd><p class="first last">attended output features.</p>
+</dd>
+<dt>attention_weights (torch.FloatTensor [batch_size, output_len, input_len]): tensor</dt>
+<dd><p class="first last">containing attention weights.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">output (torch.LongTensor [batch_size, output_len, dimensions])</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.nn.lock_dropout">
+<span id="torchnlp-nn-lock-dropout-module"></span><h2>torchnlp.nn.lock_dropout module<a class="headerlink" href="#module-torchnlp.nn.lock_dropout" title="Permalink to this headline">¶</a></h2>
+<p>BSD 3-Clause License</p>
+<p>Copyright (c) 2017,
+All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:</p>
+<ul class="simple">
+<li>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.</li>
+<li>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</li>
+<li>Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.</li>
+</ul>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS”
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+<dl class="class">
+<dt id="torchnlp.nn.lock_dropout.LockedDropout">
+<em class="property">class </em><code class="descclassname">torchnlp.nn.lock_dropout.</code><code class="descname">LockedDropout</code><span class="sig-paren">(</span><em>p=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/nn/lock_dropout.html#LockedDropout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.nn.lock_dropout.LockedDropout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>LockedDropout can be used to apply the same dropout mask to every time step.</p>
+<dl class="method">
+<dt id="torchnlp.nn.lock_dropout.LockedDropout.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/nn/lock_dropout.html#LockedDropout.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.nn.lock_dropout.LockedDropout.forward" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>torch.FloatTensor</em><em> [</em><em>batch size</em><em>, </em><em>sequence length</em><em>, </em><em>rnn hidden size</em><em>]</em>) – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.nn">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-torchnlp.nn" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.nn.LockedDropout">
+<em class="property">class </em><code class="descclassname">torchnlp.nn.</code><code class="descname">LockedDropout</code><span class="sig-paren">(</span><em>p=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/nn/lock_dropout.html#LockedDropout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.nn.LockedDropout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>LockedDropout can be used to apply the same dropout mask to every time step.</p>
+<dl class="method">
+<dt id="torchnlp.nn.LockedDropout.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/nn/lock_dropout.html#LockedDropout.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.nn.LockedDropout.forward" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>torch.FloatTensor</em><em> [</em><em>batch size</em><em>, </em><em>sequence length</em><em>, </em><em>rnn hidden size</em><em>]</em>) – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchnlp.nn.Attention">
+<em class="property">class </em><code class="descclassname">torchnlp.nn.</code><code class="descname">Attention</code><span class="sig-paren">(</span><em>dimensions</em>, <em>attention_type='general'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/nn/attention.html#Attention"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.nn.Attention" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>Applies an attention mechanism on the output features from the decoder.
+.. attribute:: linear_out</p>
+<blockquote>
+<div><em>torch.nn.Linear</em> – applies a linear transformation to the incoming data:
+<span class="math notranslate">\(y = Ax + b\)</span>.</div></blockquote>
+<dl class="method">
+<dt id="torchnlp.nn.Attention.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>input_</em>, <em>context</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/nn/attention.html#Attention.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.nn.Attention.forward" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> (<em>torch.FloatTensor</em><em> [</em><em>batch_size</em><em>, </em><em>output_len</em><em>, </em><em>dimensions</em><em>]</em>) – the attention input.</li>
+<li><strong>context</strong> (<em>torch.FloatTensor</em><em> [</em><em>batch_size</em><em>, </em><em>input_len</em><em>, </em><em>dimensions</em><em>]</em>) – tensor containing
+features of the encoded input sequence.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>tensor containing the</dt>
+<dd><p class="first last">attended output features.</p>
+</dd>
+<dt>attention_weights (torch.FloatTensor [batch_size, output_len, input_len]): tensor</dt>
+<dd><p class="first last">containing attention weights.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">output (torch.LongTensor [batch_size, output_len, dimensions])</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael Petrochuk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

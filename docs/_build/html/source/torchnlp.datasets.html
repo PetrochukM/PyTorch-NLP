@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchnlp.datasets package &mdash; PyTorch-NLP 0.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyTorch-NLP 0.0.0 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyTorch-NLP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">torchnlp.datasets package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-torchnlp.datasets.count">torchnlp.datasets.count module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.datasets.dataset">torchnlp.datasets.dataset module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.datasets.reverse">torchnlp.datasets.reverse module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.datasets.simple_qa">torchnlp.datasets.simple_qa module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.datasets.zero_to_zero">torchnlp.datasets.zero_to_zero module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.datasets">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyTorch-NLP</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>torchnlp.datasets package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/torchnlp.datasets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="torchnlp-datasets-package">
+<h1>torchnlp.datasets package<a class="headerlink" href="#torchnlp-datasets-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-torchnlp.datasets.count">
+<span id="torchnlp-datasets-count-module"></span><h2>torchnlp.datasets.count module<a class="headerlink" href="#module-torchnlp.datasets.count" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="torchnlp.datasets.count.count_dataset">
+<code class="descclassname">torchnlp.datasets.count.</code><code class="descname">count_dataset</code><span class="sig-paren">(</span><em>train=False</em>, <em>dev=False</em>, <em>test=False</em>, <em>train_rows=10000</em>, <em>dev_rows=1000</em>, <em>test_rows=1000</em>, <em>seq_max_length=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/count.html#count_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.count.count_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for sequence to label tests.</p>
+<dl class="docutils">
+<dt>Sample Data:</dt>
+<dd>text: 1 2 3
+count: 3</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.datasets.dataset">
+<span id="torchnlp-datasets-dataset-module"></span><h2>torchnlp.datasets.dataset module<a class="headerlink" href="#module-torchnlp.datasets.dataset" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.datasets.dataset.Dataset">
+<em class="property">class </em><code class="descclassname">torchnlp.datasets.dataset.</code><code class="descname">Dataset</code><span class="sig-paren">(</span><em>rows</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/dataset.html#Dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.dataset.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.dataset.Dataset</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.datasets.reverse">
+<span id="torchnlp-datasets-reverse-module"></span><h2>torchnlp.datasets.reverse module<a class="headerlink" href="#module-torchnlp.datasets.reverse" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="torchnlp.datasets.reverse.reverse_dataset">
+<code class="descclassname">torchnlp.datasets.reverse.</code><code class="descname">reverse_dataset</code><span class="sig-paren">(</span><em>train=False</em>, <em>dev=False</em>, <em>test=False</em>, <em>train_rows=10000</em>, <em>dev_rows=1000</em>, <em>test_rows=1000</em>, <em>seq_max_length=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/reverse.html#reverse_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.reverse.reverse_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for sequence to sequence tests.</p>
+<dl class="docutils">
+<dt>Sample Data:</dt>
+<dd>Input: 1 2 3
+Output: 3 2 1</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.datasets.simple_qa">
+<span id="torchnlp-datasets-simple-qa-module"></span><h2>torchnlp.datasets.simple_qa module<a class="headerlink" href="#module-torchnlp.datasets.simple_qa" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="torchnlp.datasets.simple_qa.simple_qa_dataset">
+<code class="descclassname">torchnlp.datasets.simple_qa.</code><code class="descname">simple_qa_dataset</code><span class="sig-paren">(</span><em>directory='data/simple_qa'</em>, <em>train=False</em>, <em>dev=False</em>, <em>test=False</em>, <em>train_filename='annotated_fb_data_train.txt'</em>, <em>dev_filename='annotated_fb_data_valid.txt'</em>, <em>test_filename='annotated_fb_data_test.txt'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/simple_qa.html#simple_qa_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.simple_qa.simple_qa_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset introduced by this paper:
+<a class="reference external" href="https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/">https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/</a></p>
+<p class="rubric">Example</p>
+<p>First row from the development <cite>annotated_fb_data_valid</cite> dataset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">subject</span><span class="p">:</span> <span class="n">Who</span> <span class="n">was</span> <span class="n">the</span> <span class="n">trump</span> <span class="n">ocean</span> <span class="n">club</span> <span class="n">international</span> <span class="n">hotel</span> <span class="ow">and</span> <span class="n">tower</span> <span class="n">named</span> <span class="n">after</span>
+<span class="n">relation</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">freebase</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">symbols</span><span class="o">/</span><span class="n">namesake</span><span class="o">/</span><span class="n">named_after</span>
+<span class="nb">object</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">freebase</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">m</span><span class="o">/</span><span class="mi">0</span><span class="n">cqt90</span>
+<span class="n">question</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">freebase</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">m</span><span class="o">/</span><span class="mi">0</span><span class="n">f3xg_</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.datasets.zero_to_zero">
+<span id="torchnlp-datasets-zero-to-zero-module"></span><h2>torchnlp.datasets.zero_to_zero module<a class="headerlink" href="#module-torchnlp.datasets.zero_to_zero" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="torchnlp.datasets.zero_to_zero.zero_to_zero_dataset">
+<code class="descclassname">torchnlp.datasets.zero_to_zero.</code><code class="descname">zero_to_zero_dataset</code><span class="sig-paren">(</span><em>train=False</em>, <em>dev=False</em>, <em>test=False</em>, <em>train_rows=256</em>, <em>dev_rows=64</em>, <em>test_rows=64</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/zero_to_zero.html#zero_to_zero_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.zero_to_zero.zero_to_zero_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for quick integration testing.</p>
+<dl class="docutils">
+<dt>Sample Data:</dt>
+<dd>Input: 0
+Output: 0</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.datasets">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-torchnlp.datasets" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.datasets.Dataset">
+<em class="property">class </em><code class="descclassname">torchnlp.datasets.</code><code class="descname">Dataset</code><span class="sig-paren">(</span><em>rows</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/dataset.html#Dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.dataset.Dataset</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchnlp.datasets.simple_qa_dataset">
+<code class="descclassname">torchnlp.datasets.</code><code class="descname">simple_qa_dataset</code><span class="sig-paren">(</span><em>directory='data/simple_qa'</em>, <em>train=False</em>, <em>dev=False</em>, <em>test=False</em>, <em>train_filename='annotated_fb_data_train.txt'</em>, <em>dev_filename='annotated_fb_data_valid.txt'</em>, <em>test_filename='annotated_fb_data_test.txt'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/simple_qa.html#simple_qa_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.simple_qa_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset introduced by this paper:
+<a class="reference external" href="https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/">https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/</a></p>
+<p class="rubric">Example</p>
+<p>First row from the development <cite>annotated_fb_data_valid</cite> dataset:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">subject</span><span class="p">:</span> <span class="n">Who</span> <span class="n">was</span> <span class="n">the</span> <span class="n">trump</span> <span class="n">ocean</span> <span class="n">club</span> <span class="n">international</span> <span class="n">hotel</span> <span class="ow">and</span> <span class="n">tower</span> <span class="n">named</span> <span class="n">after</span>
+<span class="n">relation</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">freebase</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">symbols</span><span class="o">/</span><span class="n">namesake</span><span class="o">/</span><span class="n">named_after</span>
+<span class="nb">object</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">freebase</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">m</span><span class="o">/</span><span class="mi">0</span><span class="n">cqt90</span>
+<span class="n">question</span><span class="p">:</span> <span class="n">www</span><span class="o">.</span><span class="n">freebase</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">m</span><span class="o">/</span><span class="mi">0</span><span class="n">f3xg_</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchnlp.datasets.zero_to_zero_dataset">
+<code class="descclassname">torchnlp.datasets.</code><code class="descname">zero_to_zero_dataset</code><span class="sig-paren">(</span><em>train=False</em>, <em>dev=False</em>, <em>test=False</em>, <em>train_rows=256</em>, <em>dev_rows=64</em>, <em>test_rows=64</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/zero_to_zero.html#zero_to_zero_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.zero_to_zero_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for quick integration testing.</p>
+<dl class="docutils">
+<dt>Sample Data:</dt>
+<dd>Input: 0
+Output: 0</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchnlp.datasets.count_dataset">
+<code class="descclassname">torchnlp.datasets.</code><code class="descname">count_dataset</code><span class="sig-paren">(</span><em>train=False</em>, <em>dev=False</em>, <em>test=False</em>, <em>train_rows=10000</em>, <em>dev_rows=1000</em>, <em>test_rows=1000</em>, <em>seq_max_length=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/count.html#count_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.count_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for sequence to label tests.</p>
+<dl class="docutils">
+<dt>Sample Data:</dt>
+<dd>text: 1 2 3
+count: 3</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchnlp.datasets.reverse_dataset">
+<code class="descclassname">torchnlp.datasets.</code><code class="descname">reverse_dataset</code><span class="sig-paren">(</span><em>train=False</em>, <em>dev=False</em>, <em>test=False</em>, <em>train_rows=10000</em>, <em>dev_rows=1000</em>, <em>test_rows=1000</em>, <em>seq_max_length=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/datasets/reverse.html#reverse_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.datasets.reverse_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for sequence to sequence tests.</p>
+<dl class="docutils">
+<dt>Sample Data:</dt>
+<dd>Input: 1 2 3
+Output: 3 2 1</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael Petrochuk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

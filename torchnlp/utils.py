@@ -8,17 +8,18 @@ logger = logging.getLogger(__name__)
 
 
 def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
-    """ Deterministic shuffle and split algorithm.
+    """Deterministic shuffle and split algorithm.
 
     Given the same two datasets and the same `random_seed`, the split happens the same exact way
     every call.
 
     Args:
-        dataset (lib.datasets.Dataset)
-        other_dataset (lib.datasets.Dataset)
-        random_seed (int, optional)
-        cut (float, optional): float between 0 and 1 to cut the dataset; otherwise, the same
-            proportions are kept.
+        dataset (lib.datasets.Dataset): First dataset.
+        other_dataset (lib.datasets.Dataset): Another dataset.
+        random_seed (int, optional): Seed to control the shuffle of both datasets.
+        cut (float, optional): If defined it is the percentage of rows that first dataset gets after
+            split otherwise the original proportions are kept.
+
     Returns:
         dataset (lib.datasets.Dataset)
         other_dataset (lib.datasets.Dataset)

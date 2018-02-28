@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchnlp.text_encoders.subword_text_tokenizer &mdash; PyTorch-NLP 0.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="PyTorch-NLP 0.0.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PyTorch-NLP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.html">torchnlp package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.datasets.html">torchnlp.datasets package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.count">torchnlp.datasets.count module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.dataset">torchnlp.datasets.dataset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.reverse">torchnlp.datasets.reverse module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.simple_qa">torchnlp.datasets.simple_qa module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.zero_to_zero">torchnlp.datasets.zero_to_zero module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.metrics.html">torchnlp.metrics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.metrics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics.accuracy">torchnlp.metrics.accuracy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics.bleu">torchnlp.metrics.bleu module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.nn.html">torchnlp.nn package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.nn.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn.attention">torchnlp.nn.attention module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn.lock_dropout">torchnlp.nn.lock_dropout module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.samplers.html">torchnlp.samplers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.bucket_batch_sampler">torchnlp.samplers.bucket_batch_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.noisy_sorted_sampler">torchnlp.samplers.noisy_sorted_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.random_batch_sampler">torchnlp.samplers.random_batch_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.sorted_sampler">torchnlp.samplers.sorted_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html">torchnlp.text_encoders package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.character_encoder">torchnlp.text_encoders.character_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.delimiter_encoder">torchnlp.text_encoders.delimiter_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.identity_encoder">torchnlp.text_encoders.identity_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.moses_encoder">torchnlp.text_encoders.moses_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.reserved_tokens">torchnlp.text_encoders.reserved_tokens module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.spacy_encoder">torchnlp.text_encoders.spacy_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.static_tokenizer_encoder">torchnlp.text_encoders.static_tokenizer_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_encoder">torchnlp.text_encoders.subword_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_text_tokenizer">torchnlp.text_encoders.subword_text_tokenizer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.text_encoders">torchnlp.text_encoders.text_encoders module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.treebank_encoder">torchnlp.text_encoders.treebank_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.word_encoder">torchnlp.text_encoders.word_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#module-torchnlp.pretrained_embeddings">torchnlp.pretrained_embeddings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#module-torchnlp.utils">torchnlp.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#module-torchnlp">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.datasets.html">torchnlp.datasets package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.count">torchnlp.datasets.count module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.dataset">torchnlp.datasets.dataset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.reverse">torchnlp.datasets.reverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.simple_qa">torchnlp.datasets.simple_qa module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.zero_to_zero">torchnlp.datasets.zero_to_zero module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.metrics.html">torchnlp.metrics package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.metrics.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics.accuracy">torchnlp.metrics.accuracy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics.bleu">torchnlp.metrics.bleu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.nn.html">torchnlp.nn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.nn.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn.attention">torchnlp.nn.attention module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn.lock_dropout">torchnlp.nn.lock_dropout module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.samplers.html">torchnlp.samplers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.bucket_batch_sampler">torchnlp.samplers.bucket_batch_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.noisy_sorted_sampler">torchnlp.samplers.noisy_sorted_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.random_batch_sampler">torchnlp.samplers.random_batch_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.sorted_sampler">torchnlp.samplers.sorted_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html">torchnlp.text_encoders package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.character_encoder">torchnlp.text_encoders.character_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.delimiter_encoder">torchnlp.text_encoders.delimiter_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.identity_encoder">torchnlp.text_encoders.identity_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.moses_encoder">torchnlp.text_encoders.moses_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.reserved_tokens">torchnlp.text_encoders.reserved_tokens module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.spacy_encoder">torchnlp.text_encoders.spacy_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.static_tokenizer_encoder">torchnlp.text_encoders.static_tokenizer_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_encoder">torchnlp.text_encoders.subword_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_text_tokenizer">torchnlp.text_encoders.subword_text_tokenizer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.text_encoders">torchnlp.text_encoders.text_encoders module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.treebank_encoder">torchnlp.text_encoders.treebank_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.word_encoder">torchnlp.text_encoders.word_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTorch-NLP</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>torchnlp.text_encoders.subword_text_tokenizer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for torchnlp.text_encoders.subword_text_tokenizer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="c1"># Copyright 2017 The Tensor2Tensor Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1"># http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+
+<span class="c1"># Dependency imports</span>
+
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="n">xrange</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># This set contains all letter and number characters.</span>
+<span class="n">_ALPHANUMERIC_CHAR_SET</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+    <span class="n">six</span><span class="o">.</span><span class="n">unichr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxunicode</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">unicodedata</span><span class="o">.</span><span class="n">category</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">unichr</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span> <span class="ow">or</span>
+        <span class="n">unicodedata</span><span class="o">.</span><span class="n">category</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">unichr</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;N&quot;</span><span class="p">)))</span>
+
+<span class="c1"># Regular expression for unescaping token strings.</span>
+<span class="c1"># &#39;\u&#39; is converted to &#39;_&#39;</span>
+<span class="c1"># &#39;\\&#39; is converted to &#39;\&#39;</span>
+<span class="c1"># &#39;\213;&#39; is converted to unichr(213)</span>
+<span class="n">_UNESCAPE_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">u|</span><span class="se">\\\\</span><span class="s2">|</span><span class="se">\\</span><span class="s2">([0-9]+);&quot;</span><span class="p">)</span>
+<span class="n">_ESCAPE_CHARS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">_u;0123456789&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="native_to_unicode_py2"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.native_to_unicode_py2">[docs]</a><span class="k">def</span> <span class="nf">native_to_unicode_py2</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Python 2: transform native string to Unicode.&quot;&quot;&quot;</span></div>
+    <span class="k">return</span> <span class="n">s</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">unicode</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span>  <span class="c1"># noqa: F821</span>
+
+
+<span class="c1"># Conversion between Unicode and UTF-8, if required (on Python2)</span>
+<span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span><span class="p">:</span>
+    <span class="n">native_to_unicode</span> <span class="o">=</span> <span class="n">native_to_unicode_py2</span>
+    <span class="n">unicode_to_native</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># No conversion required on Python3</span>
+    <span class="n">native_to_unicode</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span>
+    <span class="n">unicode_to_native</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span>
+
+
+<div class="viewcode-block" id="encode"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.encode">[docs]</a><span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Encode a unicode string as a list of tokens.</span>
+<span class="sd">    Args:</span>
+<span class="sd">      text: a unicode string</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      a list of tokens as Unicode strings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">token_start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Classify each character in the input string</span>
+    <span class="n">is_alnum</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="ow">in</span> <span class="n">_ALPHANUMERIC_CHAR_SET</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">text</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">is_alnum</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">!=</span> <span class="n">is_alnum</span><span class="p">[</span><span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">token_start</span><span class="p">:</span><span class="n">pos</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">token</span> <span class="o">!=</span> <span class="sa">u</span><span class="s2">&quot; &quot;</span> <span class="ow">or</span> <span class="n">token_start</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+            <span class="n">token_start</span> <span class="o">=</span> <span class="n">pos</span>
+    <span class="n">final_token</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">token_start</span><span class="p">:]</span>
+    <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">final_token</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">ret</span>
+
+
+<div class="viewcode-block" id="decode"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.decode">[docs]</a><span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decode a list of tokens to a unicode string.</span>
+<span class="sd">    Args:</span>
+<span class="sd">      tokens: a list of Unicode strings</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      a unicode string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">token_is_alnum</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_ALPHANUMERIC_CHAR_SET</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">token_is_alnum</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">token_is_alnum</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_escape_token</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Escape away underscores and OOV characters and append &#39;_&#39;.</span>
+<span class="sd">    This allows the token to be experessed as the concatenation of a list</span>
+<span class="sd">    of subtokens from the vocabulary. The underscore acts as a sentinel</span>
+<span class="sd">    which allows us to invertibly concatenate multiple such lists.</span>
+<span class="sd">    Args:</span>
+<span class="sd">      token: A unicode string to be escaped.</span>
+<span class="sd">      alphabet: A set of all characters in the vocabulary&#39;s alphabet.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      escaped_token: An escaped unicode string.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">      ValueError: If the provided token is not unicode.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expected string type for token, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+
+    <span class="n">token</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\\\\</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">u&quot;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">alphabet</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">!=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">else</span> <span class="sa">r</span><span class="s2">&quot;\</span><span class="si">%d</span><span class="s2">;&quot;</span> <span class="o">%</span> <span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">token</span><span class="p">]</span>
+    <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">_unescape_token</span><span class="p">(</span><span class="n">escaped_token</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inverse of _escape_token().</span>
+<span class="sd">    Args:</span>
+<span class="sd">      escaped_token: a unicode string</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      token: a unicode string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;_&quot;</span> <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">u&quot;</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">six</span><span class="o">.</span><span class="n">unichr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">OverflowError</span><span class="p">)</span> <span class="k">as</span> <span class="n">_</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">trimmed</span> <span class="o">=</span> <span class="n">escaped_token</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">escaped_token</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">escaped_token</span>
+    <span class="k">return</span> <span class="n">_UNESCAPE_REGEX</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="n">trimmed</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="SubwordTextTokenizer"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.SubwordTextTokenizer">[docs]</a><span class="k">class</span> <span class="nc">SubwordTextTokenizer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class for invertibly encoding text using a limited vocabulary.</span>
+<span class="sd">    Invertibly encodes a native string as a sequence of subtokens from a limited</span>
+<span class="sd">    vocabulary.</span>
+<span class="sd">    A SubwordTextTokenizer is built from a corpus (so it is tailored to the text in</span>
+<span class="sd">    the corpus), and stored to a file. See text_encoder_build_subword.py.</span>
+<span class="sd">    It can then be loaded and used to encode/decode any text.</span>
+<span class="sd">    Encoding has four phases:</span>
+<span class="sd">    1. Tokenize into a list of tokens.  Each token is a unicode string of either</span>
+<span class="sd">      all alphanumeric characters or all non-alphanumeric characters.  We drop</span>
+<span class="sd">      tokens consisting of a single space that are between two alphanumeric</span>
+<span class="sd">      tokens.</span>
+<span class="sd">    2. Escape each token.  This escapes away special and out-of-vocabulary</span>
+<span class="sd">      characters, and makes sure that each token ends with an underscore, and</span>
+<span class="sd">      has no other underscores.</span>
+<span class="sd">    3. Represent each escaped token as a the concatenation of a list of subtokens</span>
+<span class="sd">      from the limited vocabulary.  Subtoken selection is done greedily from</span>
+<span class="sd">      beginning to end.  That is, we construct the list in order, always picking</span>
+<span class="sd">      the longest subtoken in our vocabulary that matches a prefix of the</span>
+<span class="sd">      remaining portion of the encoded token.</span>
+<span class="sd">    4. Concatenate these lists.  This concatenation is invertible due to the</span>
+<span class="sd">      fact that the trailing underscores indicate when one list is finished.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize and read from a file, if provided.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SubwordTextTokenizer.encode"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.SubwordTextTokenizer.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Converts a native string to a list of subtoken.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          raw_text: a native string.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">          a list of integers in the range [0, vocab_size)</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokens_to_subtoken</span><span class="p">(</span><span class="n">encode</span><span class="p">(</span><span class="n">native_to_unicode</span><span class="p">(</span><span class="n">raw_text</span><span class="p">)))</span>
+
+<div class="viewcode-block" id="SubwordTextTokenizer.decode"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.SubwordTextTokenizer.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtokens</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Converts a sequence of subtoken to a native string.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          subtokens: a list of integers in the range [0, vocab_size)</span>
+<span class="sd">        Returns:</span>
+<span class="sd">          a native string</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="k">return</span> <span class="n">unicode_to_native</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_subtoken_to_tokens</span><span class="p">(</span><span class="n">subtokens</span><span class="p">)))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vocab</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_subtoken_strings</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vocab_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_all_subtoken_strings</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_tokens_to_subtoken</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a list of tokens to a list of subtoken.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          tokens: a list of strings.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">          a list of integers in the range [0, vocab_size)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_escaped_token_to_subtoken_strings</span><span class="p">(</span><span class="n">_escape_token</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="k">def</span> <span class="nf">_subtoken_to_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtokens</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Converts a list of subtoken to a list of tokens.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          subtokens: a list of integers in the range [0, vocab_size)</span>
+<span class="sd">        Returns:</span>
+<span class="sd">          a list of strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">concatenated</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subtokens</span><span class="p">)</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">concatenated</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">_unescape_token</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">split</span> <span class="k">if</span> <span class="n">t</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_escaped_token_to_subtoken_strings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">escaped_token</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Converts an escaped token string to a list of subtoken strings.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          escaped_token: An escaped token as a unicode string.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">          A list of subtokens as unicode strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># NOTE: This algorithm is greedy; it won&#39;t necessarily produce the &quot;best&quot;</span>
+        <span class="c1"># list of subtokens.</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">token_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">escaped_token</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">token_len</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">token_len</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_subtoken_len</span><span class="p">),</span> <span class="n">start</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">subtoken</span> <span class="o">=</span> <span class="n">escaped_token</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">subtoken</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_all_subtoken_strings</span><span class="p">:</span>
+                    <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subtoken</span><span class="p">)</span>
+                    <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
+                    <span class="k">break</span>
+
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># Did not break</span>
+                <span class="c1"># If there is no possible encoding of the escaped token then one of the</span>
+                <span class="c1"># characters in the token is not in the alphabet. This should be</span>
+                <span class="c1"># impossible and would be indicative of a bug.</span>
+                <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Token substring not found in subtoken vocabulary.&quot;</span>
+
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_count_tokens</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">sources</span><span class="p">):</span>
+        <span class="n">token_counts</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">corpus</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+                <span class="n">token_counts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">token_counts</span>
+
+<div class="viewcode-block" id="SubwordTextTokenizer.build_to_target_size_from_corpus"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.SubwordTextTokenizer.build_to_target_size_from_corpus">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build_to_target_size_from_corpus</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
+                                         <span class="o">*</span><span class="n">corpuses</span><span class="p">,</span>
+                                         <span class="n">target_size</span><span class="o">=</span><span class="mi">32000</span><span class="p">,</span>
+                                         <span class="n">min_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                         <span class="n">max_val</span><span class="o">=</span><span class="mf">1e3</span><span class="p">,</span>
+                                         <span class="n">num_iterations</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">token_counts</span> <span class="o">=</span> <span class="n">SubwordTextTokenizer</span><span class="o">.</span><span class="n">_count_tokens</span><span class="p">(</span><span class="o">*</span><span class="n">corpuses</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">SubwordTextTokenizer</span><span class="o">.</span><span class="n">build_to_target_size_from_token_counts</span><span class="p">(</span></div>
+            <span class="n">target_size</span><span class="p">,</span> <span class="n">token_counts</span><span class="p">,</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SubwordTextTokenizer.build_to_target_size_from_token_counts"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.SubwordTextTokenizer.build_to_target_size_from_token_counts">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build_to_target_size_from_token_counts</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
+                                               <span class="n">target_size</span><span class="p">,</span>
+                                               <span class="n">token_counts</span><span class="p">,</span>
+                                               <span class="n">min_val</span><span class="p">,</span>
+                                               <span class="n">max_val</span><span class="p">,</span>
+                                               <span class="n">num_iterations</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Builds a SubwordTextTokenizer that has `vocab_size` near `target_size`.</span>
+<span class="sd">        Uses simple recursive binary search to find a minimum token count that most</span>
+<span class="sd">        closely matches the `target_size`.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          target_size: Desired vocab_size to approximate.</span>
+<span class="sd">          token_counts: A dictionary of token counts, mapping string to int.</span>
+<span class="sd">          min_val: An integer; lower bound for the minimum token count.</span>
+<span class="sd">          max_val: An integer; upper bound for the minimum token count.</span>
+<span class="sd">          num_iterations: An integer; how many iterations of refinement.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">          A SubwordTextTokenizer instance.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: If `min_val` is greater than `max_val`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">min_val</span> <span class="o">&gt;</span> <span class="n">max_val</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Lower bound for the minimum token count &quot;</span>
+                             <span class="s2">&quot;is greater than the upper bound.&quot;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">bisect</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Bisection to find the right size.&quot;&quot;&quot;</span>
+            <span class="n">present_count</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_val</span> <span class="o">+</span> <span class="n">min_val</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Trying min_count </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">present_count</span><span class="p">)</span>
+            <span class="n">subtokenizer</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+            <span class="n">subtokenizer</span><span class="o">.</span><span class="n">build_from_token_counts</span><span class="p">(</span><span class="n">token_counts</span><span class="p">,</span> <span class="n">present_count</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;min_count </span><span class="si">%d</span><span class="s2"> attained a </span><span class="si">%d</span><span class="s2"> vocab_size&quot;</span><span class="p">,</span> <span class="n">present_count</span><span class="p">,</span>
+                        <span class="n">subtokenizer</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">)</span>
+
+            <span class="c1"># If min_val == max_val, we can&#39;t do any better than this.</span>
+            <span class="k">if</span> <span class="n">subtokenizer</span><span class="o">.</span><span class="n">vocab_size</span> <span class="o">==</span> <span class="n">target_size</span> <span class="ow">or</span> <span class="n">min_val</span> <span class="o">&gt;=</span> <span class="n">max_val</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">subtokenizer</span>
+
+            <span class="k">if</span> <span class="n">subtokenizer</span><span class="o">.</span><span class="n">vocab_size</span> <span class="o">&gt;</span> <span class="n">target_size</span><span class="p">:</span>
+                <span class="n">other_subtokenizer</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">present_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_val</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">other_subtokenizer</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">present_count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">other_subtokenizer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">subtokenizer</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">other_subtokenizer</span><span class="o">.</span><span class="n">vocab_size</span> <span class="o">-</span> <span class="n">target_size</span><span class="p">)</span> <span class="o">&lt;</span>
+                    <span class="nb">abs</span><span class="p">(</span><span class="n">subtokenizer</span><span class="o">.</span><span class="n">vocab_size</span> <span class="o">-</span> <span class="n">target_size</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="n">other_subtokenizer</span>
+            <span class="k">return</span> <span class="n">subtokenizer</span>
+</div>
+        <span class="k">return</span> <span class="n">bisect</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SubwordTextTokenizer.build_from_corpus"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.SubwordTextTokenizer.build_from_corpus">[docs]</a>    <span class="k">def</span> <span class="nf">build_from_corpus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">corpuses</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_iterations</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">token_counts</span> <span class="o">=</span> <span class="n">SubwordTextTokenizer</span><span class="o">.</span><span class="n">_count_tokens</span><span class="p">(</span><span class="o">*</span><span class="n">corpuses</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_from_token_counts</span><span class="p">(</span><span class="n">token_counts</span><span class="p">,</span> <span class="n">min_count</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SubwordTextTokenizer.build_from_token_counts"><a class="viewcode-back" href="../../../source/torchnlp.text_encoders.html#torchnlp.text_encoders.subword_text_tokenizer.SubwordTextTokenizer.build_from_token_counts">[docs]</a>    <span class="k">def</span> <span class="nf">build_from_token_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_counts</span><span class="p">,</span> <span class="n">min_count</span><span class="p">,</span> <span class="n">num_iterations</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Train a SubwordTextTokenizer based on a dictionary of word counts.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          token_counts: a dictionary of Unicode strings to int.</span>
+<span class="sd">          min_count: an integer - discard subtokens with lower counts.</span>
+<span class="sd">          num_iterations: an integer.  how many iterations of refinement.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_alphabet_from_tokens</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">(</span><span class="n">token_counts</span><span class="p">))</span>
+
+        <span class="c1"># Bootstrap the initial list of subtokens with the characters from the</span>
+        <span class="c1"># alphabet plus the escaping characters.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_subtokens_from_list</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span><span class="p">))</span>
+
+        <span class="c1"># We build iteratively.  On each iteration, we segment all the words,</span>
+        <span class="c1"># then count the resulting potential subtokens, keeping the ones</span>
+        <span class="c1"># with high enough counts for our new vocabulary.</span>
+        <span class="k">if</span> <span class="n">min_count</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">min_count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">num_iterations</span><span class="p">):</span>
+
+            <span class="c1"># Collect all substrings of the encoded token that break along current</span>
+            <span class="c1"># subtoken boundaries.</span>
+            <span class="n">subtoken_counts</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">token_counts</span><span class="p">):</span>
+                <span class="n">escaped_token</span> <span class="o">=</span> <span class="n">_escape_token</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span><span class="p">)</span>
+                <span class="n">subtokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_escaped_token_to_subtoken_strings</span><span class="p">(</span><span class="n">escaped_token</span><span class="p">)</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">subtoken</span> <span class="ow">in</span> <span class="n">subtokens</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">escaped_token</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="n">new_subtoken</span> <span class="o">=</span> <span class="n">escaped_token</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+                        <span class="n">subtoken_counts</span><span class="p">[</span><span class="n">new_subtoken</span><span class="p">]</span> <span class="o">+=</span> <span class="n">count</span>
+                    <span class="n">start</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subtoken</span><span class="p">)</span>
+
+            <span class="c1"># Array of sets of candidate subtoken strings, by length.</span>
+            <span class="n">len_to_subtoken_strings</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">subtoken_string</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">subtoken_counts</span><span class="p">):</span>
+                <span class="n">lsub</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subtoken_string</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="n">min_count</span><span class="p">:</span>
+                    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">len_to_subtoken_strings</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">lsub</span><span class="p">:</span>
+                        <span class="n">len_to_subtoken_strings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">set</span><span class="p">())</span>
+                    <span class="n">len_to_subtoken_strings</span><span class="p">[</span><span class="n">lsub</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">subtoken_string</span><span class="p">)</span>
+
+            <span class="c1"># Consider the candidates longest to shortest, so that if we accept</span>
+            <span class="c1"># a longer subtoken string, we can decrement the counts of its</span>
+            <span class="c1"># prefixes.</span>
+            <span class="n">new_subtoken_strings</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">lsub</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">len_to_subtoken_strings</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">subtoken_strings</span> <span class="o">=</span> <span class="n">len_to_subtoken_strings</span><span class="p">[</span><span class="n">lsub</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">subtoken_string</span> <span class="ow">in</span> <span class="n">subtoken_strings</span><span class="p">:</span>
+                    <span class="n">count</span> <span class="o">=</span> <span class="n">subtoken_counts</span><span class="p">[</span><span class="n">subtoken_string</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="n">min_count</span><span class="p">:</span>
+                        <span class="c1"># Exclude alphabet tokens here, as they must be included later,</span>
+                        <span class="c1"># explicitly, regardless of count.</span>
+                        <span class="k">if</span> <span class="n">subtoken_string</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span><span class="p">:</span>
+                            <span class="n">new_subtoken_strings</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">count</span><span class="p">,</span> <span class="n">subtoken_string</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">lsub</span><span class="p">):</span>
+                            <span class="n">subtoken_counts</span><span class="p">[</span><span class="n">subtoken_string</span><span class="p">[:</span><span class="n">l</span><span class="p">]]</span> <span class="o">-=</span> <span class="n">count</span>
+
+            <span class="c1"># Include the alphabet explicitly to guarantee all strings are</span>
+            <span class="c1"># encodable.</span>
+            <span class="n">new_subtoken_strings</span><span class="o">.</span><span class="n">extend</span><span class="p">((</span><span class="n">subtoken_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span><span class="p">)</span>
+            <span class="n">new_subtoken_strings</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="c1"># Reinitialize to the candidate vocabulary.</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_subtokens_from_list</span><span class="p">([</span><span class="n">subtoken</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">subtoken</span> <span class="ow">in</span> <span class="n">new_subtoken_strings</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_init_subtokens_from_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtoken_strings</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize token information from a list of subtoken strings.&quot;&quot;&quot;</span>
+        <span class="c1"># we remember the maximum length of any subtoken to avoid having to</span>
+        <span class="c1"># check arbitrarily long strings.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_all_subtoken_strings</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subtoken_strings</span> <span class="k">if</span> <span class="n">s</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_subtoken_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subtoken_strings</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_init_alphabet_from_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize alphabet from an iterable of token or subtoken strings.&quot;&quot;&quot;</span>
+        <span class="c1"># Include all characters from all tokens in the alphabet to guarantee that</span>
+        <span class="c1"># any token can be encoded. Additionally, include all escaping</span>
+        <span class="c1"># characters.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">token</span><span class="p">}</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alphabet</span> <span class="o">|=</span> <span class="n">_ESCAPE_CHARS</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael Petrochuk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchnlp.metrics package &mdash; PyTorch-NLP 0.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyTorch-NLP 0.0.0 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyTorch-NLP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">torchnlp.metrics package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-torchnlp.metrics.accuracy">torchnlp.metrics.accuracy module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.metrics.bleu">torchnlp.metrics.bleu module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.metrics">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyTorch-NLP</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>torchnlp.metrics package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/torchnlp.metrics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="torchnlp-metrics-package">
+<h1>torchnlp.metrics package<a class="headerlink" href="#torchnlp-metrics-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-torchnlp.metrics.accuracy">
+<span id="torchnlp-metrics-accuracy-module"></span><h2>torchnlp.metrics.accuracy module<a class="headerlink" href="#module-torchnlp.metrics.accuracy" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="torchnlp.metrics.accuracy.get_accuracy">
+<code class="descclassname">torchnlp.metrics.accuracy.</code><code class="descname">get_accuracy</code><span class="sig-paren">(</span><em>targets</em>, <em>outputs</em>, <em>k=1</em>, <em>ignore_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/metrics/accuracy.html#get_accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.metrics.accuracy.get_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the accuracy of o == t {o in outputs and t in targets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>targets</strong> (<em>list of tensors</em>) – </li>
+<li><strong>outputs</strong> (<em>list of tensors</em>) – </li>
+<li><strong>ignore_index</strong> (<em>optional</em><em>, </em><em>int</em>) – Specifies a target value that is ignored computing equality</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">accuracy (float)
+number correct (int)
+total (int)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchnlp.metrics.accuracy.get_token_accuracy">
+<code class="descclassname">torchnlp.metrics.accuracy.</code><code class="descname">get_token_accuracy</code><span class="sig-paren">(</span><em>targets</em>, <em>outputs</em>, <em>ignore_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/metrics/accuracy.html#get_token_accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.metrics.accuracy.get_token_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the token accuracy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>targets</strong> (<em>list of tensors</em>) – </li>
+<li><strong>outputs</strong> (<em>list of tensors</em>) – </li>
+<li><strong>ignore_index</strong> (<em>optional</em><em>, </em><em>int</em>) – Specifies a target value that is ignored computing equality</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">accuracy (float)
+number correct (int)
+total (int)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.metrics.bleu">
+<span id="torchnlp-metrics-bleu-module"></span><h2>torchnlp.metrics.bleu module<a class="headerlink" href="#module-torchnlp.metrics.bleu" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="torchnlp.metrics.bleu.get_moses_multi_bleu">
+<code class="descclassname">torchnlp.metrics.bleu.</code><code class="descname">get_moses_multi_bleu</code><span class="sig-paren">(</span><em>hypotheses</em>, <em>references</em>, <em>lowercase=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/metrics/bleu.html#get_moses_multi_bleu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.metrics.bleu.get_moses_multi_bleu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the bleu score for hypotheses and references
+using the MOSES multi-bleu.perl script.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hypotheses</strong> – List of strings where each string is a single example.</li>
+<li><strong>references</strong> – List of strings where each string is a single example.</li>
+<li><strong>lowercase</strong> – If true, pass the “-lc” flag to the multi-bleu script</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The BLEU score as a float32 value.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.metrics">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-torchnlp.metrics" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="torchnlp.metrics.get_accuracy">
+<code class="descclassname">torchnlp.metrics.</code><code class="descname">get_accuracy</code><span class="sig-paren">(</span><em>targets</em>, <em>outputs</em>, <em>k=1</em>, <em>ignore_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/metrics/accuracy.html#get_accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.metrics.get_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the accuracy of o == t {o in outputs and t in targets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>targets</strong> (<em>list of tensors</em>) – </li>
+<li><strong>outputs</strong> (<em>list of tensors</em>) – </li>
+<li><strong>ignore_index</strong> (<em>optional</em><em>, </em><em>int</em>) – Specifies a target value that is ignored computing equality</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">accuracy (float)
+number correct (int)
+total (int)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchnlp.metrics.get_token_accuracy">
+<code class="descclassname">torchnlp.metrics.</code><code class="descname">get_token_accuracy</code><span class="sig-paren">(</span><em>targets</em>, <em>outputs</em>, <em>ignore_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/metrics/accuracy.html#get_token_accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.metrics.get_token_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the token accuracy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>targets</strong> (<em>list of tensors</em>) – </li>
+<li><strong>outputs</strong> (<em>list of tensors</em>) – </li>
+<li><strong>ignore_index</strong> (<em>optional</em><em>, </em><em>int</em>) – Specifies a target value that is ignored computing equality</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">accuracy (float)
+number correct (int)
+total (int)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchnlp.metrics.get_moses_multi_bleu">
+<code class="descclassname">torchnlp.metrics.</code><code class="descname">get_moses_multi_bleu</code><span class="sig-paren">(</span><em>hypotheses</em>, <em>references</em>, <em>lowercase=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/metrics/bleu.html#get_moses_multi_bleu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.metrics.get_moses_multi_bleu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the bleu score for hypotheses and references
+using the MOSES multi-bleu.perl script.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hypotheses</strong> – List of strings where each string is a single example.</li>
+<li><strong>references</strong> – List of strings where each string is a single example.</li>
+<li><strong>lowercase</strong> – If true, pass the “-lc” flag to the multi-bleu script</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The BLEU score as a float32 value.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael Petrochuk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

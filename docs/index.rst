@@ -8,9 +8,14 @@ Welcome to Pytorch-NLP's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Package Reference
 
-
+   source/torchnlp
+   source/torchnlp.datasets
+   source/torchnlp.metrics
+   source/torchnlp.nn
+   source/torchnlp.samplers
+   source/torchnlp.text_encoders
 
 Indices and tables
 ==================

@@ -17,7 +17,6 @@ from torchnlp.text_encoders.subword_text_tokenizer import SubwordTextTokenizer
 class TestTokenCounts(unittest.TestCase):
 
     def setUp(self):
-        # TODO: Add corpus to random args
         self.corpus = [
             "One morning I shot an elephant in my pajamas. How he got in my pajamas, I don't",
             'know.', '', 'Groucho Marx',

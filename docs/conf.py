@@ -11,21 +11,40 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../torchnlp'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Pytorch-NLP'
+import io
+import re
+
+project = 'PyTorch-NLP'
 copyright = '2018, Michael Petrochuk'
 author = 'Michael Petrochuk'
 
+
+def read(*names, **kwargs):
+    with io.open(
+            os.path.join(os.path.dirname(__file__), *names), encoding=kwargs.get(
+                "encoding", "utf8")) as fp:
+        return fp.read()
+
+
+def find_version(*file_paths):
+    version_file = read(*file_paths)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
+
 # The short X.Y version
-version = ''
+version = find_version('..', 'torchnlp', '__init__.py')
 # The full version, including alpha/beta/rc tags
-release = ''
+release = find_version('..', 'torchnlp', '__init__.py')
 
 # -- General configuration ---------------------------------------------------
 
@@ -43,6 +62,8 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -74,16 +95,19 @@ pygments_style = 'sphinx'
 
 # -- Options for HTML output -------------------------------------------------
 
+import sphinx_rtd_theme
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {'collapse_navigation': False, 'display_version': True}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -103,7 +127,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Pytorch-NLPdoc'
+htmlhelp_basename = 'PyTorch-NLPdoc'
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -129,14 +153,14 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Pytorch-NLP.tex', 'Pytorch-NLP Documentation', 'Michael Petrochuk', 'manual'),
+    (master_doc, 'PyTorch-NLP.tex', 'PyTorch-NLP Documentation', 'Michael Petrochuk', 'manual'),
 ]
 
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, 'pytorch-nlp', 'Pytorch-NLP Documentation', [author], 1)]
+man_pages = [(master_doc, 'pytorch-nlp', 'PyTorch-NLP Documentation', [author], 1)]
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -144,7 +168,7 @@ man_pages = [(master_doc, 'pytorch-nlp', 'Pytorch-NLP Documentation', [author], 
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Pytorch-NLP', 'Pytorch-NLP Documentation', author, 'Pytorch-NLP',
+    (master_doc, 'PyTorch-NLP', 'PyTorch-NLP Documentation', author, 'PyTorch-NLP',
      'One line description of project.', 'Miscellaneous'),
 ]
 

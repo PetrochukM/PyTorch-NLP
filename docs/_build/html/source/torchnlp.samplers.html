@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchnlp.samplers package &mdash; PyTorch-NLP 0.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PyTorch-NLP 0.0.0 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PyTorch-NLP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">torchnlp.samplers package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-torchnlp.samplers.bucket_batch_sampler">torchnlp.samplers.bucket_batch_sampler module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.samplers.noisy_sorted_sampler">torchnlp.samplers.noisy_sorted_sampler module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.samplers.random_batch_sampler">torchnlp.samplers.random_batch_sampler module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.samplers.sorted_sampler">torchnlp.samplers.sorted_sampler module</a></li>
+<li><a class="reference internal" href="#module-torchnlp.samplers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyTorch-NLP</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>torchnlp.samplers package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/torchnlp.samplers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="torchnlp-samplers-package">
+<h1>torchnlp.samplers package<a class="headerlink" href="#torchnlp-samplers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-torchnlp.samplers.bucket_batch_sampler">
+<span id="torchnlp-samplers-bucket-batch-sampler-module"></span><h2>torchnlp.samplers.bucket_batch_sampler module<a class="headerlink" href="#module-torchnlp.samplers.bucket_batch_sampler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.samplers.bucket_batch_sampler.BucketBatchSampler">
+<em class="property">class </em><code class="descclassname">torchnlp.samplers.bucket_batch_sampler.</code><code class="descname">BucketBatchSampler</code><span class="sig-paren">(</span><em>data_source</em>, <em>sort_key</em>, <em>batch_size</em>, <em>sort_key_noise=0.25</em>, <em>last_batch_first=True</em>, <em>shuffle=True</em>, <em>drop_last=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/samplers/bucket_batch_sampler.html#BucketBatchSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.samplers.bucket_batch_sampler.BucketBatchSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.sampler.BatchSampler</span></code></p>
+<p>Reference:
+<a class="reference external" href="https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py">https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py</a>
+<a class="reference external" href="https://github.com/pytorch/text/tree/master/torchtext/data/iterators/#BucketIterator">https://github.com/pytorch/text/tree/master/torchtext/data/iterators/#BucketIterator</a></p>
+<p><cite>BucketIterator</cite> pools together examples with a similar size length to reduce the padding
+required for each batch. <cite>BucketIterator</cite> typically also includes the ability to add noise to
+the pooling.</p>
+<p>The functionality has been replicated as a <cite>Sampler</cite> to be used with a
+<cite>torch.data.utils.DataLoader</cite>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.samplers.noisy_sorted_sampler">
+<span id="torchnlp-samplers-noisy-sorted-sampler-module"></span><h2>torchnlp.samplers.noisy_sorted_sampler module<a class="headerlink" href="#module-torchnlp.samplers.noisy_sorted_sampler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.samplers.noisy_sorted_sampler.NoisySortedSampler">
+<em class="property">class </em><code class="descclassname">torchnlp.samplers.noisy_sorted_sampler.</code><code class="descname">NoisySortedSampler</code><span class="sig-paren">(</span><em>data_source</em>, <em>sort_key</em>, <em>sort_key_noise=0.25</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/samplers/noisy_sorted_sampler.html#NoisySortedSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.samplers.noisy_sorted_sampler.NoisySortedSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.sampler.Sampler</span></code></p>
+<p>Samples elements sequentially with noise.</p>
+<p>Reference and inspiration:
+<a class="reference external" href="https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py">https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data_source</strong> (<a class="reference internal" href="torchnlp.datasets.html#torchnlp.datasets.dataset.Dataset" title="torchnlp.datasets.dataset.Dataset"><em>Dataset</em></a>) – dataset to sample from</li>
+<li><strong>sort_key</strong> (<em>callable</em>) – specifies a function of one argument that is used to extract a
+comparison key from each list element</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.samplers.random_batch_sampler">
+<span id="torchnlp-samplers-random-batch-sampler-module"></span><h2>torchnlp.samplers.random_batch_sampler module<a class="headerlink" href="#module-torchnlp.samplers.random_batch_sampler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.samplers.random_batch_sampler.RandomBatchSampler">
+<em class="property">class </em><code class="descclassname">torchnlp.samplers.random_batch_sampler.</code><code class="descname">RandomBatchSampler</code><span class="sig-paren">(</span><em>sampler</em>, <em>batch_size</em>, <em>drop_last</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/samplers/random_batch_sampler.html#RandomBatchSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.samplers.random_batch_sampler.RandomBatchSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.sampler.BatchSampler</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.samplers.sorted_sampler">
+<span id="torchnlp-samplers-sorted-sampler-module"></span><h2>torchnlp.samplers.sorted_sampler module<a class="headerlink" href="#module-torchnlp.samplers.sorted_sampler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.samplers.sorted_sampler.SortedSampler">
+<em class="property">class </em><code class="descclassname">torchnlp.samplers.sorted_sampler.</code><code class="descname">SortedSampler</code><span class="sig-paren">(</span><em>data_source</em>, <em>sort_key</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/samplers/sorted_sampler.html#SortedSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.samplers.sorted_sampler.SortedSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.sampler.Sampler</span></code></p>
+<p>Samples elements sequentially, always in the same order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data_source</strong> (<a class="reference internal" href="torchnlp.datasets.html#torchnlp.datasets.dataset.Dataset" title="torchnlp.datasets.dataset.Dataset"><em>Dataset</em></a>) – dataset to sample from</li>
+<li><strong>sort_key</strong> (<em>callable</em>) – specifies a function of one argument that is used to extract a
+comparison key from each list element</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-torchnlp.samplers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-torchnlp.samplers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="torchnlp.samplers.NoisySortedSampler">
+<em class="property">class </em><code class="descclassname">torchnlp.samplers.</code><code class="descname">NoisySortedSampler</code><span class="sig-paren">(</span><em>data_source</em>, <em>sort_key</em>, <em>sort_key_noise=0.25</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/samplers/noisy_sorted_sampler.html#NoisySortedSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.samplers.NoisySortedSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.sampler.Sampler</span></code></p>
+<p>Samples elements sequentially with noise.</p>
+<p>Reference and inspiration:
+<a class="reference external" href="https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py">https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data_source</strong> (<a class="reference internal" href="torchnlp.datasets.html#torchnlp.datasets.dataset.Dataset" title="torchnlp.datasets.dataset.Dataset"><em>Dataset</em></a>) – dataset to sample from</li>
+<li><strong>sort_key</strong> (<em>callable</em>) – specifies a function of one argument that is used to extract a
+comparison key from each list element</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchnlp.samplers.RandomBatchSampler">
+<em class="property">class </em><code class="descclassname">torchnlp.samplers.</code><code class="descname">RandomBatchSampler</code><span class="sig-paren">(</span><em>sampler</em>, <em>batch_size</em>, <em>drop_last</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/samplers/random_batch_sampler.html#RandomBatchSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.samplers.RandomBatchSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.sampler.BatchSampler</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchnlp.samplers.SortedSampler">
+<em class="property">class </em><code class="descclassname">torchnlp.samplers.</code><code class="descname">SortedSampler</code><span class="sig-paren">(</span><em>data_source</em>, <em>sort_key</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/samplers/sorted_sampler.html#SortedSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.samplers.SortedSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.sampler.Sampler</span></code></p>
+<p>Samples elements sequentially, always in the same order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data_source</strong> (<a class="reference internal" href="torchnlp.datasets.html#torchnlp.datasets.dataset.Dataset" title="torchnlp.datasets.dataset.Dataset"><em>Dataset</em></a>) – dataset to sample from</li>
+<li><strong>sort_key</strong> (<em>callable</em>) – specifies a function of one argument that is used to extract a
+comparison key from each list element</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchnlp.samplers.BucketBatchSampler">
+<em class="property">class </em><code class="descclassname">torchnlp.samplers.</code><code class="descname">BucketBatchSampler</code><span class="sig-paren">(</span><em>data_source</em>, <em>sort_key</em>, <em>batch_size</em>, <em>sort_key_noise=0.25</em>, <em>last_batch_first=True</em>, <em>shuffle=True</em>, <em>drop_last=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchnlp/samplers/bucket_batch_sampler.html#BucketBatchSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchnlp.samplers.BucketBatchSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.sampler.BatchSampler</span></code></p>
+<p>Reference:
+<a class="reference external" href="https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py">https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py</a>
+<a class="reference external" href="https://github.com/pytorch/text/tree/master/torchtext/data/iterators/#BucketIterator">https://github.com/pytorch/text/tree/master/torchtext/data/iterators/#BucketIterator</a></p>
+<p><cite>BucketIterator</cite> pools together examples with a similar size length to reduce the padding
+required for each batch. <cite>BucketIterator</cite> typically also includes the ability to add noise to
+the pooling.</p>
+<p>The functionality has been replicated as a <cite>Sampler</cite> to be used with a
+<cite>torch.data.utils.DataLoader</cite>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael Petrochuk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

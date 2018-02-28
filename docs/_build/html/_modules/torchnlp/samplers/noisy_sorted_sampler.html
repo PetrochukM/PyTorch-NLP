@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchnlp.samplers.noisy_sorted_sampler &mdash; PyTorch-NLP 0.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="PyTorch-NLP 0.0.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> PyTorch-NLP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.html">torchnlp package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.datasets.html">torchnlp.datasets package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.count">torchnlp.datasets.count module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.dataset">torchnlp.datasets.dataset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.reverse">torchnlp.datasets.reverse module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.simple_qa">torchnlp.datasets.simple_qa module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.zero_to_zero">torchnlp.datasets.zero_to_zero module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.metrics.html">torchnlp.metrics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.metrics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics.accuracy">torchnlp.metrics.accuracy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics.bleu">torchnlp.metrics.bleu module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.nn.html">torchnlp.nn package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.nn.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn.attention">torchnlp.nn.attention module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn.lock_dropout">torchnlp.nn.lock_dropout module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.samplers.html">torchnlp.samplers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.bucket_batch_sampler">torchnlp.samplers.bucket_batch_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.noisy_sorted_sampler">torchnlp.samplers.noisy_sorted_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.random_batch_sampler">torchnlp.samplers.random_batch_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.sorted_sampler">torchnlp.samplers.sorted_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html">torchnlp.text_encoders package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.character_encoder">torchnlp.text_encoders.character_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.delimiter_encoder">torchnlp.text_encoders.delimiter_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.identity_encoder">torchnlp.text_encoders.identity_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.moses_encoder">torchnlp.text_encoders.moses_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.reserved_tokens">torchnlp.text_encoders.reserved_tokens module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.spacy_encoder">torchnlp.text_encoders.spacy_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.static_tokenizer_encoder">torchnlp.text_encoders.static_tokenizer_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_encoder">torchnlp.text_encoders.subword_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_text_tokenizer">torchnlp.text_encoders.subword_text_tokenizer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.text_encoders">torchnlp.text_encoders.text_encoders module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.treebank_encoder">torchnlp.text_encoders.treebank_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.word_encoder">torchnlp.text_encoders.word_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#module-torchnlp.pretrained_embeddings">torchnlp.pretrained_embeddings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#module-torchnlp.utils">torchnlp.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.html#module-torchnlp">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.datasets.html">torchnlp.datasets package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.count">torchnlp.datasets.count module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.dataset">torchnlp.datasets.dataset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.reverse">torchnlp.datasets.reverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.simple_qa">torchnlp.datasets.simple_qa module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets.zero_to_zero">torchnlp.datasets.zero_to_zero module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.datasets.html#module-torchnlp.datasets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.metrics.html">torchnlp.metrics package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.metrics.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics.accuracy">torchnlp.metrics.accuracy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics.bleu">torchnlp.metrics.bleu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.metrics.html#module-torchnlp.metrics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.nn.html">torchnlp.nn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.nn.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn.attention">torchnlp.nn.attention module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn.lock_dropout">torchnlp.nn.lock_dropout module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.nn.html#module-torchnlp.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.samplers.html">torchnlp.samplers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.bucket_batch_sampler">torchnlp.samplers.bucket_batch_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.noisy_sorted_sampler">torchnlp.samplers.noisy_sorted_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.random_batch_sampler">torchnlp.samplers.random_batch_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers.sorted_sampler">torchnlp.samplers.sorted_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.samplers.html#module-torchnlp.samplers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html">torchnlp.text_encoders package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.character_encoder">torchnlp.text_encoders.character_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.delimiter_encoder">torchnlp.text_encoders.delimiter_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.identity_encoder">torchnlp.text_encoders.identity_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.moses_encoder">torchnlp.text_encoders.moses_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.reserved_tokens">torchnlp.text_encoders.reserved_tokens module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.spacy_encoder">torchnlp.text_encoders.spacy_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.static_tokenizer_encoder">torchnlp.text_encoders.static_tokenizer_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_encoder">torchnlp.text_encoders.subword_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_text_tokenizer">torchnlp.text_encoders.subword_text_tokenizer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.text_encoders">torchnlp.text_encoders.text_encoders module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.treebank_encoder">torchnlp.text_encoders.treebank_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.word_encoder">torchnlp.text_encoders.word_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyTorch-NLP</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>torchnlp.samplers.noisy_sorted_sampler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for torchnlp.samplers.noisy_sorted_sampler</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">from</span> <span class="nn">torch.utils.data.sampler</span> <span class="k">import</span> <span class="n">Sampler</span>
+
+
+<div class="viewcode-block" id="NoisySortedSampler"><a class="viewcode-back" href="../../../source/torchnlp.samplers.html#torchnlp.samplers.noisy_sorted_sampler.NoisySortedSampler">[docs]</a><span class="k">class</span> <span class="nc">NoisySortedSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Samples elements sequentially with noise.</span>
+
+<span class="sd">    Reference and inspiration:</span>
+<span class="sd">    https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        data_source (Dataset): dataset to sample from</span>
+<span class="sd">        sort_key (callable): specifies a function of one argument that is used to extract a</span>
+<span class="sd">          comparison key from each list element</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_source</span><span class="p">,</span> <span class="n">sort_key</span><span class="p">,</span> <span class="n">sort_key_noise</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data_source</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_source</span> <span class="o">=</span> <span class="n">data_source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sort_key</span> <span class="o">=</span> <span class="n">sort_key</span>
+        <span class="n">zip_</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_source</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="n">noise_value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">sort_key_noise</span>
+            <span class="n">noise</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">noise_value</span><span class="p">,</span> <span class="n">noise_value</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">noise</span> <span class="o">+</span> <span class="n">value</span>
+            <span class="n">zip_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="p">]))</span>
+        <span class="n">zip_</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">zip_</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sorted_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">zip_</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sorted_indexes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_source</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael Petrochuk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

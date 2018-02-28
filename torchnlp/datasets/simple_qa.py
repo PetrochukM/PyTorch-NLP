@@ -54,11 +54,13 @@ def simple_qa_dataset(directory='data/simple_qa',
     Dataset introduced by this paper:
     https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/
 
-    Sample Row:
-        subject: Who was the trump ocean club international hotel and tower named after
-        relation: www.freebase.com/symbols/namesake/named_after
-        object: www.freebase.com/m/0cqt90
-        question: www.freebase.com/m/0f3xg_
+    Example:
+        First row from the development `annotated_fb_data_valid` dataset::
+        
+            subject: Who was the trump ocean club international hotel and tower named after
+            relation: www.freebase.com/symbols/namesake/named_after
+            object: www.freebase.com/m/0cqt90
+            question: www.freebase.com/m/0f3xg_
     """
     _download_simple_qa_dataset(directory, train_filename)
 

@@ -26,17 +26,19 @@ class _PretrainedEmbeddings(object):
                  url=None,
                  unk_init=torch.Tensor.zero_,
                  is_include=None):
-        """Arguments:
-               name: name of the file that contains the vectors
-               cache: directory for cached vectors
-               url: url for download if vectors not found in cache
-               unk_init (callback): by default, initalize out-of-vocabulary word vectors
-                   to zero vectors; can be any function that takes in a Tensor and
-                   returns a Tensor of the same size
-               is_include (callable): callable returns True if to include a token in memory vectors
-                   cache; some of these embedding files are gigantic so filtering it can cut
-                   down on the memory usage. We do not cache on disk if is_include is defined.
-         """
+        """
+        Args:
+            name: name of the file that contains the vectors
+            cache: directory for cached vectors
+            url: url for download if vectors not found in cache
+            unk_init (callback): by default, initialize out-of-vocabulary word vectors
+                to zero vectors; can be any function that takes in a Tensor and
+                returns a Tensor of the same size
+            is_include (callable): callable returns True if to include a token in memory vectors
+                cache; some of these embedding files are gigantic so filtering it can cut
+                down on the memory usage. We do not cache on disk if is_include is defined.
+
+        """
         self.unk_init = unk_init
         self.is_include = is_include
         self.name = name

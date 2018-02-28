@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchnlp.pretrained_embeddings &mdash; PyTorch-NLP 0.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="PyTorch-NLP 0.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PyTorch-NLP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/torchnlp.html">torchnlp package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../source/torchnlp.datasets.html">torchnlp.datasets package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.datasets.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.count">torchnlp.datasets.count module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.dataset">torchnlp.datasets.dataset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.reverse">torchnlp.datasets.reverse module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.simple_qa">torchnlp.datasets.simple_qa module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.zero_to_zero">torchnlp.datasets.zero_to_zero module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/torchnlp.metrics.html">torchnlp.metrics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.metrics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.metrics.html#module-torchnlp.metrics.accuracy">torchnlp.metrics.accuracy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.metrics.html#module-torchnlp.metrics.bleu">torchnlp.metrics.bleu module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.metrics.html#module-torchnlp.metrics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/torchnlp.nn.html">torchnlp.nn package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.nn.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.nn.html#module-torchnlp.nn.attention">torchnlp.nn.attention module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.nn.html#module-torchnlp.nn.lock_dropout">torchnlp.nn.lock_dropout module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.nn.html#module-torchnlp.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/torchnlp.samplers.html">torchnlp.samplers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.samplers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers.bucket_batch_sampler">torchnlp.samplers.bucket_batch_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers.noisy_sorted_sampler">torchnlp.samplers.noisy_sorted_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers.random_batch_sampler">torchnlp.samplers.random_batch_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers.sorted_sampler">torchnlp.samplers.sorted_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../source/torchnlp.text_encoders.html">torchnlp.text_encoders package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.character_encoder">torchnlp.text_encoders.character_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.delimiter_encoder">torchnlp.text_encoders.delimiter_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.identity_encoder">torchnlp.text_encoders.identity_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.moses_encoder">torchnlp.text_encoders.moses_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.reserved_tokens">torchnlp.text_encoders.reserved_tokens module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.spacy_encoder">torchnlp.text_encoders.spacy_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.static_tokenizer_encoder">torchnlp.text_encoders.static_tokenizer_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_encoder">torchnlp.text_encoders.subword_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_text_tokenizer">torchnlp.text_encoders.subword_text_tokenizer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.text_encoders">torchnlp.text_encoders.text_encoders module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.treebank_encoder">torchnlp.text_encoders.treebank_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.word_encoder">torchnlp.text_encoders.word_encoder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.html#module-torchnlp.pretrained_embeddings">torchnlp.pretrained_embeddings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.html#module-torchnlp.utils">torchnlp.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.html#module-torchnlp">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/torchnlp.datasets.html">torchnlp.datasets package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.datasets.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.count">torchnlp.datasets.count module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.dataset">torchnlp.datasets.dataset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.reverse">torchnlp.datasets.reverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.simple_qa">torchnlp.datasets.simple_qa module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets.zero_to_zero">torchnlp.datasets.zero_to_zero module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.datasets.html#module-torchnlp.datasets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/torchnlp.metrics.html">torchnlp.metrics package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.metrics.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.metrics.html#module-torchnlp.metrics.accuracy">torchnlp.metrics.accuracy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.metrics.html#module-torchnlp.metrics.bleu">torchnlp.metrics.bleu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.metrics.html#module-torchnlp.metrics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/torchnlp.nn.html">torchnlp.nn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.nn.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.nn.html#module-torchnlp.nn.attention">torchnlp.nn.attention module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.nn.html#module-torchnlp.nn.lock_dropout">torchnlp.nn.lock_dropout module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.nn.html#module-torchnlp.nn">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/torchnlp.samplers.html">torchnlp.samplers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.samplers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers.bucket_batch_sampler">torchnlp.samplers.bucket_batch_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers.noisy_sorted_sampler">torchnlp.samplers.noisy_sorted_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers.random_batch_sampler">torchnlp.samplers.random_batch_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers.sorted_sampler">torchnlp.samplers.sorted_sampler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.samplers.html#module-torchnlp.samplers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/torchnlp.text_encoders.html">torchnlp.text_encoders package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.character_encoder">torchnlp.text_encoders.character_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.delimiter_encoder">torchnlp.text_encoders.delimiter_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.identity_encoder">torchnlp.text_encoders.identity_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.moses_encoder">torchnlp.text_encoders.moses_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.reserved_tokens">torchnlp.text_encoders.reserved_tokens module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.spacy_encoder">torchnlp.text_encoders.spacy_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.static_tokenizer_encoder">torchnlp.text_encoders.static_tokenizer_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_encoder">torchnlp.text_encoders.subword_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.subword_text_tokenizer">torchnlp.text_encoders.subword_text_tokenizer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.text_encoders">torchnlp.text_encoders.text_encoders module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.treebank_encoder">torchnlp.text_encoders.treebank_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders.word_encoder">torchnlp.text_encoders.word_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/torchnlp.text_encoders.html#module-torchnlp.text_encoders">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyTorch-NLP</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>torchnlp.pretrained_embeddings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for torchnlp.pretrained_embeddings</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">array</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+
+<span class="kn">from</span> <span class="nn">six.moves.urllib.request</span> <span class="k">import</span> <span class="n">urlretrieve</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">torchnlp.utils</span> <span class="k">import</span> <span class="n">reporthook</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_PretrainedEmbeddings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">name</span><span class="p">,</span>
+                 <span class="n">cache</span><span class="o">=</span><span class="s1">&#39;.pretrained_embeddings_cache&#39;</span><span class="p">,</span>
+                 <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">unk_init</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">.</span><span class="n">zero_</span><span class="p">,</span>
+                 <span class="n">is_include</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            name: name of the file that contains the vectors</span>
+<span class="sd">            cache: directory for cached vectors</span>
+<span class="sd">            url: url for download if vectors not found in cache</span>
+<span class="sd">            unk_init (callback): by default, initialize out-of-vocabulary word vectors</span>
+<span class="sd">                to zero vectors; can be any function that takes in a Tensor and</span>
+<span class="sd">                returns a Tensor of the same size</span>
+<span class="sd">            is_include (callable): callable returns True if to include a token in memory vectors</span>
+<span class="sd">                cache; some of these embedding files are gigantic so filtering it can cut</span>
+<span class="sd">                down on the memory usage. We do not cache on disk if is_include is defined.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unk_init</span> <span class="o">=</span> <span class="n">unk_init</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_include</span> <span class="o">=</span> <span class="n">is_include</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stoi</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectors</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="n">token</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unk_init</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vectors</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="n">path_pt</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;.pt&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">path_pt</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;.pt&#39;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path_pt</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_include</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">url</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Downloading vectors from </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cache</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span>
+                <span class="n">dest</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dest</span><span class="p">):</span>
+                    <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">miniters</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="n">dest</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
+                        <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">reporthook</span><span class="o">=</span><span class="n">reporthook</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Extracting vectors into </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cache</span><span class="p">))</span>
+                <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">dest</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;zip&#39;</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zf</span><span class="p">:</span>
+                        <span class="n">zf</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;gz&#39;</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="s1">&#39;r:gz&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tar</span><span class="p">:</span>
+                        <span class="n">tar</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">cache</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;no vectors found at </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+            <span class="c1"># str call is necessary for Python 2/3 compatibility, since</span>
+            <span class="c1"># argument must be Python 2 str (Python 3 bytes) or</span>
+            <span class="c1"># Python 3 str (Python 2 unicode)</span>
+            <span class="n">itos</span><span class="p">,</span> <span class="n">vectors</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)),</span> <span class="kc">None</span>
+
+            <span class="c1"># Try to read the whole file with utf-8 encoding.</span>
+            <span class="n">binary_lines</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+            <span class="c1"># If there are malformed lines, read in binary mode</span>
+            <span class="c1"># and manually decode each word from utf-8</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Could not read </span><span class="si">{}</span><span class="s2"> as UTF8 file, &quot;</span>
+                               <span class="s2">&quot;reading file as bytes and skipping &quot;</span>
+                               <span class="s2">&quot;words with malformed UTF8.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+                <span class="n">binary_lines</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Loading vectors from </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)):</span>
+                <span class="c1"># Explicitly splitting on &quot; &quot; is important, so we don&#39;t</span>
+                <span class="c1"># get rid of Unicode non-breaking spaces in the vectors.</span>
+                <span class="n">entries</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">binary_lines</span> <span class="k">else</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+                <span class="n">word</span><span class="p">,</span> <span class="n">entries</span> <span class="o">=</span> <span class="n">entries</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entries</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="k">if</span> <span class="n">dim</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping token </span><span class="si">{}</span><span class="s2"> with 1-dimensional &quot;</span>
+                                   <span class="s2">&quot;vector </span><span class="si">{}</span><span class="s2">; likely a header&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">entries</span><span class="p">))</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="n">dim</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Vector for token </span><span class="si">{}</span><span class="s2"> has </span><span class="si">{}</span><span class="s2"> dimensions, but previously &quot;</span>
+                                       <span class="s2">&quot;read vectors have </span><span class="si">{}</span><span class="s2"> dimensions. All vectors must have &quot;</span>
+                                       <span class="s2">&quot;the same number of dimensions.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                           <span class="n">word</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="n">dim</span><span class="p">))</span>
+
+                <span class="k">if</span> <span class="n">binary_lines</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">binary_type</span><span class="p">):</span>
+                            <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Skipping non-UTF8 token </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">word</span><span class="p">)))</span>
+                        <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_include</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_include</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+                    <span class="k">continue</span>
+
+                <span class="n">vectors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">)</span>
+                <span class="n">itos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">itos</span> <span class="o">=</span> <span class="n">itos</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stoi</span> <span class="o">=</span> <span class="p">{</span><span class="n">word</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">itos</span><span class="p">)}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vectors</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">vectors</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saving vectors to </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_pt</span><span class="p">))</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">itos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stoi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span> <span class="n">path_pt</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Loading vectors from </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_pt</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">itos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stoi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path_pt</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="GloVe"><a class="viewcode-back" href="../../source/torchnlp.html#torchnlp.pretrained_embeddings.GloVe">[docs]</a><span class="k">class</span> <span class="nc">GloVe</span><span class="p">(</span><span class="n">_PretrainedEmbeddings</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;42B&#39;</span><span class="p">:</span> <span class="s1">&#39;http://nlp.stanford.edu/data/glove.42B.300d.zip&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;840B&#39;</span><span class="p">:</span> <span class="s1">&#39;http://nlp.stanford.edu/data/glove.840B.300d.zip&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;twitter.27B&#39;</span><span class="p">:</span> <span class="s1">&#39;http://nlp.stanford.edu/data/glove.twitter.27B.zip&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;6B&#39;</span><span class="p">:</span> <span class="s1">&#39;http://nlp.stanford.edu/data/glove.6B.zip&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;840B&#39;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;glove.</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">d.txt&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dim</span><span class="p">))</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GloVe</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FastText"><a class="viewcode-back" href="../../source/torchnlp.html#torchnlp.pretrained_embeddings.FastText">[docs]</a><span class="k">class</span> <span class="nc">FastText</span><span class="p">(</span><span class="n">_PretrainedEmbeddings</span><span class="p">):</span>
+
+    <span class="n">url_base</span> <span class="o">=</span> <span class="s1">&#39;https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.</span><span class="si">{}</span><span class="s1">.vec&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_base</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FastText</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CharNGram"><a class="viewcode-back" href="../../source/torchnlp.html#torchnlp.pretrained_embeddings.CharNGram">[docs]</a><span class="k">class</span> <span class="nc">CharNGram</span><span class="p">(</span><span class="n">_PretrainedEmbeddings</span><span class="p">):</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;charNgram.txt&#39;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;http://www.logos.t.u-tokyo.ac.jp/~hassy/publications/arxiv2016jmt/&#39;</span>
+           <span class="s1">&#39;jmt_pre-trained_embeddings.tar.gz&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CharNGram</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+        <span class="n">vector</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unk_init</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+        <span class="c1"># These literals need to be coerced to unicode for Python 2 compatibility</span>
+        <span class="c1"># when we try to join them with read ngrams from the files.</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#BEGIN#&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;#END#&#39;</span><span class="p">]</span>
+        <span class="n">num_vectors</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">grams</span> <span class="o">=</span> <span class="p">[</span><span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">end</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">gram</span> <span class="ow">in</span> <span class="n">grams</span><span class="p">:</span>
+                <span class="n">gram_key</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">gram-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">gram</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">gram_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stoi</span><span class="p">:</span>
+                    <span class="n">vector</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectors</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="n">gram_key</span><span class="p">]]</span>
+                    <span class="n">num_vectors</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">num_vectors</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">/=</span> <span class="n">num_vectors</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unk_init</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">vector</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael Petrochuk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
