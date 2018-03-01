@@ -34,10 +34,26 @@ setup_info = dict(
     long_description=LONG_DESCRIPTION,
     license='BSD',
     install_requires=['numpy', 'pandas', 'tqdm'],
+    classifiers=[
+        'Development Status :: 2 - Pre-Alpha',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Education',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Mathematics',
+        'Topic :: Scientific/Engineering :: Artificial Intelligence',
+        'Topic :: Software Development',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+    ],
+    keywords='pytorch nlp text',
+    python_requires='>=3.5',
 
     # Package info
-    packages=find_packages(exclude=('tests',)),
-    zip_safe=True,
-)
+    packages=find_packages(exclude=['.vscode', 'build_tools', 'docs', 'tests']),
+    zip_safe=True)
 
 setup(**setup_info)

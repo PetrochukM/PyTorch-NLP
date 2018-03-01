@@ -1,7 +1,5 @@
 *.pyc
 .idea
-checkpoint
-checkpoint/*
 
 # Operating system related file
 .DS_Store

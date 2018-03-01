@@ -1,4 +1,2 @@
 include README.md
 include requirements.txt
-recursive-include build_tools *
-recursive-exclude tests *
