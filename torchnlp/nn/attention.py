@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 
+# TODO: Credit IBM for this snipit
+
 
 class Attention(nn.Module):
     r"""

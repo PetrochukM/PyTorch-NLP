@@ -17,6 +17,8 @@ from torchnlp.utils import reporthook
 
 logger = logging.getLogger(__name__)
 
+# TODO: Credit torchtext for this snippet
+
 
 class _PretrainedEmbeddings(object):
 
