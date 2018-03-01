@@ -9,9 +9,13 @@ set -e
 
 python --version
 
-# TODO: Consider adding yapf or autopep8 before this call...
 if [[ "$RUN_FLAKE8" == "true" ]]; then
     flake8
+fi
+
+
+if [[ "$RUN_DOCS" == "true" ]]; then
+    make -C docs html
 fi
 
 run_tests() {
