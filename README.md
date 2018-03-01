@@ -6,10 +6,6 @@
 [![Build Status](https://travis-ci.org/MPetrochuk/PyTorch-NLP.svg?branch=master)](https://travis-ci.org/MPetrochuk/PyTorch-NLP)
 [![License](https://img.shields.io/pypi/l/Django.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-# Test
-python3.6 -m "pytest" --cov-report=html:coverage --cov-report=term-missing --cov=lib -m "not slow" tests/
-
-
 ## Installation
 
 Make sure you have Python 3.5+ and PyTorch 0.2.0 or newer. You can then install pytorch-nlp using pip:
@@ -27,4 +23,3 @@ Alternatively, you might want to use Moses tokenizer from `NLTK <http://nltk.org
 
     pip install nltk
     python -m nltk.downloader perluniprops nonbreaking_prefixes
-    
