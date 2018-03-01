@@ -1,9 +1,9 @@
 # Pytorch-NLP
 
-[![Build Status](https://travis-ci.org/Deepblue129/PytorchNLP.svg?branch=master)](https://travis-ci.org/Deepblue129/PytorchNLP)
-[![codecov](https://codecov.io/gh/Deepblue129/PytorchNLP/branch/master/graph/badge.svg)](https://codecov.io/gh/Deepblue129/PytorchNLP) 
+[![codecov](https://codecov.io/gh/MPetrochuk/PyTorch-NLP/branch/master/graph/badge.svg)](https://codecov.io/gh/MPetrochuk/PyTorch-NLP) 
 [![Documentation Status](https://readthedocs.org/projects/pytorchnlp/badge/?version=latest)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![Build Status](https://travis-ci.org/MPetrochuk/PyTorch-NLP.svg?branch=master)](https://travis-ci.org/MPetrochuk/PyTorch-NLP)
 [![License](https://img.shields.io/pypi/l/Django.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 # Test

@@ -56,7 +56,7 @@ def simple_qa_dataset(directory='data/simple_qa',
 
     Example:
         First row from the development `annotated_fb_data_valid` dataset::
-        
+
             subject: Who was the trump ocean club international hotel and tower named after
             relation: www.freebase.com/symbols/namesake/named_after
             object: www.freebase.com/m/0cqt90

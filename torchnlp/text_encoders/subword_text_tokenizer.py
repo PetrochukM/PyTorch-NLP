@@ -144,7 +144,7 @@ def _unescape_token(escaped_token):
 
 class SubwordTextTokenizer(object):
     """ Class for invertibly encoding text using a limited vocabulary.
-    
+
     Invertibly encodes a native string as a sequence of subtokens from a limited
     vocabulary.
 
@@ -229,7 +229,7 @@ class SubwordTextTokenizer(object):
 
     def _escaped_token_to_subtoken_strings(self, escaped_token):
         """ Converts an escaped token string to a list of subtoken strings.
-         
+
         Args:
           escaped_token: An escaped token as a unicode string.
         Returns:
