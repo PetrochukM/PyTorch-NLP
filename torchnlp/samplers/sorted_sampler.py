@@ -5,7 +5,7 @@ class SortedSampler(Sampler):
     """Samples elements sequentially, always in the same order.
 
     Arguments:
-        data_source (Dataset): dataset to sample from
+        data_source (datasets.Dataset): dataset to sample from
         sort_key (callable): specifies a function of one argument that is used to extract a
           comparison key from each list element
     """

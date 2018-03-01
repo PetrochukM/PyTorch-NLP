@@ -10,7 +10,7 @@ class NoisySortedSampler(Sampler):
     https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py
 
     Arguments:
-        data_source (Dataset): dataset to sample from
+        data_source (datasets.Dataset): dataset to sample from
         sort_key (callable): specifies a function of one argument that is used to extract a
           comparison key from each list element
     """

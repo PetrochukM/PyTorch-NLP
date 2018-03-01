@@ -143,27 +143,30 @@ def _unescape_token(escaped_token):
 
 
 class SubwordTextTokenizer(object):
-    """Class for invertibly encoding text using a limited vocabulary.
+    """ Class for invertibly encoding text using a limited vocabulary.
+    
     Invertibly encodes a native string as a sequence of subtokens from a limited
     vocabulary.
+
     A SubwordTextTokenizer is built from a corpus (so it is tailored to the text in
     the corpus), and stored to a file. See text_encoder_build_subword.py.
     It can then be loaded and used to encode/decode any text.
+
     Encoding has four phases:
-    1. Tokenize into a list of tokens.  Each token is a unicode string of either
-      all alphanumeric characters or all non-alphanumeric characters.  We drop
-      tokens consisting of a single space that are between two alphanumeric
-      tokens.
-    2. Escape each token.  This escapes away special and out-of-vocabulary
-      characters, and makes sure that each token ends with an underscore, and
-      has no other underscores.
-    3. Represent each escaped token as a the concatenation of a list of subtokens
-      from the limited vocabulary.  Subtoken selection is done greedily from
-      beginning to end.  That is, we construct the list in order, always picking
-      the longest subtoken in our vocabulary that matches a prefix of the
-      remaining portion of the encoded token.
-    4. Concatenate these lists.  This concatenation is invertible due to the
-      fact that the trailing underscores indicate when one list is finished.
+        1.  Tokenize into a list of tokens.  Each token is a unicode string of either
+            all alphanumeric characters or all non-alphanumeric characters.  We drop
+            tokens consisting of a single space that are between two alphanumeric
+            tokens.
+        2.  Escape each token.  This escapes away special and out-of-vocabulary
+            characters, and makes sure that each token ends with an underscore, and
+            has no other underscores.
+        3.  Represent each escaped token as a the concatenation of a list of subtokens
+            from the limited vocabulary.  Subtoken selection is done greedily from
+            beginning to end.  That is, we construct the list in order, always picking
+            the longest subtoken in our vocabulary that matches a prefix of the
+            remaining portion of the encoded token.
+        4.  Concatenate these lists.  This concatenation is invertible due to the
+            fact that the trailing underscores indicate when one list is finished.
     """
 
     def __init__(self):
@@ -172,6 +175,7 @@ class SubwordTextTokenizer(object):
 
     def encode(self, raw_text):
         """Converts a native string to a list of subtoken.
+
         Args:
           raw_text: a native string.
         Returns:
@@ -181,6 +185,7 @@ class SubwordTextTokenizer(object):
 
     def decode(self, subtokens):
         """Converts a sequence of subtoken to a native string.
+
         Args:
           subtokens: a list of integers in the range [0, vocab_size)
         Returns:
@@ -197,8 +202,8 @@ class SubwordTextTokenizer(object):
         return len(self._all_subtoken_strings)
 
     def _tokens_to_subtoken(self, tokens):
-        """
-        Converts a list of tokens to a list of subtoken.
+        """ Converts a list of tokens to a list of subtoken.
+
         Args:
           tokens: a list of strings.
         Returns:
@@ -211,7 +216,8 @@ class SubwordTextTokenizer(object):
         return ret
 
     def _subtoken_to_tokens(self, subtokens):
-        """Converts a list of subtoken to a list of tokens.
+        """ Converts a list of subtoken to a list of tokens.
+
         Args:
           subtokens: a list of integers in the range [0, vocab_size)
         Returns:
@@ -222,7 +228,8 @@ class SubwordTextTokenizer(object):
         return [_unescape_token(t + "_") for t in split if t]
 
     def _escaped_token_to_subtoken_strings(self, escaped_token):
-        """Converts an escaped token string to a list of subtoken strings.
+        """ Converts an escaped token string to a list of subtoken strings.
+         
         Args:
           escaped_token: An escaped token as a unicode string.
         Returns:
@@ -276,16 +283,20 @@ class SubwordTextTokenizer(object):
                                                max_val,
                                                num_iterations=4):
         """Builds a SubwordTextTokenizer that has `vocab_size` near `target_size`.
+
         Uses simple recursive binary search to find a minimum token count that most
         closely matches the `target_size`.
+
         Args:
           target_size: Desired vocab_size to approximate.
           token_counts: A dictionary of token counts, mapping string to int.
           min_val: An integer; lower bound for the minimum token count.
           max_val: An integer; upper bound for the minimum token count.
           num_iterations: An integer; how many iterations of refinement.
+
         Returns:
           A SubwordTextTokenizer instance.
+
         Raises:
           ValueError: If `min_val` is greater than `max_val`.
         """
@@ -327,10 +338,11 @@ class SubwordTextTokenizer(object):
 
     def build_from_token_counts(self, token_counts, min_count, num_iterations=4):
         """Train a SubwordTextTokenizer based on a dictionary of word counts.
+
         Args:
           token_counts: a dictionary of Unicode strings to int.
           min_count: an integer - discard subtokens with lower counts.
-          num_iterations: an integer.  how many iterations of refinement.
+          num_iterations: an integer; how many iterations of refinement.
         """
         self._init_alphabet_from_tokens(six.iterkeys(token_counts))
 
