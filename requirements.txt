@@ -1,2 +1,32 @@
+# NOTE: If you intend to contribute or develop on PyTorch-NLP, please install requirements.txt
+# NOTE: If you intend to use PyTorch-NLP, requirements.txt is overkill and look @ setup.py 
+# `install_requires`
+
 # pytorch 3.1 install from http://pytorch.org/
+
+# Setup.py Install
 -e .
+
+# Testing + Code Coverage
+codecov
+coverage
+pytest
+pytest-cov
+
+# Linting
+flake8
+
+# Mocking
+mock
+
+# NLP Utilties
+nltk
+spacy
+
+# HTML Documentation
+sphinx
+sphinx_rtd_theme
+sphinx-autobuild
+
+# Auto Formatter 
+yapf
