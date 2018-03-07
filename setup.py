@@ -21,7 +21,6 @@ def find_version(*file_paths):
 
 
 VERSION = find_version('torchnlp', '__init__.py')
-LONG_DESCRIPTION = read('README.md')
 
 setup_info = dict(
     # Metadata
@@ -31,7 +30,6 @@ setup_info = dict(
     author_email='petrochukm@gmail.com',
     url='https://github.com/Deepblue129/PytorchNLP',
     description='Text utilities and datasets for PyTorch',
-    long_description=LONG_DESCRIPTION,
     license='BSD',
     install_requires=['numpy', 'pandas', 'tqdm'],
     classifiers=[

@@ -23,7 +23,7 @@
     "build": true,
     "cover": true,
     "coverage": true,
-    "dist": true,
+    "dist": false,
     "experiments": false,
     "LICENSE": true,
     "log": true,
