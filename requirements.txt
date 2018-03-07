@@ -19,10 +19,6 @@ flake8
 # Mocking
 mock
 
-# NLP Utilties
-nltk
-spacy
-
 # HTML Documentation
 sphinx
 sphinx_rtd_theme
