@@ -8,14 +8,18 @@ class TreebankEncoder(WordEncoder):
         if 'tokenize' in kwargs:
             raise TypeError('TreebankEncoder defines a tokenize callable TreebankWordTokenizer')
 
-        import nltk
+        try:
+            import nltk
 
-        # Required for moses
-        nltk.download('perluniprops')
-        nltk.download('nonbreaking_prefixes')
+            # Required for moses
+            nltk.download('perluniprops')
+            nltk.download('nonbreaking_prefixes')
 
-        from nltk.tokenize.treebank import TreebankWordTokenizer
-        from nltk.tokenize.treebank import TreebankWordDetokenizer
+            from nltk.tokenize.treebank import TreebankWordTokenizer
+            from nltk.tokenize.treebank import TreebankWordDetokenizer
+        except ImportError:
+            print("Please install NLTK. " "See the docs at http://nltk.org for more information.")
+            raise
 
         self.detokenizer = TreebankWordDetokenizer()
 
