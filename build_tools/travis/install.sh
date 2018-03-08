@@ -20,6 +20,10 @@ fi
 # Install requirements via pip
 pip install -r requirements.txt
 
+# Optional Requirements
+pip install spacy
+pip install nltk
+
 # SpaCy English web model
 python -m spacy download en_core_web_sm
 
