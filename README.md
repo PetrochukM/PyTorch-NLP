@@ -1,6 +1,6 @@
 # PyTorch-NLP
 
-PyTorch-NLP is a library for Natural Language Processing in Python. It's built with the very latest research in mind, and was designed from day one to support rapid prototyping. PyTorch-NLP comes with pre-trained word vectors, iterators, dataset library, metrics, and tokenization. It's commercial open-source software, released under the BSD3 license. 
+PyTorch-NLP is a library for Natural Language Processing in Python. It's built with the very latest research in mind, and was designed from day one to support rapid prototyping. PyTorch-NLP comes with pre-trained word vectors, iterators, dataset library, metrics, and tokenization. It's open-source software, released under the BSD3 license. 
 
 [![codecov](https://codecov.io/gh/PetrochukM/PyTorch-NLP/branch/master/graph/badge.svg)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
 [![Documentation Status](https://readthedocs.org/projects/pytorchnlp/badge/?version=latest)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest)

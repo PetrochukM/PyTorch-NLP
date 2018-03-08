@@ -15,11 +15,9 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../torchnlp'))
+import torchnlp
 
 # -- Project information -----------------------------------------------------
-
-import io
-import re
 
 project = 'PyTorch-NLP'
 copyright = '2018, Michael Petrochuk'

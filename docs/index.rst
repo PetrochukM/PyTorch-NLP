@@ -1,25 +1,28 @@
-.. Pytorch-NLP documentation master file, created by
-   sphinx-quickstart on Tue Feb 27 18:27:23 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+
+:github_url: https://github.com/pytorch/pytorch
 
 Welcome to Pytorch-NLP's documentation!
 =======================================
 
+PyTorch-NLP is a library for Natural Language Processing in Python. It's built with the very latest
+research in mind, and was designed from day one to support rapid prototyping. PyTorch-NLP comes with 
+pre-trained word vectors, iterators, dataset library, metrics, and tokenization. It's
+open-source software, released under the BSD3 license. 
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Package Reference
 
-   source/torchnlp
    source/torchnlp.datasets
    source/torchnlp.metrics
    source/torchnlp.nn
    source/torchnlp.samplers
    source/torchnlp.text_encoders
+   source/torchnlp.embeddings
+   source/torchnlp.utils
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search`

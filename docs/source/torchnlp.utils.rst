@@ -1,7 +1,7 @@
-torchnlp.text\_encoders package
+torchnlp.utils package
 ===============================
 
-.. automodule:: torchnlp.text_encoders
+.. automodule:: torchnlp.utils
     :members:
     :undoc-members:
     :show-inheritance:
