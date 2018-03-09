@@ -51,16 +51,43 @@ def simple_qa_dataset(directory='data/simple_qa',
                       dev_filename='annotated_fb_data_valid.txt',
                       test_filename='annotated_fb_data_test.txt'):
     """
-    Dataset introduced by this paper:
+    Load the SimpleQuestions dataset.
+
+    Single-relation factoid questions (simple questions) are common in many settings
+    (e.g. Microsoft’s search query logs and WikiAnswers questions). The SimpleQuestions dataset is
+    one of the most commonly used benchmarks for studying single-relation factoid questions.
+
+    Paper introducing the dataset:
     https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/
 
-    Example:
-        First row from the development `annotated_fb_data_valid` dataset::
+    Args:
+        directory (str, optional): Directory to cache the dataset.
+        train (bool, optional): If to load the training split of the dataset.
+        dev (bool, optional): If to load the development split of the dataset.
+        test (bool, optional): If to load the test split of the dataset.
+        train_filename (str, optional): The filename of the training split.
+        dev_filename (str, optional): The filename of the development split.
+        test_filename (str, optional): The filename of the test split.
 
-            subject: Who was the trump ocean club international hotel and tower named after
-            relation: www.freebase.com/symbols/namesake/named_after
-            object: www.freebase.com/m/0cqt90
-            question: www.freebase.com/m/0f3xg_
+    Returns:
+        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training dataset
+        , dev dataset and test dataset in order if their respective boolean argument is true.
+
+    Example:
+        >>> from torchnlp.datasets import simple_qa_dataset
+        >>> train = simple_qa_dataset(train=True)
+        >>> train[0:2]
+        [{
+          'question': 'what is the book e about',
+          'relation': 'www.freebase.com/book/written_work/subjects',
+          'object': 'www.freebase.com/m/01cj3p',
+          'subject': 'www.freebase.com/m/04whkz5'
+        }, {
+          'question': 'to what release does the release track cardiac arrest come from',
+          'relation': 'www.freebase.com/music/release_track/release',
+          'object': 'www.freebase.com/m/0sjc7c1',
+          'subject': 'www.freebase.com/m/0tp2p24'
+        }]
     """
     _download_simple_qa_dataset(directory, train_filename)
 

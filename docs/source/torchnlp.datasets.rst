@@ -7,4 +7,3 @@ All datasets are subclasses of :class:`torchnlp.datasets.Dataset`, which inherit
 .. automodule:: torchnlp.datasets
     :members:
     :undoc-members:
-    :show-inheritance:
