@@ -49,6 +49,19 @@ logger = logging.getLogger(__name__)
 
 
 class _PretrainedEmbeddings(object):
+    """ _PretrainedEmbeddings handles downloading, caching and storing pretrained embeddings.
+
+    Args:
+        name (str): name of the file that contains the vectors
+        cache (str, optional): directory for cached vectors
+        url (str or None, optional): url for download if vectors not found in cache
+        unk_init (callback, optional): by default, initialize out-of-vocabulary word vectors
+            to zero vectors; can be any function that takes in a Tensor and
+            returns a Tensor of the same size
+        is_include (callable, optional): callable returns True if to include a token in memory
+            vectors cache; some of these embedding files are gigantic so filtering it can cut
+            down on the memory usage. We do not cache on disk if `is_include` is defined.
+    """
 
     def __init__(self,
                  name,
@@ -56,19 +69,6 @@ class _PretrainedEmbeddings(object):
                  url=None,
                  unk_init=torch.Tensor.zero_,
                  is_include=None):
-        """
-        Args:
-            name: name of the file that contains the vectors
-            cache: directory for cached vectors
-            url: url for download if vectors not found in cache
-            unk_init (callback): by default, initialize out-of-vocabulary word vectors
-                to zero vectors; can be any function that takes in a Tensor and
-                returns a Tensor of the same size
-            is_include (callable): callable returns True if to include a token in memory vectors
-                cache; some of these embedding files are gigantic so filtering it can cut
-                down on the memory usage. We do not cache on disk if is_include is defined.
-
-        """
         self.unk_init = unk_init
         self.is_include = is_include
         self.name = name

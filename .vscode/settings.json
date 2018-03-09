@@ -59,5 +59,6 @@
     "spacy",
     "tqdm",
     "unsqueeze"
-  ]
+  ],
+  "reflow.preferredLineLength": 100
 }

@@ -34,6 +34,39 @@ from torchnlp.embeddings.pretrained_embedding import _PretrainedEmbeddings
 
 
 class CharNGram(_PretrainedEmbeddings):
+    """ Character n-gram is a character-based compositional model to embed textual sequences.
+
+    Character n-gram embeddings are trained by the same Skip-gram objective. The final character
+    embedding is the average of the unique character n-gram embeddings of wt. For example, the
+    character n-grams (n = 1, 2, 3) of the word “Cat” are {C, a, t, #B#C, Ca, at, t#E#, #B#Ca, Cat,
+    at#E#}, where “#B#” and “#E#” represent the beginning and the end of each word, respectively.
+    Using the character embeddings efficiently provides morphological features. Each word is
+    subsequently represented as xt, the concatenation of its corresponding word and character
+    embeddings shared across the tasks.
+
+    Paper Reference:
+    http://www.logos.t.u-tokyo.ac.jp/~hassy/publications/arxiv2016jmt/
+
+    Example:
+        >>> from torchnlp.embeddings import CharNGram
+        >>> vectors = CharNGram()
+        >>> vectors['hello']
+        -1.7494
+        0.6242
+        ...
+        -0.6202
+        2.0928
+        [torch.FloatTensor of size 100]
+
+    Args:
+        cache (str, optional): directory for cached vectors
+        unk_init (callback, optional): by default, initialize out-of-vocabulary word vectors
+            to zero vectors; can be any function that takes in a Tensor and
+            returns a Tensor of the same size
+        is_include (callable, optional): callable returns True if to include a token in memory
+            vectors cache; some of these embedding files are gigantic so filtering it can cut
+            down on the memory usage. We do not cache on disk if `is_include` is defined.
+    """
 
     name = 'charNgram.txt'
     url = ('http://www.logos.t.u-tokyo.ac.jp/~hassy/publications/arxiv2016jmt/'
