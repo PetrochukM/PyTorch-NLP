@@ -28,15 +28,30 @@ logger = logging.getLogger(__name__)
 
 
 def get_moses_multi_bleu(hypotheses, references, lowercase=False):
-    """Calculate the bleu score for hypotheses and references
-    using the MOSES multi-bleu.perl script.
+    """Get the BLEU score using the moses `multi-bleu.perl` script.
+
+    Script url:
+    https://raw.githubusercontent.com/moses-smt/mosesdecoder/master/scripts/generic/multi-bleu.perl
+
+    Example:
+      
+      >>> hypotheses = [
+          "The brown fox jumps over the dog 笑",
+          "The brown fox jumps over the dog 2 笑"
+      ]
+      >>> references = [
+          "The quick brown fox jumps over the lazy dog 笑",
+          "The quick brown fox jumps over the lazy dog 笑"
+      ]
+      >>> get_moses_multi_bleu(hypotheses, references, lowercase=True)
+      46.51
 
     Args:
-      hypotheses: List of strings where each string is a single example.
-      references: List of strings where each string is a single example.
-      lowercase: If true, pass the "-lc" flag to the multi-bleu script
+      hypotheses (list of str): List of predicted values
+      references (list of str): List of target values
+      lowercase (bool): If true, pass the "-lc" flag to the `multi-bleu.perl` script
     Returns:
-      The BLEU score as a float32 value.
+      (:class:`np.float32`) The BLEU score as a float32 value.
     """
     if isinstance(hypotheses, list):
         hypotheses = np.array(hypotheses)
