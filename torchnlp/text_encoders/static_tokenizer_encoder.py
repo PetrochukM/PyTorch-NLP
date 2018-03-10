@@ -12,12 +12,7 @@ from torchnlp.text_encoders.text_encoders import TextEncoder
 class StaticTokenizerEncoder(TextEncoder):
     """ Encoder where the tokenizer is a static callable. """
 
-    def __init__(self,
-                 sample,
-                 min_occurrences=1,
-                 append_eos=False,
-                 lower=True,
-                 tokenize=(lambda s: s.split())):
+    def __init__(self, sample, min_occurrences=1, append_eos=False, tokenize=(lambda s: s.split())):
         """
         Given a sample, build the dictionary for the word encoder.
 
@@ -26,19 +21,17 @@ class StaticTokenizerEncoder(TextEncoder):
             min_occurrences (int): minimum number of occurrences for a token to be added to
               dictionary
             append_eos (bool): if to append EOS token onto the end to the encoded vector
-            lower (bool): if to lower the text
             tokenize (callable): callable to tokenize a string
         """
         if not isinstance(sample, list):
             raise TypeError('Sample needs to be a list of strings.')
 
-        self.lower = lower
-        self.tokenize = tokenize
         self.append_eos = append_eos
         self.tokens = Counter()
+        self.tokenize = tokenize if tokenize else lambda x: x
 
         for text in sample:
-            self.tokens.update(self._preprocess(text))
+            self.tokens.update(self.tokenize(text))
 
         self.stoi = RESERVED_STOI.copy()
         self.itos = RESERVED_ITOS[:]
@@ -52,18 +45,9 @@ class StaticTokenizerEncoder(TextEncoder):
         """ Return a list of tokens """
         return self.itos
 
-    def _preprocess(self, text):
-        """ Preprocess text before encoding as a tensor. """
-        if self.lower:
-            text = text.lower()
-        text = text.rstrip('\n')
-        if self.tokenize:
-            text = self.tokenize(text)
-        return text
-
     def encode(self, text):
         """ Encode text into a vector """
-        text = self._preprocess(text)
+        text = self.tokenize(text)
         vector = [self.stoi.get(token, UNKNOWN_INDEX) for token in text]
         if self.append_eos:
             vector.append(EOS_INDEX)

@@ -37,7 +37,7 @@ class GloVe(_PretrainedEmbeddings):
     GloVe is essentially a log-bilinear model with a weighted least-squares objective. The main
     intuition underlying the model is the simple observation that ratios of word-word co-occurrence
     probabilities have the potential for encoding some form of meaning.
-    
+
     Reference Website:
     https://nlp.stanford.edu/projects/glove/
 

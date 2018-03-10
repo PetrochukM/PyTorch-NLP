@@ -5,7 +5,7 @@ def test_moses_encoder():
     # TEST adapted from example in http://www.nltk.org/_modules/nltk/tokenize/moses.html
     input_ = ("This ain't funny. It's actually hillarious, yet double Ls. | [] < > [ ] & " +
               "You're gonna shake it off? Don't?")
-    encoder = MosesEncoder([input_], lower=False)
+    encoder = MosesEncoder([input_])
     expected_tokens = [
         'This', 'ain', '&apos;t', 'funny', '.', 'It', '&apos;s', 'actually', 'hillarious', ',',
         'yet', 'double', 'Ls', '.', '&#124;', '&#91;', '&#93;', '&lt;', '&gt;', '&#91;', '&#93;',

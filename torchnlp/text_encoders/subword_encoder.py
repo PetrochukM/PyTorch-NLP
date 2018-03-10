@@ -14,7 +14,6 @@ class SubwordEncoder(TextEncoder):
     def __init__(self,
                  sample,
                  append_eos=False,
-                 lower=True,
                  target_vocab_size=None,
                  min_occurrences=1,
                  max_occurrences=1e3):
@@ -28,16 +27,14 @@ class SubwordEncoder(TextEncoder):
             min_occurrences (int): lower bound for the minimum token count
             max_occurrences (int): upper bound for the minimum token count
         """
-        self.lower = lower
         self.append_eos = append_eos
-
-        if self.lower:
-            sample = [text.lower().rstrip('\n') for text in sample]
 
         if target_vocab_size is None:
             self.tokenizer = SubwordTextTokenizer()
             self.tokenizer.build_from_corpus(sample, min_count=min_occurrences)
         else:
+
+            target_vocab_size -= len(RESERVED_ITOS)
             self.tokenizer = SubwordTextTokenizer.build_to_target_size_from_corpus(
                 sample,
                 target_size=target_vocab_size,
@@ -55,9 +52,6 @@ class SubwordEncoder(TextEncoder):
         return self.itos
 
     def encode(self, text):
-        if self.lower:
-            text = text.lower()
-        text = text.rstrip('\n')
         text = self.tokenizer.encode(text)
         vector = [self.stoi.get(token, UNKNOWN_INDEX) for token in text]
         if self.append_eos:
