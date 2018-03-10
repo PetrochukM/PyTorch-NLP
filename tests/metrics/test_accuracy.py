@@ -32,6 +32,13 @@ def test_get_token_accuracy_2d_2d():
     assert accuracy == 0.75
 
 
+def test_get_token_accuracy_2d_2d_2d_2d():
+    targets = torch.LongTensor([[1, 1], [2, 2], [3, 3]])
+    outputs = torch.LongTensor([[1, 1], [2, 3], [4, 4]])
+    accuracy, _, _ = get_token_accuracy(targets, outputs, ignore_index=3)
+    assert accuracy == 0.75
+
+
 def test_get_accuracy_2d_3d():
     targets = torch.LongTensor([[1, 1], [2, 2], [3, 3], [4, 4]])
     outputs = torch.LongTensor([[[1, 1], [1, 1]], [[2, 2], [2, 2]], [[3, 3], [3, 3]], [[3, 3],
