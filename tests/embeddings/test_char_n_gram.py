@@ -2,7 +2,7 @@ import os
 import mock
 
 from torchnlp.embeddings import CharNGram
-from tests.test_embeddings.utils import urlretrieve_side_effect
+from tests.embeddings.utils import urlretrieve_side_effect
 
 
 @mock.patch("urllib.request.urlretrieve")

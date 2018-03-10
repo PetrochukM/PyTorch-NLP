@@ -3,6 +3,7 @@ import numpy as np
 from torchnlp.metrics import get_moses_multi_bleu
 
 
+# TODO: Fix failure case if internet does not work
 def test_get_moses_multi_bleu():
     hypotheses = ["The brown fox jumps over the dog 笑", "The brown fox jumps over the dog 2 笑"]
     references = [

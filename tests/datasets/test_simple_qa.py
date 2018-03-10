@@ -12,6 +12,7 @@ directory = 'tests/_test_data/simple_qa'
 def test_simple_qa_dataset_row(mock_urlretrieve):
     # Check the URL requested is valid
     def side_effect(url, **kwargs):
+        # TODO: Fix failure case if internet does not work
         assert urllib.request.urlopen(url).getcode() == 200
 
     mock_urlretrieve.side_effect = side_effect
