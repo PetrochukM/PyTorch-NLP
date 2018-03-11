@@ -7,17 +7,19 @@ class Dataset(data.Dataset):
     """ A class implementing :class:`torch.utils.data.Dataset`.
 
     Dataset subclasses the abstract class :class:`torch.utils.data.Dataset`. The class overrides
-    ``__len__``, ``__getitem__``, ``__contains__`` and ``__init__``.
+    ``__len__``, ``__getitem__``, ``__contains__``, ``__str__``, ``__eq__`` and ``__init__``.
 
-    Dataset is a two-dimensional size-mutable, potentially heterogeneous tabular data structure
-    with labeled axes (rows and columns).
+    Dataset is a two-dimensional immutable, potentially heterogeneous tabular data structure with
+    labeled axes (rows and columns).
+
+    Args:
+        rows (list of dict): Construct a two-dimensional tabular data structure from rows.
+
+    Attributes:
+        columns (set of string): Set of column names.
     """
 
     def __init__(self, rows):
-        """
-        Args:
-            rows (list of dict): Construct a two-dimensional tabular data structure from rows/
-        """
         self.columns = set()
         for row in rows:
             if not isinstance(row, dict):
@@ -44,11 +46,9 @@ class Dataset(data.Dataset):
             return self.rows[key]
 
     def __len__(self):
-        """ Return the number of rows. """
         return len(self.rows)
 
     def __contains__(self, key):
-        """ Check if dataset contains column. """
         return key in self.columns
 
     def __str__(self):
