@@ -5,7 +5,7 @@ def test_bucket_batch_sampler():
     data_source = [[1], [2], [3], [4], [5], [6]]
     sort_key = lambda r: len(r)
     batch_size = 2
-    batches = list(BucketBatchSampler(data_source, sort_key, batch_size))
+    batches = list(BucketBatchSampler(data_source, batch_size, sort_key, bucket_size_multiplier=2))
     assert len(batches) == 3
 
 
@@ -13,17 +13,22 @@ def test_bucket_batch_sampler_uneven():
     data_source = [[1], [2], [3], [4], [5]]
     sort_key = lambda r: len(r)
     batch_size = 2
-    batches = list(BucketBatchSampler(data_source, sort_key, batch_size))
+    batches = list(BucketBatchSampler(data_source, batch_size, sort_key, bucket_size_multiplier=2))
     assert len(batches) == 3
-    batches = list(BucketBatchSampler(data_source, sort_key, batch_size, drop_last=True))
+    batches = list(
+        BucketBatchSampler(
+            data_source, batch_size, sort_key, drop_last=True, bucket_size_multiplier=2))
     assert len(batches) == 2
 
 
 def test_bucket_batch_sampler_last_batch_first():
-    data_source = [[1], [2], [3], [4], [5, 6, 7, 8, 9, 10]]
+    data_source = [[1], [2], [3], [4], [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]]
     sort_key = lambda r: len(r)
     batch_size = 2
-    batches = list(BucketBatchSampler(data_source, sort_key, batch_size, last_batch_first=True))
+    batches = list(
+        BucketBatchSampler(
+            data_source, batch_size, sort_key, biggest_batches_first=True,
+            bucket_size_multiplier=2))
     # Largest batch (4) is in first batch
     assert 4 in batches[0]
 
@@ -31,15 +36,14 @@ def test_bucket_batch_sampler_last_batch_first():
 def test_bucket_batch_sampler_sorted():
     data_source = [[1], [2], [3], [4], [5]]
     sort_key = lambda r: r[0]
-    batch_size = 1
+    batch_size = len(data_source)
     batches = list(
         BucketBatchSampler(
             data_source,
-            sort_key,
             batch_size,
-            shuffle=False,
-            last_batch_first=False,
-            sort_key_noise=0.0))
+            sort_key,
+            biggest_batches_first=False,
+            bucket_size_multiplier=1))
     # Largest batch (4) is in first batch
     for i, batch in enumerate(batches):
         assert batch[0] == i
