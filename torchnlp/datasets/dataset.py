@@ -1,3 +1,5 @@
+import pandas as pd
+
 from torch.utils import data
 
 
@@ -18,6 +20,8 @@ class Dataset(data.Dataset):
         """
         self.columns = set()
         for row in rows:
+            if not isinstance(row, dict):
+                raise ValueError('Row must be a dict.')
             self.columns.update(row.keys())
         self.rows = rows
 
@@ -36,7 +40,7 @@ class Dataset(data.Dataset):
                 raise AttributeError
             return [row[key] if key in row else None for row in self.rows]
         # Given an row integer return a object of row values.
-        else:
+        elif isinstance(key, int):
             return self.rows[key]
 
     def __len__(self):
@@ -46,3 +50,9 @@ class Dataset(data.Dataset):
     def __contains__(self, key):
         """ Check if dataset contains column. """
         return key in self.columns
+
+    def __str__(self):
+        return str(pd.DataFrame(self.rows))
+
+    def __eq__(self, other):
+        return self.columns == other.columns and self.rows == other.rows

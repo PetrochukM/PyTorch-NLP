@@ -34,7 +34,7 @@ def get_moses_multi_bleu(hypotheses, references, lowercase=False):
     https://raw.githubusercontent.com/moses-smt/mosesdecoder/master/scripts/generic/multi-bleu.perl
 
     Example:
-      
+
       >>> hypotheses = [
           "The brown fox jumps over the dog 笑",
           "The brown fox jumps over the dog 2 笑"

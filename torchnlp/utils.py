@@ -6,8 +6,14 @@ import torch
 
 logger = logging.getLogger(__name__)
 
+# TODO: Add back padding
 
-def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
+
+def shuffle(dataset, random_seed=123):
+    random.Random(random_seed).shuffle(dataset.rows)
+
+
+def resplit_datasets(dataset, other_dataset, random_seed=None, split=None):
     """Deterministic shuffle and split algorithm.
 
     Given the same two datasets and the same `random_seed`, the split happens the same exact way
@@ -17,8 +23,8 @@ def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
         dataset (lib.datasets.Dataset): First dataset.
         other_dataset (lib.datasets.Dataset): Another dataset.
         random_seed (int, optional): Seed to control the shuffle of both datasets.
-        cut (float, optional): If defined it is the percentage of rows that first dataset gets after
-            split otherwise the original proportions are kept.
+        split (float, optional): If defined it is the percentage of rows that first dataset gets
+            after split otherwise the original proportions are kept.
 
     Returns:
         dataset (lib.datasets.Dataset)
@@ -32,11 +38,11 @@ def resplit_datasets(dataset, other_dataset, random_seed=None, cut=None):
     # https://stackoverflow.com/questions/19306976/python-shuffling-with-a-parameter-to-get-the-same-result
     # NOTE: Shuffle the same way every call of `shuffle_datasets` where the `random_seed` is given
     random.Random(random_seed).shuffle(concat)
-    if cut is None:
+    if split is None:
         return Dataset(concat[:len(dataset)]), Dataset(concat[len(dataset):])
     else:
-        cut = max(min(round(len(concat) * cut), len(concat)), 0)
-        return Dataset(concat[:cut]), Dataset(concat[cut:])
+        split = max(min(round(len(concat) * split), len(concat)), 0)
+        return Dataset(concat[:split]), Dataset(concat[split:])
 
 
 def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):

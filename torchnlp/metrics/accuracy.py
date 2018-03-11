@@ -27,7 +27,7 @@ def get_accuracy(targets, outputs, k=1, ignore_index=None):
       ignore_index (int, optional): Specifies a target index that is ignored
 
     Returns:
-      :class:`tuple` consisting of accuracy (:class:`float`), number correct (:class:`int`) and 
+      :class:`tuple` consisting of accuracy (:class:`float`), number correct (:class:`int`) and
       total (:class:`int`)
     """
     n_correct = 0.0
@@ -74,7 +74,7 @@ def get_token_accuracy(targets, outputs, ignore_index=None):
       ignore_index (int, optional): Specifies a target index that is ignored
 
     Returns:
-      :class:`tuple` consisting of accuracy (:class:`float`), number correct (:class:`int`) and 
+      :class:`tuple` consisting of accuracy (:class:`float`), number correct (:class:`int`) and
       total (:class:`int`)
      """
     n_correct = 0.0
