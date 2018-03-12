@@ -9,7 +9,24 @@ from torchnlp.text_encoders.text_encoders import TextEncoder
 
 
 class SubwordEncoder(TextEncoder):
-    """ Use Googles Tensor2Tensor SubwordTextTokenizer """
+    """ Invertibly encoding text using a limited vocabulary.
+
+    Applies Googles Tensor2Tensor SubwordTextTokenizer that invertibly encodes a native string as a
+    sequence of subtokens from a limited vocabulary. In order to build the vocabulary, it uses
+    recursive binary search to find a minimum token count `x`
+    (s.t. `min_occurrences` <= `x` <= `max_occurrences`) that most closely matches the
+    `target_size`.
+
+    Tokenization Algorithm Reference:
+    https://github.com/tensorflow/tensor2tensor/blob/8bdecbe434d93cb1e79c0489df20fee2d5a37dc2/tensor2tensor/data_generators/text_encoder.py#L389
+
+    Args:
+        sample (list of strings): Sample of data to build dictionary on
+        append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
+        target_vocab_size (int, optional): Desired size of vocab.
+        min_occurrences (int, optional): Lower bound for the minimum token count.
+        max_occurrences (int, optional): Upper bound for the minimum token count.
+    """
 
     def __init__(self,
                  sample,

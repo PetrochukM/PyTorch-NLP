@@ -2,7 +2,14 @@ from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncod
 
 
 class CharacterEncoder(StaticTokenizerEncoder):
-    """ Encode by splitting up by character """
+    """ Encodes text into a tensor by splitting the text into individual characters.
+
+    Args:
+        sample (list of strings): Sample of data to build dictionary on
+        min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
+          dictionary.
+        append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
+    """
 
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:

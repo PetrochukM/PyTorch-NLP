@@ -6,8 +6,7 @@ from torch.utils.data.sampler import BatchSampler
 class ShuffleBatchSampler(BatchSampler):
     """Wraps another sampler to yield a mini-batch of indices.
 
-    The `ImprovedBatchSampler` adds functionality on top of `torch.utils.data.sampler.BatchSampler`
-    like `shuffle` and `biggest_batch_first`.
+    The `ShuffleBatchSampler` adds `shuffle` on top of `torch.utils.data.sampler.BatchSampler`.
 
     Args:
         sampler (Sampler): Base sampler.

@@ -10,21 +10,34 @@ from torchnlp.text_encoders.text_encoders import TextEncoder
 
 
 class StaticTokenizerEncoder(TextEncoder):
-    """ Encoder where the tokenizer is a static callable. """
+    """ Encodes the text using a lambda tokenizer.
+
+    Args:
+        sample (list of strings): Sample of data to build dictionary on
+        min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
+          dictionary.
+        append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
+        tokenize (callable): callable to tokenize a string
+
+    Example:
+
+        >>> encoder = StaticTokenizerEncoder(["This ain't funny.", "Don't?"],
+                                             tokenize=lambda s: s.split())
+        >>> encoder.encode("This ain't funny.")
+         5
+         6
+         7
+        [torch.LongTensor of size 3]
+        >>> encoder.vocab
+        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', "ain't", 'funny.', "Don't?"]
+        >>> encoder.decode(encoder.encode("This ain't funny."))
+        "This ain't funny."
+
+    """
 
     def __init__(self, sample, min_occurrences=1, append_eos=False, tokenize=(lambda s: s.split())):
-        """
-        Given a sample, build the dictionary for the word encoder.
-
-        Args:
-            sample (list of strings): sample of data to build dictionary on
-            min_occurrences (int): minimum number of occurrences for a token to be added to
-              dictionary
-            append_eos (bool): if to append EOS token onto the end to the encoded vector
-            tokenize (callable): callable to tokenize a string
-        """
         if not isinstance(sample, list):
-            raise TypeError('Sample needs to be a list of strings.')
+            raise TypeError('Sample must be a list of strings.')
 
         self.append_eos = append_eos
         self.tokens = Counter()
@@ -42,11 +55,11 @@ class StaticTokenizerEncoder(TextEncoder):
 
     @property
     def vocab(self):
-        """ Return a list of tokens """
+        """ Returns the vocabulary used to encode text. """
         return self.itos
 
     def encode(self, text):
-        """ Encode text into a vector """
+        """ Returns a `torch.LongTensor` encoding of the `text`. """
         text = self.tokenize(text)
         vector = [self.stoi.get(token, UNKNOWN_INDEX) for token in text]
         if self.append_eos:
@@ -54,6 +67,10 @@ class StaticTokenizerEncoder(TextEncoder):
         return torch.LongTensor(vector)
 
     def decode(self, tensor):
-        """ Decode vector into text, not guaranteed to be reversable """
+        """ Given a `tensor`, returns a string representing the decoded text.
+
+        NOTE: Depending on the tokenizer, the decoded version is not guaranteed to be the original
+        text.
+        """
         tokens = [self.itos[index] for index in tensor]
         return ' '.join(tokens)

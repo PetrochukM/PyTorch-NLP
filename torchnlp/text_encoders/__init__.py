@@ -16,7 +16,7 @@ from torchnlp.text_encoders.spacy_encoder import SpacyEncoder
 from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
 from torchnlp.text_encoders.subword_encoder import SubwordEncoder
 from torchnlp.text_encoders.treebank_encoder import TreebankEncoder
-from torchnlp.text_encoders.word_encoder import WordEncoder
+from torchnlp.text_encoders.whitespace_encoder import WhitespaceEncoder
 
 __all__ = [
     'CharacterEncoder',
@@ -37,5 +37,5 @@ __all__ = [
     'StaticTokenizerEncoder',
     'SubwordEncoder',
     'TreebankEncoder',
-    'WordEncoder',
+    'WhitespaceEncoder',
 ]

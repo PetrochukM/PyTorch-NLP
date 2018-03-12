@@ -1,4 +1,6 @@
 class TextEncoder(object):
+    """ Base class for a text encoder.
+    """
 
     def __init__(self):
         raise NotImplementedError
