@@ -5,6 +5,9 @@ from torchnlp.samplers.shuffle_batch_sampler import ShuffleBatchSampler
 from torchnlp.samplers.noisy_sorted_batch_sampler import NoisySortedBatchSampler
 
 __all__ = [
-    'NoisySortedSampler', 'ShuffleBatchSampler', 'SortedSampler', 'BucketBatchSampler',
-    'NoisySortedBatchSampler'
+    'SortedSampler',
+    'NoisySortedSampler',
+    'NoisySortedBatchSampler',
+    'ShuffleBatchSampler',
+    'BucketBatchSampler',
 ]

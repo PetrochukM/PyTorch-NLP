@@ -2,7 +2,7 @@ from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncod
 
 
 class TreebankEncoder(StaticTokenizerEncoder):
-    """ Encodes the text using the TreeBank tokenizer.
+    """ Encodes the text using the Treebank tokenizer.
 
     Tokenization Algorithm Reference:
     http://www.nltk.org/_modules/nltk/tokenize/treebank.html

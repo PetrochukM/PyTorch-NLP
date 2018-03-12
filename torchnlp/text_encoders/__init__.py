@@ -17,12 +17,19 @@ from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncod
 from torchnlp.text_encoders.subword_encoder import SubwordEncoder
 from torchnlp.text_encoders.treebank_encoder import TreebankEncoder
 from torchnlp.text_encoders.whitespace_encoder import WhitespaceEncoder
+from torchnlp.text_encoders.text_encoder import TextEncoder
 
 __all__ = [
-    'CharacterEncoder',
+    'TextEncoder',
+    'SubwordEncoder',
+    'StaticTokenizerEncoder',
     'DelimiterEncoder',
+    'WhitespaceEncoder',
+    'CharacterEncoder',
     'IdentityEncoder',
     'MosesEncoder',
+    'TreebankEncoder',
+    'SpacyEncoder',
     'COPY_INDEX',
     'COPY_TOKEN',
     'EOS_INDEX',
@@ -33,9 +40,4 @@ __all__ = [
     'SOS_TOKEN',
     'UNKNOWN_INDEX',
     'UNKNOWN_TOKEN',
-    'SpacyEncoder',
-    'StaticTokenizerEncoder',
-    'SubwordEncoder',
-    'TreebankEncoder',
-    'WhitespaceEncoder',
 ]

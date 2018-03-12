@@ -5,7 +5,7 @@ from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
 from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
 from torchnlp.text_encoders.reserved_tokens import RESERVED_STOI
 from torchnlp.text_encoders.subword_text_tokenizer import SubwordTextTokenizer
-from torchnlp.text_encoders.text_encoders import TextEncoder
+from torchnlp.text_encoders.text_encoder import TextEncoder
 
 
 class SubwordEncoder(TextEncoder):
@@ -34,16 +34,6 @@ class SubwordEncoder(TextEncoder):
                  target_vocab_size=None,
                  min_occurrences=1,
                  max_occurrences=1e3):
-        """ Given a sample, build the dictionary for the word encoder.
-
-        Args:
-            sample (list of str)
-            append_eos (bool)
-            lower (bool)
-            target_vocab_size (int): desired vocab_size to approximate
-            min_occurrences (int): lower bound for the minimum token count
-            max_occurrences (int): upper bound for the minimum token count
-        """
         self.append_eos = append_eos
 
         if target_vocab_size is None:

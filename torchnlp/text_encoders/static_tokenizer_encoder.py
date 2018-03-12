@@ -6,7 +6,7 @@ from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
 from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
 from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
 from torchnlp.text_encoders.reserved_tokens import RESERVED_STOI
-from torchnlp.text_encoders.text_encoders import TextEncoder
+from torchnlp.text_encoders.text_encoder import TextEncoder
 
 
 class StaticTokenizerEncoder(TextEncoder):
@@ -55,11 +55,9 @@ class StaticTokenizerEncoder(TextEncoder):
 
     @property
     def vocab(self):
-        """ Returns the vocabulary used to encode text. """
         return self.itos
 
     def encode(self, text):
-        """ Returns a `torch.LongTensor` encoding of the `text`. """
         text = self.tokenize(text)
         vector = [self.stoi.get(token, UNKNOWN_INDEX) for token in text]
         if self.append_eos:
@@ -67,10 +65,5 @@ class StaticTokenizerEncoder(TextEncoder):
         return torch.LongTensor(vector)
 
     def decode(self, tensor):
-        """ Given a `tensor`, returns a string representing the decoded text.
-
-        NOTE: Depending on the tokenizer, the decoded version is not guaranteed to be the original
-        text.
-        """
         tokens = [self.itos[index] for index in tensor]
         return ' '.join(tokens)
