@@ -12,6 +12,10 @@ and text encoders. It's open-source software, released under the BSD3 license.
 [![Build Status](https://travis-ci.org/PetrochukM/PyTorch-NLP.svg?branch=master)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
 [![License](https://img.shields.io/pypi/l/pytorch-nlp.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
+## Documentation 📖 
+
+The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
+
 ## Installation
 
 Make sure you have Python 3.5+ and PyTorch 0.2.0 or newer. You can then install `pytorch-nlp` using
@@ -30,10 +34,6 @@ Alternatively, you might want to use Moses tokenizer from `NLTK <http://nltk.org
 
     pip install nltk
     python -m nltk.downloader perluniprops nonbreaking_prefixes
-
-## Documentation 📖 
-
-The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
 
 ## Contributing
 
