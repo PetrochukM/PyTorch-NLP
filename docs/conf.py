@@ -96,11 +96,10 @@ html_theme_options = {'collapse_navigation': False, 'display_version': True}
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_context = {
-    'css_files': [
-        '_static/css/pytorch_nlp.css',  # override wide tables in RTD theme
-    ],
-}
+
+def setup(app):
+    app.add_stylesheet('css/pytorch_nlp.css')
+
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.

@@ -50,7 +50,7 @@
     "build/**": true,
     "cover/**": true
   },
-  "python.pythonPath": "/usr/local/bin/python3.6",
+  "python.pythonPath": "/usr/local/opt/python3/bin/python3.6",
   "cSpell.words": [
     "bleu",
     "correspondence",
