@@ -98,7 +98,7 @@ html_static_path = ['_static']
 
 html_context = {
     'css_files': [
-        '_static/css/custom.css',  # override wide tables in RTD theme
+        '_static/css/pytorch_nlp.css',  # override wide tables in RTD theme
     ],
 }
 
