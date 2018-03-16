@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def shuffle(dataset, random_seed=123):
+    """ Shuffle dataset deterministically based on random_seed. """
     random.Random(random_seed).shuffle(dataset.rows)
 
 
@@ -64,6 +65,7 @@ def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):
 
 
 def reporthook(t):
+    """ Shuffle dataset deterministically based on random_seed. """
     """https://github.com/tqdm/tqdm"""
     last_b = [0]
 

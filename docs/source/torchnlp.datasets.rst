@@ -1,10 +1,13 @@
 torchnlp.datasets package
 =========================
 
-TODO: Explain dataset in more detail
+The ``torchnlp.datasets`` package introduces modules capable of downloading, caching and loading 
+commonly used NLP datasets.
 
-All datasets are subclasses of :class:`torchnlp.datasets.Dataset`, which inherits from
-:class:`torch.utils.data.Dataset`.
+Modules return a :class:`torch.utils.data.Dataset` object i.e,
+they have ``__getitem__`` and ``__len__`` methods implemented. Hence, they can all be passed to a
+:class:`torch.utils.data.DataLoader` which can load multiple samples parallelly using
+``torch.multiprocessing`` workers.
 
 .. automodule:: torchnlp.datasets
     :members:
