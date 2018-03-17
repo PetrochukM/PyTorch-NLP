@@ -6,7 +6,37 @@ import torch
 
 logger = logging.getLogger(__name__)
 
-# TODO: Add back padding
+
+def pad_tensor(tensor, length, padding_index):
+    """ Pad a ``tensor`` to ``length`` with ``padding_index``.
+
+    Args:
+        tensor (1D :class:`torch.LongTensor`): Tensor to pad.
+        length (int): Pad the ``tensor`` up to ``length``.
+        padding_index (int): Index to pad tensor with.
+    Returns
+        torch.LongTensor: Padded Tensor.
+    """
+    assert len(tensor.size()) == 1
+    assert length >= len(tensor)
+    n_padding = length - len(tensor)
+    padding = torch.LongTensor(n_padding * [padding_index])
+    return torch.cat((tensor, padding), 0)
+
+
+def pad_batch(batch, padding_index):
+    """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
+
+    Args:
+        batch (:class:`list` of 1D :class:`torch.LongTensor`): Batch of tensors to pad.
+        padding_index (int): Index to pad tensors with.
+    Returns
+        list of torch.LongTensor, list of int: Padded tensors and original lengths of tensors.
+    """
+    lengths = [len(row) for row in batch]
+    max_len = max(lengths)
+    padded = [pad_tensor(row, max_len, padding_index) for row in batch]
+    return padded, lengths
 
 
 def shuffle(list_, random_seed=123):

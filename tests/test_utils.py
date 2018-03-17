@@ -4,13 +4,30 @@ from torchnlp.datasets import Dataset
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import torch_equals_ignore_index
 from torchnlp.utils import shuffle
+from torchnlp.utils import pad_batch
+from torchnlp.utils import pad_tensor
+
+
+def test_pad_tensor():
+    PADDING_INDEX = 0
+    padded = pad_tensor(torch.LongTensor([1, 2, 3]), 5, PADDING_INDEX)
+    assert padded.tolist() == [1, 2, 3, PADDING_INDEX, PADDING_INDEX]
+
+
+def test_pad_batch():
+    PADDING_INDEX = 0
+    batch = [torch.LongTensor([1, 2, 3]), torch.LongTensor([1, 2]), torch.LongTensor([1])]
+    padded, lengths = pad_batch(batch, PADDING_INDEX)
+    padded = [r.tolist() for r in padded]
+    assert padded == [[1, 2, 3], [1, 2, PADDING_INDEX], [1, PADDING_INDEX, PADDING_INDEX]]
+    assert lengths == [3, 2, 1]
 
 
 def test_shuffle():
-    a = Dataset([{'r': 1}, {'r': 2}, {'r': 3}, {'r': 4}, {'r': 5}])
+    a = [1, 2, 3, 4, 5]
     # Always shuffles the same way
     shuffle(a)
-    assert a == Dataset([{'r': 4}, {'r': 2}, {'r': 5}, {'r': 3}, {'r': 1}])
+    assert a == [4, 2, 5, 3, 1]
 
 
 def test_resplit_datasets():
