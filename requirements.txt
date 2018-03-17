@@ -30,3 +30,6 @@ sphinx-autobuild
 
 # Auto Formatter 
 yapf
+
+# Release to PyPi
+wheel
