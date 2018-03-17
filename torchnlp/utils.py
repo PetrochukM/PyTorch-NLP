@@ -24,6 +24,11 @@ def pad_tensor(tensor, length, padding_index):
     return torch.cat((tensor, padding), 0)
 
 
+def flatten_parameters(model):
+    """ ``flatten_parameters`` of a RNN model loaded from disk. """
+    model.apply(lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None)
+
+
 def pad_batch(batch, padding_index):
     """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
 
