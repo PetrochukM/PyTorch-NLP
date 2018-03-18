@@ -1,22 +1,17 @@
-import urllib.request
 import os
 import shutil
 
 import mock
 
 from torchnlp.datasets import simple_qa_dataset
+from tests.datasets.utils import urlretrieve_side_effect
 
 directory = 'tests/_test_data/'
 
 
 @mock.patch("urllib.request.urlretrieve")
 def test_simple_qa_dataset_row(mock_urlretrieve):
-    # Check the URL requested is valid
-    def side_effect(url, **kwargs):
-        # TODO: Fix failure case if internet does not work
-        assert urllib.request.urlopen(url).getcode() == 200
-
-    mock_urlretrieve.side_effect = side_effect
+    mock_urlretrieve.side_effect = urlretrieve_side_effect
 
     # Check a row are parsed correctly
     train, dev, test = simple_qa_dataset(directory=directory, test=True, train=True, dev=True)

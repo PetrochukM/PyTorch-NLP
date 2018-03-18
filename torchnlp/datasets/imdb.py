@@ -2,7 +2,7 @@ import os
 import glob
 
 from torchnlp.datasets.dataset import Dataset
-from torchnlp.utils import download_extract_tar_gz
+from torchnlp.utils import download_extract
 
 
 def imdb_dataset(directory='data/',
@@ -32,13 +32,13 @@ def imdb_dataset(directory='data/',
         train_directory (str, optional): The directory of the training split.
         test_directory (str, optional): The directory of the test split.
         name (str, optional): Name of the dataset directory.
-        check_file (str, optional): Check this file exists if download was successful.
-        url (str, optional): URL of the dataset tar.gz` file.
+        check_file (str, optional): Check this file exists if the download was successful.
+        url (str, optional): URL of the dataset `tar.gz` file.
         sentiments (list of str, optional): Sentiments to load from the dataset.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training dataset
-        , dev dataset and test dataset in order if their respective boolean argument is true.
+        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training dataset and
+        test dataset in order if their respective boolean argument is true.
 
     Example:
         >>> from torchnlp.datasets import imdb_dataset
@@ -52,7 +52,7 @@ def imdb_dataset(directory='data/',
           'sentiment': 'pos'
         }]
     """
-    download_extract_tar_gz(url=url, directory=directory, check_file=check_file)
+    download_extract(url=url, directory=directory, check_file=check_file)
 
     ret = []
     split_directories = [

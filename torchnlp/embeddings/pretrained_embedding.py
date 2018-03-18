@@ -34,16 +34,13 @@ import array
 import io
 import logging
 import os
-import zipfile
 
-from six.moves.urllib.request import urlretrieve
 from tqdm import tqdm
 
 import six
-import tarfile
 import torch
 
-from torchnlp.utils import reporthook
+from torchnlp.utils import download_extract
 
 logger = logging.getLogger(__name__)
 
@@ -94,27 +91,10 @@ class _PretrainedEmbeddings(object):
             path = os.path.join(cache, name)
             path_pt = path + '.pt'
 
-        print(path)
-
         if not os.path.isfile(path_pt) or self.is_include is not None:
-            if not os.path.isfile(path) and url:
-                logger.info('Downloading vectors from {}'.format(url))
-                if not os.path.exists(cache):
-                    os.makedirs(cache)
-                dest = os.path.join(cache, os.path.basename(url))
-                print(dest)
-                if not os.path.isfile(dest):
-                    with tqdm(unit='B', unit_scale=True, miniters=1, desc=dest) as t:
-                        urlretrieve(url, dest, reporthook=reporthook(t))
-                logger.info('Extracting vectors into {}'.format(cache))
-                ext = os.path.splitext(dest)[1][1:]
-                print(ext)
-                if ext == 'zip':
-                    with zipfile.ZipFile(dest, "r") as zf:
-                        zf.extractall(cache)
-                elif ext == 'gz':
-                    with tarfile.open(dest, 'r:gz') as tar:
-                        tar.extractall(path=cache)
+            if url:
+                download_extract(url, cache, name)
+
             if not os.path.isfile(path):
                 raise RuntimeError('no vectors found at {}'.format(path))
 

@@ -5,7 +5,7 @@ def test_noisy_sorted_batch_sampler():
     data_source = [[1], [2], [3], [4], [5], [6]]
     sort_key = lambda r: len(r)
     batch_size = 2
-    batches = list(NoisySortedBatchSampler(data_source, batch_size, sort_key))
+    batches = list(NoisySortedBatchSampler(data_source, batch_size, sort_key, drop_last=False))
     assert len(batches) == 3
 
 
@@ -13,7 +13,7 @@ def test_noisy_sorted_batch_sampler_uneven():
     data_source = [[1], [2], [3], [4], [5]]
     sort_key = lambda r: len(r)
     batch_size = 2
-    batches = list(NoisySortedBatchSampler(data_source, batch_size, sort_key))
+    batches = list(NoisySortedBatchSampler(data_source, batch_size, sort_key, drop_last=False))
     assert len(batches) == 3
     batches = list(NoisySortedBatchSampler(data_source, batch_size, sort_key, drop_last=True))
     assert len(batches) == 2
@@ -24,7 +24,8 @@ def test_noisy_sorted_batch_sampler_last_batch_first():
     sort_key = lambda r: len(r)
     batch_size = 2
     batches = list(
-        NoisySortedBatchSampler(data_source, batch_size, sort_key, last_batch_first=True))
+        NoisySortedBatchSampler(
+            data_source, batch_size, sort_key, drop_last=False, last_batch_first=True))
     # Largest batch (4) is in first batch
     assert 4 in batches[0]
 
@@ -38,6 +39,7 @@ def test_noisy_sorted_batch_sampler_sorted():
             data_source,
             batch_size,
             sort_key,
+            drop_last=False,
             shuffle=False,
             last_batch_first=False,
             sort_key_noise=0.0))

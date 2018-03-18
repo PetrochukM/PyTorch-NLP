@@ -5,7 +5,9 @@ def test_bucket_batch_sampler():
     data_source = [[1], [2], [3], [4], [5], [6]]
     sort_key = lambda r: len(r)
     batch_size = 2
-    batches = list(BucketBatchSampler(data_source, batch_size, sort_key, bucket_size_multiplier=2))
+    batches = list(
+        BucketBatchSampler(
+            data_source, batch_size, sort_key, drop_last=False, bucket_size_multiplier=2))
     assert len(batches) == 3
 
 
@@ -13,7 +15,9 @@ def test_bucket_batch_sampler_uneven():
     data_source = [[1], [2], [3], [4], [5]]
     sort_key = lambda r: len(r)
     batch_size = 2
-    batches = list(BucketBatchSampler(data_source, batch_size, sort_key, bucket_size_multiplier=2))
+    batches = list(
+        BucketBatchSampler(
+            data_source, batch_size, sort_key, drop_last=False, bucket_size_multiplier=2))
     assert len(batches) == 3
     batches = list(
         BucketBatchSampler(
@@ -27,7 +31,11 @@ def test_bucket_batch_sampler_last_batch_first():
     batch_size = 2
     batches = list(
         BucketBatchSampler(
-            data_source, batch_size, sort_key, biggest_batches_first=True,
+            data_source,
+            batch_size,
+            sort_key,
+            drop_last=False,
+            biggest_batches_first=True,
             bucket_size_multiplier=2))
     # Largest batch (4) is in first batch
     assert 4 in batches[0]
@@ -42,6 +50,7 @@ def test_bucket_batch_sampler_sorted():
             data_source,
             batch_size,
             sort_key,
+            drop_last=False,
             biggest_batches_first=False,
             bucket_size_multiplier=1))
     # Largest batch (4) is in first batch

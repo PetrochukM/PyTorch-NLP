@@ -13,7 +13,7 @@ class NoisySortedSampler(Sampler):
         data (iterable): Data to sample from.
         sort_key (callable): Specifies a function of one argument that is used to extract a
             numerical comparison key from each list element.
-        sort_key_noise (float): Maximum noise added to the numerical `sort_key`.
+        sort_key_noise (float): Maximum noise added to the numerical ``sort_key``.
 
     Example:
         >>> list(NoisySortedSampler(range(10), sort_key=lambda i: i, sort_key_noise=0.25))

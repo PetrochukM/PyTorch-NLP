@@ -2,6 +2,7 @@ import logging
 import os
 import tarfile
 import urllib.request
+import zipfile
 
 import random
 import torch
@@ -142,7 +143,7 @@ def reporthook(t):
     return inner
 
 
-def download_extract_tar_gz(url, directory, check_file):
+def download_extract(url, directory, check_file):
     """ Download a ``tar.gz`` from ``url`` and extract into ``directory``.
 
     Args:
@@ -158,19 +159,24 @@ def download_extract_tar_gz(url, directory, check_file):
     if not os.path.isdir(directory):
         os.makedirs(directory)
 
-    tar_gz = url.split('/')[-1]
-    # Remove URL parameters
-    tar_gz = tar_gz.split('?')[0]
-
-    filename = os.path.join(directory, tar_gz)
-    logger.info('Downloading {}'.format(tar_gz))
-    with tqdm() as t:  # all optional kwargs
+    basename = os.path.basename(url)
+    basename = basename.split('?')[0]
+    filename = os.path.join(directory, basename)
+    logger.info('Downloading {}'.format(basename))
+    with tqdm(unit='B', unit_scale=True, miniters=1, desc=basename) as t:
         urllib.request.urlretrieve(url, filename=filename, reporthook=reporthook(t))
-    logger.info('Extracting {}'.format(tar_gz))
-    tarfile_ = tarfile.open(filename, mode='r')
-    tarfile_.extractall(directory)
-    tarfile_.close()
-    logger.info('Closed `download_extract_tar_gz`')
+    logger.info('Extracting {}'.format(basename))
+    extension = basename.split('.')[1:]
+    if 'zip' in extension:
+        with zipfile.ZipFile(filename, "r") as zip:
+            zip.extractall(directory)
+    elif 'tar' in extension or 'tgz' in extension:
+        with tarfile.open(filename, mode='r') as tar:
+            tar.extractall(path=directory)
+    else:
+        raise ValueError('Extension not supported: {}'.format(extension))
+
+    logger.info('Done with Extracting {}'.format(basename))
 
     if not os.path.isdir(directory) or not os.path.isfile(os.path.join(directory, check_file)):
         raise ValueError('[DOWNLOAD FAILED] `check_file` not found')

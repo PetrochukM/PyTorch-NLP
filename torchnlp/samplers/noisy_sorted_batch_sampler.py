@@ -6,10 +6,10 @@ from torchnlp.samplers.noisy_sorted_sampler import NoisySortedSampler
 
 
 class NoisySortedBatchSampler(BatchSampler):
-    """ Samples a noisy sorted mini-batch of indices from a data source.
+    """ Batch of indices are sampled from a noisy sorting of the data.
 
-    In order to introduce, noise into a sorted mini-batch, we sort all elements using a number to
-    which noise is introduced from a uniform distribution.
+    Batches are sampled on top of a noisy sorting. ``sort_key`` returns a number by which elements
+    are sorted onto which noise from a uniform distribution up to ``sort_key_noise`` is added.
 
     Background:
         NoisySortedBatchSampler is similar to a BucketIterator found in popular libraries like
@@ -28,6 +28,8 @@ class NoisySortedBatchSampler(BatchSampler):
         batch_size (int): Size of mini-batch.
         sort_key (callable): Specifies a function of one argument that is used to extract a
             numerical comparison key from each list element.
+        drop_last (bool): If ``True``, the sampler will drop the last batch if its size would be
+            less than ``batch_size``.
         sort_key_noise (float): Maximum noise added to the numerical `sort_key`.
         last_batch_first (bool, optional): If ``True``, the sampler will append the last batch
             first. Only helpful if the `sort_key` approximates GPU memory.
@@ -40,8 +42,6 @@ class NoisySortedBatchSampler(BatchSampler):
             Credits:
             https://github.com/allenai/allennlp/blob/3d100d31cc8d87efcf95c0b8d162bfce55c64926/allennlp/data/iterators/bucket_iterator.py#L43
         shuffle (bool, optional): If ``True``, the batches are shuffled.
-        drop_last (bool, optional): If ``True``, the sampler will drop the last batch if its size
-            would be less than ``batch_size``.
 
     Example:
         >>> list(NoisySortedBatchSampler(range(10), batch_size=3, drop_last=False))
@@ -55,10 +55,10 @@ class NoisySortedBatchSampler(BatchSampler):
                  data,
                  batch_size,
                  sort_key,
+                 drop_last,
                  sort_key_noise=0.25,
                  last_batch_first=True,
-                 shuffle=True,
-                 drop_last=False):
+                 shuffle=True):
         self.last_batch_first = last_batch_first
         self.shuffle = shuffle
         super().__init__(

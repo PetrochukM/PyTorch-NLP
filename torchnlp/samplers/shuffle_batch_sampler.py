@@ -11,8 +11,8 @@ class ShuffleBatchSampler(BatchSampler):
     Args:
         sampler (Sampler): Base sampler.
         batch_size (int): Size of mini-batch.
-        drop_last (bool, optional): If ``True``, the sampler will drop the last batch if its size
-            would be less than ``batch_size``.
+        drop_last (bool): If ``True``, the sampler will drop the last batch if its size would be
+            less than ``batch_size``.
         shuffle (bool, optional): If ``True``, the sampler will shuffle the batches.
 
     Example:
@@ -26,7 +26,7 @@ class ShuffleBatchSampler(BatchSampler):
             self,
             sampler,
             batch_size,
-            drop_last=True,
+            drop_last,
             shuffle=True,
     ):
         self.shuffle = shuffle

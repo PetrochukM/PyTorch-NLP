@@ -9,11 +9,10 @@ from torchnlp.samplers.shuffle_batch_sampler import ShuffleBatchSampler
 
 
 class BucketBatchSampler(object):
-    """Samples a noisy sorted mini-batch of indices from a data source.
+    """Batches are sampled from sorted buckets of data.
 
-    In order to introduce, noise into a sorted mini-batch, we use a bucketing technique from
-    `torchtext`. First, partition data in buckets of size 100 * `batch_size`. The examples inside
-    the buckets are sorted using `sort_key` and batched. Finally, those batches are shuffled.
+    We use a bucketing technique from ``torchtext``. First, partition data in buckets of size
+    100 * ``batch_size``. The examples inside the buckets are sorted using ``sort_key`` and batched.
 
     Background:
         BucketBatchSampler is similar to a BucketIterator found in popular libraries like `AllenNLP`
@@ -32,8 +31,8 @@ class BucketBatchSampler(object):
         batch_size (int): Size of mini-batch.
         sort_key (callable): specifies a function of one argument that is used to extract a
           comparison key from each list element
-        drop_last (bool, optional): If ``True``, the sampler will drop the last batch if its size
-            would be less than ``batch_size``
+        drop_last (bool): If ``True``, the sampler will drop the last batch if its size would be
+            less than ``batch_size``.
         biggest_batch_first (bool, optional): If ``True``, the sampler will use cPickle to
             approximate the memory footprint of each batch and attempt to return the 5 biggest
             batches first.
@@ -46,6 +45,7 @@ class BucketBatchSampler(object):
             Credits:
             https://github.com/allenai/allennlp/blob/3d100d31cc8d87efcf95c0b8d162bfce55c64926/allennlp/data/iterators/bucket_iterator.py#L43
         bucket_size_multiplier (int): Batch size multiplier to determine the bucket size.
+        shuffle (bool, optional): If ``True``, the sampler will shuffle the batches.
 
     Example:
         >>> list(BucketBatchSampler(range(10), batch_size=3, drop_last=False))
@@ -60,9 +60,10 @@ class BucketBatchSampler(object):
             data,
             batch_size,
             sort_key,
-            drop_last=False,
+            drop_last,
             biggest_batches_first=True,
             bucket_size_multiplier=100,
+            shuffle=True,
     ):
         self.biggest_batches_first = biggest_batches_first
         self.sort_key = sort_key
@@ -70,6 +71,7 @@ class BucketBatchSampler(object):
         self.batch_size = batch_size
         self.drop_last = drop_last
         self.data = data
+        self.shuffle = shuffle
 
         self.bucket_size_multiplier = bucket_size_multiplier
         self.bucket_sampler = BatchSampler(
@@ -84,7 +86,7 @@ class BucketBatchSampler(object):
                         SortedSampler(bucket, lambda i: self.sort_key(self.data[i])),
                         self.batch_size,
                         drop_last=self.drop_last,
-                        shuffle=True):
+                        shuffle=self.shuffle):
                     batch = [bucket[i] for i in batch]
 
                     # Should only be triggered once
