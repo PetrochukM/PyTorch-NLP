@@ -42,8 +42,10 @@ class Dataset(data.Dataset):
                 raise AttributeError
             return [row[key] if key in row else None for row in self.rows]
         # Given an row integer return a object of row values.
-        elif isinstance(key, int):
+        elif isinstance(key, (int, slice)):
             return self.rows[key]
+        else:
+            raise TypeError("Invalid argument type.")
 
     def __len__(self):
         return len(self.rows)

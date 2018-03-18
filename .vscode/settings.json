@@ -55,6 +55,7 @@
     "bleu",
     "correspondence",
     "functools",
+    "imdb",
     "itertools",
     "spacy",
     "tqdm",

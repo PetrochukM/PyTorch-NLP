@@ -1,8 +1,12 @@
 import logging
-import logging.config
+import os
+import tarfile
+import urllib.request
 
 import random
 import torch
+
+from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
@@ -136,3 +140,37 @@ def reporthook(t):
         last_b[0] = b
 
     return inner
+
+
+def download_extract_tar_gz(url, directory, check_file):
+    """ Download a ``tar.gz`` from ``url`` and extract into ``directory``.
+
+    Args:
+        directory (str): Directory to extract ``tar.gz`` to.
+        check_file (str): Operation was successful if this file exists.
+    Returns:
+        None:
+    """
+    if os.path.isdir(directory) and os.path.isfile(os.path.join(directory, check_file)):
+        # Already downloaded
+        return
+
+    if not os.path.isdir(directory):
+        os.makedirs(directory)
+
+    tar_gz = url.split('/')[-1]
+    # Remove URL parameters
+    tar_gz = tar_gz.split('?')[0]
+
+    filename = os.path.join(directory, tar_gz)
+    logger.info('Downloading {}'.format(tar_gz))
+    with tqdm() as t:  # all optional kwargs
+        urllib.request.urlretrieve(url, filename=filename, reporthook=reporthook(t))
+    logger.info('Extracting {}'.format(tar_gz))
+    tarfile_ = tarfile.open(filename, mode='r')
+    tarfile_.extractall(directory)
+    tarfile_.close()
+    logger.info('Closed `download_extract_tar_gz`')
+
+    if not os.path.isdir(directory) or not os.path.isfile(os.path.join(directory, check_file)):
+        raise ValueError('[DOWNLOAD FAILED] `check_file` not found')

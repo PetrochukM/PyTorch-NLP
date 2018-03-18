@@ -1,55 +1,21 @@
-import logging
 import os
-import tarfile
-import urllib.request
 
 import pandas as pd
-from tqdm import tqdm
 
 from torchnlp.datasets.dataset import Dataset
-from torchnlp.utils import reporthook
-
-logger = logging.getLogger(__name__)
+from torchnlp.utils import download_extract_tar_gz
 
 
-def _download_simple_qa_dataset(directory, some_file='annotated_fb_data_train.txt'):
-    """ Download the Simple Questions dataset into `directory`
-
-    Args:
-        directory (str)
-        some_file (str): Used to make sure Simple Questions was downloaded and extracted.
-     """
-    if os.path.isdir(directory) and os.path.isfile(os.path.join(directory, some_file)):
-        # Already downloaded
-        return
-
-    if not os.path.isdir(directory):
-        os.makedirs(directory)
-
-    url = 'https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1'
-    filename = os.path.join(directory, 'SimpleQuestions_v2.tgz')
-    logger.info('Downloading Simple Questions...')
-    with tqdm() as t:  # all optional kwargs
-        urllib.request.urlretrieve(url, filename=filename, reporthook=reporthook(t))
-    logger.info('Extracting Simple Questions...')
-    tarfile_ = tarfile.open(filename, mode='r')
-    for member in tarfile_.getmembers():
-        if member.isreg() and '._' != os.path.split(
-                member.name)[1][:2]:  # skip if the TarInfo is not files and not hidden file
-            member.name = os.path.normpath(member.name)
-            # remove the root folder SimpleQuestions_v2
-            member.name = os.path.join(*member.name.split('/')[1:])
-            tarfile_.extract(member=member, path=directory)
-    tarfile_.close()
-
-
-def simple_qa_dataset(directory='data/simple_qa',
+def simple_qa_dataset(directory='data/',
                       train=False,
                       dev=False,
                       test=False,
+                      name='SimpleQuestions_v2',
                       train_filename='annotated_fb_data_train.txt',
                       dev_filename='annotated_fb_data_valid.txt',
-                      test_filename='annotated_fb_data_test.txt'):
+                      test_filename='annotated_fb_data_test.txt',
+                      check_file='SimpleQuestions_v2/annotated_fb_data_train.txt',
+                      url='https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1'):
     """
     Load the SimpleQuestions dataset.
 
@@ -65,9 +31,12 @@ def simple_qa_dataset(directory='data/simple_qa',
         train (bool, optional): If to load the training split of the dataset.
         dev (bool, optional): If to load the development split of the dataset.
         test (bool, optional): If to load the test split of the dataset.
+        name (str, optional): Name of the dataset directory.
         train_filename (str, optional): The filename of the training split.
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
+        check_file (str, optional): Check this file exists if download was successful.
+        url (str, optional): URL of the dataset tar.gz` file.
 
     Returns:
         :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training dataset
@@ -89,25 +58,22 @@ def simple_qa_dataset(directory='data/simple_qa',
           'subject': 'www.freebase.com/m/0tp2p24'
         }]
     """
-    _download_simple_qa_dataset(directory, train_filename)
+    download_extract_tar_gz(url=url, directory=directory, check_file=check_file)
 
     ret = []
-    datasets = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
-    for is_requested, filename in datasets:
-        if not is_requested:
-            continue
-        full_path = os.path.join(directory, filename)
+    splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
+    split_filenames = [dir_ for (requested, dir_) in splits if requested]
+    for filename in split_filenames:
+        full_path = os.path.join(directory, name, filename)
         data = pd.read_table(
             full_path, header=None, names=['subject', 'relation', 'object', 'question'])
-        rows = []
-        for _, row in data.iterrows():
-            rows.append({
+        ret.append(
+            Dataset([{
                 'question': row['question'],
                 'relation': row['relation'],
                 'object': row['object'],
                 'subject': row['subject'],
-            })
-        ret.append(Dataset(rows))
+            } for _, row in data.iterrows()]))
 
     if len(ret) == 1:
         return ret[0]

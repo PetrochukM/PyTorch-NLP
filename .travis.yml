@@ -1,6 +1,8 @@
 dist: trusty
 sudo: required
 
+# TODO: Test Python 3.5 as well.
+
 language: python
 python: '3.6'
 

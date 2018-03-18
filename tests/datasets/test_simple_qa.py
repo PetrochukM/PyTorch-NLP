@@ -1,11 +1,12 @@
 import urllib.request
 import os
+import shutil
 
 import mock
 
 from torchnlp.datasets import simple_qa_dataset
 
-directory = 'tests/_test_data/simple_qa'
+directory = 'tests/_test_data/'
 
 
 @mock.patch("urllib.request.urlretrieve")
@@ -30,6 +31,4 @@ def test_simple_qa_dataset_row(mock_urlretrieve):
     }
 
     # Clean up
-    os.remove(os.path.join(directory, 'annotated_fb_data_test.txt'))
-    os.remove(os.path.join(directory, 'annotated_fb_data_train.txt'))
-    os.remove(os.path.join(directory, 'annotated_fb_data_valid.txt'))
+    shutil.rmtree(os.path.join(directory, 'SimpleQuestions_v2'))
