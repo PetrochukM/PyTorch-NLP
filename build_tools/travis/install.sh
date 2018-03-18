@@ -17,6 +17,9 @@ if [ -d $HOME/.cache/pip ]; then
     ls $HOME/.cache/pip
 fi
 
+# TODO: Add a script similar to Travis to test locally with virtual environment
+# TODO: Add a script similar to RTD to test locally with virtual environment
+
 # Install requirements via pip
 pip install -r requirements.txt
 
