@@ -11,6 +11,11 @@ def test_dataset_init():
     assert 'c' not in dataset
 
 
+def test_dataset_str():
+    dataset = Dataset([{'a': 'a', 'b': 'b'}, {'a': 'aa', 'b': 'bb'}])
+    assert '    a   b\n0   a   b\n1  aa  bb' == str(dataset)
+
+
 def test_dataset_get_column():
     dataset = Dataset([{'a': 'a', 'b': 'b'}, {'a': 'aa', 'b': 'bb'}])
     assert dataset['a'] == ['a', 'aa']

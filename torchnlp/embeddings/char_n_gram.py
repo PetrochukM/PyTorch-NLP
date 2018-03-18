@@ -31,6 +31,7 @@
 import torch
 
 from torchnlp.embeddings.pretrained_embedding import _PretrainedEmbeddings
+from torchnlp.text_encoders import UNKNOWN_TOKEN
 
 
 class CharNGram(_PretrainedEmbeddings):
@@ -77,7 +78,7 @@ class CharNGram(_PretrainedEmbeddings):
 
     def __getitem__(self, token):
         vector = torch.Tensor(self.dim).zero_()
-        if token == "<unk>":
+        if token == UNKNOWN_TOKEN:
             return self.unk_init(vector)
         # These literals need to be coerced to unicode for Python 2 compatibility
         # when we try to join them with read ngrams from the files.

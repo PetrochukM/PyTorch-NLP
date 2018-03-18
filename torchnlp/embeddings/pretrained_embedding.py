@@ -75,7 +75,7 @@ class _PretrainedEmbeddings(object):
         if token in self.stoi:
             return self.vectors[self.stoi[token]]
         else:
-            return self.unk_init(torch.Tensor(1, self.dim))
+            return self.unk_init(torch.Tensor(self.dim))
 
     def __len__(self):
         return len(self.vectors)
@@ -84,6 +84,7 @@ class _PretrainedEmbeddings(object):
         return self.name
 
     def cache(self, name, cache, url=None):
+        print(name)
         if os.path.isfile(name):
             path = name
             path_pt = os.path.join(cache, os.path.basename(name)) + '.pt'

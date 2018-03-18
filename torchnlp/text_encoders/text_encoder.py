@@ -2,14 +2,14 @@ class TextEncoder(object):
     """ Base class for a text encoder.
     """
 
-    def __init__(self):
+    def __init__(self):  # pragma: no cover
         raise NotImplementedError
 
-    def encode(self, string):
+    def encode(self, string):  # pragma: no cover
         """ Returns a :class:`torch.LongTensor` encoding of the `text`. """
         raise NotImplementedError
 
-    def decode(self, tensor):
+    def decode(self, tensor):  # pragma: no cover
         """ Given a :class:`torch.Tensor`, returns a :class:`str` representing the decoded text.
 
         Note that, depending on the tokenization method, the decoded version is not guaranteed to be
@@ -23,6 +23,6 @@ class TextEncoder(object):
         return len(self.vocab)
 
     @property
-    def vocab(self):
+    def vocab(self):  # pragma: no cover
         """ Returns the vocabulary (:class:`list`) used to encode text. """
         return NotImplementedError
