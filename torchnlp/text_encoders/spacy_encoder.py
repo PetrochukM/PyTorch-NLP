@@ -1,11 +1,4 @@
-import spacy
-from spacy.lang.en import English
-
 from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
-
-# Use the SpacyEncoder by downloading en_core_web_sm via: `python -m spacy download en_core_web_sm`
-_MODEL = spacy.load('en_core_web_sm')
-tokenizer = English().Defaults.create_tokenizer(_MODEL)
 
 
 class SpacyEncoder(StaticTokenizerEncoder):
@@ -40,5 +33,18 @@ class SpacyEncoder(StaticTokenizerEncoder):
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
             raise TypeError('SpacyEncoder defines a tokenize callable.')
+
+        try:
+            import spacy
+            from spacy.lang.en import English
+
+            # Use the SpacyEncoder by downloading en_core_web_sm via:
+            # `python -m spacy download en_core_web_sm`
+            _MODEL = spacy.load('en_core_web_sm')
+            tokenizer = English().Defaults.create_tokenizer(_MODEL)
+        except ImportError:
+            print("Please install Spacy: "
+                  "`pip install spacy` `python -m spacy download en_core_web_sm`")
+            raise
 
         super().__init__(*args, **kwargs, tokenize=lambda s: [w.text for w in tokenizer(s)])

@@ -7,6 +7,11 @@ from torchnlp.datasets.wikitext_2 import wikitext_2_dataset
 from torchnlp.datasets.dataset import Dataset
 
 __all__ = [
-    'Dataset', 'simple_qa_dataset', 'imdb_dataset', 'reverse_dataset', 'count_dataset',
-    'zero_dataset', 'wikitext_2_dataset'
+    'Dataset',
+    'simple_qa_dataset',
+    'imdb_dataset',
+    'wikitext_2_dataset',
+    'reverse_dataset',
+    'count_dataset',
+    'zero_dataset',
 ]
