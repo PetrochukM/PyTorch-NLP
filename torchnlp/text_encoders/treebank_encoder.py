@@ -49,7 +49,7 @@ class TreebankEncoder(StaticTokenizerEncoder):
 
         self.detokenizer = TreebankWordDetokenizer()
 
-        super().__init__(*args, **kwargs, tokenize=TreebankWordTokenizer().tokenize)
+        super().__init__(*args, tokenize=TreebankWordTokenizer().tokenize, **kwargs)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]

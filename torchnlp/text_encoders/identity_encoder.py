@@ -34,7 +34,7 @@ class IdentityEncoder(StaticTokenizerEncoder):
             raise TypeError('IdentityEncoder defines a identity tokenization')
         if 'append_eos' not in kwargs:
             kwargs['append_eos'] = False  # Default to not appending EOS
-        super().__init__(*args, **kwargs, tokenize=(lambda s: s if isinstance(s, list) else [s]))
+        super().__init__(*args, tokenize=(lambda s: s if isinstance(s, list) else [s]), **kwargs)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]

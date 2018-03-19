@@ -32,7 +32,7 @@ class WhitespaceEncoder(StaticTokenizerEncoder):
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
             raise TypeError('WhiteSpaceEncoder defines a tokenize callable per character')
-        super().__init__(*args, **kwargs, tokenize=(lambda s: s.split()))
+        super().__init__(*args, tokenize=(lambda s: s.split()), **kwargs)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]

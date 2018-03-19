@@ -50,7 +50,7 @@ class MosesEncoder(StaticTokenizerEncoder):
 
         self.detokenizer = MosesDetokenizer()
 
-        super().__init__(*args, **kwargs, tokenize=MosesTokenizer().tokenize)
+        super().__init__(*args, tokenize=MosesTokenizer().tokenize, **kwargs)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]

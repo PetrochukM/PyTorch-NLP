@@ -266,12 +266,12 @@ class SubwordTextTokenizer(object):
 
     @classmethod
     def build_to_target_size_from_corpus(cls,
-                                         *corpuses,
+                                         *args,
                                          target_size=32000,
                                          min_val=1,
                                          max_val=1e3,
                                          num_iterations=4):
-        token_counts = SubwordTextTokenizer._count_tokens(*corpuses)
+        token_counts = SubwordTextTokenizer._count_tokens(*args)
         return SubwordTextTokenizer.build_to_target_size_from_token_counts(
             target_size, token_counts, min_val, max_val, num_iterations)
 

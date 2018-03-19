@@ -14,7 +14,7 @@ class CharacterEncoder(StaticTokenizerEncoder):
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
             raise TypeError('CharacterEncoder defines a tokenize callable per character')
-        super().__init__(*args, **kwargs, tokenize=(lambda s: list(s)))
+        super().__init__(*args, tokenize=(lambda s: list(s)), **kwargs)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]

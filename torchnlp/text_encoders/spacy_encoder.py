@@ -47,4 +47,4 @@ class SpacyEncoder(StaticTokenizerEncoder):
                   "`pip install spacy` `python -m spacy download en_core_web_sm`")
             raise
 
-        super().__init__(*args, **kwargs, tokenize=lambda s: [w.text for w in tokenizer(s)])
+        super().__init__(*args, tokenize=lambda s: [w.text for w in tokenizer(s)], **kwargs)

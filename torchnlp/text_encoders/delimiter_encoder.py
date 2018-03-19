@@ -28,7 +28,7 @@ class DelimiterEncoder(StaticTokenizerEncoder):
         if 'tokenize' in kwargs:
             raise TypeError('CharacterEncoder defines a tokenize callable per character')
         self.delimiter = delimiter
-        super().__init__(*args, **kwargs, tokenize=(lambda s: s.split(delimiter)))
+        super().__init__(*args, tokenize=(lambda s: s.split(delimiter)), **kwargs)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]
