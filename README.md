@@ -36,7 +36,7 @@ Alternatively, you might want to use Moses tokenizer from `NLTK <http://nltk.org
 
 The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
 
-## Usage 💻
+## Usage
 
 PyTorch-NLP is designed to be intuitive, linear in thought and easy to use.
 
