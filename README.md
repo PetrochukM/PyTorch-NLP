@@ -8,7 +8,6 @@ comes with pre-trained embeddings, samplers, dataset loaders, metrics, neural ne
 and text encoders. It's open-source software, released under the BSD3 license. 
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg)
-[![License](https://img.shields.io/pypi/l/pytorch-nlp.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gh/PetrochukM/PyTorch-NLP/branch/master/graph/badge.svg)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
 [![Documentation Status](https://readthedocs.org/projects/pytorchnlp/badge/?version=latest)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/PetrochukM/PyTorch-NLP.svg?branch=master)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
@@ -44,10 +43,6 @@ We've released PyTorch-NLP because we found a lack of basic tool kits for NLP in
 ### Contributing Guide
 
 Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/Contributing.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to PyTorch-NLP.
-
-## License
-
-Docusaurus is [BSD3 licensed](./LICENSE).
 
 ## Logo Credits
 
