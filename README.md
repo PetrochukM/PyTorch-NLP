@@ -1,4 +1,6 @@
-# PyTorch-NLP
+<p align="center"><img width="40%" src="docs/_static/img/logo_horizontal_color.png" /></p>
+
+--------------------------------------------------------------------------------
 
 PyTorch-NLP is a library for Natural Language Processing (NLP) in Python. It's built with the very
 latest research in mind, and was designed from day one to support rapid prototyping. PyTorch-NLP
