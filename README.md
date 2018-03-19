@@ -18,32 +18,27 @@ and text encoders. It's open-source software, released under the BSD3 license.
 Load FastText, state-of-the-art English **word vectors**.
 
 ```python
->>> from torchnlp.embeddings import FastText
->>> vectors = FastText()
->>> vectors['hello']
-[torch.FloatTensor of size 100]
+from torchnlp.embeddings import FastText
+vectors = FastText()
+vectors['hello']  # [torch.FloatTensor of size 100]
+
 ```
 
 Load **datasets** like IMDB.
 
 ```python
->>> from torchnlp.datasets import imdb_dataset
->>> train = imdb_dataset(train=True)
->>> train[0]
-{
-  'text': 'For a movie that gets no respect there sure are a lot of memorable quotes...',
-  'sentiment': 'pos'
-}
+from torchnlp.datasets import imdb_dataset
+train = imdb_dataset(train=True)
+train[0]  # {'text': 'For a movie that gets..', 'sentiment': 'pos'}
 ```
 
 Compute the Bilingual Evaluation Understudy (BLEU) Score in `torchnlp.metrics`.
 
 ```python
->>> from torchnlp.metrics import get_moses_multi_bleu
->>> hypotheses = ["The brown fox jumps over the dog 笑"]
->>> references = ["The quick brown fox jumps over the lazy dog 笑"]
->>> get_moses_multi_bleu(hypotheses, references, lowercase=True)
-47.9
+from torchnlp.metrics import get_moses_multi_bleu
+hypotheses = ["The brown fox jumps over the dog 笑"]
+references = ["The quick brown fox jumps over the lazy dog 笑"]
+get_moses_multi_bleu(hypotheses, references, lowercase=True)  # 47.9
 ```
 
 ## Documentation 📖 
