@@ -13,7 +13,30 @@ and text encoders. It's open-source software, released under the BSD3 license.
 [![Build Status](https://travis-ci.org/PetrochukM/PyTorch-NLP.svg?branch=master)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
 [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/PyTorch-NLP)
 
-## Usage
+## Installation
+
+Make sure you have Python 3.5+ and PyTorch 0.2.0 or newer. You can then install `pytorch-nlp` using
+pip:
+
+    pip install pytorch-nlp
+
+### Optional requirements
+
+If you want to use English tokenizer from `SpaCy <http://spacy.io/>`, you need to install SpaCy and download its English model:
+
+    pip install spacy
+    python -m spacy download en_core_web_sm
+
+Alternatively, you might want to use Moses tokenizer from `NLTK <http://nltk.org/>`. You have to install NLTK and download the data needed:
+
+    pip install nltk
+    python -m nltk.downloader perluniprops nonbreaking_prefixes
+
+## Documentation 📖 
+
+The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
+
+## Usage 💻
 
 PyTorch-NLP is designed to be intuitive, linear in thought and easy to use.
 
@@ -41,29 +64,6 @@ PyTorch-NLP is designed to be intuitive, linear in thought and easy to use.
     references = ["The quick brown fox jumps over the lazy dog 笑"]
     get_moses_multi_bleu(hypotheses, references, lowercase=True)  # 47.9
     ```
-
-## Documentation 📖 
-
-The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
-
-## Installation
-
-Make sure you have Python 3.5+ and PyTorch 0.2.0 or newer. You can then install `pytorch-nlp` using
-pip:
-
-    pip install pytorch-nlp
-
-### Optional requirements
-
-If you want to use English tokenizer from `SpaCy <http://spacy.io/>`, you need to install SpaCy and download its English model:
-
-    pip install spacy
-    python -m spacy download en_core_web_sm
-
-Alternatively, you might want to use Moses tokenizer from `NLTK <http://nltk.org/>`. You have to install NLTK and download the data needed:
-
-    pip install nltk
-    python -m nltk.downloader perluniprops nonbreaking_prefixes
 
 ## Contributing
 
