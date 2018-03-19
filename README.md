@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 
 PyTorch-NLP is a library for Natural Language Processing (NLP) in Python. It's built with the very
-latest research in mind, and was designed from day one to support rapid prototyping. PyTorch-NLP
+latest research in mind and was designed from day one to support rapid prototyping. PyTorch-NLP
 comes with pre-trained embeddings, samplers, dataset loaders, metrics, neural network modules
 and text encoders. It's open-source software, released under the BSD3 license. 
 
@@ -15,7 +15,7 @@ and text encoders. It's open-source software, released under the BSD3 license.
 
 ## Usage
 
-Load FastText, state-of-the-art english **word vectors**.
+Load FastText, state-of-the-art English **word vectors**.
 
 ```python
 >>> from torchnlp.embeddings import FastText
@@ -71,7 +71,7 @@ Alternatively, you might want to use Moses tokenizer from `NLTK <http://nltk.org
 
 ## Contributing
 
-We've released PyTorch-NLP because we found a lack of basic tool kits for NLP in PyTorch. We hope that other organizations can benefit from the project. We are thankful for any contributions from the community.
+We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in PyTorch. We hope that other organizations can benefit from the project. We are thankful for any contributions from the community.
 
 ### Contributing Guide
 
@@ -79,4 +79,4 @@ Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/mas
 
 ## Logo Credits
 
-Thanks to [Chloe Yeo](http://www.yeochloe.com/) for help with the logo.
+Thanks to [Chloe Yeo](http://www.yeochloe.com/) for her logo design.
