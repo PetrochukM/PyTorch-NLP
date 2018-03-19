@@ -89,7 +89,13 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {'collapse_navigation': False, 'display_version': True}
+html_theme_options = {
+    'collapse_navigation': False,
+    'display_version': True,
+    'logo_only': True,
+}
+
+html_logo = '_static/img/logo_stacked_color.svg'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -98,7 +104,9 @@ html_static_path = ['_static']
 
 
 def setup(app):
-    app.add_stylesheet('css/pytorch_nlp.css')
+    app.add_stylesheet('https://fonts.googleapis.com/css?family=Lato')
+    app.add_stylesheet('css/pytorch_theme.css')
+    app.add_stylesheet('css/pytorch_nlp_theme.css')
 
 
 # Custom sidebar templates, must be a dictionary that maps document names
