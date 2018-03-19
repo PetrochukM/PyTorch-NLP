@@ -15,6 +15,8 @@ and text encoders. It's open-source software, released under the BSD3 license.
 
 ## Usage
 
+PyTorch-NLP is designed to be intuitive, linear in thought and easy to use.
+
 - Load FastText, state-of-the-art English **word vectors**.
 
     ```python
