@@ -50,12 +50,12 @@ def penn_treebank_dataset(
     This is the Penn Treebank Project: Release 2 CDROM, featuring a million words of 1989 Wall
     Street Journal material.
 
-    References:
-    Marcus, Mitchell P., Marcinkiewicz, Mary Ann & Santorini, Beatrice (1993).
-    Building a Large Annotated Corpus of English: The Penn Treebank
-
     More details:
     https://catalog.ldc.upenn.edu/ldc99t42
+
+    Citation:
+    Marcus, Mitchell P., Marcinkiewicz, Mary Ann & Santorini, Beatrice (1993).
+    Building a Large Annotated Corpus of English: The Penn Treebank
 
     Args:
         directory (str, optional): Directory to cache the dataset.
