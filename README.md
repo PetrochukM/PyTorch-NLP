@@ -8,12 +8,11 @@ comes with pre-trained embeddings, samplers, dataset loaders, metrics, neural ne
 and text encoders. It's open-source software, released under the BSD3 license. 
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg)
+[![License](https://img.shields.io/pypi/l/pytorch-nlp.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gh/PetrochukM/PyTorch-NLP/branch/master/graph/badge.svg)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
 [![Documentation Status](https://readthedocs.org/projects/pytorchnlp/badge/?version=latest)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![Build Status](https://travis-ci.org/PetrochukM/PyTorch-NLP.svg?branch=master)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
-[![License](https://img.shields.io/pypi/l/pytorch-nlp.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/PyTorch-NLP)
+[![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/PyTorch-NLP)
 
 ## Installation
 
