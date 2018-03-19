@@ -13,6 +13,7 @@ and text encoders. It's open-source software, released under the BSD3 license.
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![Build Status](https://travis-ci.org/PetrochukM/PyTorch-NLP.svg?branch=master)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
 [![License](https://img.shields.io/pypi/l/pytorch-nlp.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/PyTorch-NLP)
 
 ## Installation
 
