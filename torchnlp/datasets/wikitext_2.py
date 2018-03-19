@@ -5,8 +5,6 @@ from torchnlp.utils import download_extract
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 from torchnlp.text_encoders import EOS_TOKEN
 
-# TODO: Add test
-
 
 def wikitext_2_dataset(
         directory='data/',
@@ -39,7 +37,7 @@ def wikitext_2_dataset(
         test_filename (str, optional): The filename of the test split.
         name (str, optional): Name of the dataset directory.
         check_file (str, optional): Check this file exists if download was successful.
-        url (str, optional): URL of the dataset tar.gz` file.
+        url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
         :class:`tuple` of :class:`list` of :class:`str`: Tuple with the training tokens, dev tokens

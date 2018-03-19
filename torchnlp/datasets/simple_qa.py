@@ -36,7 +36,7 @@ def simple_qa_dataset(directory='data/',
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
         check_file (str, optional): Check this file exists if download was successful.
-        url (str, optional): URL of the dataset tar.gz` file.
+        url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
         :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training dataset

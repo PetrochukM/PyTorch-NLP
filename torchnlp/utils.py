@@ -152,7 +152,7 @@ def download_extract(url, directory, check_file):
     Returns:
         None:
     """
-    if os.path.isdir(directory) and os.path.isfile(os.path.join(directory, check_file)):
+    if check_file is not None and os.path.isfile(os.path.join(directory, check_file)):
         # Already downloaded
         return
 
@@ -178,5 +178,5 @@ def download_extract(url, directory, check_file):
 
     logger.info('Done with Extracting {}'.format(basename))
 
-    if not os.path.isdir(directory) or not os.path.isfile(os.path.join(directory, check_file)):
+    if check_file is not None and not os.path.isfile(os.path.join(directory, check_file)):
         raise ValueError('[DOWNLOAD FAILED] `check_file` not found')

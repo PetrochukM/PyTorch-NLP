@@ -46,3 +46,7 @@ Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/mas
 ## License
 
 Docusaurus is [BSD3 licensed](./LICENSE).
+
+## Logo Credits
+
+Thanks for [Chloe Yeo](http://www.yeochloe.com/) for help with the logo.
