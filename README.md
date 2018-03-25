@@ -38,7 +38,7 @@ The complete documentation for PyTorch-NLP is available via [our ReadTheDocs web
 
 ## Usage
 
-PyTorch-NLP is designed to be intuitive, linear in thought and easy to use.
+PyTorch-NLP is designed to be intuitive, linear in thought and easy to use. Below we present examples:
 
 - Load FastText, state-of-the-art English **word vectors**.
 
