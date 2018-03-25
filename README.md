@@ -1,4 +1,4 @@
-<p align="center"><img width="55%" src="docs/_static/img/logo_horizontal_color.png" /></p>
+<p align="center"><img width="55%" src="docs/_static/img/logo_horizontal_color.svg" /></p>
 
 -------------------------------------------------------------------------------
 
@@ -7,11 +7,11 @@ latest research in mind and was designed from day one to support rapid prototypi
 comes with pre-trained embeddings, samplers, dataset loaders, metrics, neural network modules
 and text encoders. It's open-source software, released under the BSD3 license. 
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg)
-[![codecov](https://codecov.io/gh/PetrochukM/PyTorch-NLP/branch/master/graph/badge.svg)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
-[![Documentation Status](https://readthedocs.org/projects/pytorchnlp/badge/?version=latest)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest)
-[![Build Status](https://travis-ci.org/PetrochukM/PyTorch-NLP.svg?branch=master)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
-[![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/PyTorch-NLP)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
+[![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
+[![Documentation Status](	https://img.shields.io/readthedocs/pytorchnlp/latest.svg?style=flat-square)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest&style=flat-square)
+[![Build Status](https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
+[![Gitter chat](https://img.shields.io/gitter/room/PyTorch-NLP/Lobby.svg?style=flat-square)](https://gitter.im/PyTorch-NLP?style=flat-square)
 
 ## Installation
 
