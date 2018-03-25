@@ -57,3 +57,8 @@ class TestAttention(unittest.TestCase):
             # Check types
             self.assertEqual(output.data.type(), 'torch.FloatTensor')
             self.assertEqual(weights.data.type(), 'torch.FloatTensor')
+
+            batch = weights.data.tolist()
+            for queries in batch:
+                for query in queries:
+                    self.assertAlmostEqual(sum(query), 1.0)
