@@ -14,11 +14,11 @@ and text encoders. It's open-source software, released under the BSD3 license.
    :caption: Package Reference
 
    source/torchnlp.datasets
-   source/torchnlp.metrics
    source/torchnlp.nn
-   source/torchnlp.samplers
    source/torchnlp.text_encoders
    source/torchnlp.embeddings
+   source/torchnlp.samplers
+   source/torchnlp.metrics
    source/torchnlp.utils
 
 Indices and tables

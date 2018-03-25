@@ -40,7 +40,7 @@ The complete documentation for PyTorch-NLP is available via [our ReadTheDocs web
 
 PyTorch-NLP is designed to be intuitive, linear in thought and easy to use. Below we present examples:
 
-- Load FastText, state-of-the-art English **word vectors**.
+- Load FastText, state-of-the-art English [word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.embeddings.html).
 
     ```python
     from torchnlp.embeddings import FastText
@@ -48,7 +48,7 @@ PyTorch-NLP is designed to be intuitive, linear in thought and easy to use. Belo
     vectors['hello']  # [torch.FloatTensor of size 100]
     ```
 
-- Load **datasets** like IMDB.
+- Load [datasets](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) like IMDB.
 
     ```python
     from torchnlp.datasets import imdb_dataset
@@ -56,7 +56,7 @@ PyTorch-NLP is designed to be intuitive, linear in thought and easy to use. Belo
     train[0]  # {'text': 'For a movie that gets..', 'sentiment': 'pos'}
     ```
 
-- Compute the BLEU Score with `torchnlp.metrics`.
+- Compute the BLEU Score with [torchnlp.metrics](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.metrics.html).
 
     ```python
     from torchnlp.metrics import get_moses_multi_bleu
