@@ -79,6 +79,7 @@ cover/
 
 # Data
 data/**
+.data/**
 
 # Checkpoint files
 *.pt

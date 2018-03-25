@@ -36,7 +36,7 @@ setup_info = dict(
     " metrics, neural network modules and text encoders. It's open-source software, released " +
     "under the BSD3 license.",
     license='BSD',
-    install_requires=['numpy', 'pandas', 'tqdm'],
+    install_requires=['numpy', 'pandas', 'tqdm', 'ujson'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

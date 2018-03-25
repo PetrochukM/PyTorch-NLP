@@ -10,7 +10,7 @@ directory = 'tests/_test_data/'
 
 
 @mock.patch("urllib.request.urlretrieve")
-def test_imdb_dataset_row(mock_urlretrieve):
+def test_ud_pos_dataset_row(mock_urlretrieve):
     mock_urlretrieve.side_effect = urlretrieve_side_effect
 
     # Check a row are parsed correctly
@@ -18,7 +18,6 @@ def test_imdb_dataset_row(mock_urlretrieve):
     assert len(train) > 0
     assert len(dev) > 0
     assert len(test) > 0
-    print(train[0])
     assert train[0] == {
         'tokens': [
             'Al', '-', 'Zaman', ':', 'American', 'forces', 'killed', 'Shaikh', 'Abdullah', 'al',
