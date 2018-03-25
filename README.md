@@ -76,3 +76,14 @@ Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/mas
 ## Logo Credits
 
 Thanks to [Chloe Yeo](http://www.yeochloe.com/) for her logo design.
+
+## Citing
+
+@misc{pytorch-nlp,
+  author = {Petrochuk, Michael},
+  title = {PyTorch-NLP: Text utilities and datasets for PyTorch},
+  year = {2018},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/PetrochukM/PyTorch-NLP}},
+}
