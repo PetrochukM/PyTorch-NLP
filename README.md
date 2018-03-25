@@ -79,6 +79,9 @@ Thanks to [Chloe Yeo](http://www.yeochloe.com/) for her logo design.
 
 ## Citing
 
+If you find PyTorch NLP useful for an academic publication, then please use the following BibTeX to cite it:
+
+```
 @misc{pytorch-nlp,
   author = {Petrochuk, Michael},
   title = {PyTorch-NLP: Text utilities and datasets for PyTorch},
@@ -87,3 +90,4 @@ Thanks to [Chloe Yeo](http://www.yeochloe.com/) for her logo design.
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/PetrochukM/PyTorch-NLP}},
 }
+```
