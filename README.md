@@ -69,7 +69,7 @@ Add PyTorch NLP to your project by following one the common use cases:
     from torchnlp.embeddings import FastText
     
     vectors = FastText()
-    # Load embeddings for any word as `torch.FloatTensor`
+    # Load embeddings for any word as a `torch.FloatTensor`
     vectors['hello']  # [torch.FloatTensor of size 100]
     ```
     
