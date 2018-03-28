@@ -70,7 +70,7 @@ Add PyTorch NLP to your project by following one the common use cases:
     
     vectors = FastText()
     # Load embeddings for any word as a `torch.FloatTensor`
-    vectors['hello']  # [torch.FloatTensor of size 100]
+    vectors['hello']  # RETURNS: [torch.FloatTensor of size 100]
     ```
     
 - Compute the BLEU Score with [torchnlp.metrics](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.metrics.html).
