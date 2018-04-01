@@ -48,8 +48,8 @@ The complete documentation for PyTorch-NLP is available via [our ReadTheDocs web
 
 Add PyTorch NLP to your project by following one the common use cases:
 
-- The [neural network modules](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html)
-  features a Simple Recurrent Unit (SRU).
+- From the [neural network package](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html)
+  use a Simple Recurrent Unit (SRU).
 
     ```python
     from torchnlp.nn import SRU
