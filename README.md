@@ -59,7 +59,7 @@ Add PyTorch NLP to your project by following one the common use cases:
     sru = SRU(10, 20)
 
     # Apply a Simple Recurrent Unit to `input_`
-    sru(input_) # RETURNS: [torch.FloatTensor of size 2x3x20]
+    sru(input_) # RETURNS: ([torch.FloatTensor of size 6x3x20], [torch.FloatTensor of size 2x3x20])
     ```
 
 - Load a [dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) like IMDB.
