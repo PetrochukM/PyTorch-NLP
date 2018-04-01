@@ -1,25 +1,20 @@
 import os
 import io
-import urllib.request
 
-from tqdm import tqdm
-
-from torchnlp.utils import reporthook
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 from torchnlp.text_encoders import EOS_TOKEN
 from torchnlp.utils import download_urls
 
 
 def penn_treebank_dataset(
-        directory='data/',
+        directory='data/penn-treebank',
         train=False,
         dev=False,
         test=False,
         train_filename='ptb.train.txt',
         dev_filename='ptb.valid.txt',
         test_filename='ptb.test.txt',
-        name='penn-treebank',
-        check_file='penn-treebank/ptb.train.txt',
+        check_file='ptb.train.txt',
         urls=[
             'https://raw.githubusercontent.com/wojzaremba/lstm/master/data/ptb.train.txt',
             'https://raw.githubusercontent.com/wojzaremba/lstm/master/data/ptb.valid.txt',
@@ -48,7 +43,7 @@ def penn_treebank_dataset(
         test_filename (str, optional): The filename of the test split.
         name (str, optional): Name of the dataset directory.
         check_file (str, optional): Check this file exists if download was successful.
-        urls (str, optional): URLs of the dataset `tar.gz` file.
+        urls (str, optional): URLs to download.
 
     Returns:
         :class:`tuple` of :class:`list` of :class:`str`: Tuple with the training tokens, dev tokens
@@ -61,13 +56,13 @@ def penn_treebank_dataset(
         ['aer', 'banknote', 'berlitz', 'calloway', 'centrust', 'cluett', 'fromstein', 'gitano',
         'guterman', 'hydro-quebec']
     """
-    download_urls(directory=os.path.join(directory, name), urls=urls, check_file=check_file)
+    download_urls(directory=directory, urls=urls, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
     split_filenames = [dir_ for (requested, dir_) in splits if requested]
     for filename in split_filenames:
-        full_path = os.path.join(directory, name, filename)
+        full_path = os.path.join(directory, filename)
         text = []
         with io.open(full_path, encoding='utf-8') as f:
             for line in f:

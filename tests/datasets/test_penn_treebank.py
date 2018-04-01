@@ -3,7 +3,7 @@ import mock
 from torchnlp.datasets import penn_treebank_dataset
 from tests.datasets.utils import urlretrieve_side_effect
 
-directory = 'tests/_test_data/'
+directory = 'tests/_test_data/penn-treebank'
 
 
 @mock.patch("urllib.request.urlretrieve")

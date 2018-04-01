@@ -151,13 +151,13 @@ def get_filename_from_url(url):
     return os.path.basename(parse.path)
 
 
-def download_urls(urls, directory, check_file):
+def download_urls(urls, directory, check_file=None):
     """ Download a set of ``urls`` into a ``directory``.
     
     Args:
         urls (:class:`list` of :class:`str`): Set of urls to download.
         directory (str): Directory in which to download urls.
-        check_file (str): Operation was successful if this file exists.
+        check_file (str, optional): Operation was successful if this file exists.
     Returns:
         None:
     """
@@ -178,13 +178,13 @@ def download_urls(urls, directory, check_file):
         raise ValueError('[DOWNLOAD FAILED] `check_file` not found')
 
 
-def download_compressed_directory(url, directory, check_file):
+def download_compressed_directory(url, directory, check_file=None):
     """ Download a ``tar.gz`` from ``url`` and extract into ``directory``.
 
     Args:
         url (str): Url of a compressed directory
         directory (str): Directory to extract ``tar.gz`` to.
-        check_file (str): Operation was successful if this file exists.
+        check_file (str, optional): Operation was successful if this file exists.
     Returns:
         None:
     """
