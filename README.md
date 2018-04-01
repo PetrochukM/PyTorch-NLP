@@ -44,34 +44,56 @@ If you want to use Simple Recurrent Unit (SRU) on a GPU, you need to install `cu
 
 The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
 
-## Usage
+## Quickstart
 
-PyTorch-NLP is designed to be intuitive, linear in thought and easy to use. Below we present examples:
+Add PyTorch NLP to your project by following one the common use cases:
 
-- Load FastText, state-of-the-art English [word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.embeddings.html).
-
-    ```python
-    from torchnlp.embeddings import FastText
-    vectors = FastText()
-    vectors['hello']  # [torch.FloatTensor of size 100]
-    ```
-
-- Load [datasets](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) like IMDB.
+- Load a [dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) like IMDB.
 
     ```python
     from torchnlp.datasets import imdb_dataset
+    
+    # Load the imdb training dataset
     train = imdb_dataset(train=True)
-    train[0]  # {'text': 'For a movie that gets..', 'sentiment': 'pos'}
+    train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
     ```
+      
+- Encode text into vectors with [torchnlp.text_encoders](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html).
 
+    ```python
+    from torchnlp.text_encoders import WhitespaceEncoder
+    
+    # Create a `WhitespaceEncoder` with a corpus of text
+    encoder = WhitespaceEncoder(["now this ain't funny", "so don't you dare laugh"])
+    
+    # Encode and decode phrases
+    encoder.encode("this ain't funny.") # RETURNS: torch.LongTensor([6, 7, 1])
+    encoder.decode(encoder.encode("This ain't funny.")) # RETURNS: "this ain't funny."
+    ```
+    
+- Load FastText, state-of-the-art English [embeddings](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.embeddings.html).
+
+    ```python
+    from torchnlp.embeddings import FastText
+    
+    vectors = FastText()
+    # Load embeddings for any word as a `torch.FloatTensor`
+    vectors['hello']  # RETURNS: [torch.FloatTensor of size 100]
+    ```
+    
 - Compute the BLEU Score with [torchnlp.metrics](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.metrics.html).
 
     ```python
     from torchnlp.metrics import get_moses_multi_bleu
+    
     hypotheses = ["The brown fox jumps over the dog 笑"]
     references = ["The quick brown fox jumps over the lazy dog 笑"]
-    get_moses_multi_bleu(hypotheses, references, lowercase=True)  # 47.9
+    
+    # Compute BLEU score with the official BLEU perl script
+    get_moses_multi_bleu(hypotheses, references, lowercase=True)  # RETURNS: 47.9
     ```
+    
+PyTorch NLP is designed to be intuitive, linear in thought and easy to use. PyTorch NLP has minimal framework overhead.
 
 ## Contributing
 
@@ -80,6 +102,21 @@ We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in 
 ### Contributing Guide
 
 Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/Contributing.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to PyTorch-NLP.
+
+## Citing
+
+If you find PyTorch NLP useful for an academic publication, then please use the following BibTeX to cite it:
+
+```
+@misc{pytorch-nlp,
+  author = {Petrochuk, Michael},
+  title = {PyTorch-NLP: Text utilities and datasets for PyTorch},
+  year = {2018},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/PetrochukM/PyTorch-NLP}},
+}
+```
 
 ## Logo Credits
 
