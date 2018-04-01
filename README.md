@@ -35,7 +35,8 @@ Alternatively, you might want to use Moses tokenizer from `NLTK <http://nltk.org
 
 ### Optional CUDA Requirements
 
-If you want to use Simple Recurrent Unit (SRU) on a GPU, you need to install `cupy` and `pynvrtc`:
+Along with standard PyTorch CUDA requirements, if you want to use Simple Recurrent Unit (SRU) with
+CUDA, you need to install `cupy` and `pynvrtc`:
 
     pip install cupy
     pip install pynvrtc
