@@ -53,6 +53,7 @@
   "python.pythonPath": "/usr/local/opt/python3/bin/python3.6",
   "cSpell.words": [
     "bleu",
+    "convolutional",
     "correspondence",
     "functools",
     "imdb",

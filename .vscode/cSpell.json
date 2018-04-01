@@ -10,6 +10,7 @@
         "byref",
         "CDLL",
         "chmod",
+        "convolutional",
         "correspondence",
         "ctypes",
         "cuda",

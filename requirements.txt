@@ -23,6 +23,10 @@ mock
 # nltk
 # spacy
 
+# # Optional CUDA Utilties
+# pynvrtc
+# cupy
+
 # HTML Documentation
 sphinx
 sphinx_rtd_theme

@@ -38,6 +38,10 @@ from torch.autograd import Variable
 class LockedDropout(nn.Module):
     """ LockedDropout applies the same dropout mask to every time step.
 
+    **Thank you** to Sales Force for their initial implementation of :class:`WeightDrop`. Here is
+    their `License
+    <https://github.com/salesforce/awd-lstm-lm/blob/master/LICENSE>`__.
+
     Args:
         p (float): Probability of an element in the dropout mask to be zeroed.
     """
