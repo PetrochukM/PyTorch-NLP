@@ -48,7 +48,7 @@ The complete documentation for PyTorch-NLP is available via [our ReadTheDocs web
 
 ## Quickstart
 
-Add PyTorch NLP to your project by following one the common use cases:
+Add PyTorch-NLP to your project by following one the common use cases:
 
 - From the [neural network package](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html),
   use a Simple Recurrent Unit (SRU), like so:
@@ -109,7 +109,7 @@ Add PyTorch NLP to your project by following one the common use cases:
     get_moses_multi_bleu(hypotheses, references, lowercase=True)  # RETURNS: 47.9
     ```
     
-PyTorch NLP is designed to be intuitive, linear in thought and easy to use. PyTorch NLP has minimal framework overhead.
+PyTorch-NLP is designed to be intuitive, linear in thought and easy to use. PyTorch-NLP has minimal framework overhead.
 
 ## Contributing
 
@@ -121,12 +121,12 @@ Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/mas
 
 ## Citing
 
-If you find PyTorch NLP useful for an academic publication, then please use the following BibTeX to cite it:
+If you find PyTorch-NLP useful for an academic publication, then please use the following BibTeX to cite it:
 
 ```
 @misc{pytorch-nlp,
   author = {Petrochuk, Michael},
-  title = {PyTorch-NLP: Rapid PyTorch NLP prototyping tools for research},
+  title = {PyTorch-NLP: Rapid Prototyping with PyTorch Natural Language Processing (NLP) Tools},
   year = {2018},
   publisher = {GitHub},
   journal = {GitHub repository},
