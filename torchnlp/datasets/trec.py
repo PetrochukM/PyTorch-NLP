@@ -24,7 +24,7 @@ def trec_dataset(directory='data/trec/',
     More details:
     https://nlp.stanford.edu/courses/cs224n/2004/may-steinberg-project.pdf
     http://cogcomp.org/Data/QA/QC/
-    http://www.aclweb.org/anthology/C02-1150 
+    http://www.aclweb.org/anthology/C02-1150
 
     Citation:
     Xin Li, Dan Roth, Learning Question Classifiers. COLING'02, Aug., 2002.
@@ -45,7 +45,7 @@ def trec_dataset(directory='data/trec/',
     Example:
         >>> from torchnlp.datasets import trec_dataset
         >>> train = trec_dataset(train=True)
-        >>> train[:2] # Sentence at index 17 is shortish
+        >>> train[:2]
         [{
           'label_fine': 'manner',
           'label': 'DESC',
@@ -60,8 +60,8 @@ def trec_dataset(directory='data/trec/',
 
     ret = []
     splits = [(train, train_filename), (test, test_filename)]
-    split_filenames = [dir_ for (requested, dir_) in splits if requested]
-    for filename in split_filenames:
+    splits = [f for (requested, f) in splits if requested]
+    for filename in splits:
         full_path = os.path.join(directory, filename)
         examples = []
         for line in open(full_path, 'rb'):

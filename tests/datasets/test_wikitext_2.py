@@ -10,7 +10,7 @@ directory = 'tests/_test_data/'
 
 
 @mock.patch("urllib.request.urlretrieve")
-def test_imdb_dataset_row(mock_urlretrieve):
+def test_wikitext_2_dataset_row(mock_urlretrieve):
     mock_urlretrieve.side_effect = urlretrieve_side_effect
 
     # Check a row are parsed correctly

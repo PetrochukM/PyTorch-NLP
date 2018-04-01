@@ -50,7 +50,7 @@ def snli_dataset(directory='data/',
     Returns:
         :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training tokens, dev
         tokens and test tokens in order if their respective boolean argument is true.
-        
+
     Example:
         >>> from torchnlp.datasets import snli_dataset
         >>> train = snli_dataset(train=True)
@@ -68,8 +68,8 @@ def snli_dataset(directory='data/',
     get_transitions = lambda parse: ['reduce' if t == ')' else 'shift' for t in parse if t != '(']
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
-    split_filenames = [dir_ for (requested, dir_) in splits if requested]
-    for filename in split_filenames:
+    splits = [f for (requested, f) in splits if requested]
+    for filename in splits:
         full_path = os.path.join(directory, extracted_name, filename)
         examples = []
         with io.open(full_path, encoding='utf-8') as f:

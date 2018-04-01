@@ -46,8 +46,8 @@ def penn_treebank_dataset(
         urls (str, optional): URLs to download.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training tokens, dev tokens
-        and test tokens in order if their respective boolean argument is true.
+        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training tokens, dev
+        tokens and test tokens in order if their respective boolean argument is true.
 
     Example:
         >>> from torchnlp.datasets import penn_treebank_dataset
@@ -60,8 +60,8 @@ def penn_treebank_dataset(
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
-    split_filenames = [dir_ for (requested, dir_) in splits if requested]
-    for filename in split_filenames:
+    splits = [f for (requested, f) in splits if requested]
+    for filename in splits:
         full_path = os.path.join(directory, filename)
         text = []
         with io.open(full_path, encoding='utf-8') as f:

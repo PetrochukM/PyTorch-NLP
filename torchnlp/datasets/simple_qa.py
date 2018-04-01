@@ -63,8 +63,8 @@ def simple_qa_dataset(directory='data/',
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
-    split_filenames = [dir_ for (requested, dir_) in splits if requested]
-    for filename in split_filenames:
+    splits = [f for (requested, f) in splits if requested]
+    for filename in splits:
         full_path = os.path.join(directory, extracted_name, filename)
         data = pd.read_table(
             full_path, header=None, names=['subject', 'relation', 'object', 'question'])

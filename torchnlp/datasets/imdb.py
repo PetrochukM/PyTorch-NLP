@@ -55,11 +55,11 @@ def imdb_dataset(directory='data/',
     download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
 
     ret = []
-    split_directories = [
+    splits = [
         dir_ for (requested, dir_) in [(train, train_directory), (test, test_directory)]
         if requested
     ]
-    for split_directory in split_directories:
+    for split_directory in splits:
         full_path = os.path.join(directory, extracted_name, split_directory)
         examples = []
         for sentiment in sentiments:

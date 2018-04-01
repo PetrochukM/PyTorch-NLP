@@ -20,27 +20,6 @@ Make sure you have Python 3.5+ and PyTorch 0.2.0 or newer. You can then install 
 pip:
 
     pip install pytorch-nlp
-
-### Optional Tokenizer Requirements
-
-If you want to use English tokenizer from `SpaCy <http://spacy.io/>`, you need to install SpaCy and download its English model:
-
-    pip install spacy
-    python -m spacy download en_core_web_sm
-
-Alternatively, you might want to use Moses tokenizer from `NLTK <http://nltk.org/>`. You have to install NLTK and download the data needed:
-
-    pip install nltk
-    python -m nltk.downloader perluniprops nonbreaking_prefixes
-
-
-### Optional CUDA Requirements
-
-Along with standard PyTorch CUDA requirements, if you want to use Simple Recurrent Unit (SRU) with
-CUDA, you need to install `cupy` and `pynvrtc`:
-
-    pip install cupy
-    pip install pynvrtc
     
 ## Documentation 📖 
 

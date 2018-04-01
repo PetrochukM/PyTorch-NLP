@@ -63,8 +63,8 @@ def ud_pos_dataset(directory='data/',
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
-    split_filenames = [dir_ for (requested, dir_) in splits if requested]
-    for filename in split_filenames:
+    splits = [f for (requested, f) in splits if requested]
+    for filename in splits:
         full_path = os.path.join(directory, extracted_name, filename)
         examples = []
         with io.open(full_path, encoding='utf-8') as f:

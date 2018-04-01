@@ -214,7 +214,7 @@ def download_compressed_directory(file_url, directory, check_file=None):
 
 def download_urls(file_urls, directory, check_file=None):
     """ Download a set of ``urls`` into a ``directory``.
-    
+
     Args:
         file_urls (:class:`list` of :class:`str`): Set of urls to download.
         directory (str): Directory in which to download urls.
