@@ -1,7 +1,7 @@
 import os
 import io
 
-from torchnlp.utils import download_extract
+from torchnlp.utils import download_compressed_directory
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -59,7 +59,7 @@ def ud_pos_dataset(directory='data/',
           'ptb_tags': ['NNS', 'VBD', 'DT', 'NN', ',', 'NNP', 'NNP', ',', 'IN', 'NNP', '.']
         }
     """
-    download_extract(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(url=url, directory=directory, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

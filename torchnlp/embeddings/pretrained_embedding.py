@@ -40,7 +40,7 @@ from tqdm import tqdm
 import six
 import torch
 
-from torchnlp.utils import download_extract
+from torchnlp.utils import download_compressed_directory
 
 logger = logging.getLogger(__name__)
 
@@ -94,7 +94,7 @@ class _PretrainedEmbeddings(object):
 
         if not os.path.isfile(path_pt) or self.is_include is not None:
             if url:
-                download_extract(url, cache, name)
+                download_compressed_directory(url, cache, name)
 
             if not os.path.isfile(path):
                 raise RuntimeError('no vectors found at {}'.format(path))

@@ -13,6 +13,14 @@ from torchnlp.utils import reporthook
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import shuffle
 from torchnlp.utils import torch_equals_ignore_index
+from torchnlp.utils import get_filename_from_url
+
+
+def test_get_filename_from_url():
+    assert 'aclImdb_v1.tar.gz' in get_filename_from_url(
+        'http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz')
+    assert 'SimpleQuestions_v2.tgz' in get_filename_from_url(
+        'https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1')
 
 
 def test_pad_tensor():

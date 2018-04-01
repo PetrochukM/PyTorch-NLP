@@ -3,7 +3,7 @@ import io
 
 import ujson as json
 
-from torchnlp.utils import download_extract
+from torchnlp.utils import download_compressed_directory
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -63,7 +63,7 @@ def snli_dataset(directory='data/',
           'hypothesis_transitions': ['shift', 'shift', 'shift', 'shift', 'shift', 'shift', ...],
         }
     """
-    download_extract(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(url=url, directory=directory, check_file=check_file)
 
     get_transitions = lambda parse: ['reduce' if t == ')' else 'shift' for t in parse if t != '(']
     ret = []

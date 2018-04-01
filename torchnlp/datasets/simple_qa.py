@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 from torchnlp.datasets.dataset import Dataset
-from torchnlp.utils import download_extract
+from torchnlp.utils import download_compressed_directory
 
 
 def simple_qa_dataset(directory='data/',
@@ -58,7 +58,7 @@ def simple_qa_dataset(directory='data/',
           'subject': 'www.freebase.com/m/0tp2p24'
         }]
     """
-    download_extract(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(url=url, directory=directory, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

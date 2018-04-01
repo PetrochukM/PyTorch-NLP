@@ -2,7 +2,7 @@ import os
 import glob
 
 from torchnlp.datasets.dataset import Dataset
-from torchnlp.utils import download_extract
+from torchnlp.utils import download_compressed_directory
 
 
 def imdb_dataset(directory='data/',
@@ -52,7 +52,7 @@ def imdb_dataset(directory='data/',
           'sentiment': 'pos'
         }]
     """
-    download_extract(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(url=url, directory=directory, check_file=check_file)
 
     ret = []
     split_directories = [

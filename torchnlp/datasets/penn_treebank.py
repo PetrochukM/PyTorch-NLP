@@ -7,26 +7,7 @@ from tqdm import tqdm
 from torchnlp.utils import reporthook
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 from torchnlp.text_encoders import EOS_TOKEN
-
-
-def _download_penn_treebank_dataset(directory, name, urls, check_file):
-    """ Download the penn treebank dataset """
-    # Already downloaded
-    if check_file is not None and os.path.isfile(os.path.join(directory, check_file)):
-        return
-
-    dataset_directory = os.path.join(directory, name)
-    if not os.path.isdir(dataset_directory):
-        os.makedirs(dataset_directory)
-
-    for url in urls:
-        basename = os.path.basename(url)
-        filename = os.path.join(dataset_directory, basename)
-        with tqdm(unit='B', unit_scale=True, miniters=1, desc=basename) as t:
-            urllib.request.urlretrieve(url, filename=filename, reporthook=reporthook(t))
-
-    if check_file is not None and not os.path.isfile(os.path.join(directory, check_file)):
-        raise ValueError('[DOWNLOAD FAILED] `check_file` not found')
+from torchnlp.utils import download_urls
 
 
 def penn_treebank_dataset(
@@ -80,8 +61,7 @@ def penn_treebank_dataset(
         ['aer', 'banknote', 'berlitz', 'calloway', 'centrust', 'cluett', 'fromstein', 'gitano',
         'guterman', 'hydro-quebec']
     """
-    _download_penn_treebank_dataset(
-        directory=directory, name=name, urls=urls, check_file=check_file)
+    download_urls(directory=os.path.join(directory, name), urls=urls, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

@@ -1,7 +1,7 @@
 import os
 import io
 
-from torchnlp.utils import download_extract
+from torchnlp.utils import download_compressed_directory
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 from torchnlp.text_encoders import EOS_TOKEN
 
@@ -49,7 +49,7 @@ def wikitext_2_dataset(
         >>> train[:10]
         ['</s>', '=', 'Valkyria', 'Chronicles', 'III', '=', '</s>', '</s>', 'Senjō', 'no']
     """
-    download_extract(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(url=url, directory=directory, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
