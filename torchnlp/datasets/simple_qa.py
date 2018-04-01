@@ -10,7 +10,7 @@ def simple_qa_dataset(directory='data/',
                       train=False,
                       dev=False,
                       test=False,
-                      name='SimpleQuestions_v2',
+                      extracted_name='SimpleQuestions_v2',
                       train_filename='annotated_fb_data_train.txt',
                       dev_filename='annotated_fb_data_valid.txt',
                       test_filename='annotated_fb_data_test.txt',
@@ -31,7 +31,7 @@ def simple_qa_dataset(directory='data/',
         train (bool, optional): If to load the training split of the dataset.
         dev (bool, optional): If to load the development split of the dataset.
         test (bool, optional): If to load the test split of the dataset.
-        name (str, optional): Name of the dataset directory.
+        extracted_name (str, optional): Name of the extracted dataset directory.
         train_filename (str, optional): The filename of the training split.
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
@@ -45,6 +45,7 @@ def simple_qa_dataset(directory='data/',
     Example:
         >>> from torchnlp.datasets import simple_qa_dataset
         >>> train = simple_qa_dataset(train=True)
+        SimpleQuestions_v2.tgz:  15%|▏| 62.3M/423M [00:09<00:41, 8.76MB/s]
         >>> train[0:2]
         [{
           'question': 'what is the book e about',
@@ -58,13 +59,13 @@ def simple_qa_dataset(directory='data/',
           'subject': 'www.freebase.com/m/0tp2p24'
         }]
     """
-    download_compressed_directory(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
     split_filenames = [dir_ for (requested, dir_) in splits if requested]
     for filename in split_filenames:
-        full_path = os.path.join(directory, name, filename)
+        full_path = os.path.join(directory, extracted_name, filename)
         data = pd.read_table(
             full_path, header=None, names=['subject', 'relation', 'object', 'question'])
         ret.append(

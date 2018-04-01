@@ -10,7 +10,7 @@ def imdb_dataset(directory='data/',
                  test=False,
                  train_directory='train',
                  test_directory='test',
-                 name='aclImdb',
+                 extracted_name='aclImdb',
                  check_file='aclImdb/README',
                  url='http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz',
                  sentiments=['pos', 'neg']):
@@ -31,7 +31,7 @@ def imdb_dataset(directory='data/',
         test (bool, optional): If to load the test split of the dataset.
         train_directory (str, optional): The directory of the training split.
         test_directory (str, optional): The directory of the test split.
-        name (str, optional): Name of the dataset directory.
+        extracted_name (str, optional): Name of the extracted dataset directory.
         check_file (str, optional): Check this file exists if the download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
         sentiments (list of str, optional): Sentiments to load from the dataset.
@@ -52,7 +52,7 @@ def imdb_dataset(directory='data/',
           'sentiment': 'pos'
         }]
     """
-    download_compressed_directory(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
 
     ret = []
     split_directories = [
@@ -60,7 +60,7 @@ def imdb_dataset(directory='data/',
         if requested
     ]
     for split_directory in split_directories:
-        full_path = os.path.join(directory, name, split_directory)
+        full_path = os.path.join(directory, extracted_name, split_directory)
         examples = []
         for sentiment in sentiments:
             for filename in glob.iglob(os.path.join(full_path, sentiment, '*.txt')):

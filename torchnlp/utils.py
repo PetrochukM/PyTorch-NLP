@@ -151,67 +151,82 @@ def get_filename_from_url(url):
     return os.path.basename(parse.path)
 
 
-def download_urls(urls, directory, check_file=None):
+def download(file_url, destination):
+    """ Download the file at ``file_url`` to ``directory``.
+
+    Args:
+        file_url (str): Url of file.
+        destination (str): Download to destination.
+    Returns:
+        (str): Filename of download file.
+    """
+    if not os.path.isdir(destination):
+        os.makedirs(destination)
+
+    filename = get_filename_from_url(file_url)
+    full_path = os.path.join(destination, filename)
+    logger.info('Downloading {}'.format(filename))
+    with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
+        urllib.request.urlretrieve(file_url, filename=full_path, reporthook=reporthook(t))
+    return full_path
+
+
+def maybe_extract(compressed_filename, destination):
+    """ Extract a compressed file to ``destination``.
+
+    Args:
+        compressed_filename (str): Compressed file.
+        destination (str): Extract to destination.
+    Returns:
+        None:
+    """
+    logger.info('Extracting {}'.format(compressed_filename))
+    basename = os.path.basename(compressed_filename)
+    extension = basename.split('.', 1)[1]
+
+    if 'zip' in extension:
+        with zipfile.ZipFile(compressed_filename, "r") as zip_:
+            zip_.extractall(destination)
+    elif 'tar' in extension or 'tgz' in extension:
+        with tarfile.open(compressed_filename, mode='r') as tar:
+            tar.extractall(path=destination)
+
+    logger.info('Extracted {}'.format(compressed_filename))
+
+
+def download_compressed_directory(file_url, directory, check_file=None):
+    """ Download a compressed from ``file_url`` and extract into ``destination``.
+
+    Args:
+        file_url (str): Url of file.
+        directory (str): Directory to download and extract to.
+        check_file (str, optional): Operation was successful if this file exists.
+    Returns:
+        None:
+    """
+    check_file = None if check_file is None else os.path.join(directory, check_file)
+    if check_file is None or not os.path.isfile(check_file):
+        compressed_filename = download(file_url, directory)
+        maybe_extract(compressed_filename, directory)
+        if check_file is not None and not os.path.isfile(check_file):
+            raise ValueError('[DOWNLOAD FAILED] `check_file` not found')
+
+
+def download_urls(file_urls, directory, check_file=None):
     """ Download a set of ``urls`` into a ``directory``.
     
     Args:
-        urls (:class:`list` of :class:`str`): Set of urls to download.
+        file_urls (:class:`list` of :class:`str`): Set of urls to download.
         directory (str): Directory in which to download urls.
         check_file (str, optional): Operation was successful if this file exists.
     Returns:
         None:
     """
-    # Already downloaded
-    if check_file is not None and os.path.isfile(os.path.join(directory, check_file)):
-        return
+    check_file = None if check_file is None else os.path.join(directory, check_file)
+    if check_file is None or not os.path.isfile(check_file):
+        for file_url in file_urls:
+            compressed_filename = download(file_url, directory)
+            maybe_extract(compressed_filename, directory)
 
-    if not os.path.isdir(directory):
-        os.makedirs(directory)
-
-    for url in urls:
-        filename = get_filename_from_url(url)
-        full_path = os.path.join(directory, filename)
-        with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
-            urllib.request.urlretrieve(url, filename=full_path, reporthook=reporthook(t))
-
-    if check_file is not None and not os.path.isfile(os.path.join(directory, check_file)):
-        raise ValueError('[DOWNLOAD FAILED] `check_file` not found')
-
-
-def download_compressed_directory(url, directory, check_file=None):
-    """ Download a ``tar.gz`` from ``url`` and extract into ``directory``.
-
-    Args:
-        url (str): Url of a compressed directory
-        directory (str): Directory to extract ``tar.gz`` to.
-        check_file (str, optional): Operation was successful if this file exists.
-    Returns:
-        None:
-    """
-    if check_file is not None and os.path.isfile(os.path.join(directory, check_file)):
-        # Already downloaded
-        return
-
-    if not os.path.isdir(directory):
-        os.makedirs(directory)
-
-    filename = get_filename_from_url(url)
-    full_path = os.path.join(directory, filename)
-    logger.info('Downloading {}'.format(filename))
-    with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
-        urllib.request.urlretrieve(url, filename=full_path, reporthook=reporthook(t))
-    logger.info('Extracting {}'.format(filename))
-    extension = filename.split('.')[1:]
-    if 'zip' in extension:
-        with zipfile.ZipFile(full_path, "r") as zip:
-            zip.extractall(directory)
-    elif 'tar' in extension or 'tgz' in extension:
-        with tarfile.open(full_path, mode='r') as tar:
-            tar.extractall(path=directory)
-    else:
-        raise ValueError('Extension not supported: {}'.format(extension))
-
-    logger.info('Done with Extracting {}'.format(filename))
-
-    if check_file is not None and not os.path.isfile(os.path.join(directory, check_file)):
-        raise ValueError('[DOWNLOAD FAILED] `check_file` not found')
+        if check_file is not None and not os.path.isfile(check_file):
+            raise ValueError('[DOWNLOAD FAILED] `check_file` not found')

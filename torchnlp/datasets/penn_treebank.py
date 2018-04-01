@@ -56,7 +56,7 @@ def penn_treebank_dataset(
         ['aer', 'banknote', 'berlitz', 'calloway', 'centrust', 'cluett', 'fromstein', 'gitano',
         'guterman', 'hydro-quebec']
     """
-    download_urls(directory=directory, urls=urls, check_file=check_file)
+    download_urls(directory=directory, file_urls=urls, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

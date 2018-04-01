@@ -56,7 +56,7 @@ def trec_dataset(directory='data/trec/',
           'text': 'What films featured the character Popeye Doyle ?'
         }]
     """
-    download_urls(directory=directory, urls=urls, check_file=check_file)
+    download_urls(directory=directory, file_urls=urls, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (test, test_filename)]

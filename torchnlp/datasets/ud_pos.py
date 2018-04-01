@@ -12,7 +12,7 @@ def ud_pos_dataset(directory='data/',
                    train_filename='en-ud-tag.v2.train.txt',
                    dev_filename='en-ud-tag.v2.dev.txt',
                    test_filename='en-ud-tag.v2.test.txt',
-                   name='en-ud-v2',
+                   extracted_name='en-ud-v2',
                    check_file='en-ud-v2/en-ud-tag.v2.train.txt',
                    url='https://bitbucket.org/sivareddyg/public/downloads/en-ud-v2.zip'):
     """
@@ -39,7 +39,7 @@ def ud_pos_dataset(directory='data/',
         train_filename (str, optional): The filename of the training split.
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
-        name (str, optional): Name of the dataset directory.
+        extracted_name (str, optional): Name of the extracted dataset directory.
         check_file (str, optional): Check this file exists if download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
 
@@ -59,13 +59,13 @@ def ud_pos_dataset(directory='data/',
           'ptb_tags': ['NNS', 'VBD', 'DT', 'NN', ',', 'NNP', 'NNP', ',', 'IN', 'NNP', '.']
         }
     """
-    download_compressed_directory(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
     split_filenames = [dir_ for (requested, dir_) in splits if requested]
     for filename in split_filenames:
-        full_path = os.path.join(directory, name, filename)
+        full_path = os.path.join(directory, extracted_name, filename)
         examples = []
         with io.open(full_path, encoding='utf-8') as f:
             sentence = {'tokens': [], 'ud_tags': [], 'ptb_tags': []}

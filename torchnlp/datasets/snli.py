@@ -14,7 +14,7 @@ def snli_dataset(directory='data/',
                  train_filename='snli_1.0_train.jsonl',
                  dev_filename='snli_1.0_dev.jsonl',
                  test_filename='snli_1.0_test.jsonl',
-                 name='snli_1.0',
+                 extracted_name='snli_1.0',
                  check_file='snli_1.0/snli_1.0_train.jsonl',
                  url='http://nlp.stanford.edu/projects/snli/snli_1.0.zip'):
     """
@@ -43,7 +43,7 @@ def snli_dataset(directory='data/',
         train_filename (str, optional): The filename of the training split.
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
-        name (str, optional): Name of the dataset directory.
+        extracted_name (str, optional): Name of the extracted dataset directory.
         check_file (str, optional): Check this file exists if download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
 
@@ -63,14 +63,14 @@ def snli_dataset(directory='data/',
           'hypothesis_transitions': ['shift', 'shift', 'shift', 'shift', 'shift', 'shift', ...],
         }
     """
-    download_compressed_directory(url=url, directory=directory, check_file=check_file)
+    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
 
     get_transitions = lambda parse: ['reduce' if t == ')' else 'shift' for t in parse if t != '(']
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
     split_filenames = [dir_ for (requested, dir_) in splits if requested]
     for filename in split_filenames:
-        full_path = os.path.join(directory, name, filename)
+        full_path = os.path.join(directory, extracted_name, filename)
         examples = []
         with io.open(full_path, encoding='utf-8') as f:
             for line in f:
