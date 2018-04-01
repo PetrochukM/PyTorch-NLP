@@ -48,6 +48,20 @@ The complete documentation for PyTorch-NLP is available via [our ReadTheDocs web
 
 Add PyTorch NLP to your project by following one the common use cases:
 
+- The [neural network modules](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html)
+  features a Simple Recurrent Unit (SRU).
+
+    ```python
+    from torchnlp.nn import SRU
+    import torch
+
+    input_ = torch.autograd.Variable(torch.randn(6, 3, 10))
+    sru = SRU(10, 20)
+
+    # Apply a Simple Recurrent Unit to `input_`
+    sru(input_) # RETURNS: [torch.FloatTensor of size 2x3x20]
+    ```
+
 - Load a [dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) like IMDB.
 
     ```python
