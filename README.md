@@ -73,7 +73,7 @@ Add PyTorch NLP to your project by following one the common use cases:
     train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
     ```
       
-- Encode text into vectors with [torchnlp.text_encoders](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html).
+- Encode text into vectors with the [text encoders package](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html).
 
     ```python
     from torchnlp.text_encoders import WhitespaceEncoder
@@ -96,7 +96,7 @@ Add PyTorch NLP to your project by following one the common use cases:
     vectors['hello']  # RETURNS: [torch.FloatTensor of size 100]
     ```
     
-- Compute the BLEU Score with [torchnlp.metrics](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.metrics.html).
+- Compute the BLEU Score with the [metrics package](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.metrics.html).
 
     ```python
     from torchnlp.metrics import get_moses_multi_bleu
