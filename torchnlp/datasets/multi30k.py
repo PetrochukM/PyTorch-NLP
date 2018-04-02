@@ -8,7 +8,6 @@ def multi30k_dataset(directory='data/multi30k/',
                      train=False,
                      dev=False,
                      test=False,
-                     language_extensions=['en', 'de'],
                      train_filename='train',
                      dev_filename='val',
                      test_filename='test',
@@ -48,8 +47,6 @@ def multi30k_dataset(directory='data/multi30k/',
         train (bool, optional): If to load the training split of the dataset.
         dev (bool, optional): If to load the dev split of the dataset.
         test (bool, optional): If to load the test split of the dataset.
-        language_extensions (:class:`list` of :class:`str`): List of language extensions ['en'|'de']
-            to load.
         train_directory (str, optional): The directory of the training split.
         dev_directory (str, optional): The directory of the dev split.
         test_directory (str, optional): The directory of the test split.
@@ -77,17 +74,18 @@ def multi30k_dataset(directory='data/multi30k/',
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
     splits = [f for (requested, f) in splits if requested]
+
     for filename in splits:
         examples = []
-        for extension in language_extensions:
-            path = os.path.join(directory, filename + '.' + extension)
-            with open(path, 'r', encoding='utf-8') as f:
-                language_specific_examples = [l.strip() for l in f]
 
-            if len(examples) == 0:
-                examples = [{} for _ in range(len(language_specific_examples))]
-            for i, example in enumerate(language_specific_examples):
-                examples[i][extension] = example
+        en_path = os.path.join(directory, filename + '.en')
+        de_path = os.path.join(directory, filename + '.de')
+        en_file = [l.strip() for l in open(en_path, 'r', encoding='utf-8')]
+        de_file = [l.strip() for l in open(de_path, 'r', encoding='utf-8')]
+        assert len(en_file) == len(de_file)
+        for i in range(len(en_file)):
+            if en_file[i] != '' and de_file[i] != '':
+                examples.append({'en': en_file[i], 'de': de_file[i]})
 
         ret.append(Dataset(examples))
 

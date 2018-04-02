@@ -13,7 +13,8 @@ def trec_dataset(directory='data/trec/',
                  urls=[
                      'http://cogcomp.org/Data/QA/QC/train_5500.label',
                      'http://cogcomp.org/Data/QA/QC/TREC_10.label'
-                 ]):
+                 ],
+                 fine_grained=False):
     """
     Load the Text REtrieval Conference (TREC) Question Classification dataset.
 
@@ -47,11 +48,9 @@ def trec_dataset(directory='data/trec/',
         >>> train = trec_dataset(train=True)
         >>> train[:2]
         [{
-          'label_fine': 'manner',
           'label': 'DESC',
           'text': 'How did serfdom develop in and then leave Russia ?'
         }, {
-          'label_fine': 'cremat',
           'label': 'ENTY',
           'text': 'What films featured the character Popeye Doyle ?'
         }]
@@ -68,7 +67,10 @@ def trec_dataset(directory='data/trec/',
             # there is one non-ASCII byte: sisterBADBYTEcity; replaced with space
             label, _, text = line.replace(b'\xf0', b' ').strip().decode().partition(' ')
             label, _, label_fine = label.partition(':')
-            examples.append({'label_fine': label_fine, 'label': label, 'text': text})
+            if fine_grained:
+                examples.append({'label': label_fine, 'text': text})
+            else:
+                examples.append({'label': label, 'text': text})
         ret.append(Dataset(examples))
 
     if len(ret) == 1:

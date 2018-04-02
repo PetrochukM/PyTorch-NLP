@@ -2,6 +2,7 @@ from urllib.parse import urlparse
 
 import logging
 import os
+import requests
 import tarfile
 import urllib.request
 import zipfile
@@ -145,44 +146,95 @@ def reporthook(t):
     return inner
 
 
+def download_from_drive(directory, filename, url):  # pragma: no cover
+    """ Download filename from google drive unless it's already in directory.
+
+    Args:
+        directory (str): path to the directory that will be used.
+        filename (str): name of the file to download to (do nothing if it already exists).
+        url (str): URL to download from.
+    Returns:
+        (str): The path to the downloaded file.
+    """
+    print('HERE')
+    filepath = os.path.join(directory, filename)
+    confirm_token = None
+
+    # Since the file is big, drive will scan it for virus and take it to a
+    # warning page. We find the confirm token on this page and append it to the
+    # URL to start the download process.
+    confirm_token = None
+    session = requests.Session()
+    response = session.get(url, stream=True)
+    for k, v in response.cookies.items():
+        if k.startswith("download_warning"):
+            confirm_token = v
+
+    if confirm_token:
+        url = url + "&confirm=" + confirm_token
+
+    logger.info("Downloading %s to %s" % (url, filepath))
+
+    response = session.get(url, stream=True)
+    # Now begin the download.
+    chunk_size = 16 * 1024
+    with open(filepath, "wb") as f:
+        for chunk in response.iter_content(chunk_size):
+            if chunk:
+                f.write(chunk)
+
+    # Print newline to clear the carriage return from the download progress
+    statinfo = os.stat(filepath)
+    logger.info("Successfully downloaded %s, %s bytes." % (filename, statinfo.st_size))
+    return filepath
+
+
 def get_filename_from_url(url):
     """ Return a filename from a URL """
     parse = urlparse(url)
     return os.path.basename(parse.path)
 
 
-def download(file_url, destination):
+def download(file_url, destination, filename=None):
     """ Download the file at ``file_url`` to ``directory``.
 
     Args:
         file_url (str): Url of file.
         destination (str): Download to destination.
+        filename (str, optional): Name of the file to download.
     Returns:
         (str): Filename of download file.
     """
     if not os.path.isdir(destination):
         os.makedirs(destination)
 
-    filename = get_filename_from_url(file_url)
+    if filename is None:
+        filename = get_filename_from_url(file_url)
     full_path = os.path.join(destination, filename)
     logger.info('Downloading {}'.format(filename))
-    with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
-        urllib.request.urlretrieve(file_url, filename=full_path, reporthook=reporthook(t))
+    if 'drive.google.com' in file_url:
+        download_from_drive(destination, filename, file_url)
+    else:
+        with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
+            urllib.request.urlretrieve(file_url, filename=full_path, reporthook=reporthook(t))
     return full_path
 
 
-def maybe_extract(compressed_filename, destination):
+def maybe_extract(compressed_filename, destination, extension=None):
     """ Extract a compressed file to ``destination``.
 
     Args:
         compressed_filename (str): Compressed file.
         destination (str): Extract to destination.
+        extension (str, optional): Extension of the file.
     Returns:
         None:
     """
     logger.info('Extracting {}'.format(compressed_filename))
-    basename = os.path.basename(compressed_filename)
-    extension = basename.split('.', 1)[1]
+
+    if extension is None:
+        basename = os.path.basename(compressed_filename)
+        extension = basename.split('.', 1)[1]
 
     if 'zip' in extension:
         with zipfile.ZipFile(compressed_filename, "r") as zip_:
@@ -194,20 +246,26 @@ def maybe_extract(compressed_filename, destination):
     logger.info('Extracted {}'.format(compressed_filename))
 
 
-def download_compressed_directory(file_url, directory, check_file=None):
+def download_compressed_directory(file_url,
+                                  directory,
+                                  check_file=None,
+                                  extension=None,
+                                  filename=None):
     """ Download a compressed from ``file_url`` and extract into ``destination``.
 
     Args:
         file_url (str): Url of file.
         directory (str): Directory to download and extract to.
         check_file (str, optional): Operation was successful if this file exists.
+        extension (str, optional): Extension of the file.
+        filename (str, optional): Name of the file to download.
     Returns:
         None:
     """
     check_file = None if check_file is None else os.path.join(directory, check_file)
     if check_file is None or not os.path.isfile(check_file):
-        compressed_filename = download(file_url, directory)
-        maybe_extract(compressed_filename, directory)
+        compressed_filename = download(file_url, directory, filename)
+        maybe_extract(compressed_filename, directory, extension=extension)
         if check_file is not None and not os.path.isfile(check_file):
             raise ValueError('[DOWNLOAD FAILED] `check_file` not found')
 

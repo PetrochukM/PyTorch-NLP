@@ -5,3 +5,9 @@ import urllib.request
 def urlretrieve_side_effect(url, **kwargs):
     # TODO: Fix failure case if internet does not work
     assert urllib.request.urlopen(url).getcode() == 200
+
+
+# Check the URL requested is valid
+def download_from_drive_side_effect(directory, filename, url, **kwargs):
+    # TODO: Fix failure case if internet does not work
+    assert urllib.request.urlopen(url).getcode() == 200

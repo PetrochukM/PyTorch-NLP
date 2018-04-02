@@ -15,11 +15,18 @@ def test_penn_treebank_dataset_row(mock_urlretrieve):
     assert len(train) > 0
     assert len(test) > 0
     assert train[:2] == [{
-        'label_fine': 'manner',
         'label': 'DESC',
         'text': 'How did serfdom develop in and then leave Russia ?'
     }, {
-        'label_fine': 'cremat',
         'label': 'ENTY',
+        'text': 'What films featured the character Popeye Doyle ?'
+    }]
+
+    train = trec_dataset(directory=directory, train=True, check_file=None, fine_grained=True)
+    assert train[:2] == [{
+        'label': 'manner',
+        'text': 'How did serfdom develop in and then leave Russia ?'
+    }, {
+        'label': 'cremat',
         'text': 'What films featured the character Popeye Doyle ?'
     }]
