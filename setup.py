@@ -30,11 +30,7 @@ setup_info = dict(
     author_email='petrochukm@gmail.com',
     url='https://github.com/Deepblue129/PytorchNLP',
     description='Text utilities and datasets for PyTorch',
-    long_description="PyTorch-NLP is a library for Natural Language Processing (NLP) in Python. " +
-    "It's built with the very latest research in mind, and was designed from day one to support " +
-    "rapid prototyping. PyTorch-NLP comes with pre-trained embeddings, samplers, dataset loaders," +
-    " metrics, neural network modules and text encoders. It's open-source software, released " +
-    "under the BSD3 license.",
+    long_description=read('README.md'),
     license='BSD',
     install_requires=['numpy', 'pandas', 'tqdm', 'ujson', 'requests'],
     classifiers=[
