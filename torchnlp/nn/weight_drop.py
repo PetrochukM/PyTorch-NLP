@@ -83,7 +83,7 @@ class WeightDropLSTM(torch.nn.LSTM):
 
 class WeightDropGRU(torch.nn.GRU):
     """
-    Wrapper around :class:`torch.nn.LSTM` that adds ``weight_dropout`` named argument.
+    Wrapper around :class:`torch.nn.GRU` that adds ``weight_dropout`` named argument.
 
     Args:
         weight_dropout (float): The probability a weight will be dropped.

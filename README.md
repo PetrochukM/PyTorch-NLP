@@ -5,7 +5,7 @@
 PyTorch-NLP is a library for Natural Language Processing (NLP) in PyTorch. It's built with the very
 latest research in mind and was designed from day one to support rapid prototyping. PyTorch-NLP
 comes with **neural network modules** and [FastText pre-trained word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.embeddings.html#torchnlp.embeddings.FastText).
-It features 9 text encoders for preprocessing, integration with **9 popular datasets**, and samplers
+It features 9 text encoders for preprocessing, integration with **14 popular datasets**, and samplers
 to be used with PyTorch `DataLoaders`. It's open-source software, released under the BSD3 license. 
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
