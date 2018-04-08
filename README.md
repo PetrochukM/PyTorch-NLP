@@ -6,33 +6,16 @@
   </a>
 </p>
 
-<p align="center">
-  <a href="#">
-    <img src="https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square"
-         alt="PyPI - Python Version">
-  </a>
-  <a href="https://codecov.io/gh/PetrochukM/PyTorch-NLP">
-    <img src="https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square"
-         alt="Codecov">
-  </a>
-  <a href="http://pytorchnlp.readthedocs.io/en/latest/?badge=latest&style=flat-square">
-    <img src="https://img.shields.io/readthedocs/pytorchnlp/latest.svg?style=flat-square"
-         alt="Documentation Status">
-  </a>
-  <a href="https://travis-ci.org/PetrochukM/PyTorch-NLP">
-    <img src="https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square"
-         alt="Build Status">
-  </a>
-  <a href="https://gitter.im/PyTorch-NLP?style=flat-square">
-    <img src="https://img.shields.io/gitter/room/PyTorch-NLP/Lobby.svg?style=flat-square"
-         alt="Gitter Chat">
-  </a>
-</p>
-
 ## Features
 
 PyTorch-NLP includes **neural network modules** and [FastText pre-trained word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText).
 PyTorch-NLP features 9 text encoders for preprocessing, integration with **14 popular datasets**, and NLP related ``torch.utils.data.Sampler``s. It's open-source software, released under the BSD3 license. 
+
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
+[![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
+[![Documentation Status](	https://img.shields.io/readthedocs/pytorchnlp/latest.svg?style=flat-square)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest&style=flat-square)
+[![Build Status](https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
+[![Gitter chat](https://img.shields.io/gitter/room/PyTorch-NLP/Lobby.svg?style=flat-square)](https://gitter.im/PyTorch-NLP?style=flat-square)
 
 ## Installation
 
