@@ -1,5 +1,6 @@
 import heapq
 import pickle
+import math
 
 from torch.utils.data.sampler import BatchSampler
 from torch.utils.data.sampler import RandomSampler
@@ -114,4 +115,4 @@ class BucketBatchSampler(object):
         if self.drop_last:
             return len(self.data) // self.batch_size
         else:
-            return len(self.data) // self.batch_size + 1
+            return math.ceil(len(self.data) / self.batch_size)
