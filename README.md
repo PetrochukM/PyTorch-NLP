@@ -90,6 +90,20 @@ Add PyTorch-NLP to your project by following one the common use cases:
     
 Find longer examples, [here](https://github.com/PetrochukM/PyTorch-NLP/tree/master/examples).
 
+## Related Work
+
+### torchtext
+
+torchtext and PyTorch-NLP differ in the architecture and feature set otherwise they are similar. torchtext and PyTorch-NLP provide pre-trained word vectors, datasets, iterators and text encoders. PyTorch-NLP also provides neural network modules and metrics. From an architecture standpoint,  torchtext is object orientated with external coupling while PyTorch-NLP is object orientated with low coupling.
+
+Find their Github, [here](https://github.com/pytorch/text)
+
+### AllenNLP
+
+AllenNLP is designed to be a platform for research. PyTorch-NLP is designed to be a lightweight toolkit.
+
+Find their Github, [here](https://github.com/allenai/allennlp)
+
 ## Contributing
 
 We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in PyTorch. We hope that other organizations can benefit from the project. We are thankful for any contributions from the community.
