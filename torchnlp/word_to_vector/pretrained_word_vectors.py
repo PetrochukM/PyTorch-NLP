@@ -45,8 +45,8 @@ from torchnlp.utils import download_compressed_directory
 logger = logging.getLogger(__name__)
 
 
-class _PretrainedEmbeddings(object):
-    """ _PretrainedEmbeddings handles downloading, caching and storing pretrained embeddings.
+class _PretrainedWordVectors(object):
+    """ _PretrainedWordVectors handles downloading, caching and storing pretrained embeddings.
 
     Args:
         name (str): name of the file that contains the vectors

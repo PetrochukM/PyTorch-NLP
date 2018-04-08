@@ -22,12 +22,12 @@ def trec_dataset(directory='data/trec/',
     dataset has 6 labels, 50 level-2 labels. Average length of each sentence is 10, vocabulary size
     of 8700.
 
-    More details:
-    https://nlp.stanford.edu/courses/cs224n/2004/may-steinberg-project.pdf
-    http://cogcomp.org/Data/QA/QC/
-    http://www.aclweb.org/anthology/C02-1150
+    References:
+        * https://nlp.stanford.edu/courses/cs224n/2004/may-steinberg-project.pdf
+        * http://cogcomp.org/Data/QA/QC/
+        * http://www.aclweb.org/anthology/C02-1150
 
-    Citation:
+    **Citation:**
     Xin Li, Dan Roth, Learning Question Classifiers. COLING'02, Aug., 2002.
 
     Args:

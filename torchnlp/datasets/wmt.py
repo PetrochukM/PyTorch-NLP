@@ -29,9 +29,9 @@ def wmt_dataset(directory='data/wmt16_en_de',
     A new data resource from 2013 is the Common Crawl corpus which was collected from web sources.
     Each parallel corpus comes with a annotation file that gives the source of each sentence pair.
 
-    More details:
-    https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py
-    http://www.statmt.org/wmt14/translation-task.html
+    References:
+        * https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py # noqa: E501
+        * http://www.statmt.org/wmt14/translation-task.html
 
     Args:
         directory (str, optional): Directory to cache the dataset.

@@ -4,7 +4,7 @@ from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncod
 class SpacyEncoder(StaticTokenizerEncoder):
     """ Encodes the text using the Spacy `en_core_web_sm` tokenizer.
 
-    Tokenization Algorithm Reference:
+    **Tokenizer Reference:**
     https://spacy.io/api/tokenizer
 
     Args:

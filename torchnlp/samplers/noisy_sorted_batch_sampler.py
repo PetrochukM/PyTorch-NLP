@@ -11,16 +11,17 @@ class NoisySortedBatchSampler(BatchSampler):
     Batches are sampled on top of a noisy sorting. ``sort_key`` returns a number by which elements
     are sorted onto which noise from a uniform distribution up to ``sort_key_noise`` is added.
 
-    Background:
+    **Background**
+
         NoisySortedBatchSampler is similar to a BucketIterator found in popular libraries like
         `AllenNLP` and `torchtext`. A BucketIterator pools together examples with a similar size
         length to reduce the padding required for each batch. BucketIterator also includes the
         ability to add noise to the pooling.
 
-        AllenNLP Implementation:
+        **AllenNLP Implementation:**
         https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py
 
-        torchtext Implementation:
+        **torchtext Implementation:**
         https://github.com/pytorch/text/blob/master/torchtext/data/iterator.py#L225
 
     Args:

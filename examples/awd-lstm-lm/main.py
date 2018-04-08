@@ -196,7 +196,7 @@ def train():
     start_time = time.time()
     hidden = model.init_hidden(args.batch_size)
     batch = 0
-    for sample in train_sampler:
+    for source_sample, target_sample in train_sampler:
         model.train()
         data = Variable(torch.stack([train_data[data] for data, _ in sample])).t_().contiguous()
         targets = Variable(torch.stack(

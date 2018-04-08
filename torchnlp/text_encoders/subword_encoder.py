@@ -16,7 +16,7 @@ class SubwordEncoder(TextEncoder):
     (s.t. `min_occurrences` <= `x` <= `max_occurrences`) that most closely matches the
     `target_size`.
 
-    Tokenization Algorithm Reference:
+    **Tokenizer Reference:**
     https://github.com/tensorflow/tensor2tensor/blob/8bdecbe434d93cb1e79c0489df20fee2d5a37dc2/tensor2tensor/data_generators/text_encoder.py#L389
 
     Args:

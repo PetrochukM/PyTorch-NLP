@@ -49,6 +49,7 @@ class Attention(nn.Module):
                 queries to query the context.
             context (:class:`torch.FloatTensor` [batch size, query length, dimensions]): Data
                 overwhich to apply the attention mechanism.
+
         Returns:
             :class:`tuple` with `output` and `weights`:
             * **output** (:class:`torch.LongTensor` [batch size, output length, dimensions]):

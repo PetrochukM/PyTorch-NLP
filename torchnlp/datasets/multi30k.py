@@ -26,12 +26,13 @@ def multi30k_dataset(directory='data/multi30k/',
     German human translation. As test data, we provide a new set of 1,000 tuples containing an
     English description.
 
-    More details:
-    http://www.statmt.org/wmt16/multimodal-task.html
-    http://shannon.cs.illinois.edu/DenotationGraph/
+    References:
+        * http://www.statmt.org/wmt16/multimodal-task.html
+        * http://shannon.cs.illinois.edu/DenotationGraph/
 
-    Citation:
-    ```
+    **Citation**
+    ::
+
         @article{elliott-EtAl:2016:VL16,
             author    = {{Elliott}, D. and {Frank}, S. and {Sima'an}, K. and {Specia}, L.},
             title     = {Multi30K: Multilingual English-German Image Descriptions},
@@ -40,7 +41,6 @@ def multi30k_dataset(directory='data/multi30k/',
             pages     = {70--74},
             year      = 2016
         }
-    ```
 
     Args:
         directory (str, optional): Directory to cache the dataset.

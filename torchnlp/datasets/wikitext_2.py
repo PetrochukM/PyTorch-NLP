@@ -24,7 +24,7 @@ def wikitext_2_dataset(
     from the set of verified Good and Featured articles on Wikipedia. The dataset is available
     under the Creative Commons Attribution-ShareAlike License.
 
-    More details:
+    **Reference:**
     https://einstein.ai/research/the-wikitext-long-term-dependency-language-modeling-dataset
 
     Args:

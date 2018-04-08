@@ -220,6 +220,7 @@ class SubwordTextTokenizer(object):
 
         Args:
           subtokens: a list of integers in the range [0, vocab_size)
+
         Returns:
           a list of strings.
         """

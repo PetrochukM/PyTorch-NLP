@@ -1,4 +1,5 @@
-p {
+p,
+a {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
   word-wrap: break-word;

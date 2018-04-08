@@ -4,7 +4,7 @@
 
 PyTorch-NLP is a library for Natural Language Processing (NLP) in PyTorch. It's built with the very
 latest research in mind and was designed from day one to support rapid prototyping. PyTorch-NLP
-comes with **neural network modules** and [FastText pre-trained word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.embeddings.html#torchnlp.embeddings.FastText).
+comes with **neural network modules** and [FastText pre-trained word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText).
 It features 9 text encoders for preprocessing, integration with **14 popular datasets**, and samplers
 to be used with PyTorch `DataLoaders`. It's open-source software, released under the BSD3 license. 
 
@@ -66,13 +66,13 @@ Add PyTorch-NLP to your project by following one the common use cases:
     encoder.decode(encoder.encode("This ain't funny.")) # RETURNS: "this ain't funny."
     ```
     
-- Load FastText, state-of-the-art English [embeddings](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.embeddings.html).
+- Load FastText, state-of-the-art English [word vector representations](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html).
 
     ```python
-    from torchnlp.embeddings import FastText
+    from torchnlp.word_to_vector import FastText
     
     vectors = FastText()
-    # Load embeddings for any word as a `torch.FloatTensor`
+    # Load vectors for any word as a `torch.FloatTensor`
     vectors['hello']  # RETURNS: [torch.FloatTensor of size 100]
     ```
     

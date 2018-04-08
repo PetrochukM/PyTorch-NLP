@@ -4,7 +4,7 @@ from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncod
 class WhitespaceEncoder(StaticTokenizerEncoder):
     """ Encodes the text by splitting on whitespace.
 
-    Tokenization Algorithm Reference:
+    **Tokenizer Reference:**
     https://docs.python.org/3/library/stdtypes.html#str.split
 
     Args:

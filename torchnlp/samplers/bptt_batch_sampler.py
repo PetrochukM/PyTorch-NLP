@@ -6,12 +6,11 @@ from torchnlp.samplers.bptt_sampler import BPTTSampler
 class BPTTBatchSampler(object):
     """Samples sequentially a batch of source and target slices of size ``bptt_length``.
 
-    Note:
-      - Batching is achieved by chunking the data into ``batch_size`` chunks. Similar to:
-        https://github.com/pytorch/examples/blob/c66593f1699ece14a4a2f4d314f1afb03c6793d9/word_language_model/main.py#L61
-      - The target slice is one timestep ahead of the source slice.
-      - Typically, such a sampler, is used for language modeling training with backpropagation
-        through time (BPTT).
+    Typically, such a sampler, is used for language modeling training with backpropagation through
+    time (BPTT).
+
+    **Reference:**
+    https://github.com/pytorch/examples/blob/c66593f1699ece14a4a2f4d314f1afb03c6793d9/word_language_model/main.py#L61
 
     Args:
         data (iterable): Iterable data.
@@ -19,16 +18,16 @@ class BPTTBatchSampler(object):
         batch_size (int): Size of mini-batch.
         drop_last (bool): If ``True``, the sampler will drop the last batch if its size would be
             less than ``batch_size``.
+        type_ (str, optional): Type of batch ['source'|'target'] to load where a target batch is one
+            timestep ahead
 
     Example:
         >>> sampler = BPTTBatchSampler(range(100), bptt_length=2, batch_size=3, drop_last=False)
         >>> list(sampler)[0] # First Batch
-        [(slice(0, 2), slice(1, 3)), (slice(34, 36), slice(35, 37)), (slice(67, 69), slice(68, 70))]
-        >>> list(sampler)[1] # Second Batch
-        [(slice(2, 4), slice(3, 5)), (slice(36, 38), slice(37, 39)), (slice(69, 71), slice(70, 72))]
+        [slice(0, 2), slice(34, 36), slice(67, 69)]
     """
 
-    def __init__(self, data, bptt_length, batch_size, drop_last):
+    def __init__(self, data, bptt_length, batch_size, drop_last, type_='source'):
         self.data = data
         self.batch_size = batch_size
         self.drop_last = drop_last
@@ -46,7 +45,7 @@ class BPTTBatchSampler(object):
 
         self.samplers = [{
             'offset': sum(chunk_sizes[:i]),
-            'sampler': BPTTSampler(range(chunk_sizes[i]), bptt_length)
+            'sampler': BPTTSampler(range(chunk_sizes[i]), bptt_length, type_=type_)
         } for i in range(batch_size)]
 
     def __iter__(self):
@@ -59,10 +58,8 @@ class BPTTBatchSampler(object):
                 try:
                     # Adjust the sampler indices to the offset
                     offset = self.samplers[i]['offset']
-                    source, target = next(iterator)
-                    source = slice(source.start + offset, source.stop + offset)
-                    target = slice(target.start + offset, target.stop + offset)
-                    batch.append(tuple([source, target]))
+                    slice_ = next(iterator)
+                    batch.append(slice(slice_.start + offset, slice_.stop + offset))
                 except StopIteration:
                     pass
 

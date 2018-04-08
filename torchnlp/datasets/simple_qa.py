@@ -23,7 +23,7 @@ def simple_qa_dataset(directory='data/',
     (e.g. Microsoft’s search query logs and WikiAnswers questions). The SimpleQuestions dataset is
     one of the most commonly used benchmarks for studying single-relation factoid questions.
 
-    Paper introducing the dataset:
+    **Reference:**
     https://research.fb.com/publications/large-scale-simple-question-answering-with-memory-networks/
 
     Args:

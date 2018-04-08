@@ -6,7 +6,7 @@ from torch.utils.data.sampler import Sampler
 class NoisySortedSampler(Sampler):
     """Samples elements sequentially with noise.
 
-    Reference and inspiration:
+    **Reference:**
     https://github.com/allenai/allennlp/blob/e125a490b71b21e914af01e70e9b00b165d64dcd/allennlp/data/iterators/bucket_iterator.py
 
     Args:

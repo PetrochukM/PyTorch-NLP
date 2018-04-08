@@ -4,7 +4,7 @@ from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncod
 class MosesEncoder(StaticTokenizerEncoder):
     """ Encodes the text using the Moses tokenizer.
 
-    Tokenization Algorithm Reference:
+    **Tokenizer Reference:**
     http://www.nltk.org/_modules/nltk/tokenize/moses.html
 
     Args:

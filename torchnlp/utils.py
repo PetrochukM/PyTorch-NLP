@@ -15,6 +15,38 @@ from tqdm import tqdm
 logger = logging.getLogger(__name__)
 
 
+def sampler_to_iterator(dataset, sampler):
+    """ Given a batch sampler or sampler returns examples instead of indices
+
+    Args:
+        dataset (torch.utils.data.Dataset): Dataset to sample from.
+        sampler (torch.utils.data.sampler.Sampler): Sampler over the dataset.
+
+    Returns:
+        generator over dataset examples
+    """
+    for sample in sampler:
+        if isinstance(sample, (list, tuple)):
+            # yield a batch
+            yield [dataset[i] for i in sample]
+        else:
+            # yield a single example
+            yield dataset[sample]
+
+
+def datasets_iterator(*datasets):
+    """
+    Args:
+        *datasets (:class:`list` of :class:`torch.utils.data.Dataset`)
+
+    Returns:
+        generator over rows in ``*datasets``
+    """
+    for dataset in datasets:
+        for row in dataset:
+            yield row
+
+
 def pad_tensor(tensor, length, padding_index):
     """ Pad a ``tensor`` to ``length`` with ``padding_index``.
 
@@ -22,6 +54,7 @@ def pad_tensor(tensor, length, padding_index):
         tensor (1D :class:`torch.LongTensor`): Tensor to pad.
         length (int): Pad the ``tensor`` up to ``length``.
         padding_index (int): Index to pad tensor with.
+
     Returns
         torch.LongTensor: Padded Tensor.
     """
@@ -43,6 +76,7 @@ def pad_batch(batch, padding_index):
     Args:
         batch (:class:`list` of 1D :class:`torch.LongTensor`): Batch of tensors to pad.
         padding_index (int): Index to pad tensors with.
+
     Returns
         list of torch.LongTensor, list of int: Padded tensors and original lengths of tensors.
     """
@@ -55,7 +89,7 @@ def pad_batch(batch, padding_index):
 def shuffle(list_, random_seed=123):
     """ Shuffle list deterministically based on ``random_seed``.
 
-    Reference:
+    **Reference:**
     https://stackoverflow.com/questions/19306976/python-shuffling-with-a-parameter-to-get-the-same-result
 
     Example:
@@ -111,6 +145,7 @@ def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):
 
     Args:
         ignore_index (int, optional): Specifies a ``tensor`` index that is ignored.
+
     Returns:
         (bool) Returns ``True`` if target and prediction are equal.
     """
@@ -126,8 +161,18 @@ def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):
 def reporthook(t):
     """ ``reporthook`` to use with ``urllib.request`` that prints the process of the download.
 
-    Reference:
+    Uses ``tqdm`` for progress bar.
+
+    **Reference:**
     https://github.com/tqdm/tqdm
+
+    Args:
+        t (tqdm.tqdm) Progress bar.
+
+    Example:
+        >>> with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
+        >>>    urllib.request.urlretrieve(file_url, filename=full_path, reporthook=reporthook(t))
+
     """
     last_b = [0]
 
@@ -153,6 +198,7 @@ def download_from_drive(directory, filename, url):  # pragma: no cover
         directory (str): path to the directory that will be used.
         filename (str): name of the file to download to (do nothing if it already exists).
         url (str): URL to download from.
+
     Returns:
         (str): The path to the downloaded file.
     """
@@ -202,6 +248,7 @@ def download(file_url, destination, filename=None):
         file_url (str): Url of file.
         destination (str): Download to destination.
         filename (str, optional): Name of the file to download.
+
     Returns:
         (str): Filename of download file.
     """
@@ -227,6 +274,7 @@ def maybe_extract(compressed_filename, destination, extension=None):
         compressed_filename (str): Compressed file.
         destination (str): Extract to destination.
         extension (str, optional): Extension of the file.
+
     Returns:
         None:
     """
@@ -259,6 +307,7 @@ def download_compressed_directory(file_url,
         check_file (str, optional): Operation was successful if this file exists.
         extension (str, optional): Extension of the file.
         filename (str, optional): Name of the file to download.
+
     Returns:
         None:
     """
@@ -277,6 +326,7 @@ def download_urls(file_urls, directory, check_file=None):
         file_urls (:class:`list` of :class:`str`): Set of urls to download.
         directory (str): Directory in which to download urls.
         check_file (str, optional): Operation was successful if this file exists.
+
     Returns:
         None:
     """

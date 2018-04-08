@@ -1,7 +1,7 @@
 import os
 import mock
 
-from torchnlp.embeddings import GloVe
+from torchnlp.word_to_vector import GloVe
 from tests.embeddings.utils import urlretrieve_side_effect
 
 

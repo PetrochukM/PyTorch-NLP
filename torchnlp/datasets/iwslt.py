@@ -33,11 +33,11 @@ def iwslt_dataset(
     challenging due to their variety in topics, but are very benign as they are very thoroughly
     rehearsed and planned, leading to easy to recognize and translate language.
 
-    More details:
-    http://workshop2017.iwslt.org/downloads/iwslt2017_proceeding_v2.pdf
-    http://workshop2017.iwslt.org/
+    References:
+      * http://workshop2017.iwslt.org/downloads/iwslt2017_proceeding_v2.pdf
+      * http://workshop2017.iwslt.org/
 
-    Citation:
+    **Citation:**
     M. Cettolo, C. Girardi, and M. Federico. 2012. WIT3: Web Inventory of Transcribed and Translated
     Talks. In Proc. of EAMT, pp. 261-268, Trento, Italy.
 

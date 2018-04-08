@@ -1,7 +1,7 @@
 import os
 import mock
 
-from torchnlp.embeddings import CharNGram
+from torchnlp.word_to_vector import CharNGram
 from tests.embeddings.utils import urlretrieve_side_effect
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 

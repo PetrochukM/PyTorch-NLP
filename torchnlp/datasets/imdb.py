@@ -22,8 +22,7 @@ def imdb_dataset(directory='data/',
     training, and 25,000 for testing. There is additional unlabeled data for use as well. Raw text
     and already processed bag of words formats are provided.
 
-    More details:
-    http://ai.stanford.edu/~amaas/data/sentiment/
+    **Reference:** http://ai.stanford.edu/~amaas/data/sentiment/
 
     Args:
         directory (str, optional): Directory to cache the dataset.

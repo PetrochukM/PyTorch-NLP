@@ -22,11 +22,11 @@ def ud_pos_dataset(directory='data/',
     254,830 words and 16,622 sentences, taken from various web media including weblogs, newsgroups,
     emails, reviews, and Yahoo! answers.
 
-    More details:
-    http://universaldependencies.org/
-    https://github.com/UniversalDependencies/UD_English
+    References:
+        * http://universaldependencies.org/
+        * https://github.com/UniversalDependencies/UD_English
 
-    Citation:
+    **Citation:**
     Natalia Silveira and Timothy Dozat and Marie-Catherine de Marneffe and Samuel Bowman and
     Miriam Connor and John Bauer and Christopher D. Manning (2014).
     A Gold Standard Dependency Corpus for {E}nglish

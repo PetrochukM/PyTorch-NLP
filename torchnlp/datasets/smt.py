@@ -60,10 +60,10 @@ def smt_dataset(directory='data/',
     fine grained sentiment labels for 215,154 phrases in the parse trees of 11,855 sentences and
     presents new challenges for sentiment compositionality.
 
-    More details:
+    **Reference**:
     https://nlp.stanford.edu/sentiment/index.html
 
-    Citation:
+    **Citation:**
     Richard Socher, Alex Perelygin, Jean Y. Wu, Jason Chuang, Christopher D. Manning,
     Andrew Y. Ng and Christopher Potts. Recursive Deep Models for Semantic Compositionality Over a
     Sentiment Treebank

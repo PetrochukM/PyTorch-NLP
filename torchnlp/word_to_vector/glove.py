@@ -28,29 +28,18 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from torchnlp.embeddings.pretrained_embedding import _PretrainedEmbeddings
+from torchnlp.word_to_vector.pretrained_word_vectors import _PretrainedWordVectors
 
 
-class GloVe(_PretrainedEmbeddings):
+class GloVe(_PretrainedWordVectors):
     """Word vectors derived from word-word co-occurrence statistics from a corpus by Stanford.
 
     GloVe is essentially a log-bilinear model with a weighted least-squares objective. The main
     intuition underlying the model is the simple observation that ratios of word-word co-occurrence
     probabilities have the potential for encoding some form of meaning.
 
-    Reference Website:
+    **Reference:**
     https://nlp.stanford.edu/projects/glove/
-
-    Example:
-        >>> from torchnlp.embeddings import GloVe
-        >>> vectors = GloVe()
-        >>> vectors['hello']
-        -1.7494
-        0.6242
-        ...
-        -0.6202
-        2.0928
-        [torch.FloatTensor of size 100]
 
     Args:
         name (str): name of the GloVe vectors ('840B', 'twitter.27B', '6B', '42B')
@@ -61,6 +50,17 @@ class GloVe(_PretrainedEmbeddings):
         is_include (callable, optional): callable returns True if to include a token in memory
             vectors cache; some of these embedding files are gigantic so filtering it can cut
             down on the memory usage. We do not cache on disk if `is_include` is defined.
+
+    Example:
+        >>> from torchnlp.word_to_vector import GloVe
+        >>> vectors = GloVe()
+        >>> vectors['hello']
+        -1.7494
+        0.6242
+        ...
+        -0.6202
+        2.0928
+        [torch.FloatTensor of size 100]
     """
 
     url = {

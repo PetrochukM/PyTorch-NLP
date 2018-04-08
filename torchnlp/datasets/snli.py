@@ -27,10 +27,9 @@ def snli_dataset(directory='data/',
     representational systems for text, especially including those induced by representation
     learning methods, as well as a resource for developing NLP models of any kind.
 
-    More details:
-    https://nlp.stanford.edu/projects/snli/
+    **Reference:** https://nlp.stanford.edu/projects/snli/
 
-    Citation:
+    **Citation:**
     Samuel R. Bowman, Gabor Angeli, Christopher Potts, and Christopher D. Manning. 2015. A large
     annotated corpus for learning natural language inference. In Proceedings of the 2015 Conference
     on Empirical Methods in Natural Language Processing (EMNLP).

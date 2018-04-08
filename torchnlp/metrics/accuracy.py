@@ -6,6 +6,16 @@ from torchnlp.utils import torch_equals_ignore_index
 def get_accuracy(targets, outputs, k=1, ignore_index=None):
     """ Get the accuracy top-k accuracy between two tensors.
 
+    Args:
+      targets (1 - 2D :class:`torch.Tensor`): Target or true vector against which to measure
+          saccuracy
+      outputs (1 - 3D :class:`torch.Tensor`): Prediction or output vector
+      ignore_index (int, optional): Specifies a target index that is ignored
+
+    Returns:
+      :class:`tuple` consisting of accuracy (:class:`float`), number correct (:class:`int`) and
+      total (:class:`int`)
+
     Example:
 
         >>> import torch
@@ -19,16 +29,6 @@ def get_accuracy(targets, outputs, k=1, ignore_index=None):
         4
         >>> n_total
         5
-
-    Args:
-      targets (1 - 2D :class:`torch.Tensor`): Target or true vector against which to measure
-          saccuracy
-      outputs (1 - 3D :class:`torch.Tensor`): Prediction or output vector
-      ignore_index (int, optional): Specifies a target index that is ignored
-
-    Returns:
-      :class:`tuple` consisting of accuracy (:class:`float`), number correct (:class:`int`) and
-      total (:class:`int`)
     """
     n_correct = 0.0
     for target, output in zip(targets, outputs):
@@ -53,6 +53,16 @@ def get_accuracy(targets, outputs, k=1, ignore_index=None):
 def get_token_accuracy(targets, outputs, ignore_index=None):
     """ Get the accuracy token accuracy between two tensors.
 
+    Args:
+      targets (1 - 2D :class:`torch.Tensor`): Target or true vector against which to measure
+          saccuracy
+      outputs (1 - 3D :class:`torch.Tensor`): Prediction or output vector
+      ignore_index (int, optional): Specifies a target index that is ignored
+
+    Returns:
+      :class:`tuple` consisting of accuracy (:class:`float`), number correct (:class:`int`) and
+      total (:class:`int`)
+
     Example:
 
         >>> import torch
@@ -66,16 +76,6 @@ def get_token_accuracy(targets, outputs, ignore_index=None):
         3
         >>> n_total
         4
-
-    Args:
-      targets (1 - 2D :class:`torch.Tensor`): Target or true vector against which to measure
-          saccuracy
-      outputs (1 - 3D :class:`torch.Tensor`): Prediction or output vector
-      ignore_index (int, optional): Specifies a target index that is ignored
-
-    Returns:
-      :class:`tuple` consisting of accuracy (:class:`float`), number correct (:class:`int`) and
-      total (:class:`int`)
      """
     n_correct = 0.0
     n_total = 0.0
