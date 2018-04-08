@@ -12,6 +12,8 @@ import torch
 
 from tqdm import tqdm
 
+from torchnlp.text_encoders import PADDING_INDEX
+
 logger = logging.getLogger(__name__)
 
 
@@ -47,13 +49,13 @@ def datasets_iterator(*datasets):
             yield row
 
 
-def pad_tensor(tensor, length, padding_index):
+def pad_tensor(tensor, length, padding_index=PADDING_INDEX):
     """ Pad a ``tensor`` to ``length`` with ``padding_index``.
 
     Args:
         tensor (1D :class:`torch.LongTensor`): Tensor to pad.
         length (int): Pad the ``tensor`` up to ``length``.
-        padding_index (int): Index to pad tensor with.
+        padding_index (int, optional): Index to pad tensor with.
 
     Returns
         torch.LongTensor: Padded Tensor.
@@ -70,12 +72,12 @@ def flatten_parameters(model):
     model.apply(lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None)
 
 
-def pad_batch(batch, padding_index):
+def pad_batch(batch, padding_index=PADDING_INDEX):
     """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
 
     Args:
         batch (:class:`list` of 1D :class:`torch.LongTensor`): Batch of tensors to pad.
-        padding_index (int): Index to pad tensors with.
+        padding_index (int, optional): Index to pad tensors with.
 
     Returns
         list of torch.LongTensor, list of int: Padded tensors and original lengths of tensors.

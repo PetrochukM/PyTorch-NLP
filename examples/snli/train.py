@@ -1,21 +1,23 @@
+from functools import partial
+
 import os
 import time
 import glob
 
+from torch.utils.data import DataLoader
+
 import torch
-import torch.optim as O
+import torch.optim as optim
 import torch.nn as nn
 
-from torchtext import data
 from torchnlp.samplers import BucketBatchSampler
 from torchnlp.datasets import snli_dataset
 from torchnlp.utils import datasets_iterator
-from torchnlp.text_encoders import WhitespaceEncoder
-from torchnlp.text_encoders import IdentityEncoder
+from torchnlp.text_encoders import WhitespaceEncoder, IdentityEncoder
 from torchnlp import word_to_vector
 
 from model import SNLIClassifier
-from util import get_args, makedirs
+from util import get_args, makedirs, collate_fn
 
 args = get_args()
 
@@ -40,13 +42,9 @@ label_encoder = IdentityEncoder(label_corpus)
 
 # Encode
 for row in datasets_iterator(train, dev, test):
-    row['premise'] = sentence_corpus.encode(row['premise'])
-    row['hypothesis'] = sentence_corpus.encode(row['hypothesis'])
+    row['premise'] = sentence_encoder.encode(row['premise'])
+    row['hypothesis'] = sentence_encoder.encode(row['hypothesis'])
     row['label'] = label_encoder.encode(row['label'])
-
-BucketBatchSampler(train, batch_size=args.batch_size)
-train_iter, dev_iter, test_iter = data.BucketIterator.splits(
-    (train, dev, test), batch_size=args.batch_size, device=args.gpu)
 
 config = args
 config.n_embed = sentence_encoder.vocab_size
@@ -65,20 +63,18 @@ else:
     if args.word_vectors:
         # Load word vectors
         word_vectors = word_to_vector.aliases[args.word_vectors]()
-        embedding_weights = torch.Tensor(sentence_encoder.vocab_size, args.d_embed)
         for i, token in enumerate(sentence_encoder.vocab):
-            embedding_weights[i] = word_vectors[token]
-        model.embed.weight.data.copy_(embedding_weights)
-        if args.gpu >= 0:
-            model.cuda()
+            model.embed.weight.data[i] = word_vectors[token]
+
+    if args.gpu >= 0:
+        model.cuda()
 
 criterion = nn.CrossEntropyLoss()
-opt = O.Adam(model.parameters(), lr=args.lr)
+opt = optim.Adam(model.parameters(), lr=args.lr)
 
 iterations = 0
 start = time.time()
 best_dev_acc = -1
-train_iter.repeat = False
 header = '  Time Epoch Iteration Progress    (%Epoch)   Loss   Dev/Loss     Accuracy  Dev/Accuracy'
 dev_log_template = ' '.join(
     '{:>6.0f},{:>5.0f},{:>9.0f},{:>5.0f}/{:<5.0f} {:>7.0f}%,{:>8.6f},{:8.6f},{:12.4f},{:12.4f}'.
@@ -89,9 +85,17 @@ makedirs(args.save_path)
 print(header)
 
 for epoch in range(args.epochs):
-    train_iter.init_epoch()
     n_correct, n_total = 0, 0
-    for batch_idx, batch in enumerate(train_iter):
+
+    train_sampler = BucketBatchSampler(
+        train, args.batch_size, True, sort_key=lambda r: len(row['premise']))
+    train_iterator = DataLoader(
+        train,
+        batch_sampler=train_sampler,
+        collate_fn=collate_fn,
+        pin_memory=torch.cuda.is_available(),
+        num_workers=0)
+    for batch_idx, (premise_batch, hypothesis_batch, label_batch) in enumerate(train_iterator):
 
         # switch model to training mode, clear gradient accumulators
         model.train()
@@ -100,16 +104,16 @@ for epoch in range(args.epochs):
         iterations += 1
 
         # forward pass
-        answer = model(batch)
+        answer = model(premise_batch, hypothesis_batch)
 
         # calculate accuracy of predictions in the current batch
         n_correct += (torch.max(answer,
-                                1)[1].view(batch.label.size()).data == batch.label.data).sum()
-        n_total += batch.batch_size
+                                1)[1].view(label_batch.size()).data == label_batch.data).sum()
+        n_total += premise_batch.size()[1]
         train_acc = 100. * n_correct / n_total
 
         # calculate loss of the network output with respect to training labels
-        loss = criterion(answer, batch.label)
+        loss = criterion(answer, label_batch)
 
         # backpropagate and update optimizer learning rate
         loss.backward()
@@ -130,23 +134,32 @@ for epoch in range(args.epochs):
 
             # switch model to evaluation mode
             model.eval()
-            dev_iter.init_epoch()
 
             # calculate accuracy on validation set
             n_dev_correct, dev_loss = 0, 0
-            for dev_batch_idx, dev_batch in enumerate(dev_iter):
-                answer = model(dev_batch)
+            dev_sampler = BucketBatchSampler(
+                dev, args.batch_size, True, sort_key=lambda r: len(row['premise']))
+            dev_iterator = DataLoader(
+                dev,
+                batch_sampler=dev_sampler,
+                collate_fn=partial(collate_fn, train=False),
+                pin_memory=torch.cuda.is_available(),
+                num_workers=0)
+            for dev_batch_idx, (premise_batch, hypothesis_batch,
+                                label_batch) in enumerate(dev_iterator):
+                answer = model(premise_batch, hypothesis_batch)
                 n_dev_correct += (torch.max(answer, 1)[1].view(
-                    dev_batch.label.size()).data == dev_batch.label.data).sum()
-                dev_loss = criterion(answer, dev_batch.label)
+                    label_batch.size()).data == label_batch.data).sum()
+                dev_loss = criterion(answer, label_batch)
             dev_acc = 100. * n_dev_correct / len(dev)
 
             print(
                 dev_log_template.format(time.time() - start, epoch, iterations, 1 + batch_idx,
-                                        len(train_iter), 100. * (1 + batch_idx) / len(train_iter),
-                                        loss.data[0], dev_loss.data[0], train_acc, dev_acc))
+                                        len(train_sampler),
+                                        100. * (1 + batch_idx) / len(train_sampler), loss.data[0],
+                                        dev_loss.data[0], train_acc, dev_acc))
 
-            # update best valiation set accuracy
+            # update best validation set accuracy
             if dev_acc > best_dev_acc:
 
                 # found a model with better validation set accuracy
@@ -167,5 +180,5 @@ for epoch in range(args.epochs):
             # print progress message
             print(
                 log_template.format(time.time() - start, epoch, iterations, 1 + batch_idx,
-                                    len(train_iter), 100. * (1 + batch_idx) / len(train_iter),
+                                    len(train_sampler), 100. * (1 + batch_idx) / len(train_sampler),
                                     loss.data[0], ' ' * 8, n_correct / n_total * 100, ' ' * 12))

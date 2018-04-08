@@ -1,5 +1,12 @@
-import os
 from argparse import ArgumentParser
+
+import os
+
+from torch.autograd import Variable
+
+import torch
+
+from torchnlp.utils import pad_batch
 
 
 def makedirs(name):
@@ -46,3 +53,16 @@ def get_args():
     parser.add_argument('--resume_snapshot', type=str, default='')
     args = parser.parse_args()
     return args
+
+
+def collate_fn(batch, train=True):
+    """ list of tensors to a batch variable """
+    premise_batch, _ = pad_batch([row['premise'] for row in batch])
+    hypothesis_batch, _ = pad_batch([row['hypothesis'] for row in batch])
+    label_batch = [row['label'] for row in batch]
+
+    # PyTorch RNN requires batches to be transposed for speed and integration with CUDA
+    to_variable = (
+        lambda b: Variable(torch.stack(b).t_().squeeze(0).contiguous(), volatile=not train))
+
+    return (to_variable(premise_batch), to_variable(hypothesis_batch), to_variable(label_batch))

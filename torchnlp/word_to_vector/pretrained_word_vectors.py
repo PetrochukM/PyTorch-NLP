@@ -62,7 +62,7 @@ class _PretrainedWordVectors(object):
 
     def __init__(self,
                  name,
-                 cache='.pretrained_embeddings_cache',
+                 cache='.word_vectors_cache',
                  url=None,
                  unk_init=torch.Tensor.zero_,
                  is_include=None):

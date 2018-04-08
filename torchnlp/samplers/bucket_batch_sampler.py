@@ -109,3 +109,9 @@ class BucketBatchSampler(object):
                 batches.pop(i)
             batches[0:0] = front
             return iter(batches)
+
+    def __len__(self):
+        if self.drop_last:
+            return len(self.data) // self.batch_size
+        else:
+            return len(self.data) // self.batch_size + 1
