@@ -17,10 +17,10 @@ class NoisySortedSampler(Sampler):
 
     Example:
         >>> list(NoisySortedSampler(range(10), sort_key=lambda i: i, sort_key_noise=0.25))
-        [0, 1, 2, 3, 5, 4, 6, 8, 7, 9]
+        [0, 1, 2, 3, 4, 5, 8, 6, 7, 9]
     """
 
-    def __init__(self, data, sort_key, sort_key_noise=0.25):
+    def __init__(self, data, sort_key=lambda e: e, sort_key_noise=0.25):
         super().__init__(data)
         self.data = data
         self.sort_key = sort_key

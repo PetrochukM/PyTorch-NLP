@@ -44,16 +44,13 @@ for row in datasets_iterator(train, dev, test):
     row['hypothesis'] = sentence_corpus.encode(row['hypothesis'])
     row['label'] = label_encoder.encode(row['label'])
 
-if args.word_vectors:
-    word_vectors = word_to_vector.aliases[args.word_vectors]()
-
-BucketBatchSampler()
+BucketBatchSampler(train, batch_size=args.batch_size)
 train_iter, dev_iter, test_iter = data.BucketIterator.splits(
     (train, dev, test), batch_size=args.batch_size, device=args.gpu)
 
 config = args
-config.n_embed = len(inputs.vocab)
-config.d_out = len(answers.vocab)
+config.n_embed = sentence_encoder.vocab_size
+config.d_out = label_encoder.vocab_size
 config.n_cells = config.n_layers
 
 # double the number of cells for bidirectional networks
@@ -62,11 +59,16 @@ if config.birnn:
 
 if args.resume_snapshot:
     model = torch.load(
-        args.resume_snapshot, map_location=lambda storage, locatoin: storage.cuda(args.gpu))
+        args.resume_snapshot, map_location=lambda storage, location: storage.cuda(args.gpu))
 else:
     model = SNLIClassifier(config)
     if args.word_vectors:
-        model.embed.weight.data = inputs.vocab.vectors
+        # Load word vectors
+        word_vectors = word_to_vector.aliases[args.word_vectors]()
+        embedding_weights = torch.Tensor(sentence_encoder.vocab_size, args.d_embed)
+        for i, token in enumerate(sentence_encoder.vocab):
+            embedding_weights[i] = word_vectors[token]
+        model.embed.weight.data.copy_(embedding_weights)
         if args.gpu >= 0:
             model.cuda()
 

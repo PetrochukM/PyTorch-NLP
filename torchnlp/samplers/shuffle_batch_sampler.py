@@ -17,9 +17,9 @@ class ShuffleBatchSampler(BatchSampler):
 
     Example:
         >>> list(ShuffleBatchSampler(range(10), batch_size=3, drop_last=False))
-        [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]
+        [[3, 4, 5], [9], [0, 1, 2], [6, 7, 8]]
         >>> list(ShuffleBatchSampler(range(10), batch_size=3, drop_last=True))
-        [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+        [[3, 4, 5], [0, 1, 2], [6, 7, 8]]
     """
 
     def __init__(

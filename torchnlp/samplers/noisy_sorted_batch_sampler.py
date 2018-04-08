@@ -46,17 +46,17 @@ class NoisySortedBatchSampler(BatchSampler):
 
     Example:
         >>> list(NoisySortedBatchSampler(range(10), batch_size=3, drop_last=False))
-        [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]
+        [[9], [0, 1, 2], [3, 4, 5], [6, 8, 7]]
         >>> list(NoisySortedBatchSampler(range(10), batch_size=3, drop_last=True))
-        [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+        [[7, 9, 6], [0, 1, 2], [3, 4, 5]]
 
     """
 
     def __init__(self,
                  data,
                  batch_size,
-                 sort_key,
                  drop_last,
+                 sort_key=lambda e: e,
                  sort_key_noise=0.25,
                  last_batch_first=True,
                  shuffle=True):

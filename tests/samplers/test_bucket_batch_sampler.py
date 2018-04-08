@@ -7,7 +7,7 @@ def test_bucket_batch_sampler():
     batch_size = 2
     batches = list(
         BucketBatchSampler(
-            data_source, batch_size, sort_key, drop_last=False, bucket_size_multiplier=2))
+            data_source, batch_size, sort_key=sort_key, drop_last=False, bucket_size_multiplier=2))
     assert len(batches) == 3
 
 
@@ -17,11 +17,11 @@ def test_bucket_batch_sampler_uneven():
     batch_size = 2
     batches = list(
         BucketBatchSampler(
-            data_source, batch_size, sort_key, drop_last=False, bucket_size_multiplier=2))
+            data_source, batch_size, sort_key=sort_key, drop_last=False, bucket_size_multiplier=2))
     assert len(batches) == 3
     batches = list(
         BucketBatchSampler(
-            data_source, batch_size, sort_key, drop_last=True, bucket_size_multiplier=2))
+            data_source, batch_size, sort_key=sort_key, drop_last=True, bucket_size_multiplier=2))
     assert len(batches) == 2
 
 
@@ -33,7 +33,7 @@ def test_bucket_batch_sampler_last_batch_first():
         BucketBatchSampler(
             data_source,
             batch_size,
-            sort_key,
+            sort_key=sort_key,
             drop_last=False,
             biggest_batches_first=True,
             bucket_size_multiplier=2))
@@ -49,7 +49,7 @@ def test_bucket_batch_sampler_sorted():
         BucketBatchSampler(
             data_source,
             batch_size,
-            sort_key,
+            sort_key=sort_key,
             drop_last=False,
             biggest_batches_first=False,
             bucket_size_multiplier=1))

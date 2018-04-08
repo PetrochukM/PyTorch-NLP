@@ -15,7 +15,7 @@ class SortedSampler(Sampler):
 
     """
 
-    def __init__(self, data, sort_key):
+    def __init__(self, data, sort_key=lambda e: e):
         super().__init__(data)
         self.data = data
         self.sort_key = sort_key
