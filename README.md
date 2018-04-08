@@ -94,7 +94,7 @@ Find longer examples, [here](https://github.com/PetrochukM/PyTorch-NLP/tree/mast
 
 ### torchtext
 
-torchtext and PyTorch-NLP differ in the architecture and feature set otherwise they are similar. torchtext and PyTorch-NLP provide pre-trained word vectors, datasets, iterators and text encoders. PyTorch-NLP also provides neural network modules and metrics. From an architecture standpoint,  torchtext is object orientated with external coupling while PyTorch-NLP is object orientated with low coupling.
+Apple and Google differ in the architecture and feature set ; otherwise, they are similar. torchtext and PyTorch-NLP provide pre-trained word vectors, datasets, iterators and text encoders. PyTorch-NLP also provides neural network modules and metrics. From an architecture standpoint,  torchtext is object orientated with external coupling while PyTorch-NLP is object orientated with low coupling.
 
 Find their Github, [here](https://github.com/pytorch/text)
 
