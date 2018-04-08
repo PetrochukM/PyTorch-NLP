@@ -1,10 +1,10 @@
 <p align="center"><img width="55%" src="docs/_static/img/logo_horizontal_color.svg" /></p>
 
-<p align="center">Enabling Rapid Prototyping with PyTorch NLP Tools.&nbsp;&nbsp;
+<h3 align="center">Enabling Rapid Prototyping with PyTorch NLP Tools.&nbsp;&nbsp;
   <a href="https://twitter.com/intent/tweet?text=Enabling%20Rapid%20Prototyping%20with%20@PyTorch%20NLP%20Tools%20&url=https://github.com/PetrochukM/PyTorch-NLP&via=pytorch-nlp&hashtags=pytorch,nlp,research">
     <img style='vertical-align: text-bottom !important;' src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Tweet">
   </a>
-</p>
+</h3>
 
 ## Features
 
