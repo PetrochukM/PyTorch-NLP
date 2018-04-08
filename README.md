@@ -29,7 +29,7 @@
   </a>
 </p>
 
---------------------------------------
+## Features
 
 PyTorch-NLP includes **neural network modules** and [FastText pre-trained word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText).
 PyTorch-NLP features 9 text encoders for preprocessing, integration with **14 popular datasets**, and NLP related ``torch.utils.data.Sampler``s. It's open-source software, released under the BSD3 license. 
