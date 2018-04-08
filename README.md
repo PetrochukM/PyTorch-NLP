@@ -1,18 +1,38 @@
 <p align="center"><img width="55%" src="docs/_static/img/logo_horizontal_color.svg" /></p>
 
--------------------------------------------------------------------------------
+<p align="center">Enabling Rapid Prototyping with PyTorch NLP Tools.
+  <a href="https://twitter.com/intent/tweet?text=Enabling%20Rapid%20Prototyping%20with%20@PyTorch%20NLP%20Tools%20&url=https://github.com/PetrochukM/PyTorch-NLP&via=pytorch-nlp&hashtags=pytorch,nlp,research">
+    <img style='vertical-align: text-bottom !important;' src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Tweet">
+  </a>
+</p>
 
-PyTorch-NLP is a library for Natural Language Processing (NLP) in PyTorch. It's built with the very
-latest research in mind and was designed from day one to support rapid prototyping. PyTorch-NLP
-comes with **neural network modules** and [FastText pre-trained word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText).
-It features 9 text encoders for preprocessing, integration with **14 popular datasets**, and samplers
-to be used with PyTorch `DataLoaders`. It's open-source software, released under the BSD3 license. 
+<p align="center">
+  <a href="#">
+    <img src="https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square"
+         alt="PyPI - Python Version">
+  </a>
+  <a href="https://codecov.io/gh/PetrochukM/PyTorch-NLP">
+    <img src="https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square"
+         alt="Codecov">
+  </a>
+  <a href="http://pytorchnlp.readthedocs.io/en/latest/?badge=latest&style=flat-square">
+    <img src="https://img.shields.io/readthedocs/pytorchnlp/latest.svg?style=flat-square"
+         alt="Documentation Status">
+  </a>
+  <a href="https://travis-ci.org/PetrochukM/PyTorch-NLP">
+    <img src="https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square"
+         alt="Build Status">
+  </a>
+  <a href="https://gitter.im/PyTorch-NLP?style=flat-square">
+    <img src="https://img.shields.io/gitter/room/PyTorch-NLP/Lobby.svg?style=flat-square"
+         alt="Gitter Chat">
+  </a>
+</p>
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
-[![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
-[![Documentation Status](	https://img.shields.io/readthedocs/pytorchnlp/latest.svg?style=flat-square)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest&style=flat-square)
-[![Build Status](https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
-[![Gitter chat](https://img.shields.io/gitter/room/PyTorch-NLP/Lobby.svg?style=flat-square)](https://gitter.im/PyTorch-NLP?style=flat-square)
+--------------------------------------
+
+PyTorch-NLP includes **neural network modules** and [FastText pre-trained word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText).
+PyTorch-NLP features 9 text encoders for preprocessing, integration with **14 popular datasets**, and NLP related ``torch.utils.data.Sampler``s. It's open-source software, released under the BSD3 license. 
 
 ## Installation
 
@@ -112,6 +132,11 @@ We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in 
 
 Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/Contributing.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to PyTorch-NLP.
 
+## Authors
+
+* [Michael Petrochuk](https://github.com/PetrochukM/) — Initial work 
+* [Chloe Yeo](http://www.yeochloe.com/) — Logo Design 
+
 ## Citing
 
 If you find PyTorch-NLP useful for an academic publication, then please use the following BibTeX to cite it:
@@ -126,7 +151,3 @@ If you find PyTorch-NLP useful for an academic publication, then please use the 
   howpublished = {\url{https://github.com/PetrochukM/PyTorch-NLP}},
 }
 ```
-
-## Logo Credits
-
-Thanks to [Chloe Yeo](http://www.yeochloe.com/) for her logo design.
