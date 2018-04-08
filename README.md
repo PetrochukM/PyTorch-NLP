@@ -102,7 +102,7 @@ Find their Github, [here](https://github.com/pytorch/text)
 
 AllenNLP is designed to be a platform for research. PyTorch-NLP is designed to be a lightweight toolkit.
 
-Find their Github, [here](https://github.com/allenai/allennlp)
+Find their Github, [here](https://github.com/allenai/allennlp).
 
 ## Contributing
 
