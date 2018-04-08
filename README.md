@@ -88,7 +88,7 @@ Add PyTorch-NLP to your project by following one the common use cases:
     get_moses_multi_bleu(hypotheses, references, lowercase=True)  # RETURNS: 47.9
     ```
     
-PyTorch-NLP is designed to be intuitive, linear in thought and easy to use. PyTorch-NLP has minimal framework overhead.
+Find longer examples, [here](https://github.com/PetrochukM/PyTorch-NLP/tree/master/examples).
 
 ## Contributing
 
