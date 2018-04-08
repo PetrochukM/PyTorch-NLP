@@ -12,7 +12,7 @@ from torchnlp.datasets import snli_dataset
 from torchnlp.utils import datasets_iterator
 from torchnlp.text_encoders import WhitespaceEncoder
 from torchnlp.text_encoders import IdentityEncoder
-from torchnlp import embeddings
+from torchnlp import word_to_vector
 
 from model import SNLIClassifier
 from util import get_args, makedirs
@@ -45,7 +45,7 @@ for row in datasets_iterator(train, dev, test):
     row['label'] = label_encoder.encode(row['label'])
 
 if args.word_vectors:
-    word_vectors = embeddings.aliases[args.word_vectors]()
+    word_vectors = word_to_vector.aliases[args.word_vectors]()
 
 BucketBatchSampler()
 train_iter, dev_iter, test_iter = data.BucketIterator.splits(

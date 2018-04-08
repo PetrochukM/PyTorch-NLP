@@ -1,3 +1,4 @@
 torch
 torchnlp
 numpy
+torchqrnn

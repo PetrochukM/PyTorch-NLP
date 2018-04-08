@@ -112,9 +112,12 @@ test_data = encoder.encode(test)
 
 eval_batch_size = 10
 test_batch_size = 1
-train_sampler = BPTTBatchSampler(train, args.bptt, args.batch_size, True)
-val_sampler = BPTTBatchSampler(val, args.bptt, args.batch_size, True)
-test_sampler = BPTTBatchSampler(test, args.bptt, args.batch_size, True)
+
+train_source_sampler, val_source_sampler, test_source_sampler = tuple(
+    [BPTTBatchSampler(d, args.bptt, args.batch_size, True, 'source') for d in (train, val, test)])
+
+train_target_sampler, val_target_sampler, test_target_sampler = tuple(
+    [BPTTBatchSampler(d, args.bptt, args.batch_size, True, 'target') for d in (train, val, test)])
 
 ###############################################################################
 # Build the model
@@ -169,7 +172,7 @@ print('Model total parameters:', total_params)
 ###############################################################################
 
 
-def evaluate(data_source, data_sampler, batch_size=10):
+def evaluate(data_source, source_sampler, target_sampler, batch_size=10):
     # Turn on evaluation mode which disables dropout.
     model.eval()
     if args.model == 'QRNN':
@@ -177,10 +180,10 @@ def evaluate(data_source, data_sampler, batch_size=10):
     total_loss = 0
     hidden = model.init_hidden(batch_size)
 
-    for sample in data_sampler:
+    for source_sample, target_sample in zip(source_sampler, target_sampler):
         model.train()
-        data = Variable(torch.stack([data_source[data] for data, _ in sample]), volatile=True)
-        targets = Variable(torch.stack([data_source[target] for _, target in sample])).view(-1)
+        data = Variable(torch.stack([data_source[i] for i in source_sample]), volatile=True)
+        targets = Variable(torch.stack([data_source[i] for i in target_sample])).view(-1)
         output, hidden = model(data, hidden)
         total_loss += len(data) * criterion(model.decoder.weight, model.decoder.bias, output,
                                             targets).data
@@ -196,11 +199,11 @@ def train():
     start_time = time.time()
     hidden = model.init_hidden(args.batch_size)
     batch = 0
-    for source_sample, target_sample in train_sampler:
+    for source_sample, target_sample in zip(train_source_sampler, train_target_sampler):
         model.train()
-        data = Variable(torch.stack([train_data[data] for data, _ in sample])).t_().contiguous()
+        data = Variable(torch.stack([train_data[i] for i in source_sample])).t_().contiguous()
         targets = Variable(torch.stack(
-            [train_data[target] for _, target in sample])).t_().contiguous().view(-1)
+            [train_data[i] for i in target_sample])).t_().contiguous().view(-1)
 
         # Starting each batch, we detach the hidden state from how it was previously produced.
         # If we didn't, the model would try backpropagating all the way to start of the dataset.
@@ -233,7 +236,7 @@ def train():
             print('| epoch {:3d} | {:5d}/{:5d} batches | lr {:05.5f} | ms/batch {:5.2f} | '
                   'loss {:5.2f} | ppl {:8.2f} | bpc {:8.3f}'.format(
                       epoch, batch,
-                      len(train_sampler) // args.bptt,
+                      len(train_source_sampler) // args.bptt,
                       optimizer.param_groups[0]['lr'], elapsed * 1000 / args.log_interval, cur_loss,
                       math.exp(cur_loss), cur_loss / math.log(2)))
             total_loss = 0
@@ -265,7 +268,7 @@ try:
                 tmp[prm] = prm.data.clone()
                 prm.data = optimizer.state[prm]['ax'].clone()
 
-            val_loss2 = evaluate(val_data, val_sampler)
+            val_loss2 = evaluate(val_data, val_source_sampler, val_target_sampler)
             print('-' * 89)
             print('| end of epoch {:3d} | time: {:5.2f}s | valid loss {:5.2f} | '
                   'valid ppl {:8.2f} | valid bpc {:8.3f}'.format(
@@ -282,7 +285,7 @@ try:
                 prm.data = tmp[prm].clone()
 
         else:
-            val_loss = evaluate(val_data, val_sampler, eval_batch_size)
+            val_loss = evaluate(val_data, val_source_sampler, val_target_sampler, eval_batch_size)
             print('-' * 89)
             print('| end of epoch {:3d} | time: {:5.2f}s | valid loss {:5.2f} | '
                   'valid ppl {:8.2f} | valid bpc {:8.3f}'.format(
@@ -318,7 +321,7 @@ except KeyboardInterrupt:
 model_load(args.save)
 
 # Run on test data.
-test_loss = evaluate(test_data, test_sampler, test_batch_size)
+test_loss = evaluate(test_data, test_source_sampler, test_target_sampler, test_batch_size)
 print('=' * 89)
 print('| End of training | test loss {:5.2f} | test ppl {:8.2f} | test bpc {:8.3f}'.format(
     test_loss, math.exp(test_loss), test_loss / math.log(2)))
