@@ -8,8 +8,7 @@
 
 PyTorch-NLP, or torchnlp for short, is a library of neural network layers, text processing modules and datasets designed to accelerate Natural Language Processing (NLP) research.
 
-Join our community, add datasets and neural network layers. We're eager to collaborate with you, you can chat with us on [Gitter](https://gitter.im/PyTorch-NLP/Lobby) and join the [Google Group](https://groups.google.com/forum/#!forum/pytorch-nlp). 
-
+Join our community, add datasets and neural network layers! Chat with us on [Gitter](https://gitter.im/PyTorch-NLP/Lobby) and join the [Google Group](https://groups.google.com/forum/#!forum/pytorch-nlp), we're eager to collaborate with you.
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
 [![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
