@@ -13,7 +13,7 @@ Finally, it features **9 text encoders**, **14 popular datasets** and NLP ``torc
 [![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
 [![Documentation Status](	https://img.shields.io/readthedocs/pytorchnlp/latest.svg?style=flat-square)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest&style=flat-square)
 [![Build Status](https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
-[![Gitter chat](https://img.shields.io/gitter/room/PyTorch-NLP/Lobby.svg?style=flat-square)](https://gitter.im/PyTorch-NLP?style=flat-square)
+[![Gitter chat](https://img.shields.io/gitter/room/PyTorch-NLP/Lobby.svg?style=flat-square)](https://gitter.im/PyTorch-NLP)
 
 ## Installation
 
@@ -30,7 +30,9 @@ The complete documentation for PyTorch-NLP is available via [our ReadTheDocs web
 
 Add PyTorch-NLP to your project by following one the common use cases:
 
-### From the [neural network package](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html), use a Simple Recurrent Unit (SRU)
+### Apply [Neural Networks](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) Layers 
+
+For example, from the neural network package, apply a Simple Recurrent Unit (SRU):
 
 ```python
 from torchnlp.nn import SRU
@@ -47,7 +49,9 @@ sru(input_)
 # )
 ```
 
-### Load a [dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) like IMDB
+### Load a [Dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) 
+
+Load the IMDB dataset, for example: 
 
 ```python
 from torchnlp.datasets import imdb_dataset
@@ -57,7 +61,9 @@ train = imdb_dataset(train=True)
 train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
 ```
 
-### Encode text into vectors with the [text encoders package](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html)
+### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html) 
+
+Tokenize and encode text as a tensor. For example, a `WhitespaceEncoder` breaks text into terms whenever it encounters a whitespace character.
 
 ```python
 from torchnlp.text_encoders import WhitespaceEncoder
@@ -69,8 +75,10 @@ encoder = WhitespaceEncoder(["now this ain't funny", "so don't you dare laugh"])
 encoder.encode("this ain't funny.") # RETURNS: torch.LongTensor([6, 7, 1])
 encoder.decode(encoder.encode("This ain't funny.")) # RETURNS: "this ain't funny."
 ```
+
+### Load [Word Vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html)
     
-### Load FastText, state-of-the-art English [word vector representations](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html)
+For example, load FastText, state-of-the-art English word vectors:
 
 ```python
 from torchnlp.word_to_vector import FastText
@@ -79,8 +87,10 @@ vectors = FastText()
 # Load vectors for any word as a `torch.FloatTensor`
 vectors['hello']  # RETURNS: [torch.FloatTensor of size 100]
 ```
-    
-### Compute BLEU scores with the [metrics package](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.metrics.html)
+
+### Compute [Metrics](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.metrics.html)
+
+Finally, compute common metrics such as the BLEU score.
 
 ```python
 from torchnlp.metrics import get_moses_multi_bleu
@@ -92,7 +102,11 @@ references = ["The quick brown fox jumps over the lazy dog 笑"]
 get_moses_multi_bleu(hypotheses, references, lowercase=True)  # RETURNS: 47.9
 ```
 
-Longer samples are under [`examples/`](examples/).
+### Help :question:
+
+Need more help? We are happy to answer your questions via [Gitter Chat](https://gitter.im/PyTorch-NLP)
+
+Maybe looking at longer examples may help you at [`examples/`](examples/).
 
 ## Contributing
 
