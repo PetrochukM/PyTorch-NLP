@@ -6,8 +6,7 @@
   </a>
 </h3>
 
-PyTorch-NLP is a Natural Language Processing (NLP) toolkit designed to support rapid prototyping. It includes common [neural network modules](https://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) and pre-trained word vectors (e.g. [FastText](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText) and  [GloVe](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.GloVe)).
-Finally, it features **9 text encoders**, **14 popular datasets** and NLP ``torch.utils.data.Sampler``s.
+PyTorch-NLP, or torchnlp for short, is a library of neural network layers, text preprocessing modules and datasets designed to accelerate Natural Language Processing (NLP) research. We're eager to collaborate with you! 
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
 [![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
@@ -26,9 +25,21 @@ pip:
 
 The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
 
-## Quickstart
+## Basics
 
 Add PyTorch-NLP to your project by following one the common use cases:
+
+### Load a [Dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) 
+
+Load the IMDB dataset, for example: 
+
+```python
+from torchnlp.datasets import imdb_dataset
+
+# Load the imdb training dataset
+train = imdb_dataset(train=True)
+train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
+```
 
 ### Apply [Neural Networks](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) Layers 
 
@@ -47,18 +58,6 @@ sru(input_)
 #   output [torch.FloatTensor (6x3x20)], 
 #   hidden_state [torch.FloatTensor (2x3x20)]
 # )
-```
-
-### Load a [Dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) 
-
-Load the IMDB dataset, for example: 
-
-```python
-from torchnlp.datasets import imdb_dataset
-
-# Load the imdb training dataset
-train = imdb_dataset(train=True)
-train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
 ```
 
 ### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html) 
@@ -104,9 +103,9 @@ get_moses_multi_bleu(hypotheses, references, lowercase=True)  # RETURNS: 47.9
 
 ### Help :question:
 
-Need more help? We are happy to answer your questions via [Gitter Chat](https://gitter.im/PyTorch-NLP)
-
 Maybe looking at longer examples may help you at [`examples/`](examples/).
+
+Need more help? We are happy to answer your questions via [Gitter Chat](https://gitter.im/PyTorch-NLP)
 
 ## Contributing
 
