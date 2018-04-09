@@ -7,7 +7,7 @@
 </h3>
 
 PyTorch-NLP is a Natural Language Processing (NLP) toolkit designed to support rapid prototyping. It includes common [neural network modules](https://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) and pre-trained word vectors (e.g. [FastText](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText) and  [GloVe](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.GloVe)).
-Finally, it features **9 text encoders**, **14 popular datasets** and NLP related ``torch.utils.data.Sampler``s.
+Finally, it features **9 text encoders**, **14 popular datasets** and NLP ``torch.utils.data.Sampler``s.
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
 [![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
