@@ -1,6 +1,6 @@
 <p align="center"><img width="55%" src="docs/_static/img/logo_horizontal_color.svg" /></p>
 
-<h3 align="center">Supporting Rapid Prototyping with a PyTorch-NLP Toolkit.&nbsp;&nbsp;
+<h3 align="center">Supporting Rapid Prototyping with a NLP Toolkit.&nbsp;&nbsp;
   <a href="https://twitter.com/intent/tweet?text=PyTorch-NLP%20is%20supporting%20rapid%20prototyping%20for%20research.%20&url=https://github.com/PetrochukM/PyTorch-NLP&hashtags=pytorch,nlp,research">
     <img style='vertical-align: text-bottom !important;' src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Tweet">
   </a>
