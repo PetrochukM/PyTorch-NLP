@@ -6,10 +6,8 @@
   </a>
 </h3>
 
-## Key Features
-
-PyTorch-NLP includes neural network modules and pre-trained word vectors (e.g. [FastText](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText) and  [GloVe](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.GloVe)).
-It also features **9 text encoders**, integration with **14 popular datasets**, and NLP related ``torch.utils.data.Sampler``s. Finally, it is open-source software, released under the BSD3 license. 
+PyTorch-NLP is a Natural Language Processing (NLP) toolkit designed to support rapid prototyping. First, it includes neural network modules and pre-trained word vectors (e.g. [FastText](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText) and  [GloVe](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.GloVe)).
+Finally, it features **9 text encoders**, integration with **14 popular datasets**, and NLP related ``torch.utils.data.Sampler``s.
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
 [![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
