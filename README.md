@@ -6,7 +6,7 @@
   </a>
 </h3>
 
-## Features
+## Key Features
 
 PyTorch-NLP includes neural network modules and pre-trained word vectors (e.g. [FastText](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText) and  [GloVe](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.GloVe)).
 It also features **9 text encoders**, integration with **14 popular datasets**, and NLP related ``torch.utils.data.Sampler``s. Finally, it is open-source software, released under the BSD3 license. 
@@ -95,17 +95,13 @@ Find longer examples, [here](https://github.com/PetrochukM/PyTorch-NLP/tree/mast
 
 ## Related Work
 
-### torchtext
+### [torchtext](https://github.com/pytorch/text)
 
 Apple and Google differ in the architecture and feature set ; otherwise, they are similar. torchtext and PyTorch-NLP provide pre-trained word vectors, datasets, iterators and text encoders. PyTorch-NLP also provides neural network modules and metrics. From an architecture standpoint,  torchtext is object orientated with external coupling while PyTorch-NLP is object orientated with low coupling.
 
-Find their Github, [here](https://github.com/pytorch/text).
-
-### AllenNLP
+### [AllenNLP](https://github.com/pytorch/text)
 
 AllenNLP is designed to be a platform for research. PyTorch-NLP is designed to be a lightweight toolkit.
-
-Find their Github, [here](https://github.com/allenai/allennlp).
 
 ## Contributing
 
@@ -117,7 +113,7 @@ Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/mas
 
 ## Authors
 
-* [Michael Petrochuk](https://github.com/PetrochukM/) — Initial work 
+* [Michael Petrochuk](https://github.com/PetrochukM/) — Developer 
 * [Chloe Yeo](http://www.yeochloe.com/) — Logo Design 
 
 ## Citing
