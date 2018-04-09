@@ -1,7 +1,7 @@
 <p align="center"><img width="55%" src="docs/_static/img/logo_horizontal_color.svg" /></p>
 
-<h3 align="center">Enabling Rapid Prototyping with PyTorch NLP Tools&nbsp;-&nbsp;
-  <a href="https://twitter.com/intent/tweet?text=Enabling%20Rapid%20Prototyping%20with%20@PyTorch%20NLP%20Tools%20&url=https://github.com/PetrochukM/PyTorch-NLP&via=pytorch-nlp&hashtags=pytorch,nlp,research">
+<h3 align="center">Enabling Rapid Prototyping with a PyTorch-NLP Toolkit.&nbsp;&nbsp;
+  <a href="https://twitter.com/intent/tweet?text=Enabling%20Rapid%20Prototyping%20with%20a%20PyTorch%20NLP%20Toolkit%20&url=https://github.com/PetrochukM/PyTorch-NLP&via=pytorch-nlp&hashtags=pytorch,nlp,research">
     <img style='vertical-align: text-bottom !important;' src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Tweet">
   </a>
 </h3>
@@ -9,7 +9,7 @@
 ## Features
 
 PyTorch-NLP includes **neural network modules** and [FastText pre-trained word vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText).
-It also features 9 text encoders for preprocessing, integration with **14 popular datasets**, and NLP related ``torch.utils.data.Sampler``s. Finally, It's open-source software, released under the BSD3 license. 
+It also features 9 text encoders for preprocessing, integration with **14 popular datasets**, and NLP related ``torch.utils.data.Sampler``s. Finally, it is open-source software, released under the BSD3 license. 
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
 [![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
