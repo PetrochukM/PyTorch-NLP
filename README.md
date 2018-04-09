@@ -6,7 +6,7 @@
   </a>
 </h3>
 
-PyTorch-NLP is a Natural Language Processing (NLP) toolkit designed to support rapid prototyping. First, it includes [neural network modules](https://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) and pre-trained word vectors (e.g. [FastText](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText) and  [GloVe](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.GloVe)).
+PyTorch-NLP is a Natural Language Processing (NLP) toolkit designed to support rapid prototyping. It includes common [neural network modules](https://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) and pre-trained word vectors (e.g. [FastText](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.FastText) and  [GloVe](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html#torchnlp.word_to_vector.GloVe)).
 Finally, it features **9 text encoders**, **14 popular datasets** and NLP related ``torch.utils.data.Sampler``s.
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
@@ -91,6 +91,15 @@ Add PyTorch-NLP to your project by following one the common use cases:
     
 Find longer examples, [here](https://github.com/PetrochukM/PyTorch-NLP/tree/master/examples).
 
+## Contributing
+
+We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in PyTorch. We hope that other organizations can benefit from the project. We are thankful for any contributions from the community.
+
+### Contributing Guide
+
+Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/Contributing.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to PyTorch-NLP.
+
+
 ## Related Work
 
 ### [torchtext](https://github.com/pytorch/text)
@@ -100,14 +109,6 @@ Apple and Google differ in the architecture and feature set ; otherwise, they ar
 ### [AllenNLP](https://github.com/pytorch/text)
 
 AllenNLP is designed to be a platform for research. PyTorch-NLP is designed to be a lightweight toolkit.
-
-## Contributing
-
-We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in PyTorch. We hope that other organizations can benefit from the project. We are thankful for any contributions from the community.
-
-### Contributing Guide
-
-Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/Contributing.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to PyTorch-NLP.
 
 ## Authors
 
