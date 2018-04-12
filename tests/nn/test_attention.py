@@ -61,4 +61,4 @@ class TestAttention(unittest.TestCase):
             batch = weights.data.tolist()
             for queries in batch:
                 for query in queries:
-                    self.assertAlmostEqual(sum(query), 1.0)
+                    self.assertAlmostEqual(sum(query), 1.0, 3)
