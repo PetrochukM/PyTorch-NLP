@@ -87,6 +87,7 @@ data/**
 
 # Embeddings
 .pretrained_embeddings_cache/
+.word_vectors_cache/
 
 # Test Files
 .pytest_cache
