@@ -27,3 +27,22 @@ def test_fasttext_simple(mock_urlretrieve):
 
     # Clean up
     os.remove(os.path.join(directory, 'wiki.simple.vec.pt'))
+
+
+@mock.patch('urllib.request.urlretrieve')
+def test_aligned_fasttext(mock_urlretrieve):
+    directory = 'tests/_test_data/fast_text/'
+
+    # Make sure URL has a 200 status
+    mock_urlretrieve.side_effect = urlretrieve_side_effect
+
+    # Parse the aligned FastText embeddings
+    vectors = FastText(aligned=True, cache=directory)
+
+    # Make sure all 200000 words are contained
+    assert len(vectors) == 200000
+    # Assert the embeddings' dimensionality
+    assert len(vectors['the']) == 300
+
+    # Clean up
+    os.remove(os.path.join(directory, 'wiki.multi.en.vec'))
