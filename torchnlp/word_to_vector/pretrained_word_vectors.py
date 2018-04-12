@@ -71,6 +71,9 @@ class _PretrainedWordVectors(object):
         self.name = name
         self.cache(name, cache, url=url)
 
+    def __contains__(self, token):
+        return token in self.stoi
+
     def __getitem__(self, token):
         if token in self.stoi:
             return self.vectors[self.stoi[token]]
