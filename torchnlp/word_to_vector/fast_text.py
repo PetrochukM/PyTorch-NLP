@@ -43,9 +43,15 @@ class FastText(_PretrainedWordVectors):
     References:
         * https://arxiv.org/abs/1607.04606
         * https://fasttext.cc/
+        * https://arxiv.org/abs/1710.04087
 
     Args:
         language (str): language of the vectors
+        aligned (bool): if True: use multilingual embeddings where words with
+            the same meaning share (approximately) the same position in the
+            vector space across languages. if False: use regular FastText
+            embeddings. All available languages can be found under
+            https://github.com/facebookresearch/MUSE#multilingual-word-embeddings
         cache (str, optional): directory for cached vectors
         unk_init (callback, optional): by default, initialize out-of-vocabulary word vectors
             to zero vectors; can be any function that takes in a Tensor and
@@ -66,8 +72,12 @@ class FastText(_PretrainedWordVectors):
         [torch.FloatTensor of size 100]
     """
     url_base = 'https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.{}.vec'
+    aligned_url_base = 'https://s3.amazonaws.com/arrival/embeddings/wiki.multi.{}.vec'
 
-    def __init__(self, language="en", **kwargs):
-        url = self.url_base.format(language)
+    def __init__(self, language="en", aligned=False, **kwargs):
+        if aligned:
+            url = self.aligned_url_base.format(language)
+        else:
+            url = self.url_base.format(language)
         name = os.path.basename(url)
         super(FastText, self).__init__(name, url=url, **kwargs)
