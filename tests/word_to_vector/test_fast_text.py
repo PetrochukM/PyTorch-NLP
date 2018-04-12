@@ -22,6 +22,9 @@ def test_fasttext_simple(mock_urlretrieve):
     assert 'the' in vectors.stoi
     assert len(vectors) == 1
 
+    # Test implementation of __contains()__
+    assert 'the' in vectors
+
     # Test with the unknown characters
     assert len(vectors['漢字']) == 300
 
