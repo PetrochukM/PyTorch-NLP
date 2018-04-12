@@ -114,7 +114,7 @@ We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in 
 
 ### Contributing Guide
 
-Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/Contributing.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to PyTorch-NLP.
+Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to PyTorch-NLP.
 
 ## Related Work
 
