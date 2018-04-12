@@ -1,5 +1,6 @@
 *.pyc
 .idea
+.vscode
 
 # Operating system related file
 .DS_Store
