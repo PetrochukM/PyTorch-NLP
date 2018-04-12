@@ -22,8 +22,30 @@ def test_fasttext_simple(mock_urlretrieve):
     assert 'the' in vectors.stoi
     assert len(vectors) == 1
 
+    # Test implementation of __contains()__
+    assert 'the' in vectors
+
     # Test with the unknown characters
     assert len(vectors['漢字']) == 300
 
     # Clean up
     os.remove(os.path.join(directory, 'wiki.simple.vec.pt'))
+
+
+@mock.patch('urllib.request.urlretrieve')
+def test_aligned_fasttext(mock_urlretrieve):
+    directory = 'tests/_test_data/fast_text/'
+
+    # Make sure URL has a 200 status
+    mock_urlretrieve.side_effect = urlretrieve_side_effect
+
+    # Parse the aligned FastText embeddings
+    vectors = FastText(aligned=True, cache=directory)
+
+    # Assert the embeddings' dimensionality
+    assert len(vectors['the']) == 300
+    # Our test file contains only five words to keep the file size small
+    assert len(vectors) == 5
+
+    # Clean up
+    os.remove(os.path.join(directory, 'wiki.multi.en.vec.pt'))
