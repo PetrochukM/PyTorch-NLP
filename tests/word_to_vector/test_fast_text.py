@@ -39,10 +39,10 @@ def test_aligned_fasttext(mock_urlretrieve):
     # Parse the aligned FastText embeddings
     vectors = FastText(aligned=True, cache=directory)
 
-    # Make sure all 200000 words are contained
-    assert len(vectors) == 200000
     # Assert the embeddings' dimensionality
     assert len(vectors['the']) == 300
+    # Our test file contains only five words to keep the file size small
+    assert len(vectors) == 5
 
     # Clean up
-    os.remove(os.path.join(directory, 'wiki.multi.en.vec'))
+    os.remove(os.path.join(directory, 'wiki.multi.en.vec.pt'))
