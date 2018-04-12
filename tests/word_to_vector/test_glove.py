@@ -2,7 +2,7 @@ import os
 import mock
 
 from torchnlp.word_to_vector import GloVe
-from tests.embeddings.utils import urlretrieve_side_effect
+from tests.word_to_vector.utils import urlretrieve_side_effect
 
 
 @mock.patch("urllib.request.urlretrieve")

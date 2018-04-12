@@ -2,7 +2,7 @@ import os
 import mock
 
 from torchnlp.word_to_vector import CharNGram
-from tests.embeddings.utils import urlretrieve_side_effect
+from tests.word_to_vector.utils import urlretrieve_side_effect
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 
 
