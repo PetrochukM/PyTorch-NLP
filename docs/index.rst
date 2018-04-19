@@ -1,5 +1,5 @@
 
-:github_url: https://github.com/pytorch/pytorch
+:github_url: https://github.com/PetrochukM/PyTorch-NLP
 
 Welcome to Pytorch-NLP's documentation!
 =======================================

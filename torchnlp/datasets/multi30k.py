@@ -16,7 +16,7 @@ def multi30k_dataset(directory='data/multi30k/',
                          'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/training.tar.gz',
                          'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/validation.tar.gz',
                          'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/mmt16_task1_test.tar.gz'
-                     ]):
+                     ]):  # pragma: no cover
     """
     Load the WMT 2016 machine translation dataset.
 
@@ -25,6 +25,10 @@ def multi30k_dataset(directory='data/multi30k/',
     provide 29,000 and 1,014 triples respectively, each containing an English source sentence, its
     German human translation. As test data, we provide a new set of 1,000 tuples containing an
     English description.
+
+    Status:
+        Host ``www.quest.dcs.shef.ac.uk`` forgot to update their SSL
+        certificate; therefore, this dataset does not download securely.
 
     References:
         * http://www.statmt.org/wmt16/multimodal-task.html
