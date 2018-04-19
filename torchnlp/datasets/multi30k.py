@@ -16,7 +16,7 @@ def multi30k_dataset(directory='data/multi30k/',
                          'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/training.tar.gz',
                          'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/validation.tar.gz',
                          'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/mmt16_task1_test.tar.gz'
-                     ]): # pragma: no cover
+                     ]):  # pragma: no cover
     """
     Load the WMT 2016 machine translation dataset.
 
@@ -27,7 +27,6 @@ def multi30k_dataset(directory='data/multi30k/',
     English description.
 
     Status:
-    
         Host ``www.quest.dcs.shef.ac.uk`` forgot to update their SSL
         certificate; therefore, this dataset does not download securely.
 
