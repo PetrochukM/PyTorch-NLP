@@ -1,11 +1,13 @@
 import os
 
 import mock
+import pytest
 
 from torchnlp.datasets import multi30k_dataset
 from tests.datasets.utils import urlretrieve_side_effect
 
 multi30k_directory = 'tests/_test_data/multi30k'
+
 
 @pytest.mark.skip(reason="Unsafe dataset host (SSL: CERTIFICATE_VERIFY_FAILED)")
 @mock.patch("urllib.request.urlretrieve")
