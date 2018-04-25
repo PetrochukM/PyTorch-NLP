@@ -15,4 +15,4 @@ def test_spacy_encoder_not_installed_language():
     except Exception as e:
         error_message = str(e)
 
-    assert error_message.startswith('Language 'fr' not found.')
+    assert error_message.startswith("Language 'fr' not found.")
