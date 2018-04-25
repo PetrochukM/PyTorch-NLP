@@ -28,16 +28,16 @@ pip install spacy
 pip install nltk
 
 # SpaCy English web model
-python -m spacy download en_core_web_sm
+python -m spacy download en
 
 # NLTK data needed for Moses tokenizer
 python -m nltk.downloader perluniprops nonbreaking_prefixes
 
 # Install PyTorch Dependancies
-if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then 
-    pip install http://download.pytorch.org/whl/cpu/torch-0.3.1-cp36-cp36m-linux_x86_64.whl 
+if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then
+    pip install http://download.pytorch.org/whl/cpu/torch-0.3.1-cp36-cp36m-linux_x86_64.whl
 fi
-if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then 
-    pip install http://download.pytorch.org/whl/cpu/torch-0.3.1-cp35-cp35m-linux_x86_64.whl  
+if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then
+    pip install http://download.pytorch.org/whl/cpu/torch-0.3.1-cp35-cp35m-linux_x86_64.whl
 fi
 pip install torchvision
