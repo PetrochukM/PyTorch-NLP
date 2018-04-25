@@ -56,8 +56,8 @@ class SpacyEncoder(StaticTokenizerEncoder):
             try:
                 nlp = spacy.load(language)
             except OSError:
-                raise ValueError(("Language {0} not found. Install using spaCy:"
-                                  "`python -m spacy download {0}`"
+                raise ValueError(("Language '{0}' not found. Install using " +
+                                  "spaCy: `python -m spacy download {0}`"
                                   ).format(language))
 
             from spacy.tokenizer import Tokenizer
