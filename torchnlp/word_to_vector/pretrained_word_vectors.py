@@ -83,11 +83,11 @@ class _PretrainedWordVectors(object):
 
     def __getitem__(self, tokens):
         if isinstance(tokens, list) or isinstance(tokens, tuple):
-            vector_list = [self._get_token(token) for token in tokens]
+            vector_list = [self._get_token_vector(token) for token in tokens]
             return torch.stack(vector_list)
         elif isinstance(tokens, str):
             token = tokens
-            return self._get_token(token)
+            return self._get_token_vector(token)
         else:
             raise TypeError("'__getitem__' method can only be used with types"
                             "'str', 'list', or 'tuple' as parameter")
