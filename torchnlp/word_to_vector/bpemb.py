@@ -53,7 +53,7 @@ class BPEmb(_PretrainedWordVectors):
 
     Example:
         >>> from torchnlp.word_to_vector import BPEmb
-        >>> vectors = BPEmb()
+        >>> vectors = BPEmb(dim=25)
         >>> subwords = "▁mel ford shire".split()
         >>> vectors[subwords]
         Columns 0 to 9
