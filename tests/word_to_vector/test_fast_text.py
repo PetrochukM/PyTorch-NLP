@@ -33,6 +33,48 @@ def test_fasttext_simple(mock_urlretrieve):
 
 
 @mock.patch('urllib.request.urlretrieve')
+def test_fasttext_list_arguments(mock_urlretrieve):
+    directory = 'tests/_test_data/fast_text/'
+
+    # Make sure URL has a 200 status
+    mock_urlretrieve.side_effect = urlretrieve_side_effect
+
+    # Load subset of FastText
+    vectors = FastText(language='simple', cache=directory)
+
+    # Test implementation of __getitem()__ for token list and tuple
+    list(vectors[['the', 'of']].shape) == [2, 300]
+    list(vectors[('the', 'of')].shape) == [2, 300]
+
+    # Clean up
+    os.remove(os.path.join(directory, 'wiki.simple.vec.pt'))
+
+
+@mock.patch('urllib.request.urlretrieve')
+def test_fasttext_non_list_or_tuple_raises_type_error(mock_urlretrieve):
+    directory = 'tests/_test_data/fast_text/'
+
+    # Make sure URL has a 200 status
+    mock_urlretrieve.side_effect = urlretrieve_side_effect
+
+    # Load subset of FastText
+    vectors = FastText(language='simple', cache=directory)
+
+    # Test implementation of __getitem()__ for invalid type
+    error_class = None
+
+    try:
+        vectors[None]
+    except Exception as e:
+        error_class = e.__class__
+
+    assert error_class is TypeError
+
+    # Clean up
+    os.remove(os.path.join(directory, 'wiki.simple.vec.pt'))
+
+
+@mock.patch('urllib.request.urlretrieve')
 def test_aligned_fasttext(mock_urlretrieve):
     directory = 'tests/_test_data/fast_text/'
 
