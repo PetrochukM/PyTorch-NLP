@@ -19,10 +19,10 @@ def test_bpemb(mock_urlretrieve):
     assert len(vectors) == 5
 
     # Embedding dimensionalty should be 300 by default
-    assert len(vectors['_the']) == 300
+    assert len(vectors['▁the']) == 300
 
     # Test implementation of __contains()__
-    assert '_the' in vectors
+    assert '▁the' in vectors
 
     # Test with the unknown characters
     assert len(vectors['漢字']) == 300
