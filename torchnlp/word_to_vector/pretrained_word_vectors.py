@@ -74,7 +74,7 @@ class _PretrainedWordVectors(object):
     def __contains__(self, token):
         return token in self.stoi
 
-    def _get_token(self, token):
+    def _get_token_vector(self, token):
         """Return embedding for token or for UNK if token not in vocabulary"""
         if token in self.stoi:
             return self.vectors[self.stoi[token]]
