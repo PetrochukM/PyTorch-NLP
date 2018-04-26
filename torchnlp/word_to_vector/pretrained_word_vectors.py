@@ -71,14 +71,33 @@ class _PretrainedWordVectors(object):
         self.name = name
         self.cache(name, cache, url=url)
 
-    def __contains__(self, token):
-        return token in self.stoi
+    def __contains__(self, tokens):
+        if isinstance(tokens, list) or isinstance(tokens, tuple):
+            return [token in self.stoi for token in tokens]
+        elif isinstance(tokens, str):
+            token = tokens
+            return token in self.stoi
+        else:
+            raise TypeError("'__contains__' method can only be used with types"
+                            "'str', 'list', or 'tuple' as parameter")
 
-    def __getitem__(self, token):
+    def _get_token(self, token):
+        """Return embedding for token or for UNK if token not in vocabulary"""
         if token in self.stoi:
             return self.vectors[self.stoi[token]]
         else:
             return self.unk_init(torch.Tensor(self.dim))
+
+    def __getitem__(self, tokens):
+        if isinstance(tokens, list) or isinstance(tokens, tuple):
+            vector_list = [self._get_token(token) for token in tokens]
+            return torch.stack(vector_list)
+        elif isinstance(tokens, str):
+            token = tokens
+            return self._get_token(token)
+        else:
+            raise TypeError("'__getitem__' method can only be used with types"
+                            "'str', 'list', or 'tuple' as parameter")
 
     def __len__(self):
         return len(self.vectors)
