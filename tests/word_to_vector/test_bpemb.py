@@ -28,8 +28,7 @@ def test_bpemb(mock_urlretrieve):
     assert len(vectors['漢字']) == 300
 
     # Clean up
-    os.remove(os.path.join(directory, 'tests/_test_data/bpemb/en.wiki.bpe.' +
-                                      'op50000.d300.w2v.txt.pt'))
+    os.remove(os.path.join(directory, 'en.wiki.bpe.op50000.d300.w2v.txt.pt'))
 
 
 def test_unsupported_language():
