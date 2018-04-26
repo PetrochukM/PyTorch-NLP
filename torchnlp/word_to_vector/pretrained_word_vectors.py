@@ -71,15 +71,8 @@ class _PretrainedWordVectors(object):
         self.name = name
         self.cache(name, cache, url=url)
 
-    def __contains__(self, tokens):
-        if isinstance(tokens, list) or isinstance(tokens, tuple):
-            return [token in self.stoi for token in tokens]
-        elif isinstance(tokens, str):
-            token = tokens
-            return token in self.stoi
-        else:
-            raise TypeError("'__contains__' method can only be used with types"
-                            "'str', 'list', or 'tuple' as parameter")
+    def __contains__(self, token):
+        return token in self.stoi
 
     def _get_token(self, token):
         """Return embedding for token or for UNK if token not in vocabulary"""

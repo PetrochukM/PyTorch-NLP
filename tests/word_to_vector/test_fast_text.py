@@ -46,10 +46,6 @@ def test_fasttext_list_arguments(mock_urlretrieve):
     list(vectors[['the', 'of']].shape) == [2, 300]
     list(vectors[('the', 'of')].shape) == [2, 300]
 
-    # Test implementation of __contains()__ for token list and tuple
-    assert ['the', 'of', 'a'] in vectors == [True, True, False]
-    assert ('the', 'of', 'a') in vectors == [True, True, False]
-
     # Clean up
     os.remove(os.path.join(directory, 'wiki.simple.vec.pt'))
 
