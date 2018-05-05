@@ -1,19 +1,21 @@
 import urllib.request
 import pickle
 
+import pytest
 import torch
 
 from tqdm import tqdm
 
 from torchnlp.datasets import Dataset
+from torchnlp.text_encoders import PADDING_INDEX
 from torchnlp.utils import flatten_parameters
+from torchnlp.utils import get_filename_from_url
 from torchnlp.utils import pad_batch
 from torchnlp.utils import pad_tensor
 from torchnlp.utils import reporthook
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import shuffle
 from torchnlp.utils import torch_equals_ignore_index
-from torchnlp.utils import get_filename_from_url
 
 
 def test_get_filename_from_url():
@@ -24,13 +26,24 @@ def test_get_filename_from_url():
 
 
 def test_pad_tensor():
-    PADDING_INDEX = 0
     padded = pad_tensor(torch.LongTensor([1, 2, 3]), 5, PADDING_INDEX)
     assert padded.tolist() == [1, 2, 3, PADDING_INDEX, PADDING_INDEX]
 
 
+def test_pad_tensor_multiple_dim():
+    padded = pad_tensor(torch.LongTensor(1, 2, 3), 5, PADDING_INDEX)
+    assert padded.size() == (5, 2, 3)
+    assert padded[1].sum().item() == pytest.approx(0)
+
+
+def test_pad_tensor_multiple_dim_float_tensor():
+    padded = pad_tensor(torch.FloatTensor(778, 80), 804, PADDING_INDEX)
+    assert padded.size() == (804, 80)
+    assert padded[-1].sum().item() == pytest.approx(0)
+    assert padded.type() == 'torch.FloatTensor'
+
+
 def test_pad_batch():
-    PADDING_INDEX = 0
     batch = [torch.LongTensor([1, 2, 3]), torch.LongTensor([1, 2]), torch.LongTensor([1])]
     padded, lengths = pad_batch(batch, PADDING_INDEX)
     padded = [r.tolist() for r in padded]
