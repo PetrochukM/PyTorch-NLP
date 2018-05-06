@@ -32,7 +32,6 @@
 # https://github.com/salesforce/awd-lstm-lm/blob/master/locked_dropout.py
 
 import torch.nn as nn
-from torch.autograd import Variable
 
 
 class LockedDropout(nn.Module):
@@ -59,9 +58,8 @@ class LockedDropout(nn.Module):
         if not self.training or not self.p:
             return x
         x = x.clone()
-        m = x.data.new(1, x.size(1), x.size(2)).bernoulli_(1 - self.p)
-        m = m.div_(1 - self.p)
-        mask = Variable(m, requires_grad=False)
+        mask = x.new_empty(1, x.size(1), x.size(2), requires_grad=False).bernoulli_(1 - self.p)
+        mask = mask.div_(1 - self.p)
         mask = mask.expand_as(x)
         return x * mask
 

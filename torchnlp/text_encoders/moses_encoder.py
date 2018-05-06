@@ -36,16 +36,11 @@ class MosesEncoder(StaticTokenizerEncoder):
             raise TypeError('MosesEncoder defines a tokenize callable Moses')
 
         try:
-            import nltk
-
-            # Required for moses
-            nltk.download('perluniprops')
-            nltk.download('nonbreaking_prefixes')
-
-            from nltk.tokenize.moses import MosesTokenizer
-            from nltk.tokenize.moses import MosesDetokenizer
+            from sacremoses import MosesTokenizer
+            from sacremoses import MosesDetokenizer
         except ImportError:
-            print("Please install NLTK. " "See the docs at http://nltk.org for more information.")
+            print("Please install SacreMoses. "
+                  "See the docs at https://github.com/alvations/sacremoses for more information.")
             raise
 
         self.detokenizer = MosesDetokenizer()

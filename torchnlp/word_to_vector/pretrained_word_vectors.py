@@ -99,7 +99,6 @@ class _PretrainedWordVectors(object):
         return self.name
 
     def cache(self, name, cache, url=None):
-        print(name)
         if os.path.isfile(name):
             path = name
             path_pt = os.path.join(cache, os.path.basename(name)) + '.pt'

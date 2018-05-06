@@ -11,7 +11,7 @@ def _weight_drop(module, weights, dropout):
     for name_w in weights:
         w = getattr(module, name_w)
         del module._parameters[name_w]
-        module.register_parameter(name_w + '_raw', Parameter(w.data))
+        module.register_parameter(name_w + '_raw', Parameter(w))
 
     original_module_forward = module.forward
 
@@ -43,7 +43,6 @@ class WeightDrop(torch.nn.Module):
 
     Example:
 
-        >>> from torch.autograd import Variable
         >>> from torchnlp.nn import WeightDrop
         >>> import torch
         >>>
@@ -51,10 +50,9 @@ class WeightDrop(torch.nn.Module):
         >>> weights = ['weight_hh']
         >>> weight_drop_gru = WeightDrop(gru, weights, dropout=0.9)
         >>>
-        >>> input_ = Variable(torch.randn(3, 2))
-        >>> hidden_state = Variable(torch.randn(3, 2))
+        >>> input_ = torch.randn(3, 2)
+        >>> hidden_state = torch.randn(3, 2)
         >>> weight_drop_gru(input_, hidden_state)
-        Variable containing:
         -0.4467 -0.1344
         0.1747  0.9075
         0.2340  0.1977

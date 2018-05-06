@@ -1,4 +1,3 @@
-from torch.autograd import Variable
 from torch.nn import utils
 
 import torch
@@ -26,7 +25,7 @@ def test_SRUCell_smoke():
     # This is just a smoke test.
 
     def evaluate(**kwargs):
-        input_ = Variable(torch.randn(6, 3, 10))
+        input_ = torch.randn(6, 3, 10)
         c0 = None
         sru = SRUCell(10, 20, **kwargs)
         str(sru)
@@ -42,7 +41,7 @@ def test_SRU_smoke():
     # This is just a smoke test.
 
     def evaluate(**kwargs):
-        input_ = Variable(torch.randn(6, 6, 3, 10))
+        input_ = torch.randn(6, 6, 3, 10)
         c0 = None
         sru = SRU(10, 20, **kwargs)
         str(sru)
@@ -57,7 +56,7 @@ def test_SRU_smoke():
 def test_sru_packed():
     sru = SRU(4, 4, bidirectional=True)
 
-    x = Variable(torch.randn(3, 2, 4))
+    x = torch.randn(3, 2, 4)
     lengths = [3, 3]
 
     h1, c1 = sru(x)
@@ -66,7 +65,7 @@ def test_sru_packed():
     h2, c2 = sru(pack)
     h2, _ = utils.rnn.pad_packed_sequence(h2)
 
-    x = torch.cat([x, Variable(x.data.new(1, 2, 4).zero_())])
+    x = torch.cat([x, x.new_zeros(1, 2, 4)])
     pack = utils.rnn.pack_padded_sequence(x, lengths)
     h3, c3 = sru(pack)
     h3, _ = utils.rnn.pad_packed_sequence(h3)
@@ -76,4 +75,4 @@ def test_sru_packed():
     h_eq = (h1 == h2) == (h1 == h3)
     c_eq = (c1 == c2) == (c1 == c3)
 
-    assert h_eq.sum().data[0] == np.prod(h_eq.size()) and c_eq.sum().data[0] == np.prod(c_eq.size())
+    assert h_eq.sum().item() == np.prod(h_eq.size()) and c_eq.sum().item() == np.prod(c_eq.size())

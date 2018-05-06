@@ -99,6 +99,7 @@ for epoch in range(args.epochs):
 
         # switch model to training mode, clear gradient accumulators
         model.train()
+        torch.set_grad_enabled(True)
         opt.zero_grad()
 
         iterations += 1
@@ -108,7 +109,7 @@ for epoch in range(args.epochs):
 
         # calculate accuracy of predictions in the current batch
         n_correct += (torch.max(answer,
-                                1)[1].view(label_batch.size()).data == label_batch.data).sum()
+                                1)[1].view(label_batch.size()) == label_batch).sum()
         n_total += premise_batch.size()[1]
         train_acc = 100. * n_correct / n_total
 
@@ -123,7 +124,7 @@ for epoch in range(args.epochs):
         if iterations % args.save_every == 0:
             snapshot_prefix = os.path.join(args.save_path, 'snapshot')
             snapshot_path = snapshot_prefix + '_acc_{:.4f}_loss_{:.6f}_iter_{}_model.pt'.format(
-                train_acc, loss.data[0], iterations)
+                train_acc, loss.item(), iterations)
             torch.save(model, snapshot_path)
             for f in glob.glob(snapshot_prefix + '*'):
                 if f != snapshot_path:
@@ -134,6 +135,7 @@ for epoch in range(args.epochs):
 
             # switch model to evaluation mode
             model.eval()
+            torch.set_grad_enabled(False)
 
             # calculate accuracy on validation set
             n_dev_correct, dev_loss = 0, 0
@@ -149,15 +151,15 @@ for epoch in range(args.epochs):
                                 label_batch) in enumerate(dev_iterator):
                 answer = model(premise_batch, hypothesis_batch)
                 n_dev_correct += (torch.max(answer, 1)[1].view(
-                    label_batch.size()).data == label_batch.data).sum()
+                    label_batch.size()) == label_batch).sum()
                 dev_loss = criterion(answer, label_batch)
             dev_acc = 100. * n_dev_correct / len(dev)
 
             print(
                 dev_log_template.format(time.time() - start, epoch, iterations, 1 + batch_idx,
                                         len(train_sampler),
-                                        100. * (1 + batch_idx) / len(train_sampler), loss.data[0],
-                                        dev_loss.data[0], train_acc, dev_acc))
+                                        100. * (1 + batch_idx) / len(train_sampler), loss.item(),
+                                        dev_loss.item(), train_acc, dev_acc))
 
             # update best validation set accuracy
             if dev_acc > best_dev_acc:
@@ -167,7 +169,7 @@ for epoch in range(args.epochs):
                 best_dev_acc = dev_acc
                 snapshot_prefix = os.path.join(args.save_path, 'best_snapshot')
                 snapshot_path = snapshot_prefix + '_devacc_{}_devloss_{}__iter_{}_model.pt'.format(
-                    dev_acc, dev_loss.data[0], iterations)
+                    dev_acc, dev_loss.item(), iterations)
 
                 # save model, delete previous 'best_snapshot' files
                 torch.save(model, snapshot_path)
@@ -181,4 +183,4 @@ for epoch in range(args.epochs):
             print(
                 log_template.format(time.time() - start, epoch, iterations, 1 + batch_idx,
                                     len(train_sampler), 100. * (1 + batch_idx) / len(train_sampler),
-                                    loss.data[0], ' ' * 8, n_correct / n_total * 100, ' ' * 12))
+                                    loss.item(), ' ' * 8, n_correct / n_total * 100, ' ' * 12))

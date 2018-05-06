@@ -2,20 +2,17 @@ import random
 import unittest
 
 import torch
+import numpy as np
 
 from torchnlp.nn import LockedDropout
-from tests.nn.utils import tensor
 
 
 class TestLockedDropout(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        self.input_ = tensor(
-            random.randint(1, 10),
-            random.randint(1, 10),
-            random.randint(1, 10),
-            type_=torch.FloatTensor)
+        self.input_ = torch.FloatTensor(
+            random.randint(1, 10), random.randint(1, 10), random.randint(1, 10))
         self.probability = random.random()
 
     def test_init(self):
@@ -29,4 +26,11 @@ class TestLockedDropout(unittest.TestCase):
         self.assertEqual(output.size(), self.input_.size())
 
         # Check types
-        self.assertEqual(output.data.type(), 'torch.FloatTensor')
+        self.assertEqual(output.type(), 'torch.FloatTensor')
+
+    def test_forward_eval(self):
+        dropout = LockedDropout(self.probability).eval()
+        output = dropout.forward(self.input_)
+
+        # Check sizes
+        np.equal(output.numpy(), self.input_.numpy())

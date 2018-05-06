@@ -202,7 +202,6 @@ def download_from_drive(directory, filename, url):  # pragma: no cover
     Returns:
         (str): The path to the downloaded file.
     """
-    print('HERE')
     filepath = os.path.join(directory, filename)
     confirm_token = None
 

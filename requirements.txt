@@ -1,5 +1,5 @@
 # NOTE: If you intend to contribute or develop on PyTorch-NLP, please install requirements.txt
-# NOTE: If you intend to use PyTorch-NLP, requirements.txt is overkill and look @ setup.py 
+# NOTE: If you intend to use PyTorch-NLP, requirements.txt is overkill and look @ setup.py
 # `install_requires`
 
 # pytorch 3.1 install from http://pytorch.org/
@@ -22,6 +22,7 @@ mock
 # # Optional NLP Utilties
 # nltk
 # spacy
+# sacremoses
 
 # # Optional CUDA Utilties
 # pynvrtc
@@ -32,7 +33,7 @@ sphinx
 sphinx_rtd_theme
 sphinx-autobuild
 
-# Auto Formatter 
+# Auto Formatter
 yapf
 
 # Release to PyPi

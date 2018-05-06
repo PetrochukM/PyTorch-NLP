@@ -11,9 +11,10 @@ PyTorch-NLP, or torchnlp for short, is a library of neural network layers, text 
 Join our community, add datasets and neural network layers! Chat with us on [Gitter](https://gitter.im/PyTorch-NLP/Lobby) and join the [Google Group](https://groups.google.com/forum/#!forum/pytorch-nlp), we're eager to collaborate with you.
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
-[![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP) 
+[![Codecov](https://img.shields.io/codecov/c/github/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://codecov.io/gh/PetrochukM/PyTorch-NLP)
 [![Documentation Status](	https://img.shields.io/readthedocs/pytorchnlp/latest.svg?style=flat-square)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest&style=flat-square)
 [![Build Status](https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
+
 
 ## Installation
 
@@ -21,8 +22,8 @@ Make sure you have Python 3.5+ and PyTorch 0.2.0 or newer. You can then install 
 pip:
 
     pip install pytorch-nlp
-    
-## Docs 📖 
+
+## Docs 📖
 
 The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
 
@@ -30,9 +31,9 @@ The complete documentation for PyTorch-NLP is available via [our ReadTheDocs web
 
 Add PyTorch-NLP to your project by following one of the common use cases:
 
-### Load a [Dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html) 
+### Load a [Dataset](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.datasets.html)
 
-Load the IMDB dataset, for example: 
+Load the IMDB dataset, for example:
 
 ```python
 from torchnlp.datasets import imdb_dataset
@@ -42,7 +43,7 @@ train = imdb_dataset(train=True)
 train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
 ```
 
-### Apply [Neural Networks](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) Layers 
+### Apply [Neural Networks](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) Layers
 
 For example, from the neural network package, apply a Simple Recurrent Unit (SRU):
 
@@ -56,12 +57,12 @@ sru = SRU(10, 20)
 # Apply a Simple Recurrent Unit to `input_`
 sru(input_)
 # RETURNS: (
-#   output [torch.FloatTensor (6x3x20)], 
+#   output [torch.FloatTensor (6x3x20)],
 #   hidden_state [torch.FloatTensor (2x3x20)]
 # )
 ```
 
-### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html) 
+### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html)
 
 Tokenize and encode text as a tensor. For example, a `WhitespaceEncoder` breaks text into terms whenever it encounters a whitespace character.
 
@@ -77,7 +78,7 @@ encoder.decode(encoder.encode("This ain't funny.")) # RETURNS: "this ain't funny
 ```
 
 ### Load [Word Vectors](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.word_to_vector.html)
-    
+
 For example, load FastText, state-of-the-art English word vectors:
 
 ```python
@@ -128,8 +129,8 @@ AllenNLP is designed to be a platform for research. PyTorch-NLP is designed to b
 
 ## Authors
 
-* [Michael Petrochuk](https://github.com/PetrochukM/) — Developer 
-* [Chloe Yeo](http://www.yeochloe.com/) — Logo Design 
+* [Michael Petrochuk](https://github.com/PetrochukM/) — Developer
+* [Chloe Yeo](http://www.yeochloe.com/) — Logo Design
 
 ## Citing
 

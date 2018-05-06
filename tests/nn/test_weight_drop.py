@@ -9,7 +9,7 @@ from torchnlp.nn.weight_drop import WeightDrop
 
 def test_weight_drop_linear():
     # Input is (seq, batch, input)
-    x = torch.autograd.Variable(torch.randn(2, 1, 10))
+    x = torch.randn(2, 1, 10)
 
     lin = WeightDropLinear(10, 10, weight_dropout=0.9)
     run1 = [x.sum() for x in lin(x).data]
@@ -20,7 +20,7 @@ def test_weight_drop_linear():
 
 
 def test_weight_drop_lstm():
-    input_ = torch.autograd.Variable(torch.randn(2, 1, 10))
+    input_ = torch.randn(2, 1, 10)
 
     wd_lstm = WeightDropLSTM(10, 10, num_layers=2, weight_dropout=0.9)
     run1 = [x.sum() for x in wd_lstm(input_)[0].data]
@@ -33,7 +33,7 @@ def test_weight_drop_lstm():
 
 
 def test_weight_drop_gru():
-    input_ = torch.autograd.Variable(torch.randn(2, 1, 10))
+    input_ = torch.randn(2, 1, 10)
 
     wd_lstm = WeightDropGRU(10, 10, num_layers=2, weight_dropout=0.9)
     run1 = [x.sum() for x in wd_lstm(input_)[0].data]
@@ -46,7 +46,7 @@ def test_weight_drop_gru():
 
 
 def test_weight_drop():
-    input_ = torch.autograd.Variable(torch.randn(2, 1, 10))
+    input_ = torch.randn(2, 1, 10)
 
     wd_lstm = WeightDrop(torch.nn.LSTM(10, 10), ['weight_hh_l0'], dropout=0.9)
     run1 = [x.sum() for x in wd_lstm(input_)[0].data]
@@ -59,7 +59,7 @@ def test_weight_drop():
 
 
 def test_weight_drop_zero():
-    input_ = torch.autograd.Variable(torch.randn(2, 1, 10))
+    input_ = torch.randn(2, 1, 10)
 
     wd_lstm = WeightDrop(torch.nn.LSTM(10, 10), ['weight_hh_l0'], dropout=0.0)
     run1 = [x.sum() for x in wd_lstm(input_)[0].data]

@@ -7,7 +7,7 @@ import platform
 import re
 import subprocess
 
-from torch.autograd import Function, Variable
+from torch.autograd import Function
 
 import torch
 import torch.nn as nn
@@ -239,10 +239,10 @@ def _sru_compute_cpu(activation_type, d, bidirectional=False, scale_x=1):
         else:
             x_prime = u[..., 3]
 
-        h = Variable(x.data.new(length, batch, bidir, d))
+        h = x.new_empty(length, batch, bidir, d)
 
         if init is None:
-            c_init = Variable(x.data.new(batch, bidir, d).zero_())
+            c_init = x.new_zeros(batch, bidir, d)
         else:
             c_init = init.view(batch, bidir, d)
 
@@ -380,13 +380,10 @@ class SRUCell(nn.Module):
                 hidden state for each element in the batch.
         """
         assert input_.dim() == 2 or input_.dim() == 3
-        assert isinstance(input_, Variable)
         input_size, hidden_size = self.input_size, self.hidden_size
         batch = input_.size(-2)
         if c0 is None:
-            c0 = Variable(
-                input_.data.new(batch, hidden_size
-                                if not self.bidirectional else hidden_size * 2).zero_())
+            c0 = input_.new_zeros(batch, hidden_size if not self.bidirectional else hidden_size * 2)
 
         if self.training and (self.recurrent_dropout > 0):
             mask = self.get_dropout_mask_((batch, input_size), self.recurrent_dropout)
@@ -413,7 +410,7 @@ class SRUCell(nn.Module):
 
     def get_dropout_mask_(self, size, p):
         w = self.weight.data
-        return Variable(w.new(*size).bernoulli_(1 - p).div_(1 - p))
+        return w.new(*size).bernoulli_(1 - p).div_(1 - p)
 
     def __repr__(self):
         s = '{name}({input_size}, {hidden_size}'
@@ -511,7 +508,7 @@ class SRU(nn.Module):
         assert input_.dim() == 3  # (len, batch, input_size)
         dir_ = 2 if self.bidirectional else 1
         if c0 is None:
-            zeros = Variable(input_.data.new(input_.size(1), self.hidden_size * dir_).zero_())
+            zeros = input_.new_zeros(input_.size(1), self.hidden_size * dir_)
             c0 = [zeros for i in range(self.num_layers)]
         else:
             assert c0.dim() == 3  # (num_layers, batch, hidden_size*dir_)
