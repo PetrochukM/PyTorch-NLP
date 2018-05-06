@@ -1,4 +1,5 @@
 import pytest
+import random
 
 from torchnlp.datasets import Dataset
 
@@ -24,12 +25,45 @@ def test_dataset_get_column():
         dataset['c']
 
 
+def test_dataset_set_column():
+    dataset = Dataset([{'a': 'a', 'b': 'b'}, {'a': 'aa', 'b': 'bb'}])
+
+    # Regular column update
+    dataset['a'] = ['aa', 'aaa']
+    assert dataset['a'] == ['aa', 'aaa']
+
+    # To Little
+    dataset['b'] = ['b']
+    assert dataset['b'] == ['b', None]
+
+    # Too many
+    dataset['c'] = ['c', 'cc', 'ccc']
+    assert dataset['c'] == ['c', 'cc', 'ccc']
+
+    # Smoke (regression test)
+    random.shuffle(dataset)
+
+
 def test_dataset_get_row():
     dataset = Dataset([{'a': 'a', 'b': 'b'}, {'a': 'aa', 'b': 'bb'}])
     assert dataset[0] == {'a': 'a', 'b': 'b'}
     assert dataset[1] == {'a': 'aa', 'b': 'bb'}
     with pytest.raises(IndexError):
         dataset[2]
+
+
+def test_dataset_set_row():
+    dataset = Dataset([{'a': 'a', 'b': 'b'}, {'a': 'aa', 'b': 'bb'}])
+    dataset[0] = {'c': 'c'}
+    assert dataset['c'] == ['c', None]
+    assert dataset['a'] == [None, 'aa']
+
+    dataset[0:2] = [{'d': 'd'}, {'d': 'dd'}]
+    assert dataset[0] == {'d': 'd'}
+    assert dataset[1] == {'d': 'dd'}
+
+    with pytest.raises(IndexError):
+        dataset[2] = {'c': 'c'}
 
 
 def test_dataset_equality():
