@@ -121,7 +121,7 @@ def _get_filename_from_url(url):
 
 
 def download_file_maybe_extract(url, directory, filename=None, extension=None, check_files=[]):
-    """ Download the file at ``url`` to ``directory``.
+    """ Download the file at ``url`` to ``directory``. Extract to ``directory`` if tar or zip.
 
     Args:
         url (str): Url of file.
@@ -181,7 +181,7 @@ def _check_download(*filepaths):
 
 
 def download_files_maybe_extract(urls, directory, check_files=[]):
-    """ Download the files at ``urls`` to ``directory``.
+    """ Download the files at ``urls`` to ``directory``. Extract to ``directory`` if tar or zip.
 
     Args:
         urls (str): Url of files.
