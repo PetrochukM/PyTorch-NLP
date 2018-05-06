@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ElementTree
 import io
 import glob
 
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -16,7 +16,7 @@ def iwslt_dataset(
         train_filename='{source}-{target}/train.{source}-{target}.{lang}',
         dev_filename='{source}-{target}/IWSLT16.TED.tst2013.{source}-{target}.{lang}',
         test_filename='{source}-{target}/IWSLT16.TED.tst2014.{source}-{target}.{lang}',
-        check_file='{source}-{target}/train.tags.{source}-{target}.{source}',
+        check_files=['{source}-{target}/train.tags.{source}-{target}.{source}'],
         url='https://wit3.fbk.eu/archive/2016-01/texts/{source}/{target}/{source}-{target}.tgz'):
     """
     Load the International Workshop on Spoken Language Translation (IWSLT) 2017 translation dataset.
@@ -51,7 +51,7 @@ def iwslt_dataset(
         train_filename (str, optional): The filename of the training split.
         dev_filename (str, optional): The filename of the dev split.
         test_filename (str, optional): The filename of the test split.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         url (str, optional): URL of the dataset file.
 
     Returns:
@@ -76,10 +76,10 @@ def iwslt_dataset(
 
     # Format Filenames
     source, target = tuple(language_extensions)
-    check_file = check_file.format(source=source, target=target)
+    check_files = [s.format(source=source, target=target) for s in check_files]
     url = url.format(source=source, target=target)
 
-    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
+    download_file_maybe_extract(url=url, directory=directory, check_files=check_files)
 
     iwslt_clean(os.path.join(directory, '{source}-{target}'.format(source=source, target=target)))
 

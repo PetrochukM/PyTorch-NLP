@@ -1,6 +1,6 @@
 import os
 
-from torchnlp.utils import download_urls
+from torchnlp.download import download_files_maybe_extract
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -11,7 +11,7 @@ def multi30k_dataset(directory='data/multi30k/',
                      train_filename='train',
                      dev_filename='val',
                      test_filename='test',
-                     check_file='train.de',
+                     check_files=['train.de', 'val.de'],
                      urls=[
                          'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/training.tar.gz',
                          'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/validation.tar.gz',
@@ -54,7 +54,7 @@ def multi30k_dataset(directory='data/multi30k/',
         train_directory (str, optional): The directory of the training split.
         dev_directory (str, optional): The directory of the dev split.
         test_directory (str, optional): The directory of the test split.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         urls (str, optional): URLs to download.
 
     Returns:
@@ -73,7 +73,7 @@ def multi30k_dataset(directory='data/multi30k/',
           'de': 'Mehrere Männer mit Schutzhelmen bedienen ein Antriebsradsystem.'
         }]
     """
-    download_urls(directory=directory, file_urls=urls, check_file=check_file)
+    download_files_maybe_extract(urls=urls, directory=directory, check_files=check_files)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

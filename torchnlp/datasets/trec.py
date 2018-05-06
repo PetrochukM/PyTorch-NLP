@@ -1,6 +1,6 @@
 import os
 
-from torchnlp.utils import download_urls
+from torchnlp.download import download_files_maybe_extract
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -9,7 +9,7 @@ def trec_dataset(directory='data/trec/',
                  test=False,
                  train_filename='train_5500.label',
                  test_filename='TREC_10.label',
-                 check_file='train_5500.label',
+                 check_files=['train_5500.label'],
                  urls=[
                      'http://cogcomp.org/Data/QA/QC/train_5500.label',
                      'http://cogcomp.org/Data/QA/QC/TREC_10.label'
@@ -36,7 +36,7 @@ def trec_dataset(directory='data/trec/',
         test (bool, optional): If to load the test split of the dataset.
         train_filename (str, optional): The filename of the training split.
         test_filename (str, optional): The filename of the test split.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         urls (str, optional): URLs to download.
 
     Returns:
@@ -55,7 +55,7 @@ def trec_dataset(directory='data/trec/',
           'text': 'What films featured the character Popeye Doyle ?'
         }]
     """
-    download_urls(directory=directory, file_urls=urls, check_file=check_file)
+    download_files_maybe_extract(urls=urls, directory=directory, check_files=check_files)
 
     ret = []
     splits = [(train, train_filename), (test, test_filename)]

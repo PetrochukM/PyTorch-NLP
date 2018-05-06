@@ -1,6 +1,6 @@
 import os
 
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -11,7 +11,7 @@ def wmt_dataset(directory='data/wmt16_en_de',
                 train_filename='train.tok.clean.bpe.32000',
                 dev_filename='newstest2013.tok.bpe.32000',
                 test_filename='newstest2014.tok.bpe.32000',
-                check_file='train.tok.clean.bpe.32000.en',
+                check_files=['train.tok.clean.bpe.32000.en'],
                 url='https://drive.google.com/uc?export=download&id=0B_bZck-ksdkpM25jRUN2X2UxMm8'):
     """
     The Workshop on Machine Translation (WMT) 2014 English-German dataset.
@@ -41,7 +41,7 @@ def wmt_dataset(directory='data/wmt16_en_de',
         train_filename (str, optional): The filename of the training split.
         dev_filename (str, optional): The filename of the dev split.
         test_filename (str, optional): The filename of the test split.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
@@ -60,8 +60,8 @@ def wmt_dataset(directory='data/wmt16_en_de',
           'de': 'Ich erklär@@ e die am Freitag , dem 17. Dezember unterbro@@ ch@@ ene...'
         }]
     """
-    download_compressed_directory(
-        file_url=url, directory=directory, check_file=check_file, filename='wmt16_en_de.tar.gz')
+    download_file_maybe_extract(
+        url=url, directory=directory, check_files=check_files, filename='wmt16_en_de.tar.gz')
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

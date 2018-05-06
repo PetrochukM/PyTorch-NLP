@@ -1,7 +1,7 @@
 import os
 import io
 
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -46,7 +46,7 @@ def smt_dataset(directory='data/',
                 dev_filename='dev.txt',
                 test_filename='test.txt',
                 extracted_name='trees',
-                check_file='trees/train.txt',
+                check_files=['trees/train.txt'],
                 url='http://nlp.stanford.edu/sentiment/trainDevTestTrees_PTB.zip',
                 fine_grained=False,
                 subtrees=False):
@@ -77,7 +77,7 @@ def smt_dataset(directory='data/',
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
         extracted_name (str, optional): Name of the extracted dataset directory.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
         subtrees (bool, optional): Whether to include sentiment-tagged subphrases in addition to
             complete examples.
@@ -96,7 +96,7 @@ def smt_dataset(directory='data/',
           'label': 'positive'
         }
     """
-    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
+    download_file_maybe_extract(url=url, directory=directory, check_files=check_files)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

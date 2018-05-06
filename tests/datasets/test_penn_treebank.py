@@ -12,7 +12,7 @@ def test_penn_treebank_dataset_row(mock_urlretrieve):
 
     # Check a row are parsed correctly
     train, dev, test = penn_treebank_dataset(
-        directory=directory, test=True, dev=True, train=True, check_file=None)
+        directory=directory, test=True, dev=True, train=True, check_files=[])
     assert len(train) > 0
     assert len(test) > 0
     assert len(dev) > 0

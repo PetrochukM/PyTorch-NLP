@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 from torchnlp.datasets.dataset import Dataset
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 
 
 def simple_qa_dataset(directory='data/',
@@ -14,7 +14,7 @@ def simple_qa_dataset(directory='data/',
                       train_filename='annotated_fb_data_train.txt',
                       dev_filename='annotated_fb_data_valid.txt',
                       test_filename='annotated_fb_data_test.txt',
-                      check_file='SimpleQuestions_v2/annotated_fb_data_train.txt',
+                      check_files=['SimpleQuestions_v2/annotated_fb_data_train.txt'],
                       url='https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1'):
     """
     Load the SimpleQuestions dataset.
@@ -35,7 +35,7 @@ def simple_qa_dataset(directory='data/',
         train_filename (str, optional): The filename of the training split.
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
@@ -59,7 +59,7 @@ def simple_qa_dataset(directory='data/',
           'subject': 'www.freebase.com/m/0tp2p24'
         }]
     """
-    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
+    download_file_maybe_extract(url=url, directory=directory, check_files=check_files)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
