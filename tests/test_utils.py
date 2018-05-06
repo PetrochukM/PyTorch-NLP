@@ -1,28 +1,16 @@
-import urllib.request
 import pickle
 
 import pytest
 import torch
 
-from tqdm import tqdm
-
 from torchnlp.datasets import Dataset
 from torchnlp.text_encoders import PADDING_INDEX
 from torchnlp.utils import flatten_parameters
-from torchnlp.utils import get_filename_from_url
 from torchnlp.utils import pad_batch
 from torchnlp.utils import pad_tensor
-from torchnlp.utils import reporthook
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import shuffle
 from torchnlp.utils import torch_equals_ignore_index
-
-
-def test_get_filename_from_url():
-    assert 'aclImdb_v1.tar.gz' in get_filename_from_url(
-        'http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz')
-    assert 'SimpleQuestions_v2.tgz' in get_filename_from_url(
-        'https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1')
 
 
 def test_pad_tensor():
@@ -64,12 +52,6 @@ def test_flatten_parameters():
     rnn2 = pickle.loads(rnn_pickle)
     # Check that ``flatten_parameters`` works with a RNN module.
     flatten_parameters(rnn2)
-
-
-def test_reporthook():
-    # Check that reporthook works with URLLIB
-    with tqdm(unit='B', unit_scale=True, miniters=1) as t:
-        urllib.request.urlretrieve('http://google.com', reporthook=reporthook(t))
 
 
 def test_resplit_datasets():

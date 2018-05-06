@@ -8,7 +8,7 @@ from tests.datasets.utils import download_from_drive_side_effect
 directory = 'tests/_test_data/wmt16_en_de'
 
 
-@mock.patch("torchnlp.utils.download_from_drive")
+@mock.patch('torchnlp.download._download_file_from_drive')
 def test_wmt_dataset(mock_download_from_drive):
     mock_download_from_drive.side_effect = download_from_drive_side_effect
 

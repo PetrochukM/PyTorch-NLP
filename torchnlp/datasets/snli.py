@@ -3,7 +3,7 @@ import io
 
 import ujson as json
 
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -15,7 +15,7 @@ def snli_dataset(directory='data/',
                  dev_filename='snli_1.0_dev.jsonl',
                  test_filename='snli_1.0_test.jsonl',
                  extracted_name='snli_1.0',
-                 check_file='snli_1.0/snli_1.0_train.jsonl',
+                 check_files=['snli_1.0/snli_1.0_train.jsonl'],
                  url='http://nlp.stanford.edu/projects/snli/snli_1.0.zip'):
     """
     Load the Stanford Natural Language Inference (SNLI) dataset.
@@ -43,7 +43,7 @@ def snli_dataset(directory='data/',
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
         extracted_name (str, optional): Name of the extracted dataset directory.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
@@ -62,7 +62,7 @@ def snli_dataset(directory='data/',
           'hypothesis_transitions': ['shift', 'shift', 'shift', 'shift', 'shift', 'shift', ...],
         }
     """
-    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
+    download_file_maybe_extract(url=url, directory=directory, check_files=check_files)
 
     get_transitions = lambda parse: ['reduce' if t == ')' else 'shift' for t in parse if t != '(']
     ret = []

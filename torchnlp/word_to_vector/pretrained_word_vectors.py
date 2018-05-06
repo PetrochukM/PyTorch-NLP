@@ -40,7 +40,7 @@ from tqdm import tqdm
 import six
 import torch
 
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 
 logger = logging.getLogger(__name__)
 
@@ -108,7 +108,7 @@ class _PretrainedWordVectors(object):
 
         if not os.path.isfile(path_pt) or self.is_include is not None:
             if url:
-                download_compressed_directory(url, cache, name)
+                download_file_maybe_extract(url=url, directory=cache, check_files=[name])
 
             if not os.path.isfile(path):
                 raise RuntimeError('no vectors found at {}'.format(path))
