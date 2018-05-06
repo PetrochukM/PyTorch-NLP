@@ -2,8 +2,6 @@ from argparse import ArgumentParser
 
 import os
 
-from torch.autograd import Variable
-
 import torch
 
 from torchnlp.utils import pad_batch
@@ -56,13 +54,13 @@ def get_args():
 
 
 def collate_fn(batch, train=True):
-    """ list of tensors to a batch variable """
+    """ list of tensors to a batch tensors """
     premise_batch, _ = pad_batch([row['premise'] for row in batch])
     hypothesis_batch, _ = pad_batch([row['hypothesis'] for row in batch])
     label_batch = [row['label'] for row in batch]
 
     # PyTorch RNN requires batches to be transposed for speed and integration with CUDA
-    to_variable = (
-        lambda b: Variable(torch.stack(b).t_().squeeze(0).contiguous(), volatile=not train))
+    transpose = (
+        lambda b: torch.stack(b).t_().squeeze(0).contiguous())
 
-    return (to_variable(premise_batch), to_variable(hypothesis_batch), to_variable(label_batch))
+    return (transpose(premise_batch), transpose(hypothesis_batch), transpose(label_batch))

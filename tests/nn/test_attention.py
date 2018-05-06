@@ -10,7 +10,6 @@ import torch
 
 from torchnlp.nn import Attention
 from tests.nn.utils import kwargs_product
-from tests.nn.utils import tensor
 
 
 class TestAttention(unittest.TestCase):
@@ -24,10 +23,10 @@ class TestAttention(unittest.TestCase):
         self.input_seq_len = random.randint(1, 10)
 
         # Constant randomly generated tensors
-        self.input_ = tensor(
-            self.batch_size, self.output_seq_len, self.dimensions, type_=torch.FloatTensor)
-        self.context = tensor(
-            self.batch_size, self.input_seq_len, self.dimensions, type_=torch.FloatTensor)
+        self.input_ = torch.FloatTensor(self.batch_size, self.output_seq_len,
+                                        self.dimensions).random_()
+        self.context = torch.FloatTensor(self.batch_size, self.input_seq_len,
+                                         self.dimensions).random_()
 
     def _attentions(self, attention_type=['general', 'dot']):
         """
@@ -55,10 +54,10 @@ class TestAttention(unittest.TestCase):
                              (self.batch_size, self.output_seq_len, self.input_seq_len))
 
             # Check types
-            self.assertEqual(output.data.type(), 'torch.FloatTensor')
-            self.assertEqual(weights.data.type(), 'torch.FloatTensor')
+            self.assertEqual(output.type(), 'torch.FloatTensor')
+            self.assertEqual(weights.type(), 'torch.FloatTensor')
 
-            batch = weights.data.tolist()
+            batch = weights.tolist()
             for queries in batch:
                 for query in queries:
                     self.assertAlmostEqual(sum(query), 1.0, 3)

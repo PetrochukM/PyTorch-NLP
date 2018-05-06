@@ -1,4 +1,3 @@
-from torch.autograd import Variable
 from numpy.testing import assert_almost_equal
 
 import numpy
@@ -24,8 +23,8 @@ class TestCNNEncoder(unittest.TestCase):
     def test_forward_does_correct_computation(self):
         encoder = CNNEncoder(embedding_dim=2, num_filters=1, ngram_filter_sizes=(1, 2))
         for param in encoder.parameters():
-            torch.nn.init.constant(param, 1.)
-        input_tensor = Variable(torch.FloatTensor([[[.7, .8], [.1, 1.5]]]))
+            torch.nn.init.constant_(param, 1.)
+        input_tensor = torch.FloatTensor([[[.7, .8], [.1, 1.5]]])
         encoder_output = encoder(input_tensor)
         assert_almost_equal(
             encoder_output.data.numpy(), numpy.asarray([[1.6 + 1.0, 3.1 + 1.0]]), decimal=6)
@@ -33,5 +32,5 @@ class TestCNNEncoder(unittest.TestCase):
     def test_forward_runs_with_larger_input(self):
         encoder = CNNEncoder(
             embedding_dim=7, num_filters=13, ngram_filter_sizes=(1, 2, 3, 4, 5), output_dim=30)
-        tensor = Variable(torch.rand(4, 8, 7))
+        tensor = torch.rand(4, 8, 7)
         assert encoder(tensor).size() == (4, 30)

@@ -186,11 +186,11 @@ if __name__ == '__main__':
     optimizer = torch.optim.SGD(list(embed.parameters()) + list(crit.parameters()), lr=1)
 
     for _ in range(E):
-        prev = torch.autograd.Variable((torch.rand(N, 1) * 0.999 * V).int().long())
-        x = torch.autograd.Variable((torch.rand(N, 1) * 0.999 * V).int().long())
+        prev = (torch.rand(N, 1) * 0.999 * V).int().long()
+        x = (torch.rand(N, 1) * 0.999 * V).int().long()
         y = embed(prev).squeeze()
         c = crit(embed.weight, bias, y, x.view(N))
-        print('Crit', c.exp().data[0])
+        print('Crit', c.exp().item())
 
         logprobs = crit.logprob(embed.weight, bias, y[:2]).exp()
         print(logprobs)

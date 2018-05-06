@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
 
-from embed_regularize import embedded_dropout
 from torchnlp.nn import LockedDropout
 from torchnlp.nn import WeightDrop
 
@@ -98,9 +96,8 @@ class RNNModel(nn.Module):
         self.decoder.weight.data.uniform_(-initrange, initrange)
 
     def forward(self, input, hidden, return_h=False):
-        emb = embedded_dropout(self.encoder, input, dropout=self.dropoute if self.training else 0)
         #emb = self.idrop(emb)
-
+        emb = self.encoder(input)
         emb = self.emb_drop(emb)
 
         raw_output = emb
@@ -129,17 +126,15 @@ class RNNModel(nn.Module):
     def init_hidden(self, bsz):
         weight = next(self.parameters()).data
         if self.rnn_type == 'LSTM':
-            return [(Variable(
-                weight.new(1, bsz, self.nhid if l != self.nlayers - 1 else
-                           (self.ninp if self.tie_weights else self.nhid)).zero_()),
-                     Variable(
-                         weight.new(1, bsz, self.nhid if l != self.nlayers - 1 else
-                                    (self.ninp if self.tie_weights else self.nhid)).zero_()))
+            return [(weight.new_zeros(1, bsz, self.nhid if l != self.nlayers - 1 else
+                                      (self.ninp if self.tie_weights else self.nhid)),
+                     weight.new_zeros(1, bsz, self.nhid if l != self.nlayers - 1 else
+                                      (self.ninp if self.tie_weights else self.nhid)))
                     for l in range(self.nlayers)]
         elif self.rnn_type == 'QRNN' or self.rnn_type == 'GRU':
             return [
-                Variable(
-                    weight.new(1, bsz, self.nhid if l != self.nlayers - 1 else
-                               (self.ninp if self.tie_weights else self.nhid)).zero_())
+                weight.new_zeros(1, bsz, self.nhid
+                                 if l != self.nlayers - 1 else (self.ninp
+                                                                if self.tie_weights else self.nhid))
                 for l in range(self.nlayers)
             ]

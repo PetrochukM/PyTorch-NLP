@@ -19,8 +19,8 @@ class Attention(nn.Module):
     Example:
 
          >>> attention = Attention(256)
-         >>> query = Variable(torch.randn(5, 1, 256))
-         >>> context = Variable(torch.randn(5, 5, 256))
+         >>> query = torch.randn(5, 1, 256)
+         >>> context = torch.randn(5, 5, 256)
          >>> output, weights = attention(query, context)
          >>> output.size()
          torch.Size([5, 1, 256])
