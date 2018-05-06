@@ -26,6 +26,7 @@ pip install -r requirements.txt
 # Optional Requirements
 pip install spacy
 pip install nltk
+pip install sacremoses
 
 # SpaCy English web model
 python -m spacy download en
