@@ -11,4 +11,4 @@ python3.6 setup.py sdist
 python3.6 setup.py bdist_wheel
 
 # Upload your distributions to PyPI using twine.
-twine upload dist/*
+python3.6 -m twine upload dist/*
