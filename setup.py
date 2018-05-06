@@ -36,7 +36,6 @@ setup_info = dict(
     long_description=long_description,
     long_description_content_type='text/markdown',
     license='BSD',
-    setup_requires=['setuptools>=38.6.0'],
     install_requires=['numpy', 'pandas', 'tqdm', 'ujson', 'requests'],
     classifiers=[
         'Development Status :: 4 - Beta',
