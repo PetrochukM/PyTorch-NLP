@@ -20,6 +20,9 @@ def find_version(*file_paths):
     raise RuntimeError("Unable to find version string.")
 
 
+with open('README.md') as f:
+    long_description = f.read()
+
 VERSION = find_version('torchnlp', '__init__.py')
 
 setup_info = dict(
@@ -28,13 +31,14 @@ setup_info = dict(
     version=VERSION,
     author='Michael Petrochuk',
     author_email='petrochukm@gmail.com',
-    url='https://github.com/Deepblue129/PytorchNLP',
+    url='https://github.com/PetrochukM/PytorchNLP',
     description='Text utilities and datasets for PyTorch',
-    long_description=read('README.md'),
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     license='BSD',
     install_requires=['numpy', 'pandas', 'tqdm', 'ujson', 'requests'],
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
         'Intended Audience :: Science/Research',
@@ -48,7 +52,7 @@ setup_info = dict(
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    keywords='pytorch nlp text',
+    keywords='pytorch nlp text torchtext torchnlp',
     python_requires='>=3.5',
 
     # Package info
