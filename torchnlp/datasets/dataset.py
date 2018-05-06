@@ -39,13 +39,52 @@ class Dataset(data.Dataset):
         # Given an column string return list of column values.
         if isinstance(key, str):
             if key not in self.columns:
-                raise AttributeError
+                raise AttributeError('Key not in columns.')
             return [row[key] if key in row else None for row in self.rows]
         # Given an row integer return a object of row values.
         elif isinstance(key, (int, slice)):
             return self.rows[key]
         else:
-            raise TypeError("Invalid argument type.")
+            raise TypeError('Invalid argument type.')
+
+    def __setitem__(self, key, item):
+        """
+        Set a column or row for a dataset.
+
+        Args:
+            key (str or int): String referencing a column or integer referencing a row
+            item (list or dict): Column or rows to set in the dataset.
+        """
+        if isinstance(key, str):
+            column = item
+            self.columns.add(key)
+            if len(column) > len(self.rows):
+                for i, value in enumerate(column):
+                    if i < len(self.rows):
+                        self.rows[i][key] = value
+                    else:
+                        self.rows.append({key: value})
+            else:
+                for i, row in enumerate(self.rows):
+                    if i < len(column):
+                        self.rows[i][key] = column[i]
+                    else:
+                        self.rows[i][key] = None
+        elif isinstance(key, slice):
+            rows = item
+            for row in rows:
+                if not isinstance(row, dict):
+                    raise ValueError('Row must be a dict.')
+                self.columns.update(row.keys())
+            self.rows[key] = rows
+        elif isinstance(key, int):
+            row = item
+            if not isinstance(row, dict):
+                raise ValueError('Row must be a dict.')
+            self.columns.update(row.keys())
+            self.rows[key] = row
+        else:
+            raise TypeError('Invalid argument type.')
 
     def __len__(self):
         return len(self.rows)
