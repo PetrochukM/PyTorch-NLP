@@ -51,41 +51,39 @@ def datasets_iterator(*datasets):
 
 def pad_tensor(tensor, length, padding_index=PADDING_INDEX):
     """ Pad a ``tensor`` to ``length`` with ``padding_index``.
-
     Args:
-        tensor (1D :class:`torch.LongTensor`): Tensor to pad.
+        tensor (torch.Tensor [n, *]): Tensor to pad.
         length (int): Pad the ``tensor`` up to ``length``.
         padding_index (int, optional): Index to pad tensor with.
-
     Returns
-        torch.LongTensor: Padded Tensor.
+        (torch.Tensor [length, *]) Padded Tensor.
     """
-    assert len(tensor.size()) == 1
-    assert length >= len(tensor)
-    n_padding = length - len(tensor)
-    padding = torch.LongTensor(n_padding * [padding_index])
-    return torch.cat((tensor, padding), 0)
+    n_padding = length - tensor.shape[0]
+    assert n_padding >= 0
+    if n_padding == 0:
+        return tensor
+    padding = tensor.new(n_padding, *tensor.shape[1:]).fill_(padding_index)
+    return torch.cat((tensor, padding), dim=0)
+
+
+def pad_batch(batch, padding_index=PADDING_INDEX):
+    """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
+    Args:
+        batch (:class:`list` of :class:`torch.Tensor`): Batch of tensors to pad.
+        padding_index (int, optional): Index to pad tensors with.
+    Returns
+        torch.Tensor, list of int: Padded tensors and original lengths of tensors.
+    """
+    lengths = [tensor.shape[0] for tensor in batch]
+    max_len = max(lengths)
+    padded = [pad_tensor(tensor, max_len, padding_index) for tensor in batch]
+    padded = torch.stack(padded, dim=0).contiguous()
+    return padded, lengths
 
 
 def flatten_parameters(model):
     """ ``flatten_parameters`` of a RNN model loaded from disk. """
     model.apply(lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None)
-
-
-def pad_batch(batch, padding_index=PADDING_INDEX):
-    """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
-
-    Args:
-        batch (:class:`list` of 1D :class:`torch.LongTensor`): Batch of tensors to pad.
-        padding_index (int, optional): Index to pad tensors with.
-
-    Returns
-        list of torch.LongTensor, list of int: Padded tensors and original lengths of tensors.
-    """
-    lengths = [len(row) for row in batch]
-    max_len = max(lengths)
-    padded = [pad_tensor(row, max_len, padding_index) for row in batch]
-    return padded, lengths
 
 
 def shuffle(list_, random_seed=123):
