@@ -11,6 +11,47 @@ from torchnlp.utils import pad_tensor
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import shuffle
 from torchnlp.utils import torch_equals_ignore_index
+from torchnlp.utils import get_tensors
+
+
+class GetTensorsObjectMock(object):
+
+    class_attribute = torch.tensor([4, 5])
+
+    def __init__(self, recurse=True):
+        self.noise_int = 3
+        self.noise_str = 'abc'
+        self.instance_attribute = frozenset([torch.tensor([6, 7])])
+        if recurse:
+            self.object_ = GetTensorsObjectMock(recurse=False)
+
+    @property
+    def property_(self):
+        return torch.tensor([7, 8])
+
+
+def test_get_tensors_list():
+    list_ = [torch.tensor([1, 2]), torch.tensor([2, 3])]
+    tensors = get_tensors(list_)
+    assert len(tensors) == 2
+
+
+def test_get_tensors_dict():
+    list_ = [{'t': torch.tensor([1, 2])}, torch.tensor([2, 3])]
+    tensors = get_tensors(list_)
+    assert len(tensors) == 2
+
+
+def test_get_tensors_tuple():
+    tuple_ = tuple([{'t': torch.tensor([1, 2])}, torch.tensor([2, 3])])
+    tensors = get_tensors(tuple_)
+    assert len(tensors) == 2
+
+
+def test_get_tensors_object():
+    object_ = GetTensorsObjectMock()
+    tensors = get_tensors(object_)
+    assert len(tensors) == 6
 
 
 def test_pad_tensor():

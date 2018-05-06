@@ -1,7 +1,9 @@
+import torch
+
 from torchnlp.samplers import BucketBatchSampler
 
 
-def test_bucket_batch_sampler():
+def test_bucket_batch_sampler_length():
     data_source = [[1], [2], [3], [4], [5], [6]]
     sort_key = lambda r: len(r)
     batch_size = 2
@@ -12,7 +14,7 @@ def test_bucket_batch_sampler():
     assert len(sampler) == 3
 
 
-def test_bucket_batch_sampler_uneven():
+def test_bucket_batch_sampler_uneven_length():
     data_source = [[1], [2], [3], [4], [5]]
     sort_key = lambda r: len(r)
     batch_size = 2
@@ -29,19 +31,14 @@ def test_bucket_batch_sampler_uneven():
 
 
 def test_bucket_batch_sampler_last_batch_first():
-    data_source = [[1], [2], [3], [4], [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]]
+    data_source = [torch.tensor([j for j in range(i)]) for i in range(100)]
     sort_key = lambda r: len(r)
-    batch_size = 2
+    batch_size = 1
     batches = list(
         BucketBatchSampler(
-            data_source,
-            batch_size,
-            sort_key=sort_key,
-            drop_last=False,
-            biggest_batches_first=True,
-            bucket_size_multiplier=2))
+            data_source, batch_size, sort_key=sort_key, drop_last=False, bucket_size_multiplier=2))
     # Largest batch (4) is in first batch
-    assert 4 in batches[0]
+    assert 99 == batches[0][0]
 
 
 def test_bucket_batch_sampler_sorted():
@@ -54,7 +51,7 @@ def test_bucket_batch_sampler_sorted():
             batch_size,
             sort_key=sort_key,
             drop_last=False,
-            biggest_batches_first=False,
+            biggest_batches_first=None,
             bucket_size_multiplier=1))
     # Largest batch (4) is in first batch
     for i, batch in enumerate(batches):

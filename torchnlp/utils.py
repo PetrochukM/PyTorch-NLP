@@ -1,4 +1,6 @@
 import logging
+import inspect
+import collections
 
 import random
 import torch
@@ -6,6 +8,38 @@ import torch
 from torchnlp.text_encoders import PADDING_INDEX
 
 logger = logging.getLogger(__name__)
+
+
+def get_tensors(object_):
+    """ Get all tensors associated with ``object_``
+
+    Args:
+        object_ (any): Any object to look for tensors.
+
+    Returns:
+        (list of torch.tensor): List of tensors that are associated with ``object_``.
+    """
+    if torch.is_tensor(object_):
+        return [object_]
+    elif isinstance(object_, (str, float, int)):
+        return []
+
+    tensors = set()
+
+    if isinstance(object_, collections.Mapping):
+        for value in object_.values():
+            tensors.update(get_tensors(value))
+    elif isinstance(object_, collections.Iterable):
+        for value in object_:
+            tensors.update(get_tensors(value))
+    else:
+        members = [
+            value for key, value in inspect.getmembers(object_)
+            if not isinstance(value, (collections.Callable, type(None)))
+        ]
+        tensors.update(get_tensors(members))
+
+    return tensors
 
 
 def sampler_to_iterator(dataset, sampler):
