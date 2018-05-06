@@ -82,8 +82,6 @@ class Dataset(data.Dataset):
             if not isinstance(row, dict):
                 raise ValueError('Row must be a dict.')
             self.columns.update(row.keys())
-            print(key)
-            print(self.rows)
             self.rows[key] = row
         else:
             raise TypeError('Invalid argument type.')
