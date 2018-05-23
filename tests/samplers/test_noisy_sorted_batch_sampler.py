@@ -57,4 +57,3 @@ def test_pickleable():
     data_source = [[1], [2], [3], [4], [5], [6]]
     sampler = NoisySortedBatchSampler(data_source, batch_size=2, drop_last=False)
     pickle.dumps(sampler)
-
