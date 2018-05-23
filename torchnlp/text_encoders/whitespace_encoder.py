@@ -1,6 +1,10 @@
 from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
+def _tokenize(s):
+    return s.split()
+
+
 class WhitespaceEncoder(StaticTokenizerEncoder):
     """ Encodes the text by splitting on whitespace.
 
@@ -32,7 +36,7 @@ class WhitespaceEncoder(StaticTokenizerEncoder):
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
             raise TypeError('WhiteSpaceEncoder defines a tokenize callable per character')
-        super().__init__(*args, tokenize=(lambda s: s.split()), **kwargs)
+        super().__init__(*args, tokenize=_tokenize, **kwargs)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]

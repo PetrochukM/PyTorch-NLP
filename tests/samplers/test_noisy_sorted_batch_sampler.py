@@ -1,3 +1,5 @@
+import pickle
+
 from torchnlp.samplers import NoisySortedBatchSampler
 
 
@@ -49,3 +51,10 @@ def test_noisy_sorted_batch_sampler_sorted():
     # Largest batch (4) is in first batch
     for i, batch in enumerate(batches):
         assert batch[0] == i
+
+
+def test_pickleable():
+    data_source = [[1], [2], [3], [4], [5], [6]]
+    sampler = NoisySortedBatchSampler(data_source, batch_size=2, drop_last=False)
+    pickle.dumps(sampler)
+

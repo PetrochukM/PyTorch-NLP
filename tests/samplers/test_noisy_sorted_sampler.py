@@ -1,3 +1,5 @@
+import pickle
+
 from torchnlp.samplers import NoisySortedSampler
 
 
@@ -24,3 +26,9 @@ def test_noisy_sorted_sampler_sort_key_noise():
     indexes = list(NoisySortedSampler(data_source, sort_key=sort_key, sort_key_noise=0.25))
     for i, j in enumerate(indexes):
         assert i == j
+
+
+def test_pickleable():
+    data_source = [[1], [2], [3], [4], [5], [6]]
+    sampler = NoisySortedSampler(data_source)
+    pickle.dumps(sampler)

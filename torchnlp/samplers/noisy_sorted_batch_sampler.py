@@ -5,6 +5,10 @@ from torch.utils.data.sampler import BatchSampler
 from torchnlp.samplers.noisy_sorted_sampler import NoisySortedSampler
 
 
+def _first(e):
+    return e[0]
+
+
 class NoisySortedBatchSampler(BatchSampler):
     """ Batch of indices are sampled from a noisy sorting of the data.
 
@@ -56,7 +60,7 @@ class NoisySortedBatchSampler(BatchSampler):
                  data,
                  batch_size,
                  drop_last,
-                 sort_key=lambda e: e,
+                 sort_key=_first,
                  sort_key_noise=0.25,
                  last_batch_first=True,
                  shuffle=True):

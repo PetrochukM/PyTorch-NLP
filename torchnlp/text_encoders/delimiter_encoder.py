@@ -1,5 +1,11 @@
+from functools import partial
+
 from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
 from torchnlp.text_encoders.reserved_tokens import UNKNOWN_TOKEN
+
+
+def _tokenize(s, delimiter):
+    return s.split(delimiter)
 
 
 class DelimiterEncoder(StaticTokenizerEncoder):
@@ -27,7 +33,7 @@ class DelimiterEncoder(StaticTokenizerEncoder):
         if 'tokenize' in kwargs:
             raise TypeError('CharacterEncoder defines a tokenize callable per character')
         self.delimiter = delimiter
-        super().__init__(*args, tokenize=(lambda s: s.split(delimiter)), **kwargs)
+        super().__init__(*args, tokenize=partial(_tokenize, delimiter=self.delimiter), **kwargs)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]
