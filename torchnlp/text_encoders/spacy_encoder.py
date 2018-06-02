@@ -1,5 +1,9 @@
 from functools import partial
 
+import torch
+
+from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
+from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
 from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
@@ -46,8 +50,7 @@ class SpacyEncoder(StaticTokenizerEncoder):
         try:
             import spacy
         except ImportError:
-            print("Please install spaCy: "
-                  "`pip install spacy`")
+            print("Please install spaCy: " "`pip install spacy`")
             raise
 
         # Use English as default when no language was specified
@@ -60,17 +63,23 @@ class SpacyEncoder(StaticTokenizerEncoder):
         if language in supported_languages:
             # Load the spaCy language model if it has been installed
             try:
-                nlp = spacy.load(language)
+                self.spacy = spacy.load(language, disable=['parser', 'tagger', 'ner'])
             except OSError:
                 raise ValueError(("Language '{0}' not found. Install using " +
-                                  "spaCy: `python -m spacy download {0}`"
-                                  ).format(language))
-
-            from spacy.tokenizer import Tokenizer
-            tokenizer = Tokenizer(nlp.vocab)
+                                  "spaCy: `python -m spacy download {0}`").format(language))
         else:
-            raise ValueError(("No tokenizer available for language '%s'. " +
-                              "Currently supported are %s")
-                             % (language, supported_languages))
+            raise ValueError(
+                ("No tokenizer available for language '%s'. " + "Currently supported are %s") %
+                (language, supported_languages))
 
-        super().__init__(*args, tokenize=partial(_tokenize, tokenizer=tokenizer), **kwargs)
+        super().__init__(*args, tokenize=partial(_tokenize, tokenizer=self.spacy), **kwargs)
+
+    def batch_encode(self, texts, eos_index=EOS_INDEX, unknown_index=UNKNOWN_INDEX):
+        return_ = []
+        for tokens in self.spacy.pipe(texts, n_threads=-1):
+            text = [token.text for token in tokens]
+            vector = [self.stoi.get(token, unknown_index) for token in text]
+            if self.append_eos:
+                vector.append(eos_index)
+            return_.append(torch.LongTensor(vector))
+        return return_

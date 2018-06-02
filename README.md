@@ -18,10 +18,14 @@ Join our community, add datasets and neural network layers! Chat with us on [Git
 
 ## Installation
 
-Make sure you have Python 3.5+ and PyTorch 0.2.0 or newer. You can then install `pytorch-nlp` using
+Make sure you have Python 3.5+ and PyTorch 0.4 or newer. You can then install `pytorch-nlp` using
 pip:
 
     pip install pytorch-nlp
+
+Or to install the latest code via:
+
+    pip install git+https://github.com/PetrochukM/PyTorch-NLP.git
 
 ## Docs 📖
 

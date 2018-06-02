@@ -33,6 +33,9 @@ def iwslt_dataset(
     challenging due to their variety in topics, but are very benign as they are very thoroughly
     rehearsed and planned, leading to easy to recognize and translate language.
 
+    Note:
+        The order examples are returned is not guaranteed due to ``iglob``.
+
     References:
       * http://workshop2017.iwslt.org/downloads/iwslt2017_proceeding_v2.pdf
       * http://workshop2017.iwslt.org/

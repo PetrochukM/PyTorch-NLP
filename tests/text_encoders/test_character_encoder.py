@@ -25,6 +25,15 @@ def test_character_encoder(encoder, sample):
     assert encoder.decode(output) == input_.replace('-', UNKNOWN_TOKEN)
 
 
+def test_character_batch_encoder(encoder, sample):
+    input_ = 'english-language pangram'
+    outputs = encoder.batch_encode([input_, input_])
+    assert len(outputs) == 2
+    for output in outputs:
+        assert len(output) == len(input_)
+        assert encoder.decode(output) == input_.replace('-', UNKNOWN_TOKEN)
+
+
 def test_character_encoder_min_occurrences(sample):
     encoder = CharacterEncoder(sample, min_occurrences=10)
     input_ = 'English-language pangram'
