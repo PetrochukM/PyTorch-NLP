@@ -1,10 +1,18 @@
+import pickle
+
+import pytest
+
 from torchnlp.text_encoders import IdentityEncoder
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 
 
-def test_identity_encoder_unknown():
+@pytest.fixture
+def encoder():
     sample = ['people/deceased_person/place_of_death', 'symbols/name_source/namesakes']
-    encoder = IdentityEncoder(sample)
+    return IdentityEncoder(sample)
+
+
+def test_identity_encoder_unknown(encoder):
     input_ = 'symbols/namesake/named_after'
     output = encoder.encode(input_)
     assert len(output) == 1
@@ -21,10 +29,12 @@ def test_identity_encoder_known():
     assert encoder.decode(output) == input_
 
 
-def test_identity_encoder_sequence():
+def test_identity_encoder_sequence(encoder):
     input_ = ['symbols/namesake/named_after', 'people/deceased_person/place_of_death']
-    sample = ['people/deceased_person/place_of_death', 'symbols/name_source/namesakes']
-    encoder = IdentityEncoder(sample)
     output = encoder.encode(input_)
     assert len(output) == 2
     assert encoder.decode(output) == [UNKNOWN_TOKEN, 'people/deceased_person/place_of_death']
+
+
+def test_is_pickleable(encoder):
+    pickle.dumps(encoder)

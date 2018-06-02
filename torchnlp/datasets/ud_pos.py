@@ -1,7 +1,7 @@
 import os
 import io
 
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 from torchnlp.datasets.dataset import Dataset
 
 
@@ -13,7 +13,7 @@ def ud_pos_dataset(directory='data/',
                    dev_filename='en-ud-tag.v2.dev.txt',
                    test_filename='en-ud-tag.v2.test.txt',
                    extracted_name='en-ud-v2',
-                   check_file='en-ud-v2/en-ud-tag.v2.train.txt',
+                   check_files=['en-ud-v2/en-ud-tag.v2.train.txt'],
                    url='https://bitbucket.org/sivareddyg/public/downloads/en-ud-v2.zip'):
     """
     Load the Universal Dependencies - English Dependency Treebank dataset.
@@ -40,7 +40,7 @@ def ud_pos_dataset(directory='data/',
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
         extracted_name (str, optional): Name of the extracted dataset directory.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
@@ -59,7 +59,7 @@ def ud_pos_dataset(directory='data/',
           'ptb_tags': ['NNS', 'VBD', 'DT', 'NN', ',', 'NNP', 'NNP', ',', 'IN', 'NNP', '.']
         }
     """
-    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
+    download_file_maybe_extract(url=url, directory=directory, check_files=check_files)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

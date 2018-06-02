@@ -9,6 +9,10 @@ class TextEncoder(object):
         """ Returns a :class:`torch.LongTensor` encoding of the `text`. """
         raise NotImplementedError
 
+    def batch_encode(self, strings, *args, **kwargs):
+        """ Returns a :class:`list` of :class:`torch.LongTensor` encoding of the `text`. """
+        return [self.encode(s, *args, **kwargs) for s in strings]
+
     def decode(self, tensor):  # pragma: no cover
         """ Given a :class:`torch.Tensor`, returns a :class:`str` representing the decoded text.
 

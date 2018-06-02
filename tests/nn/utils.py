@@ -1,8 +1,5 @@
 from itertools import product
 
-import torch
-from torch.autograd import Variable
-
 
 def kwargs_product(dict_):
     """
@@ -18,16 +15,3 @@ def kwargs_product(dict_):
         {'character': 'b', 'number': 2}]
     """
     return (dict(zip(dict_, x)) for x in product(*dict_.values()))
-
-
-def tensor(*args, type_=torch.LongTensor, max_=100, variable=True):
-    """
-    Args:
-        type_ constructor for a tensor
-    Returns:
-        type_ [*args] filled with random numbers from a uniform distribution [0, max]
-    """
-    ret = type_(*args).random_(to=max_ - 1)
-    if variable:
-        ret = Variable(ret)
-    return ret

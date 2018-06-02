@@ -1,5 +1,6 @@
 import unittest
 import collections
+import pickle
 import random
 import mock
 
@@ -167,3 +168,8 @@ class SubwordTextTokenizerTest(unittest.TestCase):
         # Previously there was a bug which produced an infinite loop in this case.
         with self.assertRaises(AssertionError):
             encoder.encode(original)
+
+
+def test_is_pickleable():
+    tokenizer = SubwordTextTokenizer()
+    pickle.dumps(tokenizer)

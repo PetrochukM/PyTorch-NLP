@@ -1,20 +1,45 @@
-from urllib.parse import urlparse
-
 import logging
-import os
-import requests
-import tarfile
-import urllib.request
-import zipfile
+import inspect
+import collections
 
 import random
 import torch
 
-from tqdm import tqdm
-
 from torchnlp.text_encoders import PADDING_INDEX
 
 logger = logging.getLogger(__name__)
+
+
+def get_tensors(object_):
+    """ Get all tensors associated with ``object_``
+
+    Args:
+        object_ (any): Any object to look for tensors.
+
+    Returns:
+        (list of torch.tensor): List of tensors that are associated with ``object_``.
+    """
+    if torch.is_tensor(object_):
+        return [object_]
+    elif isinstance(object_, (str, float, int)):
+        return []
+
+    tensors = set()
+
+    if isinstance(object_, collections.Mapping):
+        for value in object_.values():
+            tensors.update(get_tensors(value))
+    elif isinstance(object_, collections.Iterable):
+        for value in object_:
+            tensors.update(get_tensors(value))
+    else:
+        members = [
+            value for key, value in inspect.getmembers(object_)
+            if not isinstance(value, (collections.Callable, type(None)))
+        ]
+        tensors.update(get_tensors(members))
+
+    return tensors
 
 
 def sampler_to_iterator(dataset, sampler):
@@ -51,41 +76,39 @@ def datasets_iterator(*datasets):
 
 def pad_tensor(tensor, length, padding_index=PADDING_INDEX):
     """ Pad a ``tensor`` to ``length`` with ``padding_index``.
-
     Args:
-        tensor (1D :class:`torch.LongTensor`): Tensor to pad.
+        tensor (torch.Tensor [n, *]): Tensor to pad.
         length (int): Pad the ``tensor`` up to ``length``.
         padding_index (int, optional): Index to pad tensor with.
-
     Returns
-        torch.LongTensor: Padded Tensor.
+        (torch.Tensor [length, *]) Padded Tensor.
     """
-    assert len(tensor.size()) == 1
-    assert length >= len(tensor)
-    n_padding = length - len(tensor)
-    padding = torch.LongTensor(n_padding * [padding_index])
-    return torch.cat((tensor, padding), 0)
+    n_padding = length - tensor.shape[0]
+    assert n_padding >= 0
+    if n_padding == 0:
+        return tensor
+    padding = tensor.new(n_padding, *tensor.shape[1:]).fill_(padding_index)
+    return torch.cat((tensor, padding), dim=0)
+
+
+def pad_batch(batch, padding_index=PADDING_INDEX):
+    """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
+    Args:
+        batch (:class:`list` of :class:`torch.Tensor`): Batch of tensors to pad.
+        padding_index (int, optional): Index to pad tensors with.
+    Returns
+        torch.Tensor, list of int: Padded tensors and original lengths of tensors.
+    """
+    lengths = [tensor.shape[0] for tensor in batch]
+    max_len = max(lengths)
+    padded = [pad_tensor(tensor, max_len, padding_index) for tensor in batch]
+    padded = torch.stack(padded, dim=0).contiguous()
+    return padded, lengths
 
 
 def flatten_parameters(model):
     """ ``flatten_parameters`` of a RNN model loaded from disk. """
     model.apply(lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None)
-
-
-def pad_batch(batch, padding_index=PADDING_INDEX):
-    """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
-
-    Args:
-        batch (:class:`list` of 1D :class:`torch.LongTensor`): Batch of tensors to pad.
-        padding_index (int, optional): Index to pad tensors with.
-
-    Returns
-        list of torch.LongTensor, list of int: Padded tensors and original lengths of tensors.
-    """
-    lengths = [len(row) for row in batch]
-    max_len = max(lengths)
-    padded = [pad_tensor(row, max_len, padding_index) for row in batch]
-    return padded, lengths
 
 
 def shuffle(list_, random_seed=123):
@@ -158,185 +181,3 @@ def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):
         tensor_other = tensor_other.masked_select(mask_arr)
 
     return torch.equal(tensor, tensor_other)
-
-
-def reporthook(t):
-    """ ``reporthook`` to use with ``urllib.request`` that prints the process of the download.
-
-    Uses ``tqdm`` for progress bar.
-
-    **Reference:**
-    https://github.com/tqdm/tqdm
-
-    Args:
-        t (tqdm.tqdm) Progress bar.
-
-    Example:
-        >>> with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
-        >>>    urllib.request.urlretrieve(file_url, filename=full_path, reporthook=reporthook(t))
-
-    """
-    last_b = [0]
-
-    def inner(b=1, bsize=1, tsize=None):
-        """
-        Args:
-            b (int, optional): Number of blocks just transferred [default: 1].
-            bsize (int, optional): Size of each block (in tqdm units) [default: 1].
-            tsize (int, optional): Total size (in tqdm units). If [default: None] remains unchanged.
-        """
-        if tsize is not None:
-            t.total = tsize
-        t.update((b - last_b[0]) * bsize)
-        last_b[0] = b
-
-    return inner
-
-
-def download_from_drive(directory, filename, url):  # pragma: no cover
-    """ Download filename from google drive unless it's already in directory.
-
-    Args:
-        directory (str): path to the directory that will be used.
-        filename (str): name of the file to download to (do nothing if it already exists).
-        url (str): URL to download from.
-
-    Returns:
-        (str): The path to the downloaded file.
-    """
-    print('HERE')
-    filepath = os.path.join(directory, filename)
-    confirm_token = None
-
-    # Since the file is big, drive will scan it for virus and take it to a
-    # warning page. We find the confirm token on this page and append it to the
-    # URL to start the download process.
-    confirm_token = None
-    session = requests.Session()
-    response = session.get(url, stream=True)
-    for k, v in response.cookies.items():
-        if k.startswith("download_warning"):
-            confirm_token = v
-
-    if confirm_token:
-        url = url + "&confirm=" + confirm_token
-
-    logger.info("Downloading %s to %s" % (url, filepath))
-
-    response = session.get(url, stream=True)
-    # Now begin the download.
-    chunk_size = 16 * 1024
-    with open(filepath, "wb") as f:
-        for chunk in response.iter_content(chunk_size):
-            if chunk:
-                f.write(chunk)
-
-    # Print newline to clear the carriage return from the download progress
-    statinfo = os.stat(filepath)
-    logger.info("Successfully downloaded %s, %s bytes." % (filename, statinfo.st_size))
-    return filepath
-
-
-def get_filename_from_url(url):
-    """ Return a filename from a URL """
-    parse = urlparse(url)
-    return os.path.basename(parse.path)
-
-
-def download(file_url, destination, filename=None):
-    """ Download the file at ``file_url`` to ``directory``.
-
-    Args:
-        file_url (str): Url of file.
-        destination (str): Download to destination.
-        filename (str, optional): Name of the file to download.
-
-    Returns:
-        (str): Filename of download file.
-    """
-    if not os.path.isdir(destination):
-        os.makedirs(destination)
-
-    if filename is None:
-        filename = get_filename_from_url(file_url)
-    full_path = os.path.join(destination, filename)
-    logger.info('Downloading {}'.format(filename))
-    if 'drive.google.com' in file_url:
-        download_from_drive(destination, filename, file_url)
-    else:
-        with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
-            urllib.request.urlretrieve(file_url, filename=full_path, reporthook=reporthook(t))
-    return full_path
-
-
-def maybe_extract(compressed_filename, destination, extension=None):
-    """ Extract a compressed file to ``destination``.
-
-    Args:
-        compressed_filename (str): Compressed file.
-        destination (str): Extract to destination.
-        extension (str, optional): Extension of the file.
-
-    Returns:
-        None:
-    """
-    logger.info('Extracting {}'.format(compressed_filename))
-
-    if extension is None:
-        basename = os.path.basename(compressed_filename)
-        extension = basename.split('.', 1)[1]
-
-    if 'zip' in extension:
-        with zipfile.ZipFile(compressed_filename, "r") as zip_:
-            zip_.extractall(destination)
-    elif 'tar' in extension or 'tgz' in extension:
-        with tarfile.open(compressed_filename, mode='r') as tar:
-            tar.extractall(path=destination)
-
-    logger.info('Extracted {}'.format(compressed_filename))
-
-
-def download_compressed_directory(file_url,
-                                  directory,
-                                  check_file=None,
-                                  extension=None,
-                                  filename=None):
-    """ Download a compressed from ``file_url`` and extract into ``destination``.
-
-    Args:
-        file_url (str): Url of file.
-        directory (str): Directory to download and extract to.
-        check_file (str, optional): Operation was successful if this file exists.
-        extension (str, optional): Extension of the file.
-        filename (str, optional): Name of the file to download.
-
-    Returns:
-        None:
-    """
-    check_file = None if check_file is None else os.path.join(directory, check_file)
-    if check_file is None or not os.path.isfile(check_file):
-        compressed_filename = download(file_url, directory, filename)
-        maybe_extract(compressed_filename, directory, extension=extension)
-        if check_file is not None and not os.path.isfile(check_file):
-            raise ValueError('[DOWNLOAD FAILED] `check_file` not found')
-
-
-def download_urls(file_urls, directory, check_file=None):
-    """ Download a set of ``urls`` into a ``directory``.
-
-    Args:
-        file_urls (:class:`list` of :class:`str`): Set of urls to download.
-        directory (str): Directory in which to download urls.
-        check_file (str, optional): Operation was successful if this file exists.
-
-    Returns:
-        None:
-    """
-    check_file = None if check_file is None else os.path.join(directory, check_file)
-    if check_file is None or not os.path.isfile(check_file):
-        for file_url in file_urls:
-            compressed_filename = download(file_url, directory)
-            maybe_extract(compressed_filename, directory)
-
-        if check_file is not None and not os.path.isfile(check_file):
-            raise ValueError('[DOWNLOAD FAILED] `check_file` not found')

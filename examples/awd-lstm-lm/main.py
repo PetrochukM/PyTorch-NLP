@@ -3,8 +3,6 @@ import time
 import math
 import numpy as np
 import torch
-from torch.autograd import Variable
-
 import model
 
 from utils import repackage_hidden
@@ -43,7 +41,7 @@ parser.add_argument(
     help='amount of weight dropout to apply to the RNN hidden to hidden matrix')
 parser.add_argument('--seed', type=int, default=1111, help='random seed')
 parser.add_argument('--nonmono', type=int, default=5, help='random seed')
-parser.add_argument('--cuda', action='store_false', help='use CUDA')
+parser.add_argument('--cuda', action='store_true', default=False, help='use CUDA')
 parser.add_argument('--log-interval', type=int, default=200, metavar='N', help='report interval')
 randomhash = ''.join(str(time.time()).split('.'))
 parser.add_argument(
@@ -182,13 +180,14 @@ def evaluate(data_source, source_sampler, target_sampler, batch_size=10):
 
     for source_sample, target_sample in zip(source_sampler, target_sampler):
         model.train()
-        data = Variable(torch.stack([data_source[i] for i in source_sample]), volatile=True)
-        targets = Variable(torch.stack([data_source[i] for i in target_sample])).view(-1)
-        output, hidden = model(data, hidden)
+        data = torch.stack([data_source[i] for i in source_sample])
+        targets = torch.stack([data_source[i] for i in target_sample]).view(-1)
+        with torch.no_grad():
+            output, hidden = model(data, hidden)
         total_loss += len(data) * criterion(model.decoder.weight, model.decoder.bias, output,
-                                            targets).data
+                                            targets).item()
         hidden = repackage_hidden(hidden)
-    return total_loss[0] / len(data_source)
+    return total_loss / len(data_source)
 
 
 def train():
@@ -201,9 +200,8 @@ def train():
     batch = 0
     for source_sample, target_sample in zip(train_source_sampler, train_target_sampler):
         model.train()
-        data = Variable(torch.stack([train_data[i] for i in source_sample])).t_().contiguous()
-        targets = Variable(torch.stack(
-            [train_data[i] for i in target_sample])).t_().contiguous().view(-1)
+        data = torch.stack([train_data[i] for i in source_sample]).t_().contiguous()
+        targets = torch.stack([train_data[i] for i in target_sample]).t_().contiguous().view(-1)
 
         # Starting each batch, we detach the hidden state from how it was previously produced.
         # If we didn't, the model would try backpropagating all the way to start of the dataset.
@@ -226,12 +224,12 @@ def train():
 
         # `clip_grad_norm` helps prevent the exploding gradient problem in RNNs / LSTMs.
         if args.clip:
-            torch.nn.utils.clip_grad_norm(params, args.clip)
+            torch.nn.utils.clip_grad_norm_(params, args.clip)
         optimizer.step()
 
-        total_loss += raw_loss.data
+        total_loss += raw_loss.item()
         if batch % args.log_interval == 0 and batch > 0:
-            cur_loss = total_loss[0] / args.log_interval
+            cur_loss = total_loss / args.log_interval
             elapsed = time.time() - start_time
             print('| epoch {:3d} | {:5d}/{:5d} batches | lr {:05.5f} | ms/batch {:5.2f} | '
                   'loss {:5.2f} | ppl {:8.2f} | bpc {:8.3f}'.format(

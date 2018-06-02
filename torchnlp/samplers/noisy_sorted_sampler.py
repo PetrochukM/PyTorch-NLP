@@ -3,6 +3,10 @@ import random
 from torch.utils.data.sampler import Sampler
 
 
+def _first(e):
+    return e[0]
+
+
 class NoisySortedSampler(Sampler):
     """Samples elements sequentially with noise.
 
@@ -20,7 +24,7 @@ class NoisySortedSampler(Sampler):
         [0, 1, 2, 3, 4, 5, 8, 6, 7, 9]
     """
 
-    def __init__(self, data, sort_key=lambda e: e, sort_key_noise=0.25):
+    def __init__(self, data, sort_key=_first, sort_key_noise=0.25):
         super().__init__(data)
         self.data = data
         self.sort_key = sort_key

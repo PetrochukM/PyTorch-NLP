@@ -1,6 +1,10 @@
 from torch.utils.data.sampler import Sampler
 
 
+def _identity(e):
+    return e
+
+
 class SortedSampler(Sampler):
     """Samples elements sequentially, always in the same order.
 
@@ -15,7 +19,7 @@ class SortedSampler(Sampler):
 
     """
 
-    def __init__(self, data, sort_key=lambda e: e):
+    def __init__(self, data, sort_key=_identity):
         super().__init__(data)
         self.data = data
         self.sort_key = sort_key

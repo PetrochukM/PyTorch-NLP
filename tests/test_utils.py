@@ -1,36 +1,78 @@
-import urllib.request
 import pickle
 
+import pytest
 import torch
 
-from tqdm import tqdm
-
 from torchnlp.datasets import Dataset
+from torchnlp.text_encoders import PADDING_INDEX
 from torchnlp.utils import flatten_parameters
 from torchnlp.utils import pad_batch
 from torchnlp.utils import pad_tensor
-from torchnlp.utils import reporthook
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import shuffle
 from torchnlp.utils import torch_equals_ignore_index
-from torchnlp.utils import get_filename_from_url
+from torchnlp.utils import get_tensors
 
 
-def test_get_filename_from_url():
-    assert 'aclImdb_v1.tar.gz' in get_filename_from_url(
-        'http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz')
-    assert 'SimpleQuestions_v2.tgz' in get_filename_from_url(
-        'https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1')
+class GetTensorsObjectMock(object):
+
+    class_attribute = torch.tensor([4, 5])
+
+    def __init__(self, recurse=True):
+        self.noise_int = 3
+        self.noise_str = 'abc'
+        self.instance_attribute = frozenset([torch.tensor([6, 7])])
+        if recurse:
+            self.object_ = GetTensorsObjectMock(recurse=False)
+
+    @property
+    def property_(self):
+        return torch.tensor([7, 8])
+
+
+def test_get_tensors_list():
+    list_ = [torch.tensor([1, 2]), torch.tensor([2, 3])]
+    tensors = get_tensors(list_)
+    assert len(tensors) == 2
+
+
+def test_get_tensors_dict():
+    list_ = [{'t': torch.tensor([1, 2])}, torch.tensor([2, 3])]
+    tensors = get_tensors(list_)
+    assert len(tensors) == 2
+
+
+def test_get_tensors_tuple():
+    tuple_ = tuple([{'t': torch.tensor([1, 2])}, torch.tensor([2, 3])])
+    tensors = get_tensors(tuple_)
+    assert len(tensors) == 2
+
+
+def test_get_tensors_object():
+    object_ = GetTensorsObjectMock()
+    tensors = get_tensors(object_)
+    assert len(tensors) == 6
 
 
 def test_pad_tensor():
-    PADDING_INDEX = 0
     padded = pad_tensor(torch.LongTensor([1, 2, 3]), 5, PADDING_INDEX)
     assert padded.tolist() == [1, 2, 3, PADDING_INDEX, PADDING_INDEX]
 
 
+def test_pad_tensor_multiple_dim():
+    padded = pad_tensor(torch.LongTensor(1, 2, 3), 5, PADDING_INDEX)
+    assert padded.size() == (5, 2, 3)
+    assert padded[1].sum().item() == pytest.approx(0)
+
+
+def test_pad_tensor_multiple_dim_float_tensor():
+    padded = pad_tensor(torch.FloatTensor(778, 80), 804, PADDING_INDEX)
+    assert padded.size() == (804, 80)
+    assert padded[-1].sum().item() == pytest.approx(0)
+    assert padded.type() == 'torch.FloatTensor'
+
+
 def test_pad_batch():
-    PADDING_INDEX = 0
     batch = [torch.LongTensor([1, 2, 3]), torch.LongTensor([1, 2]), torch.LongTensor([1])]
     padded, lengths = pad_batch(batch, PADDING_INDEX)
     padded = [r.tolist() for r in padded]
@@ -51,12 +93,6 @@ def test_flatten_parameters():
     rnn2 = pickle.loads(rnn_pickle)
     # Check that ``flatten_parameters`` works with a RNN module.
     flatten_parameters(rnn2)
-
-
-def test_reporthook():
-    # Check that reporthook works with URLLIB
-    with tqdm(unit='B', unit_scale=True, miniters=1) as t:
-        urllib.request.urlretrieve('http://google.com', reporthook=reporthook(t))
 
 
 def test_resplit_datasets():

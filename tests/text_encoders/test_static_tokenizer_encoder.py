@@ -2,7 +2,7 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import WhitespaceEncoder
+from torchnlp.text_encoders import StaticTokenizerEncoder
 
 
 @pytest.fixture
@@ -12,10 +12,10 @@ def input_():
 
 @pytest.fixture
 def encoder(input_):
-    return WhitespaceEncoder([input_])
+    return StaticTokenizerEncoder([input_])
 
 
-def test_whitespace_encoder(encoder, input_):
+def test_static_tokenizer_encoder(encoder, input_):
     tokens = encoder.encode(input_)
     assert encoder.decode(tokens) == input_
 

@@ -1,7 +1,7 @@
 import os
 import io
 
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 from torchnlp.text_encoders import EOS_TOKEN
 
@@ -15,7 +15,7 @@ def wikitext_2_dataset(
         dev_filename='wiki.valid.tokens',
         test_filename='wiki.test.tokens',
         extracted_name='wikitext-2',
-        check_file='wikitext-2/wiki.train.tokens',
+        check_files=['wikitext-2/wiki.train.tokens'],
         url='https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-v1.zip'):
     """
     Load the WikiText-2 dataset.
@@ -36,7 +36,7 @@ def wikitext_2_dataset(
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
         extracted_name (str, optional): Name of the extracted dataset directory.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
@@ -49,7 +49,7 @@ def wikitext_2_dataset(
         >>> train[:10]
         ['</s>', '=', 'Valkyria', 'Chronicles', 'III', '=', '</s>', '</s>', 'Senjō', 'no']
     """
-    download_compressed_directory(file_url=url, directory=directory, check_file=check_file)
+    download_file_maybe_extract(url=url, directory=directory, check_files=check_files)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

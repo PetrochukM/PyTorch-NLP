@@ -3,7 +3,7 @@ import io
 
 from torchnlp.text_encoders import UNKNOWN_TOKEN
 from torchnlp.text_encoders import EOS_TOKEN
-from torchnlp.utils import download_urls
+from torchnlp.download import download_files_maybe_extract
 
 
 def penn_treebank_dataset(
@@ -14,7 +14,7 @@ def penn_treebank_dataset(
         train_filename='ptb.train.txt',
         dev_filename='ptb.valid.txt',
         test_filename='ptb.test.txt',
-        check_file='ptb.train.txt',
+        check_files=['ptb.train.txt'],
         urls=[
             'https://raw.githubusercontent.com/wojzaremba/lstm/master/data/ptb.train.txt',
             'https://raw.githubusercontent.com/wojzaremba/lstm/master/data/ptb.valid.txt',
@@ -41,7 +41,7 @@ def penn_treebank_dataset(
         dev_filename (str, optional): The filename of the development split.
         test_filename (str, optional): The filename of the test split.
         name (str, optional): Name of the dataset directory.
-        check_file (str, optional): Check this file exists if download was successful.
+        check_files (str, optional): Check if these files exist, then this download was successful.
         urls (str, optional): URLs to download.
 
     Returns:
@@ -55,7 +55,7 @@ def penn_treebank_dataset(
         ['aer', 'banknote', 'berlitz', 'calloway', 'centrust', 'cluett', 'fromstein', 'gitano',
         'guterman', 'hydro-quebec']
     """
-    download_urls(directory=directory, file_urls=urls, check_file=check_file)
+    download_files_maybe_extract(urls=urls, directory=directory, check_files=check_files)
 
     ret = []
     splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]

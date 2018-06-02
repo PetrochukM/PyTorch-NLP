@@ -1,5 +1,4 @@
 import heapq
-import pickle
 import math
 
 from torch.utils.data.sampler import BatchSampler
@@ -7,6 +6,15 @@ from torch.utils.data.sampler import RandomSampler
 
 from torchnlp.samplers.sorted_sampler import SortedSampler
 from torchnlp.samplers.shuffle_batch_sampler import ShuffleBatchSampler
+from torchnlp.utils import get_tensors
+
+
+def _biggest_batches_first(o):
+    return sum([t.numel() for t in get_tensors(o)])
+
+
+def _identity(e):
+    return e
 
 
 class BucketBatchSampler(object):
@@ -35,9 +43,9 @@ class BucketBatchSampler(object):
           comparison key from each list element
         drop_last (bool): If ``True``, the sampler will drop the last batch if its size would be
             less than ``batch_size``.
-        biggest_batch_first (bool, optional): If ``True``, the sampler will use cPickle to
-            approximate the memory footprint of each batch and attempt to return the 5 biggest
-            batches first.
+        biggest_batch_first (callable or None, optional): If a callable is provided, the sampler
+            approximates the memory footprint of tensors in each batch, returning the 5 biggest
+            batches first. Callable must return a number, given an example.
 
             This is largely for testing, to see how large of a batch you can safely use with your
             GPU. This will let you try out the biggest batch that you have in the data `first`, so
@@ -62,8 +70,8 @@ class BucketBatchSampler(object):
             data,
             batch_size,
             drop_last,
-            sort_key=lambda e: e,
-            biggest_batches_first=True,
+            sort_key=_identity,
+            biggest_batches_first=_biggest_batches_first,
             bucket_size_multiplier=100,
             shuffle=True,
     ):
@@ -97,17 +105,19 @@ class BucketBatchSampler(object):
 
                     yield batch
 
-        if not self.biggest_batches_first:
+        if self.biggest_batches_first is None:
             return get_batches()
         else:
             batches = list(get_batches())
-            indices = heapq.nlargest(
+            biggest_batches = heapq.nlargest(
                 5,
                 range(len(batches)),
-                key=lambda i: len(pickle.dumps([self.data[j] for j in batches[i]])))
-            front = [batches[i] for i in indices]
-            for i in sorted(indices, reverse=True):
+                key=lambda i: sum([self.biggest_batches_first(self.data[j]) for j in batches[i]]))
+            front = [batches[i] for i in biggest_batches]
+            # Remove ``biggest_batches`` from data
+            for i in sorted(biggest_batches, reverse=True):
                 batches.pop(i)
+            # Move them to the front
             batches[0:0] = front
             return iter(batches)
 

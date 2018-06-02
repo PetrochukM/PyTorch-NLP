@@ -11,7 +11,7 @@ def test_penn_treebank_dataset_row(mock_urlretrieve):
     mock_urlretrieve.side_effect = urlretrieve_side_effect
 
     # Check a row are parsed correctly
-    train, test = trec_dataset(directory=directory, test=True, train=True, check_file=None)
+    train, test = trec_dataset(directory=directory, test=True, train=True, check_files=[])
     assert len(train) > 0
     assert len(test) > 0
     assert train[:2] == [{
@@ -22,7 +22,7 @@ def test_penn_treebank_dataset_row(mock_urlretrieve):
         'text': 'What films featured the character Popeye Doyle ?'
     }]
 
-    train = trec_dataset(directory=directory, train=True, check_file=None, fine_grained=True)
+    train = trec_dataset(directory=directory, train=True, check_files=[], fine_grained=True)
     assert train[:2] == [{
         'label': 'manner',
         'text': 'How did serfdom develop in and then leave Russia ?'

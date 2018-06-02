@@ -2,6 +2,8 @@ import torch
 
 from torchnlp.utils import torch_equals_ignore_index
 
+is_scalar = lambda t: torch.is_tensor(t) and len(t.size()) == 0
+
 
 def get_accuracy(targets, outputs, k=1, ignore_index=None):
     """ Get the accuracy top-k accuracy between two tensors.
@@ -32,17 +34,14 @@ def get_accuracy(targets, outputs, k=1, ignore_index=None):
     """
     n_correct = 0.0
     for target, output in zip(targets, outputs):
-        if not torch.is_tensor(target):
+        if not torch.is_tensor(target) or is_scalar(target):
             target = torch.LongTensor([target])
 
-        if not torch.is_tensor(output):
+        if not torch.is_tensor(output) or is_scalar(output):
             output = torch.LongTensor([[output]])
 
         predictions = output.topk(k=min(k, len(output)), dim=0)[0]
         for prediction in predictions:
-            if not torch.is_tensor(prediction):
-                prediction = torch.LongTensor([prediction])
-
             if torch_equals_ignore_index(target, prediction, ignore_index=ignore_index):
                 n_correct += 1
                 break
@@ -80,10 +79,10 @@ def get_token_accuracy(targets, outputs, ignore_index=None):
     n_correct = 0.0
     n_total = 0.0
     for target, output in zip(targets, outputs):
-        if not torch.is_tensor(target):
+        if not torch.is_tensor(target) or is_scalar(target):
             target = torch.LongTensor([target])
 
-        if not torch.is_tensor(output):
+        if not torch.is_tensor(output) or is_scalar(output):
             output = torch.LongTensor([[output]])
 
         if len(target.size()) != len(output.size()):

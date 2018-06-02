@@ -40,7 +40,7 @@ from tqdm import tqdm
 import six
 import torch
 
-from torchnlp.utils import download_compressed_directory
+from torchnlp.download import download_file_maybe_extract
 
 logger = logging.getLogger(__name__)
 
@@ -99,7 +99,6 @@ class _PretrainedWordVectors(object):
         return self.name
 
     def cache(self, name, cache, url=None):
-        print(name)
         if os.path.isfile(name):
             path = name
             path_pt = os.path.join(cache, os.path.basename(name)) + '.pt'
@@ -109,7 +108,7 @@ class _PretrainedWordVectors(object):
 
         if not os.path.isfile(path_pt) or self.is_include is not None:
             if url:
-                download_compressed_directory(url, cache, name)
+                download_file_maybe_extract(url=url, directory=cache, check_files=[name])
 
             if not os.path.isfile(path):
                 raise RuntimeError('no vectors found at {}'.format(path))
@@ -172,6 +171,8 @@ class _PretrainedWordVectors(object):
             self.vectors = torch.Tensor(vectors).view(-1, dim)
             self.dim = dim
             logger.info('Saving vectors to {}'.format(path_pt))
+            if not os.path.exists(cache):
+                os.makedirs(cache)
             torch.save((self.itos, self.stoi, self.vectors, self.dim), path_pt)
         else:
             logger.info('Loading vectors from {}'.format(path_pt))
