@@ -1,8 +1,14 @@
+from functools import partial
+
 import torch
 
 from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
 from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
 from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+
+
+def _tokenize(s, tokenizer):
+    return [w.text for w in tokenizer(s)]
 
 
 class SpacyEncoder(StaticTokenizerEncoder):
@@ -66,8 +72,7 @@ class SpacyEncoder(StaticTokenizerEncoder):
                 ("No tokenizer available for language '%s'. " + "Currently supported are %s") %
                 (language, supported_languages))
 
-        super().__init__(
-            *args, tokenize=lambda s: [token.text for token in self.spacy(s)], **kwargs)
+        super().__init__(*args, tokenize=partial(_tokenize, tokenizer=self.spacy), **kwargs)
 
     def batch_encode(self, texts, eos_index=EOS_INDEX, unknown_index=UNKNOWN_INDEX):
         return_ = []

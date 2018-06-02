@@ -9,6 +9,14 @@ from torchnlp.samplers.shuffle_batch_sampler import ShuffleBatchSampler
 from torchnlp.utils import get_tensors
 
 
+def _biggest_batches_first(o):
+    return sum([t.numel() for t in get_tensors(o)])
+
+
+def _identity(e):
+    return e
+
+
 class BucketBatchSampler(object):
     """Batches are sampled from sorted buckets of data.
 
@@ -62,8 +70,8 @@ class BucketBatchSampler(object):
             data,
             batch_size,
             drop_last,
-            sort_key=lambda e: e,
-            biggest_batches_first=lambda o: sum([t.numel() for t in get_tensors(o)]),
+            sort_key=_identity,
+            biggest_batches_first=_biggest_batches_first,
             bucket_size_multiplier=100,
             shuffle=True,
     ):
