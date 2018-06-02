@@ -6,7 +6,8 @@ from torchnlp.text_encoders import SubwordEncoder
 from torchnlp.text_encoders import EOS_INDEX
 
 
-class SubwordEncoderTest:
+class TestSubwordEncoder:
+
     @pytest.fixture(scope='module')
     def corpus(self):
         return [
@@ -17,8 +18,7 @@ class SubwordEncoderTest:
 
     @pytest.fixture
     def encoder(self, corpus):
-        return SubwordEncoder(
-            corpus, target_vocab_size=86, min_occurrences=2, max_occurrences=6)
+        return SubwordEncoder(corpus, target_vocab_size=86, min_occurrences=2, max_occurrences=6)
 
     def test_build_vocab_target_size(self, encoder):
         # NOTE: `target_vocab_size` is approximate; therefore, it may not be exactly the target size

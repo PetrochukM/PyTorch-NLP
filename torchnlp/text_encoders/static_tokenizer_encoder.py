@@ -8,23 +8,19 @@ from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
 from torchnlp.text_encoders.text_encoder import TextEncoder
 
 
-def _split(s):
+def _tokenize(s):
     return s.split()
 
 
-def _identity(s):
-    return s
-
-
 class StaticTokenizerEncoder(TextEncoder):
-    """ Encodes the text using a custom tokenizer.
+    """ Encodes the text using a tokenizer.
 
     Args:
-        sample (list of strings): Sample of data to build dictionary on
+        sample (list of strings): Sample of data to build dictionary on.
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
           dictionary.
+        tokenize (callable): :class:``callable`` to tokenize a string.
         append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
-        tokenize (callable): callable to tokenize a string
         reserved_tokens (list of str, optional): Tokens added to dictionary; reserving the first
             `len(reserved_tokens)` indexes.
 
@@ -48,14 +44,14 @@ class StaticTokenizerEncoder(TextEncoder):
                  sample,
                  min_occurrences=1,
                  append_eos=False,
-                 tokenize=_split,
+                 tokenize=_tokenize,
                  reserved_tokens=RESERVED_ITOS):
         if not isinstance(sample, list):
             raise TypeError('Sample must be a list of strings.')
 
+        self.tokenize = tokenize
         self.append_eos = append_eos
         self.tokens = Counter()
-        self.tokenize = tokenize if tokenize else _identity
 
         for text in sample:
             self.tokens.update(self.tokenize(text))
