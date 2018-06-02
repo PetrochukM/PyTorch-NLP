@@ -22,6 +22,9 @@ def imdb_dataset(directory='data/',
     training, and 25,000 for testing. There is additional unlabeled data for use as well. Raw text
     and already processed bag of words formats are provided.
 
+    Note:
+        The order examples are returned is not guaranteed due to ``iglob``.
+
     **Reference:** http://ai.stanford.edu/~amaas/data/sentiment/
 
     Args:

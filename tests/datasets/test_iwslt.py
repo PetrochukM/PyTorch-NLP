@@ -18,17 +18,13 @@ def test_iwslt_dataset_row(mock_urlretrieve):
     assert len(train) > 0
     assert len(dev) > 0
     assert len(test) > 0
-    assert train[0] == {
-        'en': "David Gallo: This is Bill Lange. I'm Dave Gallo.",
-        'de': 'David Gallo: Das ist Bill Lange. Ich bin Dave Gallo.'
-    }
+    train = sorted(train, key=lambda r: len(r['en']))
+    assert train[0] == {'en': 'Thank you.', 'de': 'Danke.'}
 
     # Smoke test for iwslt_clean running twice
     train, dev, test = iwslt_dataset(directory=iwslt_directory, test=True, dev=True, train=True)
-    assert train[0] == {
-        'en': "David Gallo: This is Bill Lange. I'm Dave Gallo.",
-        'de': 'David Gallo: Das ist Bill Lange. Ich bin Dave Gallo.'
-    }
+    train = sorted(train, key=lambda r: len(r['en']))
+    assert train[0] == {'en': 'Thank you.', 'de': 'Danke.'}
 
     # Clean up
     shutil.rmtree(os.path.join(iwslt_directory, 'en-de'))
