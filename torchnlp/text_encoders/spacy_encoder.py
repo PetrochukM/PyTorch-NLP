@@ -1,4 +1,10 @@
+from functools import partial
+
 from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+
+
+def _tokenize(s, tokenizer):
+    return [w.text for w in tokenizer(s)]
 
 
 class SpacyEncoder(StaticTokenizerEncoder):
@@ -67,4 +73,4 @@ class SpacyEncoder(StaticTokenizerEncoder):
                               "Currently supported are %s")
                              % (language, supported_languages))
 
-        super().__init__(*args, tokenize=lambda s: [w.text for w in tokenizer(s)], **kwargs)
+        super().__init__(*args, tokenize=partial(_tokenize, tokenizer=tokenizer), **kwargs)

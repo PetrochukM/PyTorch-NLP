@@ -1,9 +1,18 @@
+import pickle
+
+import pytest
+
 from torchnlp.text_encoders import SpacyEncoder
 
 
-def test_spacy_encoder():
+@pytest.fixture
+def encoder():
     input_ = 'This is a sentence'
-    encoder = SpacyEncoder([input_])
+    return SpacyEncoder([input_])
+
+
+def test_spacy_encoder(encoder):
+    input_ = 'This is a sentence'
     tokens = encoder.encode(input_)
     assert encoder.decode(tokens) == input_
 
@@ -27,3 +36,7 @@ def test_spacy_encoder_unsupported_language():
 
     assert error_message.startswith("No tokenizer available for language " +
                                     "'python'.")
+
+
+def test_is_pickleable(encoder):
+    pickle.dumps(encoder)
