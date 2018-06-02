@@ -23,6 +23,10 @@ pip:
 
     pip install pytorch-nlp
 
+Or to install the latest code via:
+
+    pip install git+https://github.com/PetrochukM/PyTorch-NLP.git
+
 ## Docs 📖
 
 The complete documentation for PyTorch-NLP is available via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
