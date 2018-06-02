@@ -6,13 +6,16 @@ from torchnlp.text_encoders import SpacyEncoder
 
 
 @pytest.fixture
-def encoder():
-    input_ = 'This is a sentence'
+def input_():
+    return ('This is a sentence')
+
+
+@pytest.fixture
+def encoder(input_):
     return SpacyEncoder([input_])
 
 
-def test_spacy_encoder(encoder):
-    input_ = 'This is a sentence'
+def test_spacy_encoder(encoder, input_):
     tokens = encoder.encode(input_)
     assert encoder.decode(tokens) == input_
 
@@ -24,9 +27,7 @@ def test_spacy_encoder_issue_44():
     assert 'n\'t' in encoder.vocab
 
 
-def test_spacy_encoder_batch():
-    input_ = 'This is a sentence'
-    encoder = SpacyEncoder([input_])
+def test_spacy_encoder_batch(encoder, input_):
     tokens = encoder.batch_encode([input_, input_])
     assert encoder.decode(tokens[0]) == input_
     assert encoder.decode(tokens[1]) == input_
