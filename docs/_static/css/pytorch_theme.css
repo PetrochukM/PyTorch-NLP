@@ -45,7 +45,7 @@ p.caption {
 
 .wy-nav-top {
   background-color: #fff;
-  background-image: url('../img/logo_stacked_color.svg');
+  background-image: url('../img/logo.svg');
   background-repeat: no-repeat;
   background-position: center;
   margin: 0.4045em 0.809em;
@@ -66,7 +66,7 @@ p.caption {
   }
   .wy-nav-top {
     background-color: #fff;
-    background-image: url('../img/logo_horizontal_color.svg');
+    background-image: url('../img/logo.svg');
     background-repeat: no-repeat;
     background-position: center;
   }
