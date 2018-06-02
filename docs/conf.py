@@ -95,7 +95,7 @@ html_theme_options = {
     'logo_only': True,
 }
 
-html_logo = '_static/img/logo_stacked_color.svg'
+html_logo = '_static/img/logo.svg'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
