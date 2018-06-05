@@ -2,7 +2,7 @@
 # NOTE: If you intend to use PyTorch-NLP, requirements.txt is overkill and look @ setup.py
 # `install_requires`
 
-# pytorch 3.1 install from http://pytorch.org/
+# pytorch >=0.4 install from http://pytorch.org/
 
 # Setup.py Install
 -e .
