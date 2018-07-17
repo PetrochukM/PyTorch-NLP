@@ -63,4 +63,4 @@ def collate_fn(batch, train=True):
     transpose = (
         lambda b: torch.stack(b).t_().squeeze(0).contiguous())
 
-    return (transpose(premise_batch), transpose(hypothesis_batch), transpose(label_batch))
+    return (transpose(list(premise_batch)), transpose(list(hypothesis_batch)), transpose(label_batch))
