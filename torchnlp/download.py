@@ -11,6 +11,7 @@ from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
+__all__ = ['download_file_maybe_extract', 'download_files_maybe_extract']
 
 def _reporthook(t):
     """ ``reporthook`` to use with ``urllib.request`` that prints the process of the download.
