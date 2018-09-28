@@ -9,6 +9,8 @@ from torchnlp.text_encoders import PADDING_INDEX
 
 logger = logging.getLogger(__name__)
 
+__all__ = ['get_tensors', 'sampler_to_iterator', 'datasets_iterator', 'pad_tensor', 
+           'pad_batch', 'flatten_parameters', 'shuffle', 'resplit_datasets', 'torch_equals_ignore_index']
 
 def get_tensors(object_):
     """ Get all tensors associated with ``object_``
