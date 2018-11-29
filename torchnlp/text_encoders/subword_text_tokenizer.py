@@ -135,7 +135,7 @@ def _unescape_token(escaped_token):
 
         try:
             return six.unichr(int(m.group(1)))
-        except (ValueError, OverflowError) as _:
+        except (ValueError, OverflowError):
             return ""
 
     trimmed = escaped_token[:-1] if escaped_token.endswith("_") else escaped_token
