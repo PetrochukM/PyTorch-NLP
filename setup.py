@@ -36,7 +36,7 @@ setup_info = dict(
     long_description=long_description,
     long_description_content_type='text/markdown',
     license='BSD',
-    install_requires=['numpy', 'pandas', 'tqdm', 'requests'],
+    install_requires=['torch', 'numpy', 'pandas', 'tqdm', 'requests'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

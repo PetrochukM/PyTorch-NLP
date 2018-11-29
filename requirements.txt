@@ -2,10 +2,10 @@
 # NOTE: If you intend to use PyTorch-NLP, requirements.txt is overkill and look @ setup.py
 # `install_requires`
 
-# pytorch >=0.4 install from http://pytorch.org/
-
 # Setup.py Install
 -e .
+
+torch
 
 # Testing + Code Coverage
 codecov
@@ -19,12 +19,12 @@ flake8
 # Mocking
 mock
 
-# # Optional NLP Utilties
+# Optional NLP Utilties
 # nltk
 # spacy
 # sacremoses
 
-# # Optional CUDA Utilties
+# Optional CUDA Utilties
 # pynvrtc
 # cupy
 
