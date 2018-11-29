@@ -1,6 +1,5 @@
 import os
 import shutil
-import pytest
 
 import mock
 

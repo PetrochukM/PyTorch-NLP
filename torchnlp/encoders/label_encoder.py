@@ -5,7 +5,7 @@ def _tokenize(s):
     return s if isinstance(s, list) else [s]
 
 
-class IdentityEncoder(StaticTokenizerEncoder):
+class LabelEncoder(StaticTokenizerEncoder):
     """ Encodes the text without tokenization.
 
     Args:
@@ -16,14 +16,14 @@ class IdentityEncoder(StaticTokenizerEncoder):
 
     Example:
 
-        >>> encoder = IdentityEncoder(['label_a', 'label_b'])
+        >>> encoder = LabelEncoder(['label_a', 'label_b'])
         >>> encoder.encode('label_a')
          5
         [torch.LongTensor of size 1]
         >>> encoder.vocab
         ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'label_a', 'label_b']
         >>>
-        >>> encoder = IdentityEncoder(['token_a', 'token_b', 'token_c'])
+        >>> encoder = LabelEncoder(['token_a', 'token_b', 'token_c'])
         >>> encoder.encode(['token_a', 'token_b'])
          5
          6
@@ -35,7 +35,7 @@ class IdentityEncoder(StaticTokenizerEncoder):
 
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
-            raise TypeError('IdentityEncoder defines a identity tokenization')
+            raise TypeError('LabelEncoder defines a identity tokenization')
         if 'append_eos' not in kwargs:
             kwargs['append_eos'] = False  # Default to not appending EOS
         super().__init__(*args, tokenize=_tokenize, **kwargs)

@@ -1,6 +1,6 @@
 from torchnlp.encoders.character_encoder import CharacterEncoder
 from torchnlp.encoders.delimiter_encoder import DelimiterEncoder
-from torchnlp.encoders.identity_encoder import IdentityEncoder
+from torchnlp.encoders.label_encoder import LabelEncoder
 from torchnlp.encoders.moses_encoder import MosesEncoder
 from torchnlp.encoders.reserved_tokens import COPY_INDEX
 from torchnlp.encoders.reserved_tokens import COPY_TOKEN
@@ -26,7 +26,7 @@ __all__ = [
     'DelimiterEncoder',
     'WhitespaceEncoder',
     'CharacterEncoder',
-    'IdentityEncoder',
+    'LabelEncoder',
     'MosesEncoder',
     'TreebankEncoder',
     'SpacyEncoder',
