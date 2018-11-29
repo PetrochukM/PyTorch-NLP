@@ -2,8 +2,8 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import IdentityEncoder
-from torchnlp.text_encoders import UNKNOWN_TOKEN
+from torchnlp.encoders import IdentityEncoder
+from torchnlp.encoders import UNKNOWN_TOKEN
 
 
 @pytest.fixture

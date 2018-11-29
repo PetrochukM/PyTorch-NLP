@@ -5,7 +5,7 @@ import collections
 import random
 import torch
 
-from torchnlp.text_encoders import PADDING_INDEX
+from torchnlp.encoders import PADDING_INDEX
 
 logger = logging.getLogger(__name__)
 

@@ -1,4 +1,4 @@
-from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 def _tokenize(s):

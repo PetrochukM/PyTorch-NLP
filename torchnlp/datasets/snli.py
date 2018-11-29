@@ -1,7 +1,7 @@
 import os
 import io
 
-import ujson as json
+import json
 
 from torchnlp.download import download_file_maybe_extract
 from torchnlp.datasets.dataset import Dataset

@@ -2,9 +2,9 @@ from functools import partial
 
 import torch
 
-from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
-from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
-from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.reserved_tokens import EOS_INDEX
+from torchnlp.encoders.reserved_tokens import UNKNOWN_INDEX
+from torchnlp.encoders.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 def _tokenize(s, tokenizer):

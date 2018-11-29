@@ -1,8 +1,8 @@
 import os
 import io
 
-from torchnlp.text_encoders import UNKNOWN_TOKEN
-from torchnlp.text_encoders import EOS_TOKEN
+from torchnlp.encoders import UNKNOWN_TOKEN
+from torchnlp.encoders import EOS_TOKEN
 from torchnlp.download import download_files_maybe_extract
 
 

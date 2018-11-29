@@ -2,7 +2,7 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import MosesEncoder
+from torchnlp.encoders import MosesEncoder
 
 
 @pytest.fixture

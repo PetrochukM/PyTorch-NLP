@@ -2,8 +2,8 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import SubwordEncoder
-from torchnlp.text_encoders import EOS_INDEX
+from torchnlp.encoders import SubwordEncoder
+from torchnlp.encoders import EOS_INDEX
 
 
 class TestSubwordEncoder:
