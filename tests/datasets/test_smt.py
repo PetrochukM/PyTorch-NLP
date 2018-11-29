@@ -35,7 +35,7 @@ def test_smt_dataset_row(mock_urlretrieve):
             " splash even greater than Arnold Schwarzenegger , Jean-Claud Van Damme or Steven" +
             " Segal .",
         'label':
-            'positive'
+            'very positive'
     }
 
     # Clean up

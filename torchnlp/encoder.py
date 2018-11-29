@@ -1,4 +1,4 @@
-class TextEncoder(object):
+class Encoder(object):
     """ Base class for a text encoder.
     """
 

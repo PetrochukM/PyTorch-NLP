@@ -77,8 +77,8 @@ start = time.time()
 best_dev_acc = -1
 header = '  Time Epoch Iteration Progress    (%Epoch)   Loss   Dev/Loss     Accuracy  Dev/Accuracy'
 dev_log_template = ' '.join(
-    '{:>6.0f},{:>5.0f},{:>9.0f},{:>5.0f}/{:<5.0f} {:>7.0f}%,{:>8.6f},{:8.6f},{:12.4f},{:12.4f}'.
-    split(','))
+    '{:>6.0f},{:>5.0f},{:>9.0f},{:>5.0f}/{:<5.0f} {:>7.0f}%,{:>8.6f},{:8.6f},{:12.4f},{:12.4f}'
+    .split(','))
 log_template = ' '.join(
     '{:>6.0f},{:>5.0f},{:>9.0f},{:>5.0f}/{:<5.0f} {:>7.0f}%,{:>8.6f},{},{:12.4f},{}'.split(','))
 makedirs(args.save_path)
@@ -108,8 +108,7 @@ for epoch in range(args.epochs):
         answer = model(premise_batch, hypothesis_batch)
 
         # calculate accuracy of predictions in the current batch
-        n_correct += (torch.max(answer,
-                                1)[1].view(label_batch.size()) == label_batch).sum()
+        n_correct += (torch.max(answer, 1)[1].view(label_batch.size()) == label_batch).sum()
         n_total += premise_batch.size()[1]
         train_acc = 100. * n_correct / n_total
 
@@ -150,8 +149,8 @@ for epoch in range(args.epochs):
             for dev_batch_idx, (premise_batch, hypothesis_batch,
                                 label_batch) in enumerate(dev_iterator):
                 answer = model(premise_batch, hypothesis_batch)
-                n_dev_correct += (torch.max(answer, 1)[1].view(
-                    label_batch.size()) == label_batch).sum()
+                n_dev_correct += (torch.max(answer,
+                                            1)[1].view(label_batch.size()) == label_batch).sum()
                 dev_loss = criterion(answer, label_batch)
             dev_acc = 100. * n_dev_correct / len(dev)
 

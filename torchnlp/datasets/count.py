@@ -26,8 +26,9 @@ def count_dataset(train=False,
         seq_max_length (int, optional): Maximum sequence length.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training dataset
-        , dev dataset and test dataset in order if their respective boolean argument is true.
+        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        Returns between one and all dataset splits (train, dev and test) depending on if their
+        respective boolean argument is ``True``.
 
     Example:
         >>> from torchnlp.datasets import count_dataset

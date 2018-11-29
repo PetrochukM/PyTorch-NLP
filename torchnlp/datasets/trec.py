@@ -40,8 +40,9 @@ def trec_dataset(directory='data/trec/',
         urls (str, optional): URLs to download.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training tokens, dev
-        tokens and test tokens in order if their respective boolean argument is true.
+        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        Returns between one and all dataset splits (train, dev and test) depending on if their
+        respective boolean argument is ``True``.
 
     Example:
         >>> from torchnlp.datasets import trec_dataset

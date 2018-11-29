@@ -27,7 +27,7 @@ def test_weight_drop_lstm():
     run2 = [x.sum() for x in wd_lstm(input_)[0].data]
 
     # First time step, not influenced by hidden to hidden weights, should be equal
-    assert pytest.approx(run1[0]) == pytest.approx(run2[0])
+    assert pytest.approx(run1[0].item()) == pytest.approx(run2[0].item())
     # Second step should not
     assert run1[1] != run2[1]
 
@@ -40,7 +40,7 @@ def test_weight_drop_gru():
     run2 = [x.sum() for x in wd_lstm(input_)[0].data]
 
     # First time step, not influenced by hidden to hidden weights, should be equal
-    assert pytest.approx(run1[0]) == pytest.approx(run2[0])
+    assert pytest.approx(run1[0].item()) == pytest.approx(run2[0].item())
     # Second step should not
     assert run1[1] != run2[1]
 
@@ -53,7 +53,7 @@ def test_weight_drop():
     run2 = [x.sum() for x in wd_lstm(input_)[0].data]
 
     # First time step, not influenced by hidden to hidden weights, should be equal
-    assert pytest.approx(run1[0]) == pytest.approx(run2[0])
+    assert pytest.approx(run1[0].item()) == pytest.approx(run2[0].item())
     # Second step should not
     assert run1[1] != run2[1]
 
@@ -66,6 +66,6 @@ def test_weight_drop_zero():
     run2 = [x.sum() for x in wd_lstm(input_)[0].data]
 
     # First time step, not influenced by hidden to hidden weights, should be equal
-    assert pytest.approx(run1[0]) == pytest.approx(run2[0])
+    assert pytest.approx(run1[0].item()) == pytest.approx(run2[0].item())
     # Second step should not
-    assert pytest.approx(run1[1]) == pytest.approx(run2[1])
+    assert pytest.approx(run1[1].item()) == pytest.approx(run2[1].item())

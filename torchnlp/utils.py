@@ -76,12 +76,14 @@ def datasets_iterator(*datasets):
 
 def pad_tensor(tensor, length, padding_index=PADDING_INDEX):
     """ Pad a ``tensor`` to ``length`` with ``padding_index``.
+
     Args:
-        tensor (torch.Tensor [n, *]): Tensor to pad.
+        tensor (torch.Tensor [n, ...]): Tensor to pad.
         length (int): Pad the ``tensor`` up to ``length``.
         padding_index (int, optional): Index to pad tensor with.
+
     Returns
-        (torch.Tensor [length, *]) Padded Tensor.
+        (torch.Tensor [length, ...]) Padded Tensor.
     """
     n_padding = length - tensor.shape[0]
     assert n_padding >= 0

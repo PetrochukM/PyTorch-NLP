@@ -17,10 +17,8 @@ from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncod
 from torchnlp.text_encoders.subword_encoder import SubwordEncoder
 from torchnlp.text_encoders.treebank_encoder import TreebankEncoder
 from torchnlp.text_encoders.whitespace_encoder import WhitespaceEncoder
-from torchnlp.text_encoders.text_encoder import TextEncoder
 
 __all__ = [
-    'TextEncoder',
     'SubwordEncoder',
     'StaticTokenizerEncoder',
     'DelimiterEncoder',

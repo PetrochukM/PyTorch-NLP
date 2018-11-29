@@ -39,8 +39,9 @@ def imdb_dataset(directory='data/',
         sentiments (list of str, optional): Sentiments to load from the dataset.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training dataset and
-        test dataset in order if their respective boolean argument is true.
+        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        Returns between one and all dataset splits (train, dev and test) depending on if their
+        respective boolean argument is ``True``.
 
     Example:
         >>> from torchnlp.datasets import imdb_dataset

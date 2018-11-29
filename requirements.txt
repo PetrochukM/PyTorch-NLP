@@ -19,12 +19,12 @@ flake8
 # Mocking
 mock
 
-# # Optional NLP Utilties
+# Optional NLP Utilties
 # nltk
 # spacy
 # sacremoses
 
-# # Optional CUDA Utilties
+# Optional CUDA Utilties
 # pynvrtc
 # cupy
 

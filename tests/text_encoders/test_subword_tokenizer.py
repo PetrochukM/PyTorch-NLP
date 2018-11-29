@@ -89,8 +89,10 @@ class SubwordTextTokenizerTest(unittest.TestCase):
 
         original = 'This is a coded sentence encoded by the SubwordTextTokenizer.'
 
-        encoder = SubwordTextTokenizer.build_to_target_size_from_corpus(
-            [corpus, original], target_size=100, min_val=2, max_val=10)
+        encoder = SubwordTextTokenizer.build_to_target_size_from_corpus([corpus, original],
+                                                                        target_size=100,
+                                                                        min_val=2,
+                                                                        max_val=10)
 
         # Encoding should be reversible.
         encoded = encoder.encode(original)

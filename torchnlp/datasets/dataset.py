@@ -97,3 +97,6 @@ class Dataset(data.Dataset):
 
     def __eq__(self, other):
         return self.columns == other.columns and self.rows == other.rows
+
+    def __add__(self, other):
+        return Dataset(self.rows + other.rows)

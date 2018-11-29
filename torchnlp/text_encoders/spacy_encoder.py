@@ -65,7 +65,7 @@ class SpacyEncoder(StaticTokenizerEncoder):
             try:
                 self.spacy = spacy.load(language, disable=['parser', 'tagger', 'ner'])
             except OSError:
-                raise ValueError(("Language '{0}' not found. Install using " +
+                raise ValueError(("Language '{0}' not found. Install using "
                                   "spaCy: `python -m spacy download {0}`").format(language))
         else:
             raise ValueError(
