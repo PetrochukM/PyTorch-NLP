@@ -3,7 +3,7 @@ import mock
 
 from torchnlp.word_to_vector import CharNGram
 from tests.word_to_vector.utils import urlretrieve_side_effect
-from torchnlp.encoders import UNKNOWN_TOKEN
+from torchnlp.text_encoders import UNKNOWN_TOKEN
 
 
 @mock.patch("urllib.request.urlretrieve")

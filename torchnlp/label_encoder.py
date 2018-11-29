@@ -1,18 +1,24 @@
-from torchnlp.encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from collections import Counter
+
+from torchnlp.encoder import Encoder
+
+import torch
+
+# RESERVED TOKENS
+# NOTE: vocab size is len(reversed) + len(vocab)
+UNKNOWN_INDEX = 0
+UNKNOWN_TOKEN = '<unk>'
+RESERVED_ITOS = [UNKNOWN_TOKEN]
+RESERVED_STOI = {token: index for index, token in enumerate(RESERVED_ITOS)}
 
 
-def _tokenize(s):
-    return s if isinstance(s, list) else [s]
-
-
-class LabelEncoder(StaticTokenizerEncoder):
+class LabelEncoder(Encoder):
     """ Encodes the text without tokenization.
 
     Args:
         sample (list of strings): Sample of data to build dictionary on
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
           dictionary.
-        append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
 
     Example:
 
@@ -21,24 +27,28 @@ class LabelEncoder(StaticTokenizerEncoder):
          5
         [torch.LongTensor of size 1]
         >>> encoder.vocab
-        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'label_a', 'label_b']
-        >>>
-        >>> encoder = LabelEncoder(['token_a', 'token_b', 'token_c'])
-        >>> encoder.encode(['token_a', 'token_b'])
-         5
-         6
-        [torch.LongTensor of size 2]
-        >>> encoder.vocab
-        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'token_a', 'token_b', 'token_c']
-
+        ['<unk>', 'label_a', 'label_b']
     """
 
-    def __init__(self, *args, **kwargs):
-        if 'tokenize' in kwargs:
-            raise TypeError('LabelEncoder defines a identity tokenization')
-        if 'append_eos' not in kwargs:
-            kwargs['append_eos'] = False  # Default to not appending EOS
-        super().__init__(*args, tokenize=_tokenize, **kwargs)
+    def __init__(self, sample, min_occurrences=1, reserved_tokens=RESERVED_ITOS):
+        if not isinstance(sample, list):
+            raise TypeError('Sample must be a list of strings.')
+
+        self.tokens = Counter(sample)
+        self.itos = reserved_tokens.copy()
+        self.stoi = {token: index for index, token in enumerate(reserved_tokens)}
+        for token, count in self.tokens.items():
+            if count >= min_occurrences:
+                self.itos.append(token)
+                self.stoi[token] = len(self.itos) - 1
+
+    @property
+    def vocab(self):
+        return self.itos
+
+    def encode(self, text, unknown_index=UNKNOWN_INDEX):
+        vector = [self.stoi.get(text, unknown_index)]
+        return torch.LongTensor(vector)
 
     def decode(self, tensor):
         if len(tensor.shape) == 0:

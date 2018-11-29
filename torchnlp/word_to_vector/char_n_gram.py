@@ -31,7 +31,7 @@
 import torch
 
 from torchnlp.word_to_vector.pretrained_word_vectors import _PretrainedWordVectors
-from torchnlp.encoders import UNKNOWN_TOKEN
+from torchnlp.text_encoders import UNKNOWN_TOKEN
 
 
 class CharNGram(_PretrainedWordVectors):

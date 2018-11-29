@@ -4,7 +4,7 @@ import pytest
 import torch
 
 from torchnlp.datasets import Dataset
-from torchnlp.encoders import PADDING_INDEX
+from torchnlp.text_encoders import PADDING_INDEX
 from torchnlp.utils import flatten_parameters
 from torchnlp.utils import pad_batch
 from torchnlp.utils import pad_tensor

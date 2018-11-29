@@ -6,13 +6,13 @@ import mock
 
 import six
 
-from torchnlp.encoders import subword_text_tokenizer
-from torchnlp.encoders.subword_text_tokenizer import encode
-from torchnlp.encoders.subword_text_tokenizer import decode
-from torchnlp.encoders.subword_text_tokenizer import _escape_token
-from torchnlp.encoders.subword_text_tokenizer import _unescape_token
-from torchnlp.encoders.subword_text_tokenizer import _ESCAPE_CHARS
-from torchnlp.encoders.subword_text_tokenizer import SubwordTextTokenizer
+from torchnlp.text_encoders import subword_text_tokenizer
+from torchnlp.text_encoders.subword_text_tokenizer import encode
+from torchnlp.text_encoders.subword_text_tokenizer import decode
+from torchnlp.text_encoders.subword_text_tokenizer import _escape_token
+from torchnlp.text_encoders.subword_text_tokenizer import _unescape_token
+from torchnlp.text_encoders.subword_text_tokenizer import _ESCAPE_CHARS
+from torchnlp.text_encoders.subword_text_tokenizer import SubwordTextTokenizer
 
 
 class TestTokenCounts(unittest.TestCase):
@@ -89,8 +89,10 @@ class SubwordTextTokenizerTest(unittest.TestCase):
 
         original = 'This is a coded sentence encoded by the SubwordTextTokenizer.'
 
-        encoder = SubwordTextTokenizer.build_to_target_size_from_corpus(
-            [corpus, original], target_size=100, min_val=2, max_val=10)
+        encoder = SubwordTextTokenizer.build_to_target_size_from_corpus([corpus, original],
+                                                                        target_size=100,
+                                                                        min_val=2,
+                                                                        max_val=10)
 
         # Encoding should be reversible.
         encoded = encoder.encode(original)

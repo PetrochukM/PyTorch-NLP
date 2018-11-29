@@ -2,42 +2,38 @@ import pickle
 
 import pytest
 
-from torchnlp.label_encoder import LabelEncoder
-from torchnlp.label_encoder import UNKNOWN_TOKEN
+from torchnlp.text_encoders import IdentityEncoder
+from torchnlp.text_encoders import UNKNOWN_TOKEN
 
 
 @pytest.fixture
 def encoder():
     sample = ['people/deceased_person/place_of_death', 'symbols/name_source/namesakes']
-    return LabelEncoder(sample)
+    return IdentityEncoder(sample)
 
 
-def test_label_encoder_vocab(encoder):
-    assert len(encoder.vocab) == 3
-    assert len(encoder.vocab) == encoder.vocab_size
-
-
-def test_label_encoder_scalar(encoder):
-    input_ = 'symbols/namesake/named_after'
-    output = encoder.encode(input_)[0]
-    assert encoder.decode(output) == UNKNOWN_TOKEN
-
-
-def test_label_encoder_unknown(encoder):
+def test_identity_encoder_unknown(encoder):
     input_ = 'symbols/namesake/named_after'
     output = encoder.encode(input_)
     assert len(output) == 1
     assert encoder.decode(output) == UNKNOWN_TOKEN
 
 
-def test_label_encoder_known():
+def test_identity_encoder_known():
     input_ = 'symbols/namesake/named_after'
     sample = ['people/deceased_person/place_of_death', 'symbols/name_source/namesakes']
     sample.append(input_)
-    encoder = LabelEncoder(sample)
+    encoder = IdentityEncoder(sample)
     output = encoder.encode(input_)
     assert len(output) == 1
     assert encoder.decode(output) == input_
+
+
+def test_identity_encoder_sequence(encoder):
+    input_ = ['symbols/namesake/named_after', 'people/deceased_person/place_of_death']
+    output = encoder.encode(input_)
+    assert len(output) == 2
+    assert encoder.decode(output) == [UNKNOWN_TOKEN, 'people/deceased_person/place_of_death']
 
 
 def test_is_pickleable(encoder):

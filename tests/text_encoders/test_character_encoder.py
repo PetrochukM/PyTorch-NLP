@@ -2,9 +2,9 @@ import pickle
 
 import pytest
 
-from torchnlp.encoders import CharacterEncoder
-from torchnlp.encoders import UNKNOWN_TOKEN
-from torchnlp.encoders.reserved_tokens import RESERVED_ITOS
+from torchnlp.text_encoders import CharacterEncoder
+from torchnlp.text_encoders import UNKNOWN_TOKEN
+from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
 
 
 @pytest.fixture

@@ -2,7 +2,7 @@ import pickle
 
 import pytest
 
-from torchnlp.encoders import WhitespaceEncoder
+from torchnlp.text_encoders import WhitespaceEncoder
 
 
 @pytest.fixture

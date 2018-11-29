@@ -2,17 +2,17 @@ from collections import Counter
 
 import torch
 
-from torchnlp.encoders.reserved_tokens import EOS_INDEX
-from torchnlp.encoders.reserved_tokens import UNKNOWN_INDEX
-from torchnlp.encoders.reserved_tokens import RESERVED_ITOS
-from torchnlp.encoders.text_encoder import TextEncoder
+from torchnlp.encoder import Encoder
+from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
+from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
+from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
 
 
 def _tokenize(s):
     return s.split()
 
 
-class StaticTokenizerEncoder(TextEncoder):
+class StaticTokenizerEncoder(Encoder):
     """ Encodes the text using a tokenizer.
 
     Args:

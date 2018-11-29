@@ -1,7 +1,7 @@
 from functools import partial
 
-from torchnlp.encoders.static_tokenizer_encoder import StaticTokenizerEncoder
-from torchnlp.encoders.reserved_tokens import UNKNOWN_TOKEN
+from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.text_encoders.reserved_tokens import UNKNOWN_TOKEN
 
 
 def _tokenize(s, delimiter):

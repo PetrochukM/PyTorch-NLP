@@ -1,13 +1,13 @@
 import torch
 
-from torchnlp.encoders.reserved_tokens import EOS_INDEX
-from torchnlp.encoders.reserved_tokens import UNKNOWN_INDEX
-from torchnlp.encoders.reserved_tokens import RESERVED_ITOS
-from torchnlp.encoders.subword_text_tokenizer import SubwordTextTokenizer
-from torchnlp.encoders.text_encoder import TextEncoder
+from torchnlp.encoder import Encoder
+from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
+from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
+from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
+from torchnlp.text_encoders.subword_text_tokenizer import SubwordTextTokenizer
 
 
-class SubwordEncoder(TextEncoder):
+class SubwordEncoder(Encoder):
     """ Invertibly encoding text using a limited vocabulary.
 
     Applies Googles Tensor2Tensor SubwordTextTokenizer that invertibly encodes a native string as a
