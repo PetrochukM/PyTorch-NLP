@@ -12,6 +12,12 @@ def encoder():
     return LabelEncoder(sample)
 
 
+def test_label_encoder_scalar(encoder):
+    input_ = 'symbols/namesake/named_after'
+    output = encoder.encode(input_)[0]
+    assert encoder.decode(output) == UNKNOWN_TOKEN
+
+
 def test_label_encoder_unknown(encoder):
     input_ = 'symbols/namesake/named_after'
     output = encoder.encode(input_)

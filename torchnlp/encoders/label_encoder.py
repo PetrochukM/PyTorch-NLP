@@ -41,6 +41,9 @@ class LabelEncoder(StaticTokenizerEncoder):
         super().__init__(*args, tokenize=_tokenize, **kwargs)
 
     def decode(self, tensor):
+        if len(tensor.shape) == 0:
+            tensor = tensor.unsqueeze(0)
+
         tokens = [self.itos[index] for index in tensor]
         if len(tokens) == 1:
             return tokens[0]

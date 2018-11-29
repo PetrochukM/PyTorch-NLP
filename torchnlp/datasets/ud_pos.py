@@ -44,8 +44,9 @@ def ud_pos_dataset(directory='data/',
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training tokens, dev
-        tokens and test tokens in order if their respective boolean argument is true.
+        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        Returns between one and all dataset splits (train, dev and test) depending on if their
+        respective boolean argument is ``True``.
 
     Example:
         >>> from torchnlp.datasets import ud_pos_dataset

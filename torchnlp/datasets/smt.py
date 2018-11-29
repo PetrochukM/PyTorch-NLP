@@ -108,9 +108,9 @@ def smt_dataset(directory='data/',
             for line in f:
                 line = line.strip()
                 if subtrees:
-                    examples.extend(parse_tree(line, subtrees=subtrees))
+                    examples.extend(parse_tree(line, subtrees=subtrees, fine_grained=fine_grained))
                 else:
-                    examples.append(parse_tree(line, subtrees=subtrees))
+                    examples.append(parse_tree(line, subtrees=subtrees, fine_grained=fine_grained))
         ret.append(Dataset(examples))
 
     if len(ret) == 1:

@@ -18,8 +18,9 @@ def zero_dataset(train=False, dev=False, test=False, train_rows=256, dev_rows=64
         test_rows (int, optional): Number of test rows to generate.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training dataset
-        , dev dataset and test dataset in order if their respective boolean argument is true.
+        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        Returns between one and all dataset splits (train, dev and test) depending on if their
+        respective boolean argument is ``True``.
 
     Example:
         >>> from torchnlp.datasets import zero_dataset
