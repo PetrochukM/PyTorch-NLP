@@ -95,12 +95,12 @@ def pad_tensor(tensor, length, padding_index=PADDING_INDEX):
 
 def pad_batch(batch, padding_index=PADDING_INDEX, dim=0):
     """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
-    
+
     Args:
         batch (:class:`list` of :class:`torch.Tensor`): Batch of tensors to pad.
         padding_index (int, optional): Index to pad tensors with.
         dim (int, optional): Dimension on to which to concatenate the batch of tensors.
-        
+ 
     Returns
         torch.Tensor, list of int: Padded tensors and original lengths of tensors.
     """
