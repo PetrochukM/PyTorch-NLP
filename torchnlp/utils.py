@@ -93,18 +93,21 @@ def pad_tensor(tensor, length, padding_index=PADDING_INDEX):
     return torch.cat((tensor, padding), dim=0)
 
 
-def pad_batch(batch, padding_index=PADDING_INDEX):
+def pad_batch(batch, padding_index=PADDING_INDEX, dim=0):
     """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
+    
     Args:
         batch (:class:`list` of :class:`torch.Tensor`): Batch of tensors to pad.
         padding_index (int, optional): Index to pad tensors with.
+        dim (int, optional): Dimension on to which to concatenate the batch of tensors.
+        
     Returns
         torch.Tensor, list of int: Padded tensors and original lengths of tensors.
     """
     lengths = [tensor.shape[0] for tensor in batch]
     max_len = max(lengths)
     padded = [pad_tensor(tensor, max_len, padding_index) for tensor in batch]
-    padded = torch.stack(padded, dim=0).contiguous()
+    padded = torch.stack(padded, dim=dim).contiguous()
     return padded, lengths
 
 
