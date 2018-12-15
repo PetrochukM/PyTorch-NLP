@@ -13,6 +13,7 @@ from torchnlp.datasets.multi30k import multi30k_dataset
 from torchnlp.datasets.iwslt import iwslt_dataset
 from torchnlp.datasets.wmt import wmt_dataset
 from torchnlp.datasets.smt import smt_dataset
+from torchnlp.datasets.glue import glue_dataset
 
 __all__ = [
     'Dataset',
@@ -30,4 +31,5 @@ __all__ = [
     'count_dataset',
     'zero_dataset',
     'smt_dataset',
+    'glue_dataset',
 ]
