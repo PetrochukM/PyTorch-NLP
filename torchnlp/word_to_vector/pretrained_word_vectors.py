@@ -161,7 +161,7 @@ class _PretrainedWordVectors(object):
                 if self.is_include is not None and not self.is_include(word):
                     continue
 
-                vectors[len(itos)] = torch.Tensor([float(e) for x in entries])
+                vectors[len(itos)] = torch.Tensor([float(x) for x in entries])
                 itos.append(word)
 
             self.itos = itos
