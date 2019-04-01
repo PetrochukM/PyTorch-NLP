@@ -56,8 +56,7 @@ def test_unsupported_dim():
         error_message = str(e)
 
     assert error_class is ValueError
-    assert error_message.startswith("Embedding dimensionality of '42' not "
-                                    "supported.")
+    assert error_message.startswith("Embedding dimensionality of '42' not " "supported.")
 
 
 def test_unsupported_merge_ops():
@@ -71,5 +70,4 @@ def test_unsupported_merge_ops():
         error_message = str(e)
 
     assert error_class is ValueError
-    assert error_message.startswith("Number of '42' merge operations not "
-                                    "supported.")
+    assert error_message.startswith("Number of '42' merge operations not " "supported.")

@@ -6,18 +6,16 @@ from torchnlp.datasets.dataset import Dataset
 from torchnlp.download import download_file_maybe_extract
 
 
-def simple_qa_dataset(
-        directory='data/',
-        train=False,
-        dev=False,
-        test=False,
-        extracted_name='SimpleQuestions_v2',
-        train_filename='annotated_fb_data_train.txt',
-        dev_filename='annotated_fb_data_valid.txt',
-        test_filename='annotated_fb_data_test.txt',
-        check_files=['SimpleQuestions_v2/annotated_fb_data_train.txt'],
-        url='https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1'
-):
+def simple_qa_dataset(directory='data/',
+                      train=False,
+                      dev=False,
+                      test=False,
+                      extracted_name='SimpleQuestions_v2',
+                      train_filename='annotated_fb_data_train.txt',
+                      dev_filename='annotated_fb_data_valid.txt',
+                      test_filename='annotated_fb_data_test.txt',
+                      check_files=['SimpleQuestions_v2/annotated_fb_data_train.txt'],
+                      url='https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1'):
     """
     Load the SimpleQuestions dataset.
 
@@ -62,20 +60,15 @@ def simple_qa_dataset(
           'subject': 'www.freebase.com/m/0tp2p24'
         }]
     """
-    download_file_maybe_extract(
-        url=url, directory=directory, check_files=check_files)
+    download_file_maybe_extract(url=url, directory=directory, check_files=check_files)
 
     ret = []
-    splits = [(train, train_filename), (dev, dev_filename),
-              (test, test_filename)]
+    splits = [(train, train_filename), (dev, dev_filename), (test, test_filename)]
     splits = [f for (requested, f) in splits if requested]
     for filename in splits:
         full_path = os.path.join(directory, extracted_name, filename)
         data = pd.read_csv(
-            full_path,
-            header=None,
-            sep='\t',
-            names=['subject', 'relation', 'object', 'question'])
+            full_path, header=None, sep='\t', names=['subject', 'relation', 'object', 'question'])
         ret.append(
             Dataset([{
                 'question': row['question'],

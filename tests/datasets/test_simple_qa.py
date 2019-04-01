@@ -9,6 +9,7 @@ from tests.datasets.utils import urlretrieve_side_effect
 
 directory = 'tests/_test_data/'
 
+
 @mock.patch("urllib.request.urlretrieve")
 def test_simple_qa_dataset_row(mock_urlretrieve):
     mock_urlretrieve.side_effect = urlretrieve_side_effect

@@ -113,9 +113,7 @@ def pad_batch(batch, padding_index=PADDING_INDEX, dim=0):
 
 def flatten_parameters(model):
     """ ``flatten_parameters`` of a RNN model loaded from disk. """
-    model.apply(
-        lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None
-    )
+    model.apply(lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None)
 
 
 def shuffle(list_, random_seed=123):

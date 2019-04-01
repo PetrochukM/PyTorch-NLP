@@ -41,24 +41,24 @@ def test_get_token_accuracy_2d_2d_2d_2d():
 
 def test_get_accuracy_2d_3d():
     targets = torch.LongTensor([[1, 1], [2, 2], [3, 3], [4, 4]])
-    outputs = torch.LongTensor([[[1, 1], [1, 1]], [[2, 2], [2, 2]], [[3, 3], [3, 3]], [[3, 3],
-                                                                                       [3, 3]]])
+    outputs = torch.LongTensor([[[1, 1], [1, 1]], [[2, 2], [2, 2]], [[3, 3], [3, 3]],
+                                [[3, 3], [3, 3]]])
     accuracy, _, _ = get_accuracy(targets, outputs)
     assert accuracy == 0.75
 
 
 def test_get_token_accuracy_2d_3d():
     targets = torch.LongTensor([[1, 1], [2, 2], [3, 3], [4, 4]])
-    outputs = torch.LongTensor([[[1, 1], [1, 1]], [[2, 2], [2, 2]], [[3, 3], [3, 3]], [[3, 3],
-                                                                                       [3, 3]]])
+    outputs = torch.LongTensor([[[1, 1], [1, 1]], [[2, 2], [2, 2]], [[3, 3], [3, 3]],
+                                [[3, 3], [3, 3]]])
     accuracy, _, _ = get_token_accuracy(targets, outputs)
     assert accuracy == 0.75
 
 
 def test_get_accuracy_2d_3d_top_k():
     targets = torch.LongTensor([[1, 1], [2, 2], [3, 3], [4, 4]])
-    outputs = torch.LongTensor([[[1, 1], [1, 1]], [[2, 2], [2, 2]], [[3, 3], [3, 3]], [[3, 3],
-                                                                                       [4, 4]]])
+    outputs = torch.LongTensor([[[1, 1], [1, 1]], [[2, 2], [2, 2]], [[3, 3], [3, 3]],
+                                [[3, 3], [4, 4]]])
     accuracy, _, _ = get_accuracy(targets, outputs, k=3)
     assert accuracy == 1.0
 

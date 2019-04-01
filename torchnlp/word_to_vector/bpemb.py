@@ -79,9 +79,9 @@ class BPEmb(_PretrainedWordVectors):
             raise ValueError(("Language '%s' not supported. Use one of the "
                               "following options instead:\n%s") % (language, SUPPORTED_LANGUAGES))
         if dim not in SUPPORTED_DIMS:
-            raise ValueError(("Embedding dimensionality of '%d' not supported. "
-                              "Use one of the following options instead:\n%s") % (dim,
-                                                                                  SUPPORTED_DIMS))
+            raise ValueError(
+                ("Embedding dimensionality of '%d' not supported. "
+                 "Use one of the following options instead:\n%s") % (dim, SUPPORTED_DIMS))
         if merge_ops not in SUPPORTED_MERGE_OPS:
             raise ValueError(("Number of '%d' merge operations not supported. "
                               "Use one of the following options instead:\n%s") %
