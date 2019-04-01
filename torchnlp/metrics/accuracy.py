@@ -42,7 +42,10 @@ def get_accuracy(targets, outputs, k=1, ignore_index=None):
 
         predictions = output.topk(k=min(k, len(output)), dim=0)[0]
         for prediction in predictions:
-            if torch_equals_ignore_index(target, prediction, ignore_index=ignore_index):
+            if torch_equals_ignore_index(
+                    target.squeeze(),
+                    prediction.squeeze(),
+                    ignore_index=ignore_index):
                 n_correct += 1
                 break
 

@@ -26,16 +26,16 @@ def get_tensors(object_):
 
     tensors = set()
 
-    if isinstance(object_, collections.Mapping):
+    if isinstance(object_, collections.abc.Mapping):
         for value in object_.values():
             tensors.update(get_tensors(value))
-    elif isinstance(object_, collections.Iterable):
+    elif isinstance(object_, collections.abc.Iterable):
         for value in object_:
             tensors.update(get_tensors(value))
     else:
         members = [
             value for key, value in inspect.getmembers(object_)
-            if not isinstance(value, (collections.Callable, type(None)))
+            if not isinstance(value, (collections.abc.Callable, type(None)))
         ]
         tensors.update(get_tensors(members))
 
@@ -113,7 +113,9 @@ def pad_batch(batch, padding_index=PADDING_INDEX, dim=0):
 
 def flatten_parameters(model):
     """ ``flatten_parameters`` of a RNN model loaded from disk. """
-    model.apply(lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None)
+    model.apply(
+        lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None
+    )
 
 
 def shuffle(list_, random_seed=123):

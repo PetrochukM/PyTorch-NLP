@@ -16,12 +16,12 @@ from torchnlp.text_encoders.subword_text_tokenizer import SubwordTextTokenizer
 
 
 class TestTokenCounts(unittest.TestCase):
-
     def setUp(self):
         self.corpus = [
             "One morning I shot an elephant in my pajamas. How he got in my pajamas, I don't",
             'know.', '', 'Groucho Marx',
-            "I haven't slept for 10 days... because that would be too long.", '', 'Mitch Hedberg'
+            "I haven't slept for 10 days... because that would be too long.",
+            '', 'Mitch Hedberg'
         ]
 
     def test_token_counts(self):
@@ -44,55 +44,60 @@ class TestTokenCounts(unittest.TestCase):
 
 
 class EncodeDecodeTest(unittest.TestCase):
-
     def test_encode(self):
-        self.assertListEqual([u"Dude", u" - ", u"that", u"'", u"s", u"so", u"cool", u"."],
-                             encode(u"Dude - that's so cool."))
+        self.assertListEqual(
+            [u"Dude", u" - ", u"that", u"'", u"s", u"so", u"cool", u"."],
+            encode(u"Dude - that's so cool."))
         self.assertListEqual([u"Łukasz", u"est", u"né", u"en", u"1981", u"."],
                              encode(u"Łukasz est né en 1981."))
         self.assertListEqual([u" ", u"Spaces", u"at", u"the", u"ends", u" "],
                              encode(u" Spaces at the ends "))
         self.assertListEqual([u"802", u".", u"11b"], encode(u"802.11b"))
-        self.assertListEqual([u"two", u". \n", u"lines"], encode(u"two. \nlines"))
+        self.assertListEqual([u"two", u". \n", u"lines"],
+                             encode(u"two. \nlines"))
 
     def test_decode(self):
-        self.assertEqual(u"Dude - that's so cool.",
-                         decode([u"Dude", u" - ", u"that", u"'", u"s", u"so", u"cool", u"."]))
+        self.assertEqual(
+            u"Dude - that's so cool.",
+            decode(
+                [u"Dude", u" - ", u"that", u"'", u"s", u"so", u"cool", u"."]))
 
     def test_invertibility_on_random_strings(self):
         for _ in range(1000):
-            s = u"".join(six.unichr(random.randint(0, 65535)) for _ in range(10))
+            s = u"".join(
+                six.unichr(random.randint(0, 65535)) for _ in range(10))
             self.assertEqual(s, decode(encode(s)))
 
 
 class EscapeUnescapeTokenTest(unittest.TestCase):
-
     def test_escape_token(self):
-        escaped = _escape_token('Foo! Bar.\nunder_score back\\slash',
-                                set('abcdefghijklmnopqrstuvwxyz .\n') | _ESCAPE_CHARS)
+        escaped = _escape_token(
+            'Foo! Bar.\nunder_score back\\slash',
+            set('abcdefghijklmnopqrstuvwxyz .\n') | _ESCAPE_CHARS)
 
-        self.assertEqual('\\70;oo\\33; \\66;ar.\\10;under\\uscore back\\\\slash_', escaped)
+        self.assertEqual(
+            '\\70;oo\\33; \\66;ar.\\10;under\\uscore back\\\\slash_', escaped)
 
     def test_unescape_token(self):
-        unescaped = _unescape_token('\\70;oo\\33; \\66;ar.\\10;under\\uscore back\\\\slash_')
+        unescaped = _unescape_token(
+            '\\70;oo\\33; \\66;ar.\\10;under\\uscore back\\\\slash_')
 
         self.assertEqual('Foo! Bar.\nunder_score back\\slash', unescaped)
 
 
 class SubwordTextTokenizerTest(unittest.TestCase):
-
     def test_encode_decode(self):
-        corpus = ('This is a corpus of text that provides a bunch of tokens from which '
-                  'to build a vocabulary. It will be used when strings are encoded '
-                  'with a SubwordTextTokenizer subclass. The encoder was coded by a coder.')
+        corpus = (
+            'This is a corpus of text that provides a bunch of tokens from which '
+            'to build a vocabulary. It will be used when strings are encoded '
+            'with a SubwordTextTokenizer subclass. The encoder was coded by a coder.'
+        )
         alphabet = set(corpus) ^ {' '}
 
         original = 'This is a coded sentence encoded by the SubwordTextTokenizer.'
 
-        encoder = SubwordTextTokenizer.build_to_target_size_from_corpus([corpus, original],
-                                                                        target_size=100,
-                                                                        min_val=2,
-                                                                        max_val=10)
+        encoder = SubwordTextTokenizer.build_to_target_size_from_corpus(
+            [corpus, original], target_size=100, min_val=2, max_val=10)
 
         # Encoding should be reversible.
         encoded = encoder.encode(original)
@@ -156,7 +161,8 @@ class SubwordTextTokenizerTest(unittest.TestCase):
         encoded_str = ''.join(encoded)
         self.assertIn('\\84;', encoded_str)
 
-    @mock.patch.object(subword_text_tokenizer, '_ESCAPE_CHARS', new=set('\\_;13579'))
+    @mock.patch.object(
+        subword_text_tokenizer, '_ESCAPE_CHARS', new=set('\\_;13579'))
     def test_raises_exception_when_not_encodable(self):
         corpus = 'the quick brown fox jumps over the lazy dog'
         token_counts = collections.Counter(corpus.split(' '))
