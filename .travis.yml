@@ -3,14 +3,14 @@ sudo: required
 
 language: python
 python:
+  - '3.7'
   - '3.6'
-  - '3.5'
 
 cache: pip
 
 notifications:
   email: false
-  
+
 before_install: source build_tools/travis/before_install.sh
 install: source build_tools/travis/install.sh
 script: RUN_DOCS=true RUN_SLOW=true RUN_FLAKE8=true bash build_tools/travis/test_script.sh
