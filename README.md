@@ -50,21 +50,18 @@ train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
 
 ### Apply [Neural Networks](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) Layers
 
-For example, from the neural network package, apply a Simple Recurrent Unit (SRU):
+For example, from the neural network package, apply state-of-the-art LockedDropout:
 
 ```python
-from torchnlp.nn import SRU
 import torch
+from torchnlp.nn import LockedDropout
 
-input_ = torch.autograd.Variable(torch.randn(6, 3, 10))
-sru = SRU(10, 20)
+input_ = torch.randn(6, 3, 10)
+dropout = LockedDropout(0.5)
 
-# Apply a Simple Recurrent Unit to `input_`
-sru(input_)
-# RETURNS: (
-#   output [torch.FloatTensor (6x3x20)],
-#   hidden_state [torch.FloatTensor (2x3x20)]
-# )
+# Apply a LockedDropout to `input_`
+dropout(input_)
+# RETURNS: torch.FloatTensor (6x3x10)
 ```
 
 ### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.encoders.text.html)
