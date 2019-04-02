@@ -147,3 +147,95 @@ def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):
         tensor_other = tensor_other.masked_select(mask_arr)
 
     return torch.equal(tensor, tensor_other)
+
+
+def is_namedtuple(object_):
+    return hasattr(object_, '_asdict') and isinstance(object_, tuple)
+
+
+def collate_tensors(batch, stack_tensors=torch.stack):
+    """ Collate a list of type ``k`` (dict, namedtuple, list, etc.) with tensors.
+
+    Inspired by:
+    https://github.com/pytorch/pytorch/blob/master/torch/utils/data/_utils/collate.py#L31
+
+    Args:
+        batch (list of k): List of rows of type ``k``.
+        stack_tensors (callable): Function to stack tensors into a batch.
+
+    Returns:
+        k: Collated batch of type ``k``.
+
+    Example use case:
+        This is useful with ``torch.utils.data.dataloader.DataLoader`` which requires a collate
+        function. Typically, when collating sequences you'd set
+        ``collate_fn=partial(collate_tensors, stack_tensors=encoders.text.stack_and_pad_tensors)``.
+
+    Example:
+
+        >>> import torch
+        >>> batch = [
+        ...   { 'column_a': torch.randn(5), 'column_b': torch.randn(5) },
+        ...   { 'column_a': torch.randn(5), 'column_b': torch.randn(5) },
+        ... ]
+        >>> collated = collate_tensors(batch)
+        >>> {k: t.size() for (k, t) in collated.items()}
+        {'column_a': torch.Size([2, 5]), 'column_b': torch.Size([2, 5])}
+    """
+    if all([torch.is_tensor(b) for b in batch]):
+        return stack_tensors(batch)
+    if (all([isinstance(b, dict) for b in batch]) and
+            all([b.keys() == batch[0].keys() for b in batch])):
+        return {key: collate_tensors([d[key] for d in batch], stack_tensors) for key in batch[0]}
+    elif all([is_namedtuple(b) for b in batch]):  # Handle ``namedtuple``
+        return batch[0].__class__(**collate_tensors([b._asdict() for b in batch], stack_tensors))
+    elif all([isinstance(b, list) for b in batch]):
+        # Handle list of lists such each list has some column to be batched, similar to:
+        # [['a', 'b'], ['a', 'b']] → [['a', 'a'], ['b', 'b']]
+        transposed = zip(*batch)
+        return [collate_tensors(samples, stack_tensors) for samples in transposed]
+    else:
+        return batch
+
+
+def tensors_to(tensors, *args, **kwargs):
+    """ Apply ``torch.Tensor.to`` to tensors in a generic data structure.
+
+    Inspired by:
+    https://github.com/pytorch/pytorch/blob/master/torch/utils/data/_utils/collate.py#L31
+
+    Args:
+        tensors (tensor, dict, list, namedtuple or tuple): Data structure with tensor values to
+            move.
+        *args: Arguments passed to ``torch.Tensor.to``.
+        **kwargs: Keyword arguments passed to ``torch.Tensor.to``.
+
+    Example use case:
+        This is useful as a complementary function to ``collate_tensors``. Following collating,
+        it's important to move your tensors to the appropriate device.
+
+    Returns:
+        The inputted ``tensors`` with ``torch.Tensor.to`` applied.
+
+    Example:
+
+        >>> import torch
+        >>> batch = [
+        ...   { 'column_a': torch.randn(5), 'column_b': torch.randn(5) },
+        ...   { 'column_a': torch.randn(5), 'column_b': torch.randn(5) },
+        ... ]
+        >>> tensors_to(batch, torch.device('cpu'))  # doctest: +ELLIPSIS
+        [{'column_a': tensor(...}]
+    """
+    if torch.is_tensor(tensors):
+        return tensors.to(*args, **kwargs)
+    elif isinstance(tensors, dict):
+        return {k: tensors_to(v, *args, **kwargs) for k, v in tensors.items()}
+    elif hasattr(tensors, '_asdict') and isinstance(tensors, tuple):  # Handle ``namedtuple``
+        return tensors.__class__(**tensors_to(tensors._asdict(), *args, **kwargs))
+    elif isinstance(tensors, list):
+        return [tensors_to(t, *args, **kwargs) for t in tensors]
+    elif isinstance(tensors, tuple):
+        return tuple([tensors_to(t, *args, **kwargs) for t in tensors])
+    else:
+        return tensors

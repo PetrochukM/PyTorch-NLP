@@ -23,7 +23,7 @@ def pad_tensor(tensor, length, padding_index=DEFAULT_PADDING_INDEX):
     return torch.cat((tensor, padding), dim=0)
 
 
-def pad_batch(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
+def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
     """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
 
     Args:
@@ -49,9 +49,9 @@ class TextEncoder(Encoder):
             torch.Tensor: Encoded and padded batch of sequences.
             list of int: Original lengths of sequences.
         """
-        return pad_batch([self.encode(object_, *args, **kwargs) for object_ in batch],
-                         padding_index=self.padding_index,
-                         dim=dim)
+        return stack_and_pad_tensors([self.encode(object_, *args, **kwargs) for object_ in batch],
+                                     padding_index=self.padding_index,
+                                     dim=dim)
 
     def batch_decode(self, batch, lengths=None, *args, **kwargs):
         """

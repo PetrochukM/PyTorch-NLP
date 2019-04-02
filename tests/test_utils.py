@@ -1,13 +1,20 @@
+from collections import namedtuple
+from functools import partial
+from unittest import mock
+
 import pickle
 
 import torch
 
 from torchnlp.datasets import Dataset
+from torchnlp.utils import collate_tensors
 from torchnlp.utils import flatten_parameters
+from torchnlp.utils import get_tensors
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import shuffle
+from torchnlp.utils import tensors_to
 from torchnlp.utils import torch_equals_ignore_index
-from torchnlp.utils import get_tensors
+from torchnlp.encoders.text import stack_and_pad_tensors
 
 
 class GetTensorsObjectMock(object):
@@ -87,3 +94,48 @@ def test_torch_equals_ignore_index():
     target = torch.LongTensor([1, 2, 4])
     assert torch_equals_ignore_index(source, target, ignore_index=3)
     assert not torch_equals_ignore_index(source, target)
+
+
+TestTuple = namedtuple('TestTuple', ['t'])
+
+
+def test_collate_tensors():
+
+    tensor = torch.Tensor(1)
+    collate_sequences = partial(collate_tensors, stack_tensors=stack_and_pad_tensors)
+    assert collate_sequences([tensor, tensor])[0].shape == (2, 1)
+    assert collate_sequences([[tensor], [tensor]])[0][0].shape == (2, 1)
+    assert collate_sequences([{'t': tensor}, {'t': tensor}])['t'][0].shape == (2, 1)
+    assert collate_sequences([TestTuple(t=tensor), TestTuple(t=tensor)]).t[0].shape == (2, 1)
+    assert collate_sequences(['test', 'test']) == ['test', 'test']
+
+
+@mock.patch('torch.is_tensor')
+def test_tensors_to(mock_is_tensor):
+    TestTuple = namedtuple('TestTuple', ['t'])
+
+    mock_tensor = mock.Mock()
+    mock_is_tensor.side_effect = lambda m, **kwargs: m == mock_tensor
+    tensors_to(mock_tensor, device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+
+    returned = tensors_to({'t': [mock_tensor]}, device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+    assert isinstance(returned, dict)
+
+    returned = tensors_to([mock_tensor], device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+    assert isinstance(returned, list)
+
+    returned = tensors_to(tuple([mock_tensor]), device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+    assert isinstance(returned, tuple)
+
+    returned = tensors_to(TestTuple(t=mock_tensor), device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+    assert isinstance(returned, TestTuple)
