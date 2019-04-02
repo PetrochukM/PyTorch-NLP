@@ -2,9 +2,14 @@ dist: trusty
 sudo: required
 
 language: python
-python:
-  - '3.7'
-  - '3.6'
+matrix:
+  include:
+    - python: 3.6
+      dist: trusty
+      sudo: false
+    - python: 3.7
+      dist: xenial
+      sudo: true
 
 cache: pip
 
