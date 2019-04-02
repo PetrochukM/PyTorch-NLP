@@ -58,7 +58,7 @@ class FastText(_PretrainedWordVectors):
             returns a Tensor of the same size
         is_include (callable, optional): callable returns True if to include a token in memory
             vectors cache; some of these embedding files are gigantic so filtering it can cut
-            down on the memory usage. We do not cache on disk if `is_include` is defined.
+            down on the memory usage. We do not cache on disk if ``is_include`` is defined.
 
     Example:
         >>> from torchnlp.word_to_vector import FastText  # doctest: +SKIP

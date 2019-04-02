@@ -9,9 +9,10 @@ class Encoder(object):
         raise NotImplementedError
 
     def enforce_reversible(self):
-        """ Updates the specification of `self.encode` and `self.decode` to enforce reversibility.
+        """ Updates the specification of ``Encoder.encode`` and ``Encoder.decode`` to enforce
+        reversibility.
 
-        Formally, reversible means: ``self.decode(self.encode(object_)) == object_``
+        Formally, reversible means: ``Encoder.decode(Encoder.encode(object_)) == object_``
 
         Example:
             >>> encoder = Encoder().enforce_reversible()  # doctest: +SKIP
@@ -37,23 +38,49 @@ class Encoder(object):
         return self
 
     def encode(self, object_):  # pragma: no cover
-        """ Returns a :class:`torch.Tensor` encoding of the `object`. """
+        """ Encodes an object to a :class:`torch.Tensor`.
+
+        Args:
+            object_ (object): Object to encode.
+
+        Returns:
+            torch.Tensor: Encoding of the object.
+        """
         raise NotImplementedError
 
     def batch_encode(self, batch, *args, **kwargs):
-        """ Returns a :class:`torch.Tensor` encoding of the `batch` of `object_`s. """
+        """
+        Args:
+            batch (list): Batch of objects to encode.
+            *args: Arguments passed to ``encode``.
+            **kwargs: Key word arguments passed to ``encode``.
+
+        Returns:
+            list: Batch of encoded objects.
+        """
         return torch.tensor([self.encode(object_, *args, **kwargs).tolist() for object_ in batch])
 
     def decode(self, tensor):  # pragma: no cover
-        """ Given a :class:`torch.Tensor` returns the decoded tensor.
+        """ Decodes a :class:`torch.Tensor` to a object.
 
-        Note that, depending on the tokenization method, the decoded version is not guaranteed to be
-        the same as the original.
+        Args:
+            tensor (torch.Tensor): Tensor to decode.
+
+        Returns:
+            object: Object decoded from tensor.
         """
         raise NotImplementedError
 
     def batch_decode(self, batch, *args, **kwargs):
-        """ Returns a :class:`list` decoding of the `batch` of :class:`torch.Tensor`. """
+        """
+        Args:
+            batch (list of :class:`torch.Tensor`): Batch of encoded objects.
+            *args: Arguments passed to ``decode``.
+            **kwargs: Key word arguments passed to ``decode``.
+
+        Returns:
+            list: Batch of decoded objects.
+        """
         iterator = ([split.squeeze(0) for split in batch.split(1)]
                     if torch.is_tensor(batch) else batch)
         return [self.decode(tensor, *args, **kwargs) for tensor in iterator]

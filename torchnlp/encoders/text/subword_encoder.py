@@ -11,7 +11,8 @@ from torchnlp.encoders.text.subword_text_tokenizer import SubwordTextTokenizer
 class SubwordEncoder(TextEncoder):
     """ Invertibly encoding text using a limited vocabulary.
 
-    Applies Googles Tensor2Tensor SubwordTextTokenizer that invertibly encodes a native string as a
+    Applies Googles Tensor2Tensor ``SubwordTextTokenizer`` that invertibly encodes a native string
+    as a
     sequence of subtokens from a limited vocabulary. In order to build the vocabulary, it uses
     recursive binary search to find a minimum token count `x`
     (s.t. `min_occurrences` <= `x` <= `max_occurrences`) that most closely matches the
@@ -22,13 +23,14 @@ class SubwordEncoder(TextEncoder):
 
     Args:
         sample (list): Sample of data used to build encoding dictionary.
-        append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
+        append_eos (bool, optional): If ``True`` append EOS token onto the end to the encoded
+          vector.
         target_vocab_size (int, optional): Desired size of vocab.
         min_occurrences (int, optional): Lower bound for the minimum token count.
         max_occurrences (int, optional): Upper bound for the minimum token count.
         reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
             of the dictionary.
-        eos_index (int, optional): The eos token is used to encode end of sequence. This is
+        eos_index (int, optional): The eos token is used to encode the end of a sequence. This is
           the index that token resides at.
         unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
           the index that token resides at.
@@ -72,10 +74,18 @@ class SubwordEncoder(TextEncoder):
 
     @property
     def vocab(self):
+        """
+        Returns:
+            list: List of tokens in the dictionary.
+        """
         return self.itos
 
     @property
     def vocab_size(self):
+        """
+        Returns:
+            int: Number of tokens in the dictionary.
+        """
         return len(self.vocab)
 
     def encode(self, sequence):

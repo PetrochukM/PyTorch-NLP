@@ -35,9 +35,9 @@ class NoisySortedBatchSampler(BatchSampler):
             numerical comparison key from each list element.
         drop_last (bool): If ``True``, the sampler will drop the last batch if its size would be
             less than ``batch_size``.
-        sort_key_noise (float): Maximum noise added to the numerical `sort_key`.
+        sort_key_noise (float): Maximum noise added to the numerical ``sort_key``.
         last_batch_first (bool, optional): If ``True``, the sampler will append the last batch
-            first. Only helpful if the `sort_key` approximates GPU memory.
+            first. Only helpful if the ``sort_key`` approximates GPU memory.
 
             This is largely for testing, to see how large of a batch you can safely use with your
             GPU. This will let you try out the biggest batch that you have in the data `first`, so

@@ -35,7 +35,7 @@ def imdb_dataset(directory='data/',
         test_directory (str, optional): The directory of the test split.
         extracted_name (str, optional): Name of the extracted dataset directory.
         check_files (str, optional): Check if these files exist, then this download was successful.
-        url (str, optional): URL of the dataset `tar.gz` file.
+        url (str, optional): URL of the dataset ``tar.gz`` file.
         sentiments (list of str, optional): Sentiments to load from the dataset.
 
     Returns:

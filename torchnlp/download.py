@@ -136,7 +136,7 @@ def download_file_maybe_extract(url, directory, filename=None, extension=None, c
         (str): Filename of download file.
 
     Raises:
-        (ValueError): Error if one of the ``check_files`` are not found following the download.
+        ValueError: Error if one of the ``check_files`` are not found following the download.
     """
     if filename is None:
         filename = _get_filename_from_url(url)
@@ -189,7 +189,7 @@ def download_files_maybe_extract(urls, directory, check_files=[]):
             If these files exist before the download, the download is skipped.
 
     Raises:
-        (ValueError): Error if one of the ``check_files`` are not found following the download.
+        ValueError: Error if one of the ``check_files`` are not found following the download.
     """
     check_files = [os.path.join(directory, f) for f in check_files]
     if _check_download(*check_files):

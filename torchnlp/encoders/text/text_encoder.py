@@ -46,15 +46,24 @@ class TextEncoder(Encoder):
     def batch_encode(self, batch, *args, dim=0, **kwargs):
         """
         Returns
-            torch.Tensor: Encoded and padded batch of tensors.
-            list of int: Original lengths of tensors.
+            torch.Tensor: Encoded and padded batch of sequences.
+            list of int: Original lengths of sequences.
         """
         return pad_batch([self.encode(object_, *args, **kwargs) for object_ in batch],
                          padding_index=self.padding_index,
                          dim=dim)
 
     def batch_decode(self, batch, lengths=None, *args, **kwargs):
-        """ Returns a :class:`list` decoding of the `batch` of :class:`torch.Tensor`. """
+        """
+        Args:
+            batch (list of :class:`torch.Tensor`): Batch of encoded sequences.
+            lengths (list of int): Original lengths of sequences.
+            *args: Arguments passed to ``decode``.
+            **kwargs: Key word arguments passed to ``decode``.
+
+        Returns:
+            list: Batch of decoded sequences.
+        """
         split = batch.split(1) if torch.is_tensor(batch) else batch
         decoded = []
         for i, text in enumerate(split):

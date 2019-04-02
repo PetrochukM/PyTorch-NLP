@@ -11,10 +11,11 @@ class TreebankEncoder(StaticTokenizerEncoder):
         sample (list): Sample of data used to build encoding dictionary.
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
           the encoding dictionary.
-        append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
+        append_eos (bool, optional): If ``True`` append EOS token onto the end to the encoded
+          vector.
         reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
             of the dictionary.
-        eos_index (int, optional): The eos token is used to encode end of sequence. This is
+        eos_index (int, optional): The eos token is used to encode the end of a sequence. This is
           the index that token resides at.
         unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
           the index that token resides at.

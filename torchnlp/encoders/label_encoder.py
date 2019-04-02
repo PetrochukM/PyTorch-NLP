@@ -55,10 +55,18 @@ class LabelEncoder(Encoder):
 
     @property
     def vocab(self):
+        """
+        Returns:
+            list: List of labels in the dictionary.
+        """
         return self.itos
 
     @property
     def vocab_size(self):
+        """
+        Returns:
+            int: Number of labels in the dictionary.
+        """
         return len(self.vocab)
 
     def encode(self, label):

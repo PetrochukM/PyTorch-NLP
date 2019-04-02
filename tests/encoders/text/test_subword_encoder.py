@@ -21,7 +21,8 @@ class TestSubwordEncoder:
         return SubwordEncoder(corpus, target_vocab_size=86, min_occurrences=2, max_occurrences=6)
 
     def test_build_vocab_target_size(self, encoder):
-        # NOTE: `target_vocab_size` is approximate; therefore, it may not be exactly the target size
+        # NOTE: ``target_vocab_size`` is approximate; therefore, it may not be exactly the target
+        # size
         assert len(encoder.vocab) == 86
 
     def test_encode(self, encoder):
