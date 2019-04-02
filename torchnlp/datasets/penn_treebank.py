@@ -1,9 +1,9 @@
 import os
 import io
 
-from torchnlp.text_encoders import UNKNOWN_TOKEN
-from torchnlp.text_encoders import EOS_TOKEN
 from torchnlp.download import download_files_maybe_extract
+from torchnlp.encoders.sequence import DEFAULT_EOS_TOKEN
+from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
 
 
 def penn_treebank_dataset(
@@ -19,7 +19,9 @@ def penn_treebank_dataset(
             'https://raw.githubusercontent.com/wojzaremba/lstm/master/data/ptb.train.txt',
             'https://raw.githubusercontent.com/wojzaremba/lstm/master/data/ptb.valid.txt',
             'https://raw.githubusercontent.com/wojzaremba/lstm/master/data/ptb.test.txt'
-        ]):
+        ],
+        unknown_token=DEFAULT_UNKNOWN_TOKEN,
+        eos_token=DEFAULT_EOS_TOKEN):
     """
     Load the Penn Treebank dataset.
 
@@ -43,6 +45,8 @@ def penn_treebank_dataset(
         name (str, optional): Name of the dataset directory.
         check_files (str, optional): Check if these files exist, then this download was successful.
         urls (str, optional): URLs to download.
+        unknown_token (str, optional): Token to use for unknown words.
+        eos_token (str, optional): Token to use at the end of sentences.
 
     Returns:
         :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
@@ -50,9 +54,9 @@ def penn_treebank_dataset(
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import penn_treebank_dataset
-        >>> train = penn_treebank_dataset(train=True)
-        >>> train[:10]
+        >>> from torchnlp.datasets import penn_treebank_dataset  # doctest: +SKIP
+        >>> train = penn_treebank_dataset(train=True)  # doctest: +SKIP
+        >>> train[:10]  # doctest: +SKIP
         ['aer', 'banknote', 'berlitz', 'calloway', 'centrust', 'cluett', 'fromstein', 'gitano',
         'guterman', 'hydro-quebec']
     """
@@ -66,8 +70,8 @@ def penn_treebank_dataset(
         text = []
         with io.open(full_path, encoding='utf-8') as f:
             for line in f:
-                text.extend(line.replace('<unk>', UNKNOWN_TOKEN).split())
-                text.append(EOS_TOKEN)
+                text.extend(line.replace('<unk>', unknown_token).split())
+                text.append(eos_token)
         ret.append(text)
 
     if len(ret) == 1:

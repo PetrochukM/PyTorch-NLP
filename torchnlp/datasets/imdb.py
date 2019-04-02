@@ -44,9 +44,9 @@ def imdb_dataset(directory='data/',
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import imdb_dataset
-        >>> train = imdb_dataset(train=True)
-        >>> train[0:2]
+        >>> from torchnlp.datasets import imdb_dataset  # doctest: +SKIP
+        >>> train = imdb_dataset(train=True)  # doctest: +SKIP
+        >>> train[0:2]  # doctest: +SKIP
         [{
           'text': 'For a movie that gets no respect there sure are a lot of memorable quotes...',
           'sentiment': 'pos'

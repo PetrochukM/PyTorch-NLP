@@ -2,7 +2,7 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import SpacyEncoder
+from torchnlp.encoders.sequence import SpacyEncoder
 
 
 @pytest.fixture

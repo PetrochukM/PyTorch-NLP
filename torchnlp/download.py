@@ -24,9 +24,8 @@ def _reporthook(t):
         t (tqdm.tqdm) Progress bar.
 
     Example:
-        >>> with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
-        >>>    urllib.request.urlretrieve(file_url, filename=full_path, reporthook=reporthook(t))
-
+        >>> with tqdm(unit='B', unit_scale=True, miniters=1, desc=filename) as t:  # doctest: +SKIP
+        ...   urllib.request.urlretrieve(file_url, filename=full_path, reporthook=reporthook(t))
     """
     last_b = [0]
 

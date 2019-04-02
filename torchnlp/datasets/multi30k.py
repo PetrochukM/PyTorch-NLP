@@ -63,9 +63,9 @@ def multi30k_dataset(directory='data/multi30k/',
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import multi30k_dataset
-        >>> train = multi30k_dataset(train=True)
-        >>> train[:2]
+        >>> from torchnlp.datasets import multi30k_dataset  # doctest: +SKIP
+        >>> train = multi30k_dataset(train=True)  # doctest: +SKIP
+        >>> train[:2]  # doctest: +SKIP
         [{
           'en': 'Two young, White males are outside near many bushes.',
           'de': 'Zwei junge weiße Männer sind im Freien in der Nähe vieler Büsche.'

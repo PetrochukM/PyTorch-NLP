@@ -1,31 +1,28 @@
-from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.sequence.delimiter_encoder import DelimiterEncoder
 
 
-def _tokenize(s):
-    return s.split()
-
-
-class WhitespaceEncoder(StaticTokenizerEncoder):
-    """ Encodes the text by splitting on whitespace.
-
-    **Tokenizer Reference:**
-    https://docs.python.org/3/library/stdtypes.html#str.split
+class WhitespaceEncoder(DelimiterEncoder):
+    """ Encodes a sequence by splitting on whitespace.
 
     Args:
-        sample (list of strings): Sample of data to build dictionary on
+        sample (list): Sample of data used to build encoding dictionary.
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
-          dictionary.
+          the encoding dictionary.
         append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
+        reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
+            of the dictionary.
+        eos_index (int, optional): The eos token is used to encode end of sequence. This is
+          the index that token resides at.
+        unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
+          the index that token resides at.
+        padding_index (int, optional): The unknown token is used to encode sequence padding. This is
+          the index that token resides at.
 
     Example:
 
-        >>> encoder = WhitespaceEncoder(["This ain't funny.", "Don't?"],
-                                             tokenize=lambda s: s.split())
+        >>> encoder = WhitespaceEncoder(["This ain't funny.", "Don't?"])
         >>> encoder.encode("This ain't funny.")
-         5
-         6
-         7
-        [torch.LongTensor of size 3]
+        tensor([5, 6, 7])
         >>> encoder.vocab
         ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', "ain't", 'funny.', "Don't?"]
         >>> encoder.decode(encoder.encode("This ain't funny."))
@@ -34,10 +31,4 @@ class WhitespaceEncoder(StaticTokenizerEncoder):
     """
 
     def __init__(self, *args, **kwargs):
-        if 'tokenize' in kwargs:
-            raise TypeError('WhiteSpaceEncoder defines a tokenize callable per character')
-        super().__init__(*args, tokenize=_tokenize, **kwargs)
-
-    def decode(self, tensor):
-        tokens = [self.itos[index] for index in tensor]
-        return ' '.join(tokens)
+        super().__init__(' ', *args, **kwargs)

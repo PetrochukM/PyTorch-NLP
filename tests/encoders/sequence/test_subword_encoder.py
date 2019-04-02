@@ -2,8 +2,8 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import SubwordEncoder
-from torchnlp.text_encoders import EOS_INDEX
+from torchnlp.encoders.sequence import SubwordEncoder
+from torchnlp.encoders.sequence import DEFAULT_EOS_INDEX
 
 
 class TestSubwordEncoder:
@@ -31,7 +31,7 @@ class TestSubwordEncoder:
     def test_eos(self, corpus):
         encoder = SubwordEncoder(corpus, append_eos=True)
         input_ = 'This is a sentence'
-        assert encoder.encode(input_)[-1] == EOS_INDEX
+        assert encoder.encode(input_)[-1] == DEFAULT_EOS_INDEX
 
     def test_is_pickleable(self, encoder):
         pickle.dumps(encoder)

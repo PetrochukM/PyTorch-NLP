@@ -1,4 +1,4 @@
-from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.sequence.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 def _tokenize(s):
@@ -6,20 +6,28 @@ def _tokenize(s):
 
 
 class CharacterEncoder(StaticTokenizerEncoder):
-    """ Encodes text into a tensor by splitting the text into individual characters.
+    """ Encodes sequence into a tensor by splitting the sequence into individual characters.
 
     Args:
-        sample (list of strings): Sample of data to build dictionary on
+        sample (list): Sample of data used to build encoding dictionary.
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
-          dictionary.
+          the encoding dictionary.
         append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
+        reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
+            of the dictionary.
+        eos_index (int, optional): The eos token is used to encode end of sequence. This is
+          the index that token resides at.
+        unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
+          the index that token resides at.
+        padding_index (int, optional): The unknown token is used to encode sequence padding. This is
+          the index that token resides at.
     """
 
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
-            raise TypeError('CharacterEncoder defines a tokenize callable per character')
+            raise TypeError('Encoder does not take keyword argument tokenize.')
+
         super().__init__(*args, tokenize=_tokenize, **kwargs)
 
     def decode(self, tensor):
-        tokens = [self.itos[index] for index in tensor]
-        return ''.join(tokens)
+        return ''.join([self.itos[index] for index in tensor])

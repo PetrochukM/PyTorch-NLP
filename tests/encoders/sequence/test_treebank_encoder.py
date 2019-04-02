@@ -2,7 +2,7 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import TreebankEncoder
+from torchnlp.encoders.sequence import TreebankEncoder
 
 
 @pytest.fixture

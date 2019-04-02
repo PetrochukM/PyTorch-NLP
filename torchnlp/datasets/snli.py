@@ -52,9 +52,9 @@ def snli_dataset(directory='data/',
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import snli_dataset
-        >>> train = snli_dataset(train=True)
-        >>> train[0]
+        >>> from torchnlp.datasets import snli_dataset  # doctest: +SKIP
+        >>> train = snli_dataset(train=True)  # doctest: +SKIP
+        >>> train[0]  # doctest: +SKIP
         {
           'premise': 'Kids are on a amusement ride.',
           'hypothesis': 'A car is broke down on the side of the road.',

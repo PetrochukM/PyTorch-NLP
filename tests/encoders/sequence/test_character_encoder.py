@@ -2,9 +2,9 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import CharacterEncoder
-from torchnlp.text_encoders import UNKNOWN_TOKEN
-from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
+from torchnlp.encoders.sequence import CharacterEncoder
+from torchnlp.encoders.sequence import DEFAULT_RESERVED_TOKENS
+from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
 
 
 @pytest.fixture
@@ -20,25 +20,27 @@ def encoder(sample):
 def test_character_encoder(encoder, sample):
     input_ = 'english-language pangram'
     output = encoder.encode(input_)
-    assert encoder.vocab_size == len(set(list(sample[0]))) + len(RESERVED_ITOS)
+    assert encoder.vocab_size == len(set(list(sample[0]))) + len(DEFAULT_RESERVED_TOKENS)
     assert len(output) == len(input_)
-    assert encoder.decode(output) == input_.replace('-', UNKNOWN_TOKEN)
+    assert encoder.decode(output) == input_.replace('-', DEFAULT_UNKNOWN_TOKEN)
 
 
-def test_character_batch_encoder(encoder, sample):
+def test_character_encoder_batch(encoder, sample):
     input_ = 'english-language pangram'
-    outputs = encoder.batch_encode([input_, input_])
-    assert len(outputs) == 2
-    for output in outputs:
-        assert len(output) == len(input_)
-        assert encoder.decode(output) == input_.replace('-', UNKNOWN_TOKEN)
+    longer_input_ = 'english-language pangram pangram'
+    encoded, lengths = encoder.batch_encode([input_, longer_input_])
+    assert encoded.shape[0] == 2
+    assert len(lengths) == 2
+    decoded = encoder.batch_decode(encoded, lengths=lengths)
+    assert decoded[0] == input_.replace('-', DEFAULT_UNKNOWN_TOKEN)
+    assert decoded[1] == longer_input_.replace('-', DEFAULT_UNKNOWN_TOKEN)
 
 
 def test_character_encoder_min_occurrences(sample):
     encoder = CharacterEncoder(sample, min_occurrences=10)
     input_ = 'English-language pangram'
     output = encoder.encode(input_)
-    assert encoder.decode(output) == ''.join([UNKNOWN_TOKEN] * len(input_))
+    assert encoder.decode(output) == ''.join([DEFAULT_UNKNOWN_TOKEN] * len(input_))
 
 
 def test_is_pickleable(encoder):

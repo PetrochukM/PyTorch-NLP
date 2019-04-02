@@ -24,7 +24,7 @@ class BPTTBatchSampler(object):
     Example:
         >>> sampler = BPTTBatchSampler(range(100), bptt_length=2, batch_size=3, drop_last=False)
         >>> list(sampler)[0] # First Batch
-        [slice(0, 2), slice(34, 36), slice(67, 69)]
+        [slice(0, 2, None), slice(34, 36, None), slice(67, 69, None)]
     """
 
     def __init__(self, data, bptt_length, batch_size, drop_last, type_='source'):

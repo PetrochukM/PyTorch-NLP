@@ -3,8 +3,8 @@ import random
 from torch.utils.data.sampler import Sampler
 
 
-def _first(e):
-    return e[0]
+def _identity(e):
+    return e
 
 
 class NoisySortedSampler(Sampler):
@@ -20,11 +20,14 @@ class NoisySortedSampler(Sampler):
         sort_key_noise (float): Maximum noise added to the numerical ``sort_key``.
 
     Example:
+        >>> import random
+        >>> random.seed(123)
+        >>>
         >>> list(NoisySortedSampler(range(10), sort_key=lambda i: i, sort_key_noise=0.25))
-        [0, 1, 2, 3, 4, 5, 8, 6, 7, 9]
+        [0, 1, 2, 3, 5, 4, 6, 7, 9, 8]
     """
 
-    def __init__(self, data, sort_key=_first, sort_key_noise=0.25):
+    def __init__(self, data, sort_key=_identity, sort_key_noise=0.25):
         super().__init__(data)
         self.data = data
         self.sort_key = sort_key

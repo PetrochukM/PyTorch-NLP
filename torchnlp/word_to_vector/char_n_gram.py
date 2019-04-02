@@ -31,7 +31,6 @@
 import torch
 
 from torchnlp.word_to_vector.pretrained_word_vectors import _PretrainedWordVectors
-from torchnlp.text_encoders import UNKNOWN_TOKEN
 
 
 class CharNGram(_PretrainedWordVectors):
@@ -58,9 +57,9 @@ class CharNGram(_PretrainedWordVectors):
             down on the memory usage. We do not cache on disk if `is_include` is defined.
 
     Example:
-        >>> from torchnlp.word_to_vector import CharNGram
-        >>> vectors = CharNGram()
-        >>> vectors['hello']
+        >>> from torchnlp.word_to_vector import CharNGram  # doctest: +SKIP
+        >>> vectors = CharNGram()  # doctest: +SKIP
+        >>> vectors['hello']  # doctest: +SKIP
         -1.7494
         0.6242
         ...
@@ -78,8 +77,6 @@ class CharNGram(_PretrainedWordVectors):
 
     def __getitem__(self, token):
         vector = torch.Tensor(self.dim).zero_()
-        if token == UNKNOWN_TOKEN:
-            return self.unk_init(vector)
         # These literals need to be coerced to unicode for Python 2 compatibility
         # when we try to join them with read ngrams from the files.
         chars = ['#BEGIN#'] + list(token) + ['#END#']

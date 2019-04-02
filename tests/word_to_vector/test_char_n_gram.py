@@ -3,7 +3,7 @@ import mock
 
 from torchnlp.word_to_vector import CharNGram
 from tests.word_to_vector.utils import urlretrieve_side_effect
-from torchnlp.text_encoders import UNKNOWN_TOKEN
+from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
 
 
 @mock.patch("urllib.request.urlretrieve")
@@ -19,7 +19,7 @@ def test_charngram_100d(mock_urlretrieve):
 
     # Test with the unknown characters
     assert len(vectors['漢字']) == 100
-    assert len(vectors[UNKNOWN_TOKEN]) == 100
+    assert len(vectors[DEFAULT_UNKNOWN_TOKEN]) == 100
 
     # Clean up
     os.remove(directory + 'charNgram.txt.pt')

@@ -2,8 +2,8 @@ import os
 import io
 
 from torchnlp.download import download_file_maybe_extract
-from torchnlp.text_encoders import UNKNOWN_TOKEN
-from torchnlp.text_encoders import EOS_TOKEN
+from torchnlp.encoders.sequence import DEFAULT_EOS_TOKEN
+from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
 
 
 def wikitext_2_dataset(
@@ -16,7 +16,9 @@ def wikitext_2_dataset(
         test_filename='wiki.test.tokens',
         extracted_name='wikitext-2',
         check_files=['wikitext-2/wiki.train.tokens'],
-        url='https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-v1.zip'):
+        url='https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-v1.zip',
+        unknown_token=DEFAULT_UNKNOWN_TOKEN,
+        eos_token=DEFAULT_EOS_TOKEN):
     """
     Load the WikiText-2 dataset.
 
@@ -38,6 +40,8 @@ def wikitext_2_dataset(
         extracted_name (str, optional): Name of the extracted dataset directory.
         check_files (str, optional): Check if these files exist, then this download was successful.
         url (str, optional): URL of the dataset `tar.gz` file.
+        unknown_token (str, optional): Token to use for unknown words.
+        eos_token (str, optional): Token to use at the end of sentences.
 
     Returns:
         :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
@@ -45,9 +49,9 @@ def wikitext_2_dataset(
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import wikitext_2_dataset
-        >>> train = wikitext_2_dataset(train=True)
-        >>> train[:10]
+        >>> from torchnlp.datasets import wikitext_2_dataset  # doctest: +SKIP
+        >>> train = wikitext_2_dataset(train=True)  # doctest: +SKIP
+        >>> train[:10]  # doctest: +SKIP
         ['</s>', '=', 'Valkyria', 'Chronicles', 'III', '=', '</s>', '</s>', 'Senjō', 'no']
     """
     download_file_maybe_extract(url=url, directory=directory, check_files=check_files)
@@ -60,8 +64,8 @@ def wikitext_2_dataset(
         text = []
         with io.open(full_path, encoding='utf-8') as f:
             for line in f:
-                text.extend(line.replace('<unk>', UNKNOWN_TOKEN).split())
-                text.append(EOS_TOKEN)
+                text.extend(line.replace('<unk>', unknown_token).split())
+                text.append(eos_token)
         ret.append(text)
 
     if len(ret) == 1:

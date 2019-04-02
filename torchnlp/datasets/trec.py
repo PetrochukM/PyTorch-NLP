@@ -45,9 +45,9 @@ def trec_dataset(directory='data/trec/',
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import trec_dataset
-        >>> train = trec_dataset(train=True)
-        >>> train[:2]
+        >>> from torchnlp.datasets import trec_dataset  # doctest: +SKIP
+        >>> train = trec_dataset(train=True)  # doctest: +SKIP
+        >>> train[:2]  # doctest: +SKIP
         [{
           'label': 'DESC',
           'text': 'How did serfdom develop in and then leave Russia ?'

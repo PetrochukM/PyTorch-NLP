@@ -13,7 +13,8 @@ import torch.nn as nn
 from torchnlp.samplers import BucketBatchSampler
 from torchnlp.datasets import snli_dataset
 from torchnlp.utils import datasets_iterator
-from torchnlp.text_encoders import WhitespaceEncoder, IdentityEncoder
+from torchnlp.encoders.sequence import WhitespaceEncoder
+from torchnlp.encoders import LabelEncoder
 from torchnlp import word_to_vector
 
 from model import SNLIClassifier
@@ -38,7 +39,7 @@ sentence_corpus += [row['hypothesis'] for row in datasets_iterator(train, dev, t
 sentence_encoder = WhitespaceEncoder(sentence_corpus)
 
 label_corpus = [row['label'] for row in datasets_iterator(train, dev, test)]
-label_encoder = IdentityEncoder(label_corpus)
+label_encoder = LabelEncoder(label_corpus)
 
 # Encode
 for row in datasets_iterator(train, dev, test):

@@ -88,9 +88,9 @@ def smt_dataset(directory='data/',
         tokens and test tokens in order if their respective boolean argument is true.
 
     Example:
-        >>> from torchnlp.datasets import smt_dataset
-        >>> train = smt_dataset(train=True)
-        >>> train[5]
+        >>> from torchnlp.datasets import smt_dataset  # doctest: +SKIP
+        >>> train = smt_dataset(train=True)  # doctest: +SKIP
+        >>> train[5]  # doctest: +SKIP
         {
           'text': "Whether or not you 're enlightened by any of Derrida 's lectures on ...",
           'label': 'positive'

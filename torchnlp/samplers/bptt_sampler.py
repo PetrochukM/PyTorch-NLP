@@ -21,7 +21,7 @@ class BPTTSampler(Sampler):
     Example:
         >>> from torchnlp.samplers import BPTTSampler
         >>> list(BPTTSampler(range(5), 2))
-        [slice(0, 2), slice(2, 4)]
+        [slice(0, 2, None), slice(2, 4, None)]
     """
 
     def __init__(self, data, bptt_length, type_='source'):

@@ -2,37 +2,41 @@ from collections import Counter
 
 import torch
 
-from torchnlp.encoder import Encoder
-from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
-from torchnlp.text_encoders.reserved_tokens import RESERVED_ITOS
-from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
+from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_EOS_INDEX
+from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_PADDING_INDEX
+from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_RESERVED_TOKENS
+from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_UNKNOWN_INDEX
+from torchnlp.encoders.sequence.sequence_encoder import SequenceEncoder
 
 
 def _tokenize(s):
     return s.split()
 
 
-class StaticTokenizerEncoder(Encoder):
-    """ Encodes the text using a tokenizer.
+class StaticTokenizerEncoder(SequenceEncoder):
+    """ Encodes a sequence using a static tokenizer.
 
     Args:
-        sample (list of strings): Sample of data to build dictionary on.
+        sample (list): Sample of data used to build encoding dictionary.
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
-          dictionary.
-        tokenize (callable): :class:``callable`` to tokenize a string.
+          the encoding dictionary.
+        tokenize (callable): :class:``callable`` to tokenize a sequence.
         append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
-        reserved_tokens (list of str, optional): Tokens added to dictionary; reserving the first
-            `len(reserved_tokens)` indexes.
+        reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
+            of the dictionary.
+        eos_index (int, optional): The eos token is used to encode end of sequence. This is
+          the index that token resides at.
+        unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
+          the index that token resides at.
+        padding_index (int, optional): The unknown token is used to encode sequence padding. This is
+          the index that token resides at.
 
     Example:
 
-        >>> encoder = StaticTokenizerEncoder(["This ain't funny.", "Don't?"],
-                                             tokenize=lambda s: s.split())
+        >>> sample = ["This ain't funny.", "Don't?"]
+        >>> encoder = StaticTokenizerEncoder(sample, tokenize=lambda s: s.split())
         >>> encoder.encode("This ain't funny.")
-         5
-         6
-         7
-        [torch.LongTensor of size 3]
+        tensor([5, 6, 7])
         >>> encoder.vocab
         ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', "ain't", 'funny.', "Don't?"]
         >>> encoder.decode(encoder.encode("This ain't funny."))
@@ -45,16 +49,23 @@ class StaticTokenizerEncoder(Encoder):
                  min_occurrences=1,
                  append_eos=False,
                  tokenize=_tokenize,
-                 reserved_tokens=RESERVED_ITOS):
+                 reserved_tokens=DEFAULT_RESERVED_TOKENS,
+                 eos_index=DEFAULT_EOS_INDEX,
+                 unknown_index=DEFAULT_UNKNOWN_INDEX,
+                 padding_index=DEFAULT_PADDING_INDEX):
         if not isinstance(sample, list):
-            raise TypeError('Sample must be a list of strings.')
+            raise TypeError('Sample must be a list.')
 
+        self.eos_index = eos_index
+        self.unknown_index = unknown_index
+        self.padding_index = padding_index
+        self.reserved_tokens = reserved_tokens
         self.tokenize = tokenize
         self.append_eos = append_eos
         self.tokens = Counter()
 
-        for text in sample:
-            self.tokens.update(self.tokenize(text))
+        for sequence in sample:
+            self.tokens.update(self.tokenize(sequence))
 
         self.itos = reserved_tokens.copy()
         self.stoi = {token: index for index, token in enumerate(reserved_tokens)}
@@ -67,12 +78,16 @@ class StaticTokenizerEncoder(Encoder):
     def vocab(self):
         return self.itos
 
-    def encode(self, text, eos_index=EOS_INDEX, unknown_index=UNKNOWN_INDEX):
-        text = self.tokenize(text)
-        vector = [self.stoi.get(token, unknown_index) for token in text]
+    @property
+    def vocab_size(self):
+        return len(self.vocab)
+
+    def encode(self, sequence):
+        sequence = self.tokenize(sequence)
+        vector = [self.stoi.get(token, self.unknown_index) for token in sequence]
         if self.append_eos:
-            vector.append(eos_index)
-        return torch.LongTensor(vector)
+            vector.append(self.eos_index)
+        return torch.tensor(vector)
 
     def decode(self, tensor):
         tokens = [self.itos[index] for index in tensor]

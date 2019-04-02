@@ -2,9 +2,9 @@ import pickle
 
 import pytest
 
-from torchnlp.text_encoders import DelimiterEncoder
-from torchnlp.text_encoders import UNKNOWN_TOKEN
-from torchnlp.text_encoders import EOS_TOKEN
+from torchnlp.encoders.sequence import DelimiterEncoder
+from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
+from torchnlp.encoders.sequence import DEFAULT_EOS_TOKEN
 
 
 @pytest.fixture
@@ -16,7 +16,8 @@ def encoder():
 def test_delimiter_encoder(encoder):
     input_ = 'symbols/namesake/named_after'
     output = encoder.encode(input_)
-    assert encoder.decode(output) == '/'.join(['symbols', UNKNOWN_TOKEN, UNKNOWN_TOKEN]) + EOS_TOKEN
+    assert encoder.decode(output) == '/'.join(
+        ['symbols', DEFAULT_UNKNOWN_TOKEN, DEFAULT_UNKNOWN_TOKEN, DEFAULT_EOS_TOKEN])
 
 
 def test_is_pickleable(encoder):

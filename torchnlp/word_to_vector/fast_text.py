@@ -61,9 +61,9 @@ class FastText(_PretrainedWordVectors):
             down on the memory usage. We do not cache on disk if `is_include` is defined.
 
     Example:
-        >>> from torchnlp.word_to_vector import FastText
-        >>> vectors = FastText()
-        >>> vectors['hello']
+        >>> from torchnlp.word_to_vector import FastText  # doctest: +SKIP
+        >>> vectors = FastText()  # doctest: +SKIP
+        >>> vectors['hello']  # doctest: +SKIP
         -1.7494
         0.6242
         ...

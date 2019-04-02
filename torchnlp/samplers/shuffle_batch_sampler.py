@@ -16,10 +16,15 @@ class ShuffleBatchSampler(BatchSampler):
         shuffle (bool, optional): If ``True``, the sampler will shuffle the batches.
 
     Example:
-        >>> list(ShuffleBatchSampler(range(10), batch_size=3, drop_last=False))
-        [[3, 4, 5], [9], [0, 1, 2], [6, 7, 8]]
-        >>> list(ShuffleBatchSampler(range(10), batch_size=3, drop_last=True))
-        [[3, 4, 5], [0, 1, 2], [6, 7, 8]]
+        >>> import random
+        >>> from torchnlp.samplers import SortedSampler
+        >>>
+        >>> random.seed(123)
+        >>>
+        >>> list(ShuffleBatchSampler(SortedSampler(range(10)), batch_size=3, drop_last=False))
+        [[6, 7, 8], [9], [3, 4, 5], [0, 1, 2]]
+        >>> list(ShuffleBatchSampler(SortedSampler(range(10)), batch_size=3, drop_last=True))
+        [[0, 1, 2], [6, 7, 8], [3, 4, 5]]
     """
 
     def __init__(

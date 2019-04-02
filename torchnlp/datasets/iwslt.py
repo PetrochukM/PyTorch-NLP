@@ -63,9 +63,9 @@ def iwslt_dataset(
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import iwslt_dataset
-        >>> train = iwslt_dataset(train=True)
-        >>> train[:2]
+        >>> from torchnlp.datasets import iwslt_dataset  # doctest: +SKIP
+        >>> train = iwslt_dataset(train=True)  # doctest: +SKIP
+        >>> train[:2]  # doctest: +SKIP
         [{
           'en': "David Gallo: This is Bill Lange. I'm Dave Gallo.",
           'de': 'David Gallo: Das ist Bill Lange. Ich bin Dave Gallo.'

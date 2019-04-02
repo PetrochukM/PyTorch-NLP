@@ -44,10 +44,10 @@ def simple_qa_dataset(directory='data/',
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import simple_qa_dataset
-        >>> train = simple_qa_dataset(train=True)
+        >>> from torchnlp.datasets import simple_qa_dataset  # doctest: +SKIP
+        >>> train = simple_qa_dataset(train=True)  # doctest: +SKIP
         SimpleQuestions_v2.tgz:  15%|▏| 62.3M/423M [00:09<00:41, 8.76MB/s]
-        >>> train[0:2]
+        >>> train[0:2]  # doctest: +SKIP
         [{
           'question': 'what is the book e about',
           'relation': 'www.freebase.com/book/written_work/subjects',

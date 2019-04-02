@@ -96,17 +96,17 @@ def model_load(fn):
 
 
 from torchnlp import datasets
-from torchnlp.text_encoders import IdentityEncoder
+from torchnlp.encoders import LabelEncoder
 from torchnlp.samplers import BPTTBatchSampler
 
 print('Producing dataset...')
 train, val, test = getattr(datasets, args.data)(train=True, dev=True, test=True)
 
-encoder = IdentityEncoder(train + val + test)
+encoder = LabelEncoder(train + val + test)
 
-train_data = encoder.encode(train)
-val_data = encoder.encode(val)
-test_data = encoder.encode(test)
+train_data = encoder.batch_encode(train)
+val_data = encoder.batch_encode(val)
+test_data = encoder.batch_encode(test)
 
 eval_batch_size = 10
 test_batch_size = 1
