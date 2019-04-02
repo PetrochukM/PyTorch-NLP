@@ -11,13 +11,17 @@ export PYTHONPATH=.
 
 python --version
 
+if [[ "$RUN_DOCS" == "true" ]]; then
+    make -C docs html
+fi
+
 if [[ "$RUN_FLAKE8" == "true" ]]; then
     flake8 torchnlp/
     flake8 tests/
 fi
 
 run_tests() {
-    TEST_CMD="python -m pytest tests/ torchnlp/ --doctest-modules --verbose --durations=20"
+    TEST_CMD="python -m pytest tests/ torchnlp/ --verbose --durations=20 --cov=torchnlp --doctest-modules"
     if [[ "$RUN_SLOW" == "true" ]]; then
         TEST_CMD="$TEST_CMD --runslow"
     fi
