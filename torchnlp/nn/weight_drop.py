@@ -56,9 +56,7 @@ class WeightDrop(torch.nn.Module):
         >>> input_ = torch.randn(3, 2)
         >>> hidden_state = torch.randn(3, 2)
         >>> weight_drop_gru(input_, hidden_state)
-        tensor([[-0.1250, -0.4532],
-                [ 1.0132, -0.3668],
-                [ 0.0491, -0.2257]], grad_fn=<AddBackward0>)
+        tensor(... grad_fn=<AddBackward0>)
     """
 
     def __init__(self, module, weights, dropout=0.0):
