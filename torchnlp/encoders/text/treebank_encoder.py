@@ -1,8 +1,8 @@
-from torchnlp.encoders.sequence.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 class TreebankEncoder(StaticTokenizerEncoder):
-    """ Encodes a sequence using the Treebank tokenizer.
+    """ Encodes text using the Treebank tokenizer.
 
     **Tokenizer Reference:**
     http://www.nltk.org/_modules/nltk/tokenize/treebank.html

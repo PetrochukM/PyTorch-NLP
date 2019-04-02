@@ -1,15 +1,15 @@
 import torch
 
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_EOS_INDEX
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_PADDING_INDEX
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_RESERVED_TOKENS
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_UNKNOWN_INDEX
-from torchnlp.encoders.sequence.sequence_encoder import SequenceEncoder
-from torchnlp.encoders.sequence.subword_text_tokenizer import SubwordTextTokenizer
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_EOS_INDEX
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_PADDING_INDEX
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_RESERVED_TOKENS
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_UNKNOWN_INDEX
+from torchnlp.encoders.text.text_encoder import TextEncoder
+from torchnlp.encoders.text.subword_text_tokenizer import SubwordTextTokenizer
 
 
-class SubwordEncoder(SequenceEncoder):
-    """ Invertibly encoding sequence using a limited vocabulary.
+class SubwordEncoder(TextEncoder):
+    """ Invertibly encoding text using a limited vocabulary.
 
     Applies Googles Tensor2Tensor SubwordTextTokenizer that invertibly encodes a native string as a
     sequence of subtokens from a limited vocabulary. In order to build the vocabulary, it uses

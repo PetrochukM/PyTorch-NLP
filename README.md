@@ -67,12 +67,12 @@ sru(input_)
 # )
 ```
 
-### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.encoders.sequence.html)
+### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.encoders.text.html)
 
 Tokenize and encode text as a tensor. For example, a `WhitespaceEncoder` breaks text into terms whenever it encounters a whitespace character.
 
 ```python
-from torchnlp.encoders.sequence import WhitespaceEncoder
+from torchnlp.encoders.text import WhitespaceEncoder
 
 # Create a `WhitespaceEncoder` with a corpus of text
 encoder = WhitespaceEncoder(["now this ain't funny", "so don't you dare laugh"])

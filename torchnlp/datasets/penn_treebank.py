@@ -2,8 +2,8 @@ import os
 import io
 
 from torchnlp.download import download_files_maybe_extract
-from torchnlp.encoders.sequence import DEFAULT_EOS_TOKEN
-from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
+from torchnlp.encoders.text import DEFAULT_EOS_TOKEN
+from torchnlp.encoders.text import DEFAULT_UNKNOWN_TOKEN
 
 
 def penn_treebank_dataset(

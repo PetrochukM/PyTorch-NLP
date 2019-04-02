@@ -1,6 +1,6 @@
 from functools import partial
 
-from torchnlp.encoders.sequence.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 def _tokenize(s, delimiter):
@@ -8,7 +8,7 @@ def _tokenize(s, delimiter):
 
 
 class DelimiterEncoder(StaticTokenizerEncoder):
-    """ Encodes a sequence into a tensor by splitting the sequence using a delimiter.
+    """ Encodes text into a tensor by splitting the text using a delimiter.
 
     Args:
         delimiter (string): Delimiter used with ``string.split``

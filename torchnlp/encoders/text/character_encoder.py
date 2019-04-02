@@ -1,4 +1,4 @@
-from torchnlp.encoders.sequence.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 def _tokenize(s):
@@ -6,7 +6,7 @@ def _tokenize(s):
 
 
 class CharacterEncoder(StaticTokenizerEncoder):
-    """ Encodes sequence into a tensor by splitting the sequence into individual characters.
+    """ Encodes text into a tensor by splitting the text into individual characters.
 
     Args:
         sample (list): Sample of data used to build encoding dictionary.

@@ -1,4 +1,4 @@
-from torchnlp.encoders.sequence.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 class MosesEncoder(StaticTokenizerEncoder):
@@ -27,7 +27,8 @@ class MosesEncoder(StaticTokenizerEncoder):
         >>> encoder.encode("This ain't funny.")
         tensor([5, 6, 7, 8, 9])
         >>> encoder.vocab
-        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', 'ain', '&apos;t', 'funny', '.', 'Don', '?']
+        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', 'ain', '&apos;t', 'funny', '.', \
+'Don', '?']
         >>> encoder.decode(encoder.encode("This ain't funny."))
         "This ain't funny."
 

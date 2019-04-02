@@ -13,7 +13,7 @@ import torch.nn as nn
 from torchnlp.samplers import BucketBatchSampler
 from torchnlp.datasets import snli_dataset
 from torchnlp.utils import datasets_iterator
-from torchnlp.encoders.sequence import WhitespaceEncoder
+from torchnlp.encoders.text import WhitespaceEncoder
 from torchnlp.encoders import LabelEncoder
 from torchnlp import word_to_vector
 

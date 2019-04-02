@@ -1,7 +1,7 @@
 import torch
 
 from torchnlp.encoders import Encoder
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_PADDING_INDEX
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_PADDING_INDEX
 
 
 def pad_tensor(tensor, length, padding_index=DEFAULT_PADDING_INDEX):
@@ -41,7 +41,7 @@ def pad_batch(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
     return padded, lengths
 
 
-class SequenceEncoder(Encoder):
+class TextEncoder(Encoder):
 
     def batch_encode(self, batch, *args, dim=0, **kwargs):
         """
@@ -57,8 +57,8 @@ class SequenceEncoder(Encoder):
         """ Returns a :class:`list` decoding of the `batch` of :class:`torch.Tensor`. """
         split = batch.split(1) if torch.is_tensor(batch) else batch
         decoded = []
-        for i, sequence in enumerate(split):
-            sequence = sequence.squeeze(0) if torch.is_tensor(batch) else sequence
-            sequence = sequence[:lengths[i]] if lengths is not None else sequence
-            decoded.append(self.decode(sequence, *args, **kwargs))
+        for i, text in enumerate(split):
+            text = text.squeeze(0) if torch.is_tensor(batch) else text
+            text = text[:lengths[i]] if lengths is not None else text
+            decoded.append(self.decode(text, *args, **kwargs))
         return decoded

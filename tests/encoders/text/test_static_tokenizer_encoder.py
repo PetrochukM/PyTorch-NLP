@@ -2,7 +2,7 @@ import pickle
 
 import pytest
 
-from torchnlp.encoders.sequence import StaticTokenizerEncoder
+from torchnlp.encoders.text import StaticTokenizerEncoder
 
 
 @pytest.fixture

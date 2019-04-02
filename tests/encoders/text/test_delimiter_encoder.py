@@ -2,9 +2,9 @@ import pickle
 
 import pytest
 
-from torchnlp.encoders.sequence import DelimiterEncoder
-from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
-from torchnlp.encoders.sequence import DEFAULT_EOS_TOKEN
+from torchnlp.encoders.text import DelimiterEncoder
+from torchnlp.encoders.text import DEFAULT_UNKNOWN_TOKEN
+from torchnlp.encoders.text import DEFAULT_EOS_TOKEN
 
 
 @pytest.fixture

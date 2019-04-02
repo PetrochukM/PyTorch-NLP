@@ -2,19 +2,19 @@ from collections import Counter
 
 import torch
 
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_EOS_INDEX
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_PADDING_INDEX
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_RESERVED_TOKENS
-from torchnlp.encoders.sequence.default_reserved_tokens import DEFAULT_UNKNOWN_INDEX
-from torchnlp.encoders.sequence.sequence_encoder import SequenceEncoder
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_EOS_INDEX
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_PADDING_INDEX
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_RESERVED_TOKENS
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_UNKNOWN_INDEX
+from torchnlp.encoders.text.text_encoder import TextEncoder
 
 
 def _tokenize(s):
     return s.split()
 
 
-class StaticTokenizerEncoder(SequenceEncoder):
-    """ Encodes a sequence using a static tokenizer.
+class StaticTokenizerEncoder(TextEncoder):
+    """ Encodes a text sequence using a static tokenizer.
 
     Args:
         sample (list): Sample of data used to build encoding dictionary.

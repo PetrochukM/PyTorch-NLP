@@ -2,7 +2,7 @@ from functools import partial
 
 import torch
 
-from torchnlp.encoders.sequence.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 def _tokenize(s, tokenizer):

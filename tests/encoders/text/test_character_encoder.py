@@ -2,9 +2,9 @@ import pickle
 
 import pytest
 
-from torchnlp.encoders.sequence import CharacterEncoder
-from torchnlp.encoders.sequence import DEFAULT_RESERVED_TOKENS
-from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
+from torchnlp.encoders.text import CharacterEncoder
+from torchnlp.encoders.text import DEFAULT_RESERVED_TOKENS
+from torchnlp.encoders.text import DEFAULT_UNKNOWN_TOKEN
 
 
 @pytest.fixture

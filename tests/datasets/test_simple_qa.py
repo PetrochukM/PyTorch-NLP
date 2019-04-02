@@ -2,7 +2,6 @@ import os
 import shutil
 
 import mock
-import pytest
 
 from torchnlp.datasets import simple_qa_dataset
 from tests.datasets.utils import urlretrieve_side_effect

@@ -2,8 +2,8 @@ import os
 import io
 
 from torchnlp.download import download_file_maybe_extract
-from torchnlp.encoders.sequence import DEFAULT_EOS_TOKEN
-from torchnlp.encoders.sequence import DEFAULT_UNKNOWN_TOKEN
+from torchnlp.encoders.text import DEFAULT_EOS_TOKEN
+from torchnlp.encoders.text import DEFAULT_UNKNOWN_TOKEN
 
 
 def wikitext_2_dataset(

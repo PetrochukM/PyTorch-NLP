@@ -1,9 +1,9 @@
 import pytest
 import torch
 
-from torchnlp.encoders.sequence import DEFAULT_PADDING_INDEX
-from torchnlp.encoders.sequence import pad_batch
-from torchnlp.encoders.sequence import pad_tensor
+from torchnlp.encoders.text import DEFAULT_PADDING_INDEX
+from torchnlp.encoders.text import pad_batch
+from torchnlp.encoders.text import pad_tensor
 
 
 def test_pad_tensor():

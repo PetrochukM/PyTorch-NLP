@@ -1,8 +1,8 @@
-from torchnlp.encoders.sequence.delimiter_encoder import DelimiterEncoder
+from torchnlp.encoders.text.delimiter_encoder import DelimiterEncoder
 
 
 class WhitespaceEncoder(DelimiterEncoder):
-    """ Encodes a sequence by splitting on whitespace.
+    """ Encodes a text by splitting on whitespace.
 
     Args:
         sample (list): Sample of data used to build encoding dictionary.
