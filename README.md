@@ -16,6 +16,7 @@ Join our community, add datasets and neural network layers! Chat with us on [Git
 [![Documentation Status](	https://img.shields.io/readthedocs/pytorchnlp/latest.svg?style=flat-square)](http://pytorchnlp.readthedocs.io/en/latest/?badge=latest&style=flat-square)
 [![Build Status](https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
 
+_Logo by [Chloe Yeo](http://www.yeochloe.com/)_
 
 ## Installation
 
