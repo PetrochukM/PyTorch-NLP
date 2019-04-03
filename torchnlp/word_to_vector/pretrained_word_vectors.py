@@ -30,7 +30,6 @@
 
 from __future__ import unicode_literals
 
-import array
 import io
 import logging
 import os
@@ -137,7 +136,7 @@ class _PretrainedWordVectors(object):
                 entries = line.rstrip().split(b" " if binary_lines else " ")
 
                 word, entries = entries[0], entries[1:]
-                if dim is None and len(entries) > 1:
+                if dim is None and vectors is None and len(entries) > 1:
                     dim = len(entries)
                     vectors = torch.empty(len(lines), dim, dtype=torch.float)
                 elif len(entries) == 1:
