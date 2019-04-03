@@ -16,7 +16,7 @@ and text encoders. It's open-source software, released under the BSD3 license.
    source/torchnlp.datasets
    source/torchnlp.word_to_vector
    source/torchnlp.nn
-   source/torchnlp.text_encoders
+   source/torchnlp.encoders
    source/torchnlp.samplers
    source/torchnlp.metrics
    source/torchnlp.utils

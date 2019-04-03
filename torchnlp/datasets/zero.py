@@ -26,13 +26,7 @@ def zero_dataset(train=False, dev=False, test=False, train_rows=256, dev_rows=64
         >>> from torchnlp.datasets import zero_dataset
         >>> train = zero_dataset(train=True)
         >>> train[0:2]
-        [{
-          'source': '0',
-          'target': '0'
-        }, {
-          'source': '0',
-          'target': '0'
-        }]
+        [{'source': '0', 'target': '0'}, {'source': '0', 'target': '0'}]
     """
     ret = []
     for is_requested, n_rows in [(train, train_rows), (dev, dev_rows), (test, test_rows)]:

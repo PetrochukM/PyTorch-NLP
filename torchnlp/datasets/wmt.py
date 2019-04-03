@@ -50,9 +50,9 @@ def wmt_dataset(directory='data/wmt16_en_de',
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import wmt_dataset
-        >>> train = wmt_dataset(train=True)
-        >>> train[:2]
+        >>> from torchnlp.datasets import wmt_dataset  # doctest: +SKIP
+        >>> train = wmt_dataset(train=True)  # doctest: +SKIP
+        >>> train[:2]  # doctest: +SKIP
         [{
           'en': 'Res@@ um@@ ption of the session',
           'de': 'Wiederaufnahme der Sitzungsperiode'

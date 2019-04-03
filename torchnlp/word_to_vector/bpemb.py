@@ -51,10 +51,10 @@ class BPEmb(_PretrainedWordVectors):
             tokenizer
 
     Example:
-        >>> from torchnlp.word_to_vector import BPEmb
-        >>> vectors = BPEmb(dim=25)
-        >>> subwords = "▁mel ford shire".split()
-        >>> vectors[subwords]
+        >>> from torchnlp.word_to_vector import BPEmb  # doctest: +SKIP
+        >>> vectors = BPEmb(dim=25)  # doctest: +SKIP
+        >>> subwords = "▁mel ford shire".split()  # doctest: +SKIP
+        >>> vectors[subwords]  # doctest: +SKIP
         Columns 0 to 9
         -0.5859 -0.1803  0.2623 -0.6052  0.0194 -0.2795  0.2716 -0.2957 -0.0492
         1.0934
@@ -79,9 +79,9 @@ class BPEmb(_PretrainedWordVectors):
             raise ValueError(("Language '%s' not supported. Use one of the "
                               "following options instead:\n%s") % (language, SUPPORTED_LANGUAGES))
         if dim not in SUPPORTED_DIMS:
-            raise ValueError(("Embedding dimensionality of '%d' not supported. "
-                              "Use one of the following options instead:\n%s") % (dim,
-                                                                                  SUPPORTED_DIMS))
+            raise ValueError(
+                ("Embedding dimensionality of '%d' not supported. "
+                 "Use one of the following options instead:\n%s") % (dim, SUPPORTED_DIMS))
         if merge_ops not in SUPPORTED_MERGE_OPS:
             raise ValueError(("Number of '%d' merge operations not supported. "
                               "Use one of the following options instead:\n%s") %

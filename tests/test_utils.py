@@ -1,17 +1,20 @@
+from collections import namedtuple
+from functools import partial
+from unittest import mock
+
 import pickle
 
-import pytest
 import torch
 
 from torchnlp.datasets import Dataset
-from torchnlp.text_encoders import PADDING_INDEX
+from torchnlp.utils import collate_tensors
 from torchnlp.utils import flatten_parameters
-from torchnlp.utils import pad_batch
-from torchnlp.utils import pad_tensor
+from torchnlp.utils import get_tensors
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import shuffle
+from torchnlp.utils import tensors_to
 from torchnlp.utils import torch_equals_ignore_index
-from torchnlp.utils import get_tensors
+from torchnlp.encoders.text import stack_and_pad_tensors
 
 
 class GetTensorsObjectMock(object):
@@ -54,32 +57,6 @@ def test_get_tensors_object():
     assert len(tensors) == 6
 
 
-def test_pad_tensor():
-    padded = pad_tensor(torch.LongTensor([1, 2, 3]), 5, PADDING_INDEX)
-    assert padded.tolist() == [1, 2, 3, PADDING_INDEX, PADDING_INDEX]
-
-
-def test_pad_tensor_multiple_dim():
-    padded = pad_tensor(torch.LongTensor(1, 2, 3), 5, PADDING_INDEX)
-    assert padded.size() == (5, 2, 3)
-    assert padded[1].sum().item() == pytest.approx(0)
-
-
-def test_pad_tensor_multiple_dim_float_tensor():
-    padded = pad_tensor(torch.FloatTensor(778, 80), 804, PADDING_INDEX)
-    assert padded.size() == (804, 80)
-    assert padded[-1].sum().item() == pytest.approx(0)
-    assert padded.type() == 'torch.FloatTensor'
-
-
-def test_pad_batch():
-    batch = [torch.LongTensor([1, 2, 3]), torch.LongTensor([1, 2]), torch.LongTensor([1])]
-    padded, lengths = pad_batch(batch, PADDING_INDEX)
-    padded = [r.tolist() for r in padded]
-    assert padded == [[1, 2, 3], [1, 2, PADDING_INDEX], [1, PADDING_INDEX, PADDING_INDEX]]
-    assert lengths == [3, 2, 1]
-
-
 def test_shuffle():
     a = [1, 2, 3, 4, 5]
     # Always shuffles the same way
@@ -117,3 +94,48 @@ def test_torch_equals_ignore_index():
     target = torch.LongTensor([1, 2, 4])
     assert torch_equals_ignore_index(source, target, ignore_index=3)
     assert not torch_equals_ignore_index(source, target)
+
+
+TestTuple = namedtuple('TestTuple', ['t'])
+
+
+def test_collate_tensors():
+
+    tensor = torch.Tensor(1)
+    collate_sequences = partial(collate_tensors, stack_tensors=stack_and_pad_tensors)
+    assert collate_sequences([tensor, tensor])[0].shape == (2, 1)
+    assert collate_sequences([[tensor], [tensor]])[0][0].shape == (2, 1)
+    assert collate_sequences([{'t': tensor}, {'t': tensor}])['t'][0].shape == (2, 1)
+    assert collate_sequences([TestTuple(t=tensor), TestTuple(t=tensor)]).t[0].shape == (2, 1)
+    assert collate_sequences(['test', 'test']) == ['test', 'test']
+
+
+@mock.patch('torch.is_tensor')
+def test_tensors_to(mock_is_tensor):
+    TestTuple = namedtuple('TestTuple', ['t'])
+
+    mock_tensor = mock.Mock()
+    mock_is_tensor.side_effect = lambda m, **kwargs: m == mock_tensor
+    tensors_to(mock_tensor, device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+
+    returned = tensors_to({'t': [mock_tensor]}, device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+    assert isinstance(returned, dict)
+
+    returned = tensors_to([mock_tensor], device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+    assert isinstance(returned, list)
+
+    returned = tensors_to(tuple([mock_tensor]), device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+    assert isinstance(returned, tuple)
+
+    returned = tensors_to(TestTuple(t=mock_tensor), device=torch.device('cpu'))
+    mock_tensor.to.assert_called_once()
+    mock_tensor.to.reset_mock()
+    assert isinstance(returned, TestTuple)

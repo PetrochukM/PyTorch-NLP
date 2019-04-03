@@ -7,22 +7,23 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
+export PYTHONPATH=.
+
 python --version
-
-if [[ "$RUN_FLAKE8" == "true" ]]; then
-    flake8
-fi
-
 
 if [[ "$RUN_DOCS" == "true" ]]; then
     make -C docs html
 fi
 
+if [[ "$RUN_FLAKE8" == "true" ]]; then
+    flake8 torchnlp/
+    flake8 tests/
+fi
+
 run_tests() {
+    TEST_CMD="python -m pytest tests/ torchnlp/ --verbose --durations=20 --cov=torchnlp --doctest-modules"
     if [[ "$RUN_SLOW" == "true" ]]; then
-        TEST_CMD="py.test -v --durations=20 --cov=torchnlp --runslow"
-    else
-        TEST_CMD="py.test -v --durations=20 --cov=torchnlp"
+        TEST_CMD="$TEST_CMD --runslow"
     fi
     $TEST_CMD
 }

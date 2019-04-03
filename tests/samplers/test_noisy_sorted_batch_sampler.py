@@ -36,14 +36,12 @@ def test_noisy_sorted_batch_sampler_last_batch_first():
 
 
 def test_noisy_sorted_batch_sampler_sorted():
-    data_source = [[1], [2], [3], [4], [5]]
-    sort_key = lambda r: r[0]
+    data_source = [1, 2, 3, 4, 5]
     batch_size = 1
     batches = list(
         NoisySortedBatchSampler(
             data_source,
             batch_size,
-            sort_key=sort_key,
             drop_last=False,
             shuffle=False,
             last_batch_first=False,
@@ -54,6 +52,6 @@ def test_noisy_sorted_batch_sampler_sorted():
 
 
 def test_pickleable():
-    data_source = [[1], [2], [3], [4], [5], [6]]
+    data_source = [1, 2, 3, 4, 5, 6]
     sampler = NoisySortedBatchSampler(data_source, batch_size=2, drop_last=False)
     pickle.dumps(sampler)

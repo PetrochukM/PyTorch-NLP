@@ -44,13 +44,13 @@ def get_moses_multi_bleu(hypotheses, references, lowercase=False):
     Example:
 
       >>> hypotheses = [
-          "The brown fox jumps over the dog 笑",
-          "The brown fox jumps over the dog 2 笑"
-      ]
+      ...   "The brown fox jumps over the dog 笑",
+      ...   "The brown fox jumps over the dog 2 笑"
+      ... ]
       >>> references = [
-          "The quick brown fox jumps over the lazy dog 笑",
-          "The quick brown fox jumps over the lazy dog 笑"
-      ]
+      ...   "The quick brown fox jumps over the lazy dog 笑",
+      ...   "The quick brown fox jumps over the lazy dog 笑"
+      ... ]
       >>> get_moses_multi_bleu(hypotheses, references, lowercase=True)
       46.51
     """

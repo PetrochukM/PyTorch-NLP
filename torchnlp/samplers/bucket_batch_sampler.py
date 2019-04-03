@@ -18,7 +18,7 @@ def _identity(e):
 
 
 class BucketBatchSampler(object):
-    """Batches are sampled from sorted buckets of data.
+    """ Batches are sampled from sorted buckets of data.
 
     We use a bucketing technique from ``torchtext``. First, partition data in buckets of size
     100 * ``batch_size``. The examples inside the buckets are sorted using ``sort_key`` and batched.
@@ -59,7 +59,7 @@ class BucketBatchSampler(object):
 
     Example:
         >>> list(BucketBatchSampler(range(10), batch_size=3, drop_last=False))
-        [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]
+        [[9], [3, 4, 5], [6, 7, 8], [0, 1, 2]]
         >>> list(BucketBatchSampler(range(10), batch_size=3, drop_last=True))
         [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
 

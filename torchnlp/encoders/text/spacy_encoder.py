@@ -2,9 +2,7 @@ from functools import partial
 
 import torch
 
-from torchnlp.text_encoders.reserved_tokens import EOS_INDEX
-from torchnlp.text_encoders.reserved_tokens import UNKNOWN_INDEX
-from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 def _tokenize(s, tokenizer):
@@ -18,24 +16,28 @@ class SpacyEncoder(StaticTokenizerEncoder):
     https://spacy.io/api/tokenizer
 
     Args:
-        sample (list of strings): Sample of data to build dictionary on
+        sample (list): Sample of data used to build encoding dictionary.
+        min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
+          the encoding dictionary.
+        append_eos (bool, optional): If ``True`` append EOS token onto the end to the encoded
+          vector.
+        reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
+            of the dictionary.
+        eos_index (int, optional): The eos token is used to encode the end of a sequence. This is
+          the index that token resides at.
+        unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
+          the index that token resides at.
+        padding_index (int, optional): The unknown token is used to encode sequence padding. This is
+          the index that token resides at.
         language (string, optional): Language to use for parsing. Accepted values
             are 'en', 'de', 'es', 'pt', 'fr', 'it', 'nl' and 'xx'.
             For details see https://spacy.io/models/#available-models
-        min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
-          dictionary.
-        append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
 
     Example:
 
         >>> encoder = SpacyEncoder(["This ain't funny.", "Don't?"])
         >>> encoder.encode("This ain't funny.")
-         5
-         6
-         7
-         8
-         9
-        [torch.LongTensor of size 5]
+        tensor([5, 6, 7, 8, 9])
         >>> encoder.vocab
         ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', 'ai', "n't", 'funny', '.', 'Do', '?']
         >>> encoder.decode(encoder.encode("This ain't funny."))
@@ -45,7 +47,7 @@ class SpacyEncoder(StaticTokenizerEncoder):
 
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
-            raise TypeError('SpacyEncoder defines a tokenize callable.')
+            raise TypeError('Encoder does not take keyword argument tokenize.')
 
         try:
             import spacy
@@ -74,12 +76,12 @@ class SpacyEncoder(StaticTokenizerEncoder):
 
         super().__init__(*args, tokenize=partial(_tokenize, tokenizer=self.spacy), **kwargs)
 
-    def batch_encode(self, texts, eos_index=EOS_INDEX, unknown_index=UNKNOWN_INDEX):
+    def batch_encode(self, sequences):
         return_ = []
-        for tokens in self.spacy.pipe(texts, n_threads=-1):
+        for tokens in self.spacy.pipe(sequences, n_threads=-1):
             text = [token.text for token in tokens]
-            vector = [self.stoi.get(token, unknown_index) for token in text]
+            vector = [self.stoi.get(token, self.unknown_index) for token in text]
             if self.append_eos:
-                vector.append(eos_index)
-            return_.append(torch.LongTensor(vector))
+                vector.append(self.eos_index)
+            return_.append(torch.tensor(vector))
         return return_

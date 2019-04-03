@@ -35,7 +35,7 @@ def imdb_dataset(directory='data/',
         test_directory (str, optional): The directory of the test split.
         extracted_name (str, optional): Name of the extracted dataset directory.
         check_files (str, optional): Check if these files exist, then this download was successful.
-        url (str, optional): URL of the dataset `tar.gz` file.
+        url (str, optional): URL of the dataset ``tar.gz`` file.
         sentiments (list of str, optional): Sentiments to load from the dataset.
 
     Returns:
@@ -44,9 +44,9 @@ def imdb_dataset(directory='data/',
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import imdb_dataset
-        >>> train = imdb_dataset(train=True)
-        >>> train[0:2]
+        >>> from torchnlp.datasets import imdb_dataset  # doctest: +SKIP
+        >>> train = imdb_dataset(train=True)  # doctest: +SKIP
+        >>> train[0:2]  # doctest: +SKIP
         [{
           'text': 'For a movie that gets no respect there sure are a lot of memorable quotes...',
           'sentiment': 'pos'

@@ -49,9 +49,9 @@ def ud_pos_dataset(directory='data/',
         respective boolean argument is ``True``.
 
     Example:
-        >>> from torchnlp.datasets import ud_pos_dataset
-        >>> train = ud_pos_dataset(train=True)
-        >>> train[17] # Sentence at index 17 is shortish
+        >>> from torchnlp.datasets import ud_pos_dataset  # doctest: +SKIP
+        >>> train = ud_pos_dataset(train=True)  # doctest: +SKIP
+        >>> train[17]  # doctest: +SKIP
         {
           'tokens': ['Guerrillas', 'killed', 'an', 'engineer', ',', 'Asi', 'Ali', ',', 'from',
                      'Tikrit', '.'],

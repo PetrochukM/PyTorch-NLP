@@ -31,16 +31,13 @@ def reverse_dataset(train=False,
         respective boolean argument is ``True``.
 
     Example:
+        >>> import random
+        >>> random.seed(321)
+        >>>
         >>> from torchnlp.datasets import reverse_dataset
         >>> train = reverse_dataset(train=True)
-        >>> train[0:2]
-        [{
-          'source': '5 2 7 5 1',
-          'target': '1 5 7 2 5'
-        }, {
-          'source': '5 0 3 8 4 1 9 0 0 2',
-          'target': '2 0 0 9 1 4 8 3 0 5'
-        }]
+        >>> train[0:1]
+        [{'source': '6 2 5 8 7', 'target': '7 8 5 2 6'}]
     """
     ret = []
     for is_requested, n_rows in [(train, train_rows), (dev, dev_rows), (test, test_rows)]:

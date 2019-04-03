@@ -42,11 +42,12 @@ def get_accuracy(targets, outputs, k=1, ignore_index=None):
 
         predictions = output.topk(k=min(k, len(output)), dim=0)[0]
         for prediction in predictions:
-            if torch_equals_ignore_index(target, prediction, ignore_index=ignore_index):
+            if torch_equals_ignore_index(
+                    target.squeeze(), prediction.squeeze(), ignore_index=ignore_index):
                 n_correct += 1
                 break
 
-    return n_correct / len(targets), n_correct, len(targets)
+    return n_correct / len(targets), int(n_correct), len(targets)
 
 
 def get_token_accuracy(targets, outputs, ignore_index=None):
@@ -72,9 +73,9 @@ def get_token_accuracy(targets, outputs, ignore_index=None):
         >>> accuracy
         0.75
         >>> n_correct
-        3
+        3.0
         >>> n_total
-        4
+        4.0
      """
     n_correct = 0.0
     n_total = 0.0
@@ -92,10 +93,10 @@ def get_token_accuracy(targets, outputs, ignore_index=None):
 
         if ignore_index is not None:
             mask = target.ne(ignore_index)
-            n_correct += prediction.eq(target).masked_select(mask).sum()
-            n_total += mask.sum()
+            n_correct += prediction.eq(target).masked_select(mask).sum().item()
+            n_total += mask.sum().item()
         else:
             n_total += len(target)
-            n_correct += prediction.eq(target).sum()
+            n_correct += prediction.eq(target).sum().item()
 
     return n_correct / n_total, n_correct, n_total

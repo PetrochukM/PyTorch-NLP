@@ -5,8 +5,8 @@ from torch.utils.data.sampler import BatchSampler
 from torchnlp.samplers.noisy_sorted_sampler import NoisySortedSampler
 
 
-def _first(e):
-    return e[0]
+def _identity(e):
+    return e
 
 
 class NoisySortedBatchSampler(BatchSampler):
@@ -35,9 +35,9 @@ class NoisySortedBatchSampler(BatchSampler):
             numerical comparison key from each list element.
         drop_last (bool): If ``True``, the sampler will drop the last batch if its size would be
             less than ``batch_size``.
-        sort_key_noise (float): Maximum noise added to the numerical `sort_key`.
+        sort_key_noise (float): Maximum noise added to the numerical ``sort_key``.
         last_batch_first (bool, optional): If ``True``, the sampler will append the last batch
-            first. Only helpful if the `sort_key` approximates GPU memory.
+            first. Only helpful if the ``sort_key`` approximates GPU memory.
 
             This is largely for testing, to see how large of a batch you can safely use with your
             GPU. This will let you try out the biggest batch that you have in the data `first`, so
@@ -49,10 +49,13 @@ class NoisySortedBatchSampler(BatchSampler):
         shuffle (bool, optional): If ``True``, the batches are shuffled.
 
     Example:
+        >>> import random
+        >>> random.seed(123)
+        >>>
         >>> list(NoisySortedBatchSampler(range(10), batch_size=3, drop_last=False))
-        [[9], [0, 1, 2], [3, 4, 5], [6, 8, 7]]
+        [[8], [0, 1, 2], [6, 7, 9], [3, 5, 4]]
         >>> list(NoisySortedBatchSampler(range(10), batch_size=3, drop_last=True))
-        [[7, 9, 6], [0, 1, 2], [3, 4, 5]]
+        [[4, 8, 9], [3, 6, 5], [0, 1, 2]]
 
     """
 
@@ -60,7 +63,7 @@ class NoisySortedBatchSampler(BatchSampler):
                  data,
                  batch_size,
                  drop_last,
-                 sort_key=_first,
+                 sort_key=_identity,
                  sort_key_noise=0.25,
                  last_batch_first=True,
                  shuffle=True):

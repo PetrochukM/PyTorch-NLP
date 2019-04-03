@@ -46,6 +46,9 @@ class WeightDrop(torch.nn.Module):
         >>> from torchnlp.nn import WeightDrop
         >>> import torch
         >>>
+        >>> torch.manual_seed(123)
+        <torch._C.Generator object ...
+        >>>
         >>> gru = torch.nn.GRUCell(2, 2)
         >>> weights = ['weight_hh']
         >>> weight_drop_gru = WeightDrop(gru, weights, dropout=0.9)
@@ -53,10 +56,7 @@ class WeightDrop(torch.nn.Module):
         >>> input_ = torch.randn(3, 2)
         >>> hidden_state = torch.randn(3, 2)
         >>> weight_drop_gru(input_, hidden_state)
-        -0.4467 -0.1344
-        0.1747  0.9075
-        0.2340  0.1977
-        [torch.FloatTensor of size 3x2]
+        tensor(... grad_fn=<AddBackward0>)
     """
 
     def __init__(self, module, weights, dropout=0.0):

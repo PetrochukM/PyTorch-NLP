@@ -19,7 +19,7 @@ Join our community, add datasets and neural network layers! Chat with us on [Git
 
 ## Installation
 
-Make sure you have Python 3.5+ and PyTorch 0.4 or newer. You can then install `pytorch-nlp` using
+Make sure you have Python 3.6+ and PyTorch 1.0+. You can then install `pytorch-nlp` using
 pip:
 
     pip install pytorch-nlp
@@ -50,35 +50,32 @@ train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
 
 ### Apply [Neural Networks](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.nn.html) Layers
 
-For example, from the neural network package, apply a Simple Recurrent Unit (SRU):
+For example, from the neural network package, apply state-of-the-art LockedDropout:
 
 ```python
-from torchnlp.nn import SRU
 import torch
+from torchnlp.nn import LockedDropout
 
-input_ = torch.autograd.Variable(torch.randn(6, 3, 10))
-sru = SRU(10, 20)
+input_ = torch.randn(6, 3, 10)
+dropout = LockedDropout(0.5)
 
-# Apply a Simple Recurrent Unit to `input_`
-sru(input_)
-# RETURNS: (
-#   output [torch.FloatTensor (6x3x20)],
-#   hidden_state [torch.FloatTensor (2x3x20)]
-# )
+# Apply a LockedDropout to `input_`
+dropout(input_)
+# RETURNS: torch.FloatTensor (6x3x10)
 ```
 
-### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.text_encoders.html)
+### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.encoders.text.html)
 
 Tokenize and encode text as a tensor. For example, a `WhitespaceEncoder` breaks text into terms whenever it encounters a whitespace character.
 
 ```python
-from torchnlp.text_encoders import WhitespaceEncoder
+from torchnlp.encoders.text import WhitespaceEncoder
 
 # Create a `WhitespaceEncoder` with a corpus of text
 encoder = WhitespaceEncoder(["now this ain't funny", "so don't you dare laugh"])
 
 # Encode and decode phrases
-encoder.encode("this ain't funny.") # RETURNS: torch.LongTensor([6, 7, 1])
+encoder.encode("this ain't funny.") # RETURNS: torch.Tensor([6, 7, 1])
 encoder.decode(encoder.encode("This ain't funny.")) # RETURNS: "this ain't funny."
 ```
 

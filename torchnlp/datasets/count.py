@@ -31,16 +31,13 @@ def count_dataset(train=False,
         respective boolean argument is ``True``.
 
     Example:
+        >>> import random
+        >>> random.seed(321)
+        >>>
         >>> from torchnlp.datasets import count_dataset
         >>> train = count_dataset(train=True)
         >>> train[0:2]
-        [{
-          'numbers': '3 7 3 4',
-          'count': '4'
-        }, {
-          'numbers': '1 3',
-          'count': '2'
-        }]
+        [{'numbers': '6 2 5 8 7', 'count': '5'}, {'numbers': '3 9 7 6 6 7', 'count': '6'}]
     """
     ret = []
     for is_requested, n_rows in [(train, train_rows), (dev, dev_rows), (test, test_rows)]:

@@ -1,4 +1,4 @@
-from torchnlp.text_encoders.static_tokenizer_encoder import StaticTokenizerEncoder
+from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
 class MosesEncoder(StaticTokenizerEncoder):
@@ -8,24 +8,28 @@ class MosesEncoder(StaticTokenizerEncoder):
     http://www.nltk.org/_modules/nltk/tokenize/moses.html
 
     Args:
-        sample (list of strings): Sample of data to build dictionary on
+        sample (list): Sample of data used to build encoding dictionary.
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
-          dictionary.
-        append_eos (bool, optional): If `True` append EOS token onto the end to the encoded vector.
+          the encoding dictionary.
+        append_eos (bool, optional): If ``True`` append EOS token onto the end to the encoded
+          vector.
+        reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
+            of the dictionary.
+        eos_index (int, optional): The eos token is used to encode the end of a sequence. This is
+          the index that token resides at.
+        unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
+          the index that token resides at.
+        padding_index (int, optional): The unknown token is used to encode sequence padding. This is
+          the index that token resides at.
 
     Example:
 
         >>> encoder = MosesEncoder(["This ain't funny.", "Don't?"])
         >>> encoder.encode("This ain't funny.")
-         5
-         6
-         7
-         8
-         9
-        [torch.LongTensor of size 5]
+        tensor([5, 6, 7, 8, 9])
         >>> encoder.vocab
-        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', 'ain', '&apos;t', 'funny', '.', 'Don',
-        '?']
+        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', 'ain', '&apos;t', 'funny', '.', \
+'Don', '?']
         >>> encoder.decode(encoder.encode("This ain't funny."))
         "This ain't funny."
 
@@ -33,7 +37,7 @@ class MosesEncoder(StaticTokenizerEncoder):
 
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
-            raise TypeError('MosesEncoder defines a tokenize callable Moses')
+            raise TypeError('Encoder does not take keyword argument tokenize.')
 
         try:
             from sacremoses import MosesTokenizer

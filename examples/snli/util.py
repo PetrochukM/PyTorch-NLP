@@ -4,7 +4,7 @@ import os
 
 import torch
 
-from torchnlp.utils import pad_batch
+from torchnlp.encoders.text import pad_batch
 
 
 def makedirs(name):
