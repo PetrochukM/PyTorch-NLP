@@ -113,10 +113,7 @@ class _PretrainedWordVectors(object):
             if not os.path.isfile(path):
                 raise RuntimeError('no vectors found at {}'.format(path))
 
-            # str call is necessary for Python 2/3 compatibility, since
-            # argument must be Python 2 str (Python 3 bytes) or
-            # Python 3 str (Python 2 unicode)
-            itos, vectors, dim = [], array.array(str('d')), None
+            itos, vectors, dim = [], None, None
 
             # Try to read the whole file with utf-8 encoding.
             binary_lines = False
@@ -142,6 +139,7 @@ class _PretrainedWordVectors(object):
                 word, entries = entries[0], entries[1:]
                 if dim is None and len(entries) > 1:
                     dim = len(entries)
+                    vectors = torch.empty(len(lines), dim, dtype=torch.float)
                 elif len(entries) == 1:
                     logger.warning("Skipping token {} with 1-dimensional "
                                    "vector {}; likely a header".format(word, entries))
@@ -163,12 +161,12 @@ class _PretrainedWordVectors(object):
                 if self.is_include is not None and not self.is_include(word):
                     continue
 
-                vectors.extend(float(x) for x in entries)
+                vectors[len(itos)] = torch.tensor([float(x) for x in entries])
                 itos.append(word)
 
             self.itos = itos
             self.stoi = {word: i for i, word in enumerate(itos)}
-            self.vectors = torch.Tensor(vectors).view(-1, dim)
+            self.vectors = vectors[:len(itos)]
             self.dim = dim
             logger.info('Saving vectors to {}'.format(path_pt))
             if not os.path.exists(cache):
