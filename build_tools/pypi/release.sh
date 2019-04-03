@@ -5,10 +5,13 @@
 rm -r dist/
 
 # Create a source distribution
-python3.6 setup.py sdist
+python3 setup.py sdist
 
 # Create a wheel for the project
-python3.6 setup.py bdist_wheel
+python3 setup.py bdist_wheel
+
+# Install ``twine`` for uploading to PyPI
+python3 -m pip install twine
 
 # Upload your distributions to PyPI using twine.
-python3.6 -m twine upload dist/*
+python3 -m twine upload dist/*

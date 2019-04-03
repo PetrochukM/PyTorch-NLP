@@ -60,8 +60,7 @@ input_ = torch.randn(6, 3, 10)
 dropout = LockedDropout(0.5)
 
 # Apply a LockedDropout to `input_`
-dropout(input_)
-# RETURNS: torch.FloatTensor (6x3x10)
+dropout(input_) # RETURNS: torch.FloatTensor (6x3x10)
 ```
 
 ### [Encode Text](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.encoders.text.html)
