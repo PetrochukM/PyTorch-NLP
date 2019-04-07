@@ -27,9 +27,11 @@ def test_label_encoder_no_reserved():
 def test_label_encoder_enforce_reversible(label_encoder):
     label_encoder.enforce_reversible()
 
+    label_encoder.encode('people/deceased_person/place_of_death')
     with pytest.raises(ValueError):
         label_encoder.encode('symbols/namesake/named_after')
 
+    label_encoder.decode(torch.tensor(label_encoder.vocab_size - 1))
     with pytest.raises(IndexError):
         label_encoder.decode(torch.tensor(label_encoder.vocab_size))
 
