@@ -23,7 +23,7 @@ class Encoder(object):
         def _encode(object_, *args, **kwargs):
             encoded = last_encode(object_, *args, **kwargs)
             if last_decode(encoded) != object_:
-                raise ValueError('Encoding is not reversible for "%s"', object_)
+                raise ValueError('Encoding is not reversible for "%s"' % object_)
             return encoded
 
         self.encode = _encode
@@ -31,7 +31,7 @@ class Encoder(object):
         def _decode(tensor, *args, **kwargs):
             decoded = last_decode(tensor, *args, **kwargs)
             if last_encode(decoded) == tensor:
-                raise ValueError('Decode is not reversible for "%s"', tensor)
+                raise ValueError('Decode is not reversible for "%s"' % tensor)
             return decoded
 
         self.decode = _decode
