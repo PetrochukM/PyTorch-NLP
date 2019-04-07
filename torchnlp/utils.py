@@ -153,6 +153,46 @@ def is_namedtuple(object_):
     return hasattr(object_, '_asdict') and isinstance(object_, tuple)
 
 
+def lengths_to_mask(*lengths, **kwargs):
+    """ Given a list of lengths, create a batch mask.
+
+    Example:
+        >>> lengths_to_mask([1, 2, 3])
+        tensor([[1, 0, 0],
+                [1, 1, 0],
+                [1, 1, 1]], dtype=torch.uint8)
+        >>> lengths_to_mask([1, 2, 2], [1, 2, 2])
+        tensor([[[1, 0],
+                 [0, 0]],
+        <BLANKLINE>
+                [[1, 1],
+                 [1, 1]],
+        <BLANKLINE>
+                [[1, 1],
+                 [1, 1]]], dtype=torch.uint8)
+
+    Args:
+        *lengths (list of int or torch.Tensor)
+        **kwargs: Keyword arguments passed to ``torch.zeros`` upon initially creating the returned
+          tensor.
+
+    Returns:
+        torch.ByteTensor
+    """
+    # Squeeze to deal with random additional dimensions
+    lengths = [l.squeeze().tolist() if torch.is_tensor(l) else l for l in lengths]
+
+    # For cases where length is a scalar, this needs to convert it to a list.
+    lengths = [l if isinstance(l, list) else [l] for l in lengths]
+    assert all(len(l) == len(lengths[0]) for l in lengths)
+    batch_size = len(lengths[0])
+    other_dimensions = tuple([int(max(l)) for l in lengths])
+    mask = torch.zeros(batch_size, *other_dimensions, **kwargs)
+    for i, length in enumerate(zip(*tuple(lengths))):
+        mask[i][[slice(int(l)) for l in length]].fill_(1)
+    return mask.byte()
+
+
 def collate_tensors(batch, stack_tensors=torch.stack):
     """ Collate a list of type ``k`` (dict, namedtuple, list, etc.) with tensors.
 

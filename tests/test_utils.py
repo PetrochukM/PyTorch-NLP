@@ -7,14 +7,15 @@ import pickle
 import torch
 
 from torchnlp.datasets import Dataset
+from torchnlp.encoders.text import stack_and_pad_tensors
 from torchnlp.utils import collate_tensors
 from torchnlp.utils import flatten_parameters
 from torchnlp.utils import get_tensors
+from torchnlp.utils import lengths_to_mask
 from torchnlp.utils import resplit_datasets
 from torchnlp.utils import shuffle
 from torchnlp.utils import tensors_to
 from torchnlp.utils import torch_equals_ignore_index
-from torchnlp.encoders.text import stack_and_pad_tensors
 
 
 class GetTensorsObjectMock(object):
@@ -139,3 +140,13 @@ def test_tensors_to(mock_is_tensor):
     mock_tensor.to.assert_called_once()
     mock_tensor.to.reset_mock()
     assert isinstance(returned, TestTuple)
+
+
+def test_lengths_to_mask():
+    assert lengths_to_mask([3]).sum() == 3
+    assert lengths_to_mask(torch.tensor(3)).sum() == 3
+    assert lengths_to_mask([1, 2, 3]).sum() == 6
+    assert lengths_to_mask([1, 2, 3])[0].sum() == 1
+    assert lengths_to_mask([1, 2, 3])[0][0].item() == 1
+    assert lengths_to_mask(torch.tensor([1, 2, 3]))[0][0].item() == 1
+    assert lengths_to_mask(torch.tensor([1.0, 2.0, 3.0]))[0][0].item() == 1

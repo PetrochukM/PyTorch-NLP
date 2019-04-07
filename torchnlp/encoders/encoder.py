@@ -30,7 +30,7 @@ class Encoder(object):
 
         def _decode(tensor, *args, **kwargs):
             decoded = last_decode(tensor, *args, **kwargs)
-            if torch.equals(last_encode(decoded), tensor):
+            if last_encode(decoded) == tensor:
                 raise ValueError('Decode is not reversible for "%s"', tensor)
             return decoded
 
