@@ -24,10 +24,21 @@ def test_pad_tensor_multiple_dim_float_tensor():
     assert padded.type() == 'torch.FloatTensor'
 
 
-def test_pad_batch():
+def test_stack_and_pad_tensors():
     batch = [torch.LongTensor([1, 2, 3]), torch.LongTensor([1, 2]), torch.LongTensor([1])]
     padded, lengths = stack_and_pad_tensors(batch, DEFAULT_PADDING_INDEX)
     padded = [r.tolist() for r in padded]
     assert padded == [[1, 2, 3], [1, 2, DEFAULT_PADDING_INDEX],
                       [1, DEFAULT_PADDING_INDEX, DEFAULT_PADDING_INDEX]]
-    assert lengths == [3, 2, 1]
+    assert lengths.tolist() == [3, 2, 1]
+
+
+def test_stack_and_pad_tensors__dim():
+    batch_size = 3
+    batch = [torch.LongTensor([1, 2, 3, 4]), torch.LongTensor([1, 2, 3]), torch.LongTensor([1, 2])]
+    padded, lengths = stack_and_pad_tensors(batch, DEFAULT_PADDING_INDEX, dim=1)
+    assert padded.shape == (4, batch_size)
+    assert lengths.shape == (1, batch_size)
+    assert lengths.tolist() == [[4, 3, 2]]
+    assert padded.tolist() == [[1, 1, 1], [2, 2, 2], [3, 3, DEFAULT_PADDING_INDEX],
+                               [4, DEFAULT_PADDING_INDEX, DEFAULT_PADDING_INDEX]]

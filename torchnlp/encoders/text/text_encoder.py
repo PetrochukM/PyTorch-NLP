@@ -32,12 +32,15 @@ def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
         dim (int, optional): Dimension on to which to concatenate the batch of tensors.
 
     Returns
-        torch.Tensor, list of int: Padded tensors and original lengths of tensors.
+        torch.Tensor, torch.Tensor: Padded tensors and original lengths of tensors.
     """
     lengths = [tensor.shape[0] for tensor in batch]
     max_len = max(lengths)
     padded = [pad_tensor(tensor, max_len, padding_index) for tensor in batch]
+    lengths = torch.tensor(lengths)
     padded = torch.stack(padded, dim=dim).contiguous()
+    for _ in range(dim):
+        lengths = lengths.unsqueeze(0)
     return padded, lengths
 
 
