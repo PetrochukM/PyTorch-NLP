@@ -19,6 +19,7 @@ class LabelEncoder(Encoder):
           dictionary.
         unknown_index (int, optional): The unknown label is used to encode unseen labels. This is
           the index that label resides at.
+        **kwargs: Keyword arguments passed onto ``Encoder``.
 
     Example:
 
@@ -40,7 +41,10 @@ class LabelEncoder(Encoder):
                  sample,
                  min_occurrences=1,
                  reserved_labels=DEFAULT_RESERVED,
-                 unknown_index=DEFAULT_RESERVED.index(DEFAULT_UNKNOWN_TOKEN)):
+                 unknown_index=DEFAULT_RESERVED.index(DEFAULT_UNKNOWN_TOKEN),
+                 **kwargs):
+        super().__init__(**kwargs)
+
         if unknown_index and unknown_index >= len(reserved_labels):
             raise ValueError('The `unknown_index` if provided must be also `reserved`.')
 
@@ -70,11 +74,57 @@ class LabelEncoder(Encoder):
         return len(self.vocab)
 
     def encode(self, label):
+        """ Encodes a ``label``.
+
+        Args:
+            label (object): Label to encode.
+
+        Returns:
+            torch.Tensor: Encoding of the label.
+        """
+        label = super().encode(label)
+
         return torch.tensor(self.stoi.get(label, self.unknown_index))
 
-    def decode(self, tensor):
-        if tensor.numel() > 1:
+    def batch_encode(self, iterator, *args, dim=0, **kwargs):
+        """
+        Args:
+            iterator (iterator): Batch of labels to encode.
+            *args: Arguments passed to ``Encoder.batch_encode``.
+            dim (int, optional): Dimension along which to concatenate tensors.
+            **kwargs: Keyword arguments passed to ``Encoder.batch_encode``.
+
+        Returns:
+            torch.Tensor: Tensor of encoded labels.
+        """
+        return torch.stack(super().batch_encode(iterator, *args, **kwargs), dim=dim)
+
+    def decode(self, encoded):
+        """ Decodes ``encoded`` label.
+
+        Args:
+            encoded (torch.Tensor): Encoded label.
+
+        Returns:
+            object: Label decoded from ``encoded``.
+        """
+        encoded = super().decode(encoded)
+
+        if encoded.numel() > 1:
             raise ValueError(
                 '``decode`` decodes one label at a time, use ``batch_decode`` instead.')
 
-        return self.itos[tensor.squeeze().item()]
+        return self.itos[encoded.squeeze().item()]
+
+    def batch_decode(self, tensor, *args, dim=0, **kwargs):
+        """
+        Args:
+            tensor (torch.Tensor): Batch of tensors.
+            *args: Arguments passed to ``Encoder.batch_decode``.
+            dim (int, optional): Dimension along which to split tensors.
+            **kwargs: Keyword arguments passed to ``Encoder.batch_decode``.
+
+        Returns:
+            list: Batch of decoded labels.
+        """
+        return super().batch_decode([t.squeeze(0) for t in tensor.split(1, dim=dim)])

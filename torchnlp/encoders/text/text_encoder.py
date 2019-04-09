@@ -46,31 +46,32 @@ def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
 
 class TextEncoder(Encoder):
 
-    def batch_encode(self, batch, *args, dim=0, **kwargs):
+    def batch_encode(self, iterator, *args, dim=0, **kwargs):
         """
-        Returns
-            torch.Tensor: Encoded and padded batch of sequences.
-            list of int: Original lengths of sequences.
-        """
-        return stack_and_pad_tensors([self.encode(object_, *args, **kwargs) for object_ in batch],
-                                     padding_index=self.padding_index,
-                                     dim=dim)
+        Args:
+            iterator (iterator): Batch of text to encode.
+            *args: Arguments passed onto ``Encoder.__init__``.
+            dim (int, optional): Dimension along which to concatenate tensors.
+            **kwargs: Keyword arguments passed onto ``Encoder.__init__``.
 
-    def batch_decode(self, batch, lengths=None, *args, **kwargs):
+        Returns
+            torch.Tensor, list of int: Encoded and padded batch of sequences; Original lengths of
+                sequences.
+        """
+        return stack_and_pad_tensors(
+            super().batch_encode(iterator), padding_index=self.padding_index, dim=dim)
+
+    def batch_decode(self, tensor, lengths, dim=0, *args, **kwargs):
         """
         Args:
             batch (list of :class:`torch.Tensor`): Batch of encoded sequences.
             lengths (list of int): Original lengths of sequences.
+            dim (int, optional): Dimension along which to split tensors.
             *args: Arguments passed to ``decode``.
             **kwargs: Key word arguments passed to ``decode``.
 
         Returns:
             list: Batch of decoded sequences.
         """
-        split = batch.split(1) if torch.is_tensor(batch) else batch
-        decoded = []
-        for i, text in enumerate(split):
-            text = text.squeeze(0) if torch.is_tensor(batch) else text
-            text = text[:lengths[i]] if lengths is not None else text
-            decoded.append(self.decode(text, *args, **kwargs))
-        return decoded
+        return super().batch_decode(
+            [t.squeeze(0)[:l] for t, l in zip(tensor.split(1, dim=dim), lengths)])

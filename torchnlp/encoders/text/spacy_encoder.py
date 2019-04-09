@@ -1,7 +1,5 @@
 from functools import partial
 
-import torch
-
 from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncoder
 
 
@@ -16,23 +14,11 @@ class SpacyEncoder(StaticTokenizerEncoder):
     https://spacy.io/api/tokenizer
 
     Args:
-        sample (list): Sample of data used to build encoding dictionary.
-        min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
-          the encoding dictionary.
-        append_eos (bool, optional): If ``True`` append EOS token onto the end to the encoded
-          vector.
-        reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
-            of the dictionary.
-        eos_index (int, optional): The eos token is used to encode the end of a sequence. This is
-          the index that token resides at.
-        unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
-          the index that token resides at.
-        padding_index (int, optional): The unknown token is used to encode sequence padding. This is
-          the index that token resides at.
+        **args: Arguments passed onto ``StaticTokenizerEncoder.__init__``.
         language (string, optional): Language to use for parsing. Accepted values
             are 'en', 'de', 'es', 'pt', 'fr', 'it', 'nl' and 'xx'.
             For details see https://spacy.io/models/#available-models
-
+        **kwargs: Keyword arguments passed onto ``StaticTokenizerEncoder.__init__``.
     Example:
 
         >>> encoder = SpacyEncoder(["This ain't funny.", "Don't?"])
@@ -47,7 +33,7 @@ class SpacyEncoder(StaticTokenizerEncoder):
 
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
-            raise TypeError('Encoder does not take keyword argument tokenize.')
+            raise TypeError('``SpacyEncoder`` does not take keyword argument ``tokenize``.')
 
         try:
             import spacy
@@ -77,11 +63,9 @@ class SpacyEncoder(StaticTokenizerEncoder):
         super().__init__(*args, tokenize=partial(_tokenize, tokenizer=self.spacy), **kwargs)
 
     def batch_encode(self, sequences):
-        return_ = []
-        for tokens in self.spacy.pipe(sequences, n_threads=-1):
-            text = [token.text for token in tokens]
-            vector = [self.stoi.get(token, self.unknown_index) for token in text]
-            if self.append_eos:
-                vector.append(self.eos_index)
-            return_.append(torch.tensor(vector))
+        # Batch tokenization is handled by ``self.spacy.pipe``
+        original = self.tokenize
+        self.tokenize = lambda sequence: [token.text for token in sequence]
+        return_ = super().batch_encode(self.spacy.pipe(sequences))
+        self.tokenize = original
         return return_

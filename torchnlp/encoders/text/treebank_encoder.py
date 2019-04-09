@@ -8,19 +8,8 @@ class TreebankEncoder(StaticTokenizerEncoder):
     http://www.nltk.org/_modules/nltk/tokenize/treebank.html
 
     Args:
-        sample (list): Sample of data used to build encoding dictionary.
-        min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
-          the encoding dictionary.
-        append_eos (bool, optional): If ``True`` append EOS token onto the end to the encoded
-          vector.
-        reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
-            of the dictionary.
-        eos_index (int, optional): The eos token is used to encode the end of a sequence. This is
-          the index that token resides at.
-        unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
-          the index that token resides at.
-        padding_index (int, optional): The unknown token is used to encode sequence padding. This is
-          the index that token resides at.
+        **args: Arguments passed onto ``StaticTokenizerEncoder.__init__``.
+        **kwargs: Keyword arguments passed onto ``StaticTokenizerEncoder.__init__``.
 
     Example:
 
@@ -36,7 +25,10 @@ class TreebankEncoder(StaticTokenizerEncoder):
 
     def __init__(self, *args, **kwargs):
         if 'tokenize' in kwargs:
-            raise TypeError('Encoder does not take keyword argument tokenize.')
+            raise TypeError('``TreebankEncoder`` does not take keyword argument ``tokenize``.')
+
+        if 'detokenize' in kwargs:
+            raise TypeError('``TreebankEncoder`` does not take keyword argument ``detokenize``.')
 
         try:
             import nltk
@@ -51,10 +43,8 @@ class TreebankEncoder(StaticTokenizerEncoder):
             print("Please install NLTK. " "See the docs at http://nltk.org for more information.")
             raise
 
-        self.detokenizer = TreebankWordDetokenizer()
-
-        super().__init__(*args, tokenize=TreebankWordTokenizer().tokenize, **kwargs)
-
-    def decode(self, tensor):
-        tokens = [self.itos[index] for index in tensor]
-        return self.detokenizer.detokenize(tokens)
+        super().__init__(
+            *args,
+            tokenize=TreebankWordTokenizer().tokenize,
+            detokenize=TreebankWordDetokenizer().detokenize,
+            **kwargs)
