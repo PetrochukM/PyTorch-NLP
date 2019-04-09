@@ -24,7 +24,7 @@ class SubwordEncoder(TextEncoder):
     Args:
         sample (list): Sample of data used to build encoding dictionary.
         append_eos (bool, optional): If ``True`` append EOS token onto the end to the encoded
-          vector.
+            vector.
         target_vocab_size (int, optional): Desired size of vocab.
         min_occurrences (int, optional): Lower bound for the minimum token count.
         max_occurrences (int, optional): Upper bound for the minimum token count.

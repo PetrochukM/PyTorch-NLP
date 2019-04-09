@@ -55,8 +55,8 @@ class TextEncoder(Encoder):
             **kwargs: Keyword arguments passed onto ``Encoder.__init__``.
 
         Returns
-            torch.Tensor, list of int: Encoded and padded batch of sequences;
-                Original lengths of sequences.
+            torch.Tensor, list of int: Encoded and padded batch of sequences; Original lengths of
+                sequences.
         """
         return stack_and_pad_tensors(
             super().batch_encode(iterator), padding_index=self.padding_index, dim=dim)

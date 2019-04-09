@@ -1,9 +1,9 @@
 class Encoder(object):
     """
-    Base class for a encoder.
+    Base class for a encoder employing an identity function.
 
     Args:
-        enforce_reversible (bool): Check for reversibility on ``Encoder.encode`` and
+        enforce_reversible (bool, optional): Check for reversibility on ``Encoder.encode`` and
           ``Encoder.decode``. Formally, reversible means:
           ``Encoder.decode(Encoder.encode(object_)) == object_``.
     """
