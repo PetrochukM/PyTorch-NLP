@@ -36,6 +36,7 @@ class SubwordEncoder(TextEncoder):
           the index that token resides at.
         padding_index (int, optional): The unknown token is used to encode sequence padding. This is
           the index that token resides at.
+        **kwargs: Keyword arguments passed onto ``TextEncoder.__init__``.
     """
 
     def __init__(self,
@@ -47,7 +48,10 @@ class SubwordEncoder(TextEncoder):
                  reserved_tokens=DEFAULT_RESERVED_TOKENS,
                  eos_index=DEFAULT_EOS_INDEX,
                  unknown_index=DEFAULT_UNKNOWN_INDEX,
-                 padding_index=DEFAULT_PADDING_INDEX):
+                 padding_index=DEFAULT_PADDING_INDEX,
+                 **kwargs):
+        super().__init__(**kwargs)
+
         self.append_eos = append_eos
         self.eos_index = eos_index
         self.unknown_index = unknown_index
@@ -89,11 +93,29 @@ class SubwordEncoder(TextEncoder):
         return len(self.vocab)
 
     def encode(self, sequence):
+        """ Encodes a ``sequence``.
+
+        Args:
+            sequence (str): String ``sequence`` to encode.
+
+        Returns:
+            torch.Tensor: Encoding of the ``sequence``.
+        """
+        sequence = super().encode(sequence)
         sequence = self.tokenizer.encode(sequence)
         vector = [self.stoi.get(token, self.unknown_index) for token in sequence]
         if self.append_eos:
             vector.append(self.eos_index)
         return torch.tensor(vector)
 
-    def decode(self, tensor):
-        return self.tokenizer.decode([self.itos[index] for index in tensor])
+    def decode(self, encoded):
+        """ Decodes a tensor into a sequence.
+
+        Args:
+            encoded (torch.Tensor): Encoded sequence.
+
+        Returns:
+            str: Sequence decoded from ``encoded``.
+        """
+        encoded = super().decode(encoded)
+        return self.tokenizer.decode([self.itos[index] for index in encoded])

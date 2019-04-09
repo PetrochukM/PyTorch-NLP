@@ -25,7 +25,7 @@ def test_label_encoder_no_reserved():
 
 
 def test_label_encoder_enforce_reversible(label_encoder):
-    label_encoder.enforce_reversible()
+    label_encoder.enforce_reversible = True
 
     label_encoder.encode('people/deceased_person/place_of_death')
     with pytest.raises(ValueError):
@@ -39,6 +39,12 @@ def test_label_encoder_enforce_reversible(label_encoder):
 def test_label_encoder_batch_encoding(label_encoder):
     encoded = label_encoder.batch_encode(label_encoder.vocab)
     assert torch.equal(encoded, torch.arange(label_encoder.vocab_size).view(-1))
+
+
+def test_label_encoder_batch_dim(label_encoder):
+    encoded = label_encoder.batch_encode(label_encoder.vocab, dim=-1)
+    decoded = label_encoder.batch_decode(encoded, dim=-1)
+    assert decoded == label_encoder.vocab
 
 
 def test_label_encoder_batch_decoding(label_encoder):

@@ -28,7 +28,7 @@ def test_spacy_encoder_issue_44():
 
 
 def test_spacy_encoder_batch(encoder, input_):
-    tokens = encoder.batch_encode([input_, input_])
+    tokens, _ = encoder.batch_encode([input_, input_])
     assert encoder.decode(tokens[0]) == input_
     assert encoder.decode(tokens[1]) == input_
 
