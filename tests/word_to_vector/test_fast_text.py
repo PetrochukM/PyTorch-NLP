@@ -90,4 +90,4 @@ def test_aligned_fasttext(mock_urlretrieve):
     assert len(vectors) == 5
 
     # Clean up
-    os.remove(os.path.join(directory, 'wiki.multi.en.vec.pt'))
+    os.remove(os.path.join(directory, 'wiki.en.align.vec.pt'))
