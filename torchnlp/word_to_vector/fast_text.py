@@ -71,8 +71,8 @@ class FastText(_PretrainedWordVectors):
         2.0928
         [torch.FloatTensor of size 100]
     """
-    url_base = 'https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.{}.vec'
-    aligned_url_base = 'https://s3.amazonaws.com/arrival/embeddings/wiki.multi.{}.vec'
+    url_base = 'https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.{}.vec'
+    aligned_url_base = 'https://dl.fbaipublicfiles.com/fasttext/vectors-aligned/wiki.{}.align.vec'
 
     def __init__(self, language="en", aligned=False, **kwargs):
         if aligned:
