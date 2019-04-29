@@ -52,7 +52,7 @@ class LockedDropout(nn.Module):
     def forward(self, x):
         """
         Args:
-            x (:class:`torch.FloatTensor` [batch size, sequence length, rnn hidden size]): Input to
+            x (:class:`torch.FloatTensor` [sequence length, batch size, rnn hidden size]): Input to
                 apply dropout too.
         """
         if not self.training or not self.p:
