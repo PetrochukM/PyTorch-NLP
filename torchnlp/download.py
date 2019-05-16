@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import logging
 import os
 import requests
-import tarfile
+import subprocess
 import urllib.request
 import zipfile
 
@@ -99,9 +99,11 @@ def _maybe_extract(compressed_filename, directory, extension=None):
     if 'zip' in extension:
         with zipfile.ZipFile(compressed_filename, "r") as zip_:
             zip_.extractall(directory)
-    elif 'tar' in extension or 'tgz' in extension:
-        with tarfile.open(compressed_filename, mode='r') as tar:
-            tar.extractall(path=directory)
+    elif 'tar.gz' in extension or 'tgz' in extension:
+        # `tar` is much faster than python's `tarfile` implementation
+        subprocess.call(['tar', '-C', directory, '-zxvf', compressed_filename])
+    elif 'tar' in extension:
+        subprocess.call(['tar', '-C', directory, '-xvf', compressed_filename])
 
     logger.info('Extracted {}'.format(compressed_filename))
 
