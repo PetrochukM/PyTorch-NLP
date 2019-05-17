@@ -64,12 +64,12 @@ class FastText(_PretrainedWordVectors):
         >>> from torchnlp.word_to_vector import FastText  # doctest: +SKIP
         >>> vectors = FastText()  # doctest: +SKIP
         >>> vectors['hello']  # doctest: +SKIP
-        -1.7494
-        0.6242
+        -0.1595
+        -0.1826
         ...
-        -0.6202
-        2.0928
-        [torch.FloatTensor of size 100]
+        0.2492
+        0.0654
+        [torch.FloatTensor of size 300]
     """
     url_base = 'https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.{}.vec'
     aligned_url_base = 'https://dl.fbaipublicfiles.com/fasttext/vectors-aligned/wiki.{}.align.vec'
