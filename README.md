@@ -88,7 +88,7 @@ from torchnlp.word_to_vector import FastText
 
 vectors = FastText()
 # Load vectors for any word as a `torch.FloatTensor`
-vectors['hello']  # RETURNS: [torch.FloatTensor of size 100]
+vectors['hello']  # RETURNS: [torch.FloatTensor of size 300]
 ```
 
 ### Compute [Metrics](http://pytorchnlp.readthedocs.io/en/latest/source/torchnlp.metrics.html)
