@@ -69,7 +69,7 @@ class CharNGram(_PretrainedWordVectors):
     """
 
     name = 'charNgram.txt'
-    url = ('http://www.logos.t.u-tokyo.ac.jp/~hassy/publications/arxiv2016jmt/'
+    url = ('https://www.logos.t.u-tokyo.ac.jp/~hassy/publications/arxiv2016jmt/'
            'jmt_pre-trained_embeddings.tar.gz')
 
     def __init__(self, **kwargs):

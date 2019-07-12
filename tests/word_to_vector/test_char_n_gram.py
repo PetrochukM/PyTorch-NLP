@@ -1,20 +1,17 @@
 import os
 import mock
 
-import pytest
-
 from torchnlp.word_to_vector import CharNGram
-from tests.word_to_vector.utils import urlretrieve_side_effect
 from torchnlp.encoders.text import DEFAULT_UNKNOWN_TOKEN
 
 
-@pytest.mark.skip(reason="CharNGram sometimes has an SSL certificate failure.")
 @mock.patch("urllib.request.urlretrieve")
 def test_charngram_100d(mock_urlretrieve):
     directory = 'tests/_test_data/char_n_gram/'
 
     # Make sure URL has a 200 status
-    mock_urlretrieve.side_effect = urlretrieve_side_effect
+    # TODO: Skip for now due to SSL failure.
+    # mock_urlretrieve.side_effect = urlretrieve_side_effect
 
     # Attempt to parse a subset of CharNGram
     vectors = CharNGram(cache=directory)
