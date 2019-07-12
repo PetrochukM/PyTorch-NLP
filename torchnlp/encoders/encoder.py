@@ -22,9 +22,10 @@ class Encoder(object):
         """
         if self.enforce_reversible:
             self.enforce_reversible = False
-            if self.decode(self.encode(object_)) != object_:
-                raise ValueError('Encoding is not reversible for "%s"' % object_)
+            encoded_decoded = self.decode(self.encode(object_))
             self.enforce_reversible = True
+            if encoded_decoded != object_:
+                raise ValueError('Encoding is not reversible for "%s"' % object_)
 
         return object_
 
@@ -51,9 +52,10 @@ class Encoder(object):
         """
         if self.enforce_reversible:
             self.enforce_reversible = False
-            if self.encode(self.decode(encoded)) != encoded:
-                raise ValueError('Decoding is not reversible for "%s"' % encoded)
+            decoded_encoded = self.encode(self.decode(encoded))
             self.enforce_reversible = True
+            if decoded_encoded != encoded:
+                raise ValueError('Decoding is not reversible for "%s"' % encoded)
 
         return encoded
 
