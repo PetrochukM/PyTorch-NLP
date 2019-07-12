@@ -21,7 +21,7 @@ def _weight_drop(module, weights, dropout):
             w = torch.nn.functional.dropout(raw_w, p=dropout, training=module.training)
             setattr(module, name_w, w)
 
-        return original_module_forward(*args)
+        return original_module_forward(*args, **kwargs)
 
     setattr(module, 'forward', forward)
 
