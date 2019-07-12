@@ -5,6 +5,7 @@ import pytest
 from torchnlp.encoders.text import CharacterEncoder
 from torchnlp.encoders.text import DEFAULT_RESERVED_TOKENS
 from torchnlp.encoders.text import DEFAULT_UNKNOWN_TOKEN
+from torchnlp.encoders.text import DEFAULT_UNKNOWN_INDEX
 
 
 @pytest.fixture
@@ -32,6 +33,11 @@ def test_character_encoder__enforce_reversible(encoder):
         encoder.decode(encoder.encode('english-language pangram'))
 
     encoder.decode(encoder.encode('english language pangram'))
+
+    encoded = encoder.encode('english language pangram')
+    encoded[7] = DEFAULT_UNKNOWN_INDEX
+    with pytest.raises(ValueError):
+        encoder.decode(encoded)
 
 
 def test_character_encoder_batch(encoder):
