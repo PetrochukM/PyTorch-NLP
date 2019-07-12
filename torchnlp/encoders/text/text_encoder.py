@@ -46,6 +46,24 @@ def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
 
 class TextEncoder(Encoder):
 
+    def decode(self, encoded):
+        """ Decodes an object.
+
+        Args:
+            object_ (object): Encoded object.
+
+        Returns:
+            object: Object decoded.
+        """
+        if self.enforce_reversible:
+            self.enforce_reversible = False
+            decoded_encoded = self.encode(self.decode(encoded))
+            self.enforce_reversible = True
+            if not torch.equal(decoded_encoded, encoded):
+                raise ValueError('Decoding is not reversible for "%s"' % encoded)
+
+        return encoded
+
     def batch_encode(self, iterator, *args, dim=0, **kwargs):
         """
         Args:

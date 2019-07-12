@@ -25,7 +25,16 @@ def test_character_encoder(encoder, sample):
     assert encoder.decode(output) == input_.replace('-', DEFAULT_UNKNOWN_TOKEN)
 
 
-def test_character_encoder_batch(encoder, sample):
+def test_character_encoder__enforce_reversible(encoder):
+    encoder.enforce_reversible = True
+
+    with pytest.raises(ValueError):
+        encoder.decode(encoder.encode('english-language pangram'))
+
+    encoder.decode(encoder.encode('english language pangram'))
+
+
+def test_character_encoder_batch(encoder):
     input_ = 'english-language pangram'
     longer_input_ = 'english-language pangram pangram'
     encoded, lengths = encoder.batch_encode([input_, longer_input_])
