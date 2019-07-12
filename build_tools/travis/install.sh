@@ -21,12 +21,12 @@ fi
 # TODO: Add a script similar to RTD to test locally with virtual environment
 
 # Install requirements via pip
-pip install -r requirements.txt
+pip install -r requirements.txt --progress-bar off
 
 # Optional Requirements
-pip install spacy
-pip install nltk
-pip install sacremoses
+pip install spacy --progress-bar off
+pip install nltk --progress-bar off
+pip install sacremoses --progress-bar off
 
 # SpaCy English web model
 python -m spacy download en
@@ -36,9 +36,9 @@ python -m nltk.downloader perluniprops nonbreaking_prefixes
 
 # Install PyTorch Dependancies
 if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then
-    pip install https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp37-cp37m-linux_x86_64.whl
+    pip install https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp37-cp37m-linux_x86_64.whl --progress-bar off
 fi
 if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then
-    pip install https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
+    pip install https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl --progress-bar off
 fi
-pip install torchvision
+pip install torchvision --progress-bar off

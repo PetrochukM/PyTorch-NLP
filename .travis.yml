@@ -1,12 +1,9 @@
-dist: trusty
-sudo: required
-
 language: python
 matrix:
   include:
     - python: 3.6
-      dist: trusty
-      sudo: false
+      dist: xenial
+      sudo: true
     - python: 3.7
       dist: xenial
       sudo: true
