@@ -34,7 +34,7 @@ class SubwordEncoder(TextEncoder):
           the index that token resides at.
         unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
           the index that token resides at.
-        padding_index (int, optional): The unknown token is used to encode sequence padding. This is
+        padding_index (int, optional): The padding token is used to encode sequence padding. This is
           the index that token resides at.
         **kwargs: Keyword arguments passed onto ``TextEncoder.__init__``.
     """
