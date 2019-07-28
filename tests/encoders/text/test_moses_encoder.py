@@ -16,8 +16,9 @@ def input_():
 def encoder(input_):
     return MosesEncoder([input_])
 
-@pytest.mark.skipif(sys.version_info >= (3,7),
-                    reason="Running NLTK moses with Python 3.7 halts on travis.")
+
+@pytest.mark.skipif(
+    sys.version_info >= (3, 7), reason="Running NLTK moses with Python 3.7 halts on travis.")
 def test_moses_encoder(encoder, input_):
     # TEST adapted from example in http://www.nltk.org/_modules/nltk/tokenize/moses.html
     expected_tokens = [
