@@ -33,5 +33,7 @@ def test_moses_encoder(encoder, input_):
     assert encoder.decode(tokens) == expected_decode
 
 
+@pytest.mark.skipif(
+    sys.version_info >= (3, 7), reason="Running NLTK moses with Python 3.7 halts on travis.")
 def test_is_pickleable(encoder):
     pickle.dumps(encoder)
