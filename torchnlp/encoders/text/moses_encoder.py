@@ -13,15 +13,18 @@ class MosesEncoder(StaticTokenizerEncoder):
         **args: Arguments passed onto ``StaticTokenizerEncoder.__init__``.
         **kwargs: Keyword arguments passed onto ``StaticTokenizerEncoder.__init__``.
 
+    NOTE: The `doctest` is skipped because running NLTK moses with Python 3.7's pytest halts on
+    travis.
+
     Example:
 
-        >>> encoder = MosesEncoder(["This ain't funny.", "Don't?"])
-        >>> encoder.encode("This ain't funny.")
+        >>> encoder = MosesEncoder(["This ain't funny.", "Don't?"]) # doctest: +SKIP
+        >>> encoder.encode("This ain't funny.") # doctest: +SKIP
         tensor([5, 6, 7, 8, 9])
-        >>> encoder.vocab
+        >>> encoder.vocab # doctest: +SKIP
         ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', 'ain', '&apos;t', 'funny', '.', \
 'Don', '?']
-        >>> encoder.decode(encoder.encode("This ain't funny."))
+        >>> encoder.decode(encoder.encode("This ain't funny.")) # doctest: +SKIP
         "This ain't funny."
 
     """
