@@ -55,7 +55,7 @@ def test_get_tensors_tuple():
 def test_get_tensors_object():
     object_ = GetTensorsObjectMock()
     tensors = get_tensors(object_)
-    assert len(tensors) == 6
+    assert len(tensors) == 5
 
 
 def test_shuffle():

@@ -8,6 +8,32 @@ import torch
 logger = logging.getLogger(__name__)
 
 
+def _get_tensors(object_, seen=set()):
+    if torch.is_tensor(object_):
+        return [object_]
+
+    elif isinstance(object_, (str, float, int)) or id(object_) in seen:
+        return []
+
+    seen.add(id(object_))
+    tensors = set()
+
+    if isinstance(object_, collections.abc.Mapping):
+        for value in object_.values():
+            tensors.update(_get_tensors(value, seen))
+    elif isinstance(object_, collections.abc.Iterable):
+        for value in object_:
+            tensors.update(_get_tensors(value, seen))
+    else:
+        members = [
+            value for key, value in inspect.getmembers(object_)
+            if not isinstance(value, (collections.abc.Callable, type(None)))
+        ]
+        tensors.update(_get_tensors(members, seen))
+
+    return tensors
+
+
 def get_tensors(object_):
     """ Get all tensors associated with ``object_``
 
@@ -17,27 +43,7 @@ def get_tensors(object_):
     Returns:
         (list of torch.tensor): List of tensors that are associated with ``object_``.
     """
-    if torch.is_tensor(object_):
-        return [object_]
-    elif isinstance(object_, (str, float, int)):
-        return []
-
-    tensors = set()
-
-    if isinstance(object_, collections.abc.Mapping):
-        for value in object_.values():
-            tensors.update(get_tensors(value))
-    elif isinstance(object_, collections.abc.Iterable):
-        for value in object_:
-            tensors.update(get_tensors(value))
-    else:
-        members = [
-            value for key, value in inspect.getmembers(object_)
-            if not isinstance(value, (collections.abc.Callable, type(None)))
-        ]
-        tensors.update(get_tensors(members))
-
-    return tensors
+    return _get_tensors(object_)
 
 
 def sampler_to_iterator(dataset, sampler):
@@ -158,18 +164,18 @@ def lengths_to_mask(*lengths, **kwargs):
 
     Example:
         >>> lengths_to_mask([1, 2, 3])
-        tensor([[1, 0, 0],
-                [1, 1, 0],
-                [1, 1, 1]], dtype=torch.uint8)
+        tensor([[ True, False, False],
+                [ True,  True, False],
+                [ True,  True,  True]])
         >>> lengths_to_mask([1, 2, 2], [1, 2, 2])
-        tensor([[[1, 0],
-                 [0, 0]],
+        tensor([[[ True, False],
+                 [False, False]],
         <BLANKLINE>
-                [[1, 1],
-                 [1, 1]],
+                [[ True,  True],
+                 [ True,  True]],
         <BLANKLINE>
-                [[1, 1],
-                 [1, 1]]], dtype=torch.uint8)
+                [[ True,  True],
+                 [ True,  True]]])
 
     Args:
         *lengths (list of int or torch.Tensor)
@@ -177,7 +183,7 @@ def lengths_to_mask(*lengths, **kwargs):
           tensor.
 
     Returns:
-        torch.ByteTensor
+        torch.BoolTensor
     """
     # Squeeze to deal with random additional dimensions
     lengths = [l.squeeze().tolist() if torch.is_tensor(l) else l for l in lengths]
@@ -190,7 +196,7 @@ def lengths_to_mask(*lengths, **kwargs):
     mask = torch.zeros(batch_size, *other_dimensions, **kwargs)
     for i, length in enumerate(zip(*tuple(lengths))):
         mask[i][[slice(int(l)) for l in length]].fill_(1)
-    return mask.byte()
+    return mask.bool()
 
 
 def collate_tensors(batch, stack_tensors=torch.stack):

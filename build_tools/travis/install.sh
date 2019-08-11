@@ -35,10 +35,5 @@ python -m spacy download en
 python -m nltk.downloader perluniprops nonbreaking_prefixes
 
 # Install PyTorch Dependancies
-if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then
-    pip install https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp37-cp37m-linux_x86_64.whl --progress-bar off
-fi
-if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then
-    pip install https://download.pytorch.org/whl/cpu/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl --progress-bar off
-fi
-pip install torchvision --progress-bar off
+pip install torch==1.2.0+cpu torchvision==0.4.0+cpu -f https://download.pytorch.org/whl/torch_stable.html  --progress-bar off
+
