@@ -1,4 +1,6 @@
-import pandas as pd
+from third_party.lazy_loader import LazyLoader
+
+pd = LazyLoader('pd', globals(), 'pandas')
 
 from torch.utils import data
 

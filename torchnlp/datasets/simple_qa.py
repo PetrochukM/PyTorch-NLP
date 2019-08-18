@@ -1,6 +1,8 @@
 import os
 
-import pandas as pd
+from third_party.lazy_loader import LazyLoader
+
+pd = LazyLoader('pd', globals(), 'pandas')
 
 from torchnlp.datasets.dataset import Dataset
 from torchnlp.download import download_file_maybe_extract
