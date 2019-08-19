@@ -34,10 +34,11 @@ import io
 import logging
 import os
 
+from third_party.lazy_loader import LazyLoader
 from tqdm import tqdm
 
-import six
 import torch
+six = LazyLoader('six', globals(), 'six')
 
 from torchnlp.download import download_file_maybe_extract
 

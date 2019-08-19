@@ -20,9 +20,11 @@ import subprocess
 import tempfile
 import logging
 
+from third_party.lazy_loader import LazyLoader
+
 import numpy as np
 
-from six.moves import urllib
+six = LazyLoader('six', globals(), 'six')
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +66,7 @@ def get_moses_multi_bleu(hypotheses, references, lowercase=False):
 
     # Get MOSES multi-bleu script
     try:
-        multi_bleu_path, _ = urllib.request.urlretrieve(
+        multi_bleu_path, _ = six.moves.urllib.request.urlretrieve(
             "https://raw.githubusercontent.com/moses-smt/mosesdecoder/"
             "master/scripts/generic/multi-bleu.perl")
         os.chmod(multi_bleu_path, 0o755)

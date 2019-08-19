@@ -2,12 +2,14 @@ from urllib.parse import urlparse
 
 import logging
 import os
-import requests
 import subprocess
 import urllib.request
 import zipfile
 
+from third_party.lazy_loader import LazyLoader
 from tqdm import tqdm
+
+requests = LazyLoader('requests', globals(), 'requests')
 
 logger = logging.getLogger(__name__)
 

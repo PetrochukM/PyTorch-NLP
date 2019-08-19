@@ -20,16 +20,16 @@ import sys
 import unicodedata
 
 # Dependency imports
+from third_party.lazy_loader import LazyLoader
 
-import six
-from six.moves import xrange  # pylint: disable=redefined-builtin
+six = LazyLoader('six', globals(), 'six')
 
 logger = logging.getLogger(__name__)
 
 # This set contains all letter and number characters.
 _ALPHANUMERIC_CHAR_SET = set(
     six.unichr(i)
-    for i in xrange(sys.maxunicode)
+    for i in six.moves.xrange(sys.maxunicode)
     if (unicodedata.category(six.unichr(i)).startswith("L") or
         unicodedata.category(six.unichr(i)).startswith("N")))
 
@@ -70,7 +70,7 @@ def encode(text):
     token_start = 0
     # Classify each character in the input string
     is_alnum = [c in _ALPHANUMERIC_CHAR_SET for c in text]
-    for pos in xrange(1, len(text)):
+    for pos in six.moves.xrange(1, len(text)):
         if is_alnum[pos] != is_alnum[pos - 1]:
             token = text[token_start:pos]
             if token != u" " or token_start == 0:
@@ -242,7 +242,7 @@ class SubwordTextTokenizer(object):
         start = 0
         token_len = len(escaped_token)
         while start < token_len:
-            for end in xrange(min(token_len, start + self._max_subtoken_len), start, -1):
+            for end in six.moves.xrange(min(token_len, start + self._max_subtoken_len), start, -1):
                 subtoken = escaped_token[start:end]
                 if subtoken in self._all_subtoken_strings:
                     ret.append(subtoken)
@@ -356,7 +356,7 @@ class SubwordTextTokenizer(object):
         # with high enough counts for our new vocabulary.
         if min_count < 1:
             min_count = 1
-        for i in xrange(num_iterations):
+        for i in six.moves.xrange(num_iterations):
 
             # Collect all substrings of the encoded token that break along current
             # subtoken boundaries.
@@ -366,7 +366,7 @@ class SubwordTextTokenizer(object):
                 subtokens = self._escaped_token_to_subtoken_strings(escaped_token)
                 start = 0
                 for subtoken in subtokens:
-                    for end in xrange(start + 1, len(escaped_token) + 1):
+                    for end in six.moves.xrange(start + 1, len(escaped_token) + 1):
                         new_subtoken = escaped_token[start:end]
                         subtoken_counts[new_subtoken] += count
                     start += len(subtoken)
@@ -384,7 +384,7 @@ class SubwordTextTokenizer(object):
             # a longer subtoken string, we can decrement the counts of its
             # prefixes.
             new_subtoken_strings = []
-            for lsub in xrange(len(len_to_subtoken_strings) - 1, 0, -1):
+            for lsub in six.moves.xrange(len(len_to_subtoken_strings) - 1, 0, -1):
                 subtoken_strings = len_to_subtoken_strings[lsub]
                 for subtoken_string in subtoken_strings:
                     count = subtoken_counts[subtoken_string]
@@ -393,7 +393,7 @@ class SubwordTextTokenizer(object):
                         # explicitly, regardless of count.
                         if subtoken_string not in self._alphabet:
                             new_subtoken_strings.append((count, subtoken_string))
-                        for l in xrange(1, lsub):
+                        for l in six.moves.xrange(1, lsub):
                             subtoken_counts[subtoken_string[:l]] -= count
 
             # Include the alphabet explicitly to guarantee all strings are
