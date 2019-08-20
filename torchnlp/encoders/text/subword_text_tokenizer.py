@@ -12,6 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from functools import lru_cache
 
 import collections
 import logging
@@ -26,12 +27,16 @@ six = LazyLoader('six', globals(), 'six')
 
 logger = logging.getLogger(__name__)
 
-# This set contains all letter and number characters.
-_ALPHANUMERIC_CHAR_SET = set(
-    six.unichr(i)
-    for i in six.moves.xrange(sys.maxunicode)
-    if (unicodedata.category(six.unichr(i)).startswith("L") or
-        unicodedata.category(six.unichr(i)).startswith("N")))
+
+@lru_cache()
+def get_alphanumeric_char_set():
+    """ This set contains all letter and number characters. """
+    return set(
+        six.unichr(i)
+        for i in six.moves.xrange(sys.maxunicode)
+        if (unicodedata.category(six.unichr(i)).startswith("L") or
+            unicodedata.category(six.unichr(i)).startswith("N")))
+
 
 # Regular expression for unescaping token strings.
 # '\u' is converted to '_'
@@ -41,19 +46,19 @@ _UNESCAPE_REGEX = re.compile(r"\\u|\\\\|\\([0-9]+);")
 _ESCAPE_CHARS = set(u"\\_u;0123456789")
 
 
-def native_to_unicode_py2(s):
-    """Python 2: transform native string to Unicode."""
-    return s if isinstance(s, unicode) else s.decode("utf8")  # noqa: F821
-
-
 # Conversion between Unicode and UTF-8, if required (on Python2)
-if six.PY2:
-    native_to_unicode = native_to_unicode_py2
-    unicode_to_native = lambda s: s.encode("utf-8")
-else:
-    # No conversion required on Python3
-    native_to_unicode = lambda s: s
-    unicode_to_native = lambda s: s
+def native_to_unicode(s):
+    if six.PY2:
+        return s if isinstance(s, unicode) else s.decode("utf8")  # noqa: F821
+    else:
+        return s
+
+
+def unicode_to_native(s):
+    if six.PY2:
+        return s.encode("utf-8")
+    else:
+        return s
 
 
 def encode(text):
@@ -69,7 +74,7 @@ def encode(text):
     ret = []
     token_start = 0
     # Classify each character in the input string
-    is_alnum = [c in _ALPHANUMERIC_CHAR_SET for c in text]
+    is_alnum = [c in get_alphanumeric_char_set() for c in text]
     for pos in six.moves.xrange(1, len(text)):
         if is_alnum[pos] != is_alnum[pos - 1]:
             token = text[token_start:pos]
@@ -89,7 +94,7 @@ def decode(tokens):
     Returns:
       a unicode string
     """
-    token_is_alnum = [t[0] in _ALPHANUMERIC_CHAR_SET for t in tokens]
+    token_is_alnum = [t[0] in get_alphanumeric_char_set() for t in tokens]
     ret = []
     for i, token in enumerate(tokens):
         if i > 0 and token_is_alnum[i - 1] and token_is_alnum[i]:
