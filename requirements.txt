@@ -28,6 +28,10 @@ mock
 # pynvrtc
 # cupy
 
+# Other Optionals
+# pandas
+# requests
+
 # HTML Documentation
 sphinx
 sphinx_rtd_theme

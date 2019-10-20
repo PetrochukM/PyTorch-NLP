@@ -86,8 +86,8 @@ class CharNGram(_PretrainedWordVectors):
             grams = [chars[i:(i + n)] for i in range(end)]
             for gram in grams:
                 gram_key = '{}gram-{}'.format(n, ''.join(gram))
-                if gram_key in self.stoi:
-                    vector += self.vectors[self.stoi[gram_key]]
+                if gram_key in self.token_to_index:
+                    vector += self.vectors[self.token_to_index[gram_key]]
                     num_vectors += 1
         if num_vectors > 0:
             vector /= num_vectors

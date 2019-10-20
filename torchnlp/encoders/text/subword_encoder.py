@@ -70,11 +70,11 @@ class SubwordEncoder(TextEncoder):
                 min_val=min_occurrences,
                 max_val=max_occurrences)
 
-        self.itos = reserved_tokens.copy()
-        self.stoi = {token: index for index, token in enumerate(reserved_tokens)}
+        self.index_to_token = reserved_tokens.copy()
+        self.token_to_index = {token: index for index, token in enumerate(reserved_tokens)}
         for token in self.tokenizer.vocab:
-            self.itos.append(token)
-            self.stoi[token] = len(self.itos) - 1
+            self.index_to_token.append(token)
+            self.token_to_index[token] = len(self.index_to_token) - 1
 
     @property
     def vocab(self):
@@ -82,7 +82,7 @@ class SubwordEncoder(TextEncoder):
         Returns:
             list: List of tokens in the dictionary.
         """
-        return self.itos
+        return self.index_to_token
 
     @property
     def vocab_size(self):
@@ -103,7 +103,7 @@ class SubwordEncoder(TextEncoder):
         """
         sequence = super().encode(sequence)
         sequence = self.tokenizer.encode(sequence)
-        vector = [self.stoi.get(token, self.unknown_index) for token in sequence]
+        vector = [self.token_to_index.get(token, self.unknown_index) for token in sequence]
         if self.append_eos:
             vector.append(self.eos_index)
         return torch.tensor(vector)
@@ -118,4 +118,4 @@ class SubwordEncoder(TextEncoder):
             str: Sequence decoded from ``encoded``.
         """
         encoded = super().decode(encoded)
-        return self.tokenizer.decode([self.itos[index] for index in encoded])
+        return self.tokenizer.decode([self.index_to_token[index] for index in encoded])

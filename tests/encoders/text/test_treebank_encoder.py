@@ -23,7 +23,7 @@ def test_treebank_encoder(encoder, input_):
     ]
     expected_decode = "Good muffins cost $3.88 in New York. Please buy me two of them. Thanks."
     tokens = encoder.encode(input_)
-    assert [encoder.itos[i] for i in tokens] == expected_tokens
+    assert [encoder.index_to_token[i] for i in tokens] == expected_tokens
     assert encoder.decode(tokens) == expected_decode
 
 

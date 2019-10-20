@@ -75,7 +75,7 @@ target/
 logs/**
 
 # Coverage
-coverage/** 
+coverage/**
 cover/
 
 # Data
@@ -94,3 +94,6 @@ data/**
 
 # ReadTheDocs build files
 docs/_build
+
+# Python's virtual env
+venv

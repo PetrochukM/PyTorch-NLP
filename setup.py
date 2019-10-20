@@ -7,8 +7,8 @@ from setuptools import setup, find_packages
 
 def read(*names, **kwargs):
     with io.open(
-            os.path.join(os.path.dirname(__file__), *names), encoding=kwargs.get(
-                "encoding", "utf8")) as fp:
+            os.path.join(os.path.dirname(__file__), *names),
+            encoding=kwargs.get("encoding", "utf8")) as fp:
         return fp.read()
 
 
@@ -36,7 +36,7 @@ setup_info = dict(
     long_description=long_description,
     long_description_content_type='text/markdown',
     license='BSD',
-    install_requires=['numpy', 'pandas', 'tqdm', 'requests'],
+    install_requires=['numpy', 'tqdm'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
