@@ -1,10 +1,12 @@
 from functools import partial
 
+import glob
+import itertools
 import os
 import time
-import glob
 
 from torch.utils.data import DataLoader
+from torch.utils.data.sampler import SequentialSampler
 
 import torch
 import torch.optim as optim
@@ -12,7 +14,6 @@ import torch.nn as nn
 
 from torchnlp.samplers import BucketBatchSampler
 from torchnlp.datasets import snli_dataset
-from torchnlp.utils import datasets_iterator
 from torchnlp.encoders.text import WhitespaceEncoder
 from torchnlp.encoders import LabelEncoder
 from torchnlp import word_to_vector
@@ -29,20 +30,20 @@ if args.gpu >= 0:
 train, dev, test = snli_dataset(train=True, dev=True, test=True)
 
 # Preprocess
-for row in datasets_iterator(train, dev, test):
+for row in itertools.chain(train, dev, test):
     row['premise'] = row['premise'].lower()
     row['hypothesis'] = row['hypothesis'].lower()
 
 # Make Encoders
-sentence_corpus = [row['premise'] for row in datasets_iterator(train, dev, test)]
-sentence_corpus += [row['hypothesis'] for row in datasets_iterator(train, dev, test)]
+sentence_corpus = [row['premise'] for row in itertools.chain(train, dev, test)]
+sentence_corpus += [row['hypothesis'] for row in itertools.chain(train, dev, test)]
 sentence_encoder = WhitespaceEncoder(sentence_corpus)
 
-label_corpus = [row['label'] for row in datasets_iterator(train, dev, test)]
+label_corpus = [row['label'] for row in itertools.chain(train, dev, test)]
 label_encoder = LabelEncoder(label_corpus)
 
 # Encode
-for row in datasets_iterator(train, dev, test):
+for row in itertools.chain(train, dev, test):
     row['premise'] = sentence_encoder.encode(row['premise'])
     row['hypothesis'] = sentence_encoder.encode(row['hypothesis'])
     row['label'] = label_encoder.encode(row['label'])
@@ -88,11 +89,12 @@ print(header)
 for epoch in range(args.epochs):
     n_correct, n_total = 0, 0
 
-    train_sampler = BucketBatchSampler(
-        train, args.batch_size, True, sort_key=lambda r: len(row['premise']))
+    train_sampler = SequentialSampler(train)
+    train_batch_sampler = BucketBatchSampler(
+        train_sampler, args.batch_size, True, sort_key=lambda r: len(row['premise']))
     train_iterator = DataLoader(
         train,
-        batch_sampler=train_sampler,
+        batch_sampler=train_batch_sampler,
         collate_fn=collate_fn,
         pin_memory=torch.cuda.is_available(),
         num_workers=0)
@@ -139,11 +141,13 @@ for epoch in range(args.epochs):
 
             # calculate accuracy on validation set
             n_dev_correct, dev_loss = 0, 0
-            dev_sampler = BucketBatchSampler(
+
+            dev_sampler = SequentialSampler(train)
+            dev_batch_sampler = BucketBatchSampler(
                 dev, args.batch_size, True, sort_key=lambda r: len(row['premise']))
             dev_iterator = DataLoader(
                 dev,
-                batch_sampler=dev_sampler,
+                batch_sampler=dev_batch_sampler,
                 collate_fn=partial(collate_fn, train=False),
                 pin_memory=torch.cuda.is_available(),
                 num_workers=0)

@@ -2,7 +2,6 @@ import logging
 import inspect
 import collections
 
-import random
 import torch
 
 logger = logging.getLogger(__name__)
@@ -65,75 +64,46 @@ def sampler_to_iterator(dataset, sampler):
             yield dataset[sample]
 
 
-def datasets_iterator(*datasets):
-    """
-    Args:
-        *datasets (:class:`list` of :class:`torch.utils.data.Dataset`)
-
-    Returns:
-        generator over rows in ``*datasets``
-    """
-    for dataset in datasets:
-        for row in dataset:
-            yield row
-
-
 def flatten_parameters(model):
     """ ``flatten_parameters`` of a RNN model loaded from disk. """
     model.apply(lambda m: m.flatten_parameters() if hasattr(m, 'flatten_parameters') else None)
 
 
-def shuffle(list_, random_seed=123):
-    """ Shuffle list deterministically based on ``random_seed``.
+def split_list(list_, splits):
+    """ Split ``list_`` using the ``splits`` ratio.
 
-    **Reference:**
-    https://stackoverflow.com/questions/19306976/python-shuffling-with-a-parameter-to-get-the-same-result
+    Args:
+        list_ (list): List to split.
+        splits (tuple): Tuple of decimals determining list splits summing up to 1.0.
+
+    Returns:
+        (list): Splits of the list.
 
     Example:
-        >>> a = [1, 2, 3, 4, 5]
-        >>> b = [1, 2, 3, 4, 5]
-        >>> shuffle(a, random_seed=456)
-        >>> shuffle(b, random_seed=456)
-        >>> a == b
-        True
-        >>> a, b
-        ([1, 3, 2, 5, 4], [1, 3, 2, 5, 4])
+        >>> dataset = [1, 2, 3, 4, 5]
+        >>> split_list(dataset, splits=(.6, .2, .2))
+        [[1, 2, 3], [4], [5]]
+    """
+    assert sum(splits) == 1, 'Splits must sum to 1.0'
+    splits = [round(s * len(list_)) for s in splits]
+    lists = []
+    for split in splits[:-1]:
+        lists.append(list_[:split])
+        list_ = list_[split:]
+    lists.append(list_)
+    return lists
+
+
+def get_total_parameters(model):
+    """ Return the total number of trainable parameters in ``model``.
 
     Args:
-        list_ (list): List to be shuffled.
-        random_seed (int): Random seed used to shuffle.
-    Returns:
-        None:
-    """
-    random.Random(random_seed).shuffle(list_)
-
-
-def resplit_datasets(dataset, other_dataset, random_seed=None, split=None):
-    """Deterministic shuffle and split algorithm.
-
-    Given the same two datasets and the same ``random_seed``, the split happens the same exact way
-    every call.
-
-    Args:
-        dataset (lib.datasets.Dataset): First dataset.
-        other_dataset (lib.datasets.Dataset): Another dataset.
-        random_seed (int, optional): Seed to control the shuffle of both datasets.
-        split (float, optional): If defined it is the percentage of rows that first dataset gets
-            after split otherwise the original proportions are kept.
+        model (torch.nn.Module)
 
     Returns:
-        :class:`lib.datasets.Dataset`, :class:`lib.datasets.Dataset`: Resplit datasets.
+        (int): The total number of trainable parameters in ``model``.
     """
-    # Prevent circular dependency
-    from torchnlp.datasets import Dataset
-
-    concat = dataset.rows + other_dataset.rows
-    shuffle(concat, random_seed=random_seed)
-    if split is None:
-        return Dataset(concat[:len(dataset)]), Dataset(concat[len(dataset):])
-    else:
-        split = max(min(round(len(concat) * split), len(concat)), 0)
-        return Dataset(concat[:split]), Dataset(concat[split:])
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
 def torch_equals_ignore_index(tensor, tensor_other, ignore_index=None):

@@ -1,7 +1,6 @@
 import os
 import glob
 
-from torchnlp.datasets.dataset import Dataset
 from torchnlp.download import download_file_maybe_extract
 
 
@@ -39,7 +38,7 @@ def imdb_dataset(directory='data/',
         sentiments (list of str, optional): Sentiments to load from the dataset.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
@@ -73,7 +72,7 @@ def imdb_dataset(directory='data/',
                     'text': text,
                     'sentiment': sentiment,
                 })
-        ret.append(Dataset(examples))
+        ret.append(examples)
 
     if len(ret) == 1:
         return ret[0]

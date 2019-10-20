@@ -6,16 +6,15 @@ import pickle
 
 import torch
 
-from torchnlp.datasets import Dataset
 from torchnlp.encoders.text import stack_and_pad_tensors
 from torchnlp.utils import collate_tensors
 from torchnlp.utils import flatten_parameters
 from torchnlp.utils import get_tensors
 from torchnlp.utils import lengths_to_mask
-from torchnlp.utils import resplit_datasets
-from torchnlp.utils import shuffle
+from torchnlp.utils import split_list
 from torchnlp.utils import tensors_to
 from torchnlp.utils import torch_equals_ignore_index
+from torchnlp.utils import get_total_parameters
 
 
 class GetTensorsObjectMock(object):
@@ -58,13 +57,6 @@ def test_get_tensors_object():
     assert len(tensors) == 5
 
 
-def test_shuffle():
-    a = [1, 2, 3, 4, 5]
-    # Always shuffles the same way
-    shuffle(a)
-    assert a == [4, 2, 5, 3, 1]
-
-
 def test_flatten_parameters():
     rnn = torch.nn.LSTM(10, 20, 2)
     rnn_pickle = pickle.dumps(rnn)
@@ -73,21 +65,13 @@ def test_flatten_parameters():
     flatten_parameters(rnn2)
 
 
-def test_resplit_datasets():
-    a = Dataset([{'r': 1}, {'r': 2}, {'r': 3}, {'r': 4}, {'r': 5}])
-    b = Dataset([{'r': 6}, {'r': 7}, {'r': 8}, {'r': 9}, {'r': 10}])
-    # Test determinism
-    a, b = resplit_datasets(a, b, random_seed=123)
-    assert list(a) == [{'r': 9}, {'r': 8}, {'r': 6}, {'r': 10}, {'r': 3}]
-    assert list(b) == [{'r': 4}, {'r': 7}, {'r': 2}, {'r': 5}, {'r': 1}]
+def test_get_total_parameters():
+    rnn = torch.nn.LSTM(10, 20, 2)
+    assert get_total_parameters(rnn) == 5920
 
 
-def test_resplit_datasets_cut():
-    a = Dataset([{'r': 1}, {'r': 2}, {'r': 3}, {'r': 4}, {'r': 5}])
-    b = Dataset([{'r': 6}, {'r': 7}, {'r': 8}, {'r': 9}, {'r': 10}])
-    a, b = resplit_datasets(a, b, random_seed=123, split=0.3)
-    assert len(a) == 3
-    assert len(b) == 7
+def test_split_list():
+    assert split_list([1, 2, 3, 4, 5], (0.6, 0.4)) == [[1, 2, 3], [4, 5]]
 
 
 def test_torch_equals_ignore_index():

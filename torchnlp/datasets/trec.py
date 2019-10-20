@@ -1,7 +1,6 @@
 import os
 
 from torchnlp.download import download_files_maybe_extract
-from torchnlp.datasets.dataset import Dataset
 
 
 def trec_dataset(directory='data/trec/',
@@ -40,7 +39,7 @@ def trec_dataset(directory='data/trec/',
         urls (str, optional): URLs to download.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
@@ -72,7 +71,7 @@ def trec_dataset(directory='data/trec/',
                 examples.append({'label': label_fine, 'text': text})
             else:
                 examples.append({'label': label, 'text': text})
-        ret.append(Dataset(examples))
+        ret.append(examples)
 
     if len(ret) == 1:
         return ret[0]

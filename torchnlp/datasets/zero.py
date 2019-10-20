@@ -1,6 +1,3 @@
-from torchnlp.datasets.dataset import Dataset
-
-
 def zero_dataset(train=False, dev=False, test=False, train_rows=256, dev_rows=64, test_rows=64):
     """
     Load the Zero dataset.
@@ -18,7 +15,7 @@ def zero_dataset(train=False, dev=False, test=False, train_rows=256, dev_rows=64
         test_rows (int, optional): Number of test rows to generate.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
@@ -33,7 +30,7 @@ def zero_dataset(train=False, dev=False, test=False, train_rows=256, dev_rows=64
         if not is_requested:
             continue
         rows = [{'source': str(0), 'target': str(0)} for i in range(n_rows)]
-        ret.append(Dataset(rows))
+        ret.append(rows)
 
     if len(ret) == 1:
         return ret[0]

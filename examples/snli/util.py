@@ -4,7 +4,7 @@ import os
 
 import torch
 
-from torchnlp.encoders.text import pad_batch
+from torchnlp.encoders.text import stack_and_pad_tensors
 
 
 def makedirs(name):
@@ -55,8 +55,8 @@ def get_args():
 
 def collate_fn(batch, train=True):
     """ list of tensors to a batch tensors """
-    premise_batch, _ = pad_batch([row['premise'] for row in batch])
-    hypothesis_batch, _ = pad_batch([row['hypothesis'] for row in batch])
+    premise_batch, _ = stack_and_pad_tensors([row['premise'] for row in batch])
+    hypothesis_batch, _ = stack_and_pad_tensors([row['hypothesis'] for row in batch])
     label_batch = torch.stack([row['label'] for row in batch])
 
     # PyTorch RNN requires batches to be transposed for speed and integration with CUDA
