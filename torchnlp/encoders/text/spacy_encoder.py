@@ -23,9 +23,9 @@ class SpacyEncoder(StaticTokenizerEncoder):
 
         >>> encoder = SpacyEncoder(["This ain't funny.", "Don't?"])
         >>> encoder.encode("This ain't funny.")
-        tensor([5, 6, 7, 8, 9])
+        tensor([ 8,  9, 11, 10,  5])
         >>> encoder.vocab
-        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', 'ai', "n't", 'funny', '.', 'Do', '?']
+        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', '.', '?', 'Do', 'This', 'ai', 'funny', "n't"]
         >>> encoder.decode(encoder.encode("This ain't funny."))
         "This ai n't funny ."
 
