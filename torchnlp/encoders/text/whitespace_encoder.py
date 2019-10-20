@@ -12,9 +12,9 @@ class WhitespaceEncoder(DelimiterEncoder):
 
         >>> encoder = WhitespaceEncoder(["This ain't funny.", "Don't?"])
         >>> encoder.encode("This ain't funny.")
-        tensor([6, 7, 8])
+        tensor([5, 6, 7])
         >>> encoder.vocab
-        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', "Don't?", 'This', "ain't", 'funny.']
+        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', "ain't", 'funny.', "Don't?"]
         >>> encoder.decode(encoder.encode("This ain't funny."))
         "This ain't funny."
 

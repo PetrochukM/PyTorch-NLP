@@ -21,9 +21,12 @@ if [[ "$RUN_FLAKE8" == "true" ]]; then
 fi
 
 run_tests() {
-    TEST_CMD="python -m pytest tests/ torchnlp/ --verbose --durations=20 --cov=torchnlp --doctest-modules"
+    TEST_CMD="python -m pytest tests/ torchnlp/ --verbose --durations=20 --cov=torchnlp"
     if [[ "$RUN_SLOW" == "true" ]]; then
         TEST_CMD="$TEST_CMD --runslow"
+    fi
+    if [[ "$RUN_DOCTEXT" == "true" ]]; then
+        TEST_CMD="$TEST_CMD --doctest-modules"
     fi
     $TEST_CMD
 }

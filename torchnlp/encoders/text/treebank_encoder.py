@@ -15,9 +15,9 @@ class TreebankEncoder(StaticTokenizerEncoder):
 
         >>> encoder = TreebankEncoder(["This ain't funny.", "Don't?"])
         >>> encoder.encode("This ain't funny.")
-        tensor([ 8,  9, 11, 10,  5])
+        tensor([5, 6, 7, 8, 9])
         >>> encoder.vocab
-        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', '.', '?', 'Do', 'This', 'ai', 'funny', "n't"]
+        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', 'ai', "n't", 'funny', '.', 'Do', '?']
         >>> encoder.decode(encoder.encode("This ain't funny."))
         "This ain't funny."
 

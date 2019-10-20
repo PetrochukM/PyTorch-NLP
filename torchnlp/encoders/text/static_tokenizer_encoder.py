@@ -43,9 +43,9 @@ class StaticTokenizerEncoder(TextEncoder):
         >>> sample = ["This ain't funny.", "Don't?"]
         >>> encoder = StaticTokenizerEncoder(sample, tokenize=lambda s: s.split())
         >>> encoder.encode("This ain't funny.")
-        tensor([6, 7, 8])
+        tensor([5, 6, 7])
         >>> encoder.vocab
-        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', "Don't?", 'This', "ain't", 'funny.']
+        ['<pad>', '<unk>', '</s>', '<s>', '<copy>', 'This', "ain't", 'funny.', "Don't?"]
         >>> encoder.decode(encoder.encode("This ain't funny."))
         "This ain't funny."
 
@@ -81,7 +81,7 @@ class StaticTokenizerEncoder(TextEncoder):
 
         self.index_to_token = reserved_tokens.copy()
         self.token_to_index = {token: index for index, token in enumerate(reserved_tokens)}
-        for token, count in sorted(self.tokens.items()):
+        for token, count in self.tokens.items():
             if count >= min_occurrences:
                 self.index_to_token.append(token)
                 self.token_to_index[token] = len(self.index_to_token) - 1
