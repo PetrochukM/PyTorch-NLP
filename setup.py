@@ -54,7 +54,7 @@ setup_info = dict(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords='pytorch nlp text torchtext torchnlp',
-    python_requires='>=3.6',
+    python_requires='>=3.5',
 
     # Package info
     packages=find_packages(exclude=['.vscode', 'build_tools', 'docs', 'tests']),
