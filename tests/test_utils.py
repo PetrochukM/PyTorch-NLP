@@ -102,26 +102,26 @@ def test_tensors_to(mock_is_tensor):
     mock_tensor = mock.Mock()
     mock_is_tensor.side_effect = lambda m, **kwargs: m == mock_tensor
     tensors_to(mock_tensor, device=torch.device('cpu'))
-    mock_tensor.to.assert_called_once()
+    mock_tensor.to.called == 1
     mock_tensor.to.reset_mock()
 
     returned = tensors_to({'t': [mock_tensor]}, device=torch.device('cpu'))
-    mock_tensor.to.assert_called_once()
+    mock_tensor.to.called == 1
     mock_tensor.to.reset_mock()
     assert isinstance(returned, dict)
 
     returned = tensors_to([mock_tensor], device=torch.device('cpu'))
-    mock_tensor.to.assert_called_once()
+    mock_tensor.to.called == 1
     mock_tensor.to.reset_mock()
     assert isinstance(returned, list)
 
     returned = tensors_to(tuple([mock_tensor]), device=torch.device('cpu'))
-    mock_tensor.to.assert_called_once()
+    mock_tensor.to.called == 1
     mock_tensor.to.reset_mock()
     assert isinstance(returned, tuple)
 
     returned = tensors_to(TestTuple(t=mock_tensor), device=torch.device('cpu'))
-    mock_tensor.to.assert_called_once()
+    mock_tensor.to.called == 1
     mock_tensor.to.reset_mock()
     assert isinstance(returned, TestTuple)
 
