@@ -285,3 +285,7 @@ def tensors_to(tensors, *args, **kwargs):
         return tuple([tensors_to(t, *args, **kwargs) for t in tensors])
     else:
         return tensors
+
+
+def identity(x):
+    return x

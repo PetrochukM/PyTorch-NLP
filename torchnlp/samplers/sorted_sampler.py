@@ -1,12 +1,10 @@
 from torch.utils.data.sampler import Sampler
 
-
-def _identity(e):
-    return e
+from torchnlp.utils import identity
 
 
 class SortedSampler(Sampler):
-    """Samples elements sequentially, always in the same order.
+    """ Samples elements sequentially, always in the same order.
 
     Args:
         data (iterable): Iterable data.
@@ -19,7 +17,7 @@ class SortedSampler(Sampler):
 
     """
 
-    def __init__(self, data, sort_key=_identity):
+    def __init__(self, data, sort_key=identity):
         super().__init__(data)
         self.data = data
         self.sort_key = sort_key

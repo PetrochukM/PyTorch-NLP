@@ -31,8 +31,8 @@ def reverse_dataset(train=False,
         respective boolean argument is ``True``.
 
     Example:
-        >>> import random
-        >>> random.seed(321)
+        >>> from torchnlp.random import set_seed
+        >>> set_seed(321)
         >>>
         >>> from torchnlp.datasets import reverse_dataset
         >>> train = reverse_dataset(train=True)
