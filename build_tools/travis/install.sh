@@ -28,6 +28,7 @@ pip install spacy --progress-bar off
 pip install nltk --progress-bar off
 pip install sacremoses --progress-bar off
 pip install pandas --progress-bar off
+pip install requests --progress-bar off
 
 # SpaCy English web model
 python -m spacy download en
