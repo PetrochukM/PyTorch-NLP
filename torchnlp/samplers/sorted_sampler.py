@@ -23,9 +23,9 @@ class SortedSampler(Sampler):
         super().__init__(data)
         self.data = data
         self.sort_key = sort_key
-        zip = [(i, self.sort_key(row)) for i, row in enumerate(self.data)]
-        zip = sorted(zip, key=lambda r: r[1])
-        self.sorted_indexes = [item[0] for item in zip]
+        zip_ = [(i, self.sort_key(row)) for i, row in enumerate(self.data)]
+        zip_ = sorted(zip_, key=lambda r: r[1])
+        self.sorted_indexes = [item[0] for item in zip_]
 
     def __iter__(self):
         return iter(self.sorted_indexes)
