@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 import torch
 
 from torchnlp.encoders import Encoder
@@ -23,6 +25,9 @@ def pad_tensor(tensor, length, padding_index=DEFAULT_PADDING_INDEX):
     return torch.cat((tensor, padding), dim=0)
 
 
+BatchedSequences = namedtuple('BatchedSequences', ['sequences', 'lengths'])
+
+
 def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
     """ Pad a :class:`list` of ``tensors`` (``batch``) with ``padding_index``.
 
@@ -32,7 +37,8 @@ def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
         dim (int, optional): Dimension on to which to concatenate the batch of tensors.
 
     Returns
-        torch.Tensor, torch.Tensor: Padded tensors and original lengths of tensors.
+        BatchedSequences(torch.Tensor, torch.Tensor): Padded tensors and original lengths of
+            tensors.
     """
     lengths = [tensor.shape[0] for tensor in batch]
     max_len = max(lengths)
@@ -41,7 +47,8 @@ def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
     padded = torch.stack(padded, dim=dim).contiguous()
     for _ in range(dim):
         lengths = lengths.unsqueeze(0)
-    return padded, lengths
+
+    return BatchedSequences(padded, lengths)
 
 
 class TextEncoder(Encoder):
@@ -73,7 +80,7 @@ class TextEncoder(Encoder):
             **kwargs: Keyword arguments passed onto ``Encoder.__init__``.
 
         Returns
-            torch.Tensor, list of int: Encoded and padded batch of sequences; Original lengths of
+            torch.Tensor, torch.Tensor: Encoded and padded batch of sequences; Original lengths of
                 sequences.
         """
         return stack_and_pad_tensors(
@@ -83,7 +90,7 @@ class TextEncoder(Encoder):
         """
         Args:
             batch (list of :class:`torch.Tensor`): Batch of encoded sequences.
-            lengths (list of int): Original lengths of sequences.
+            lengths (torch.Tensor): Original lengths of sequences.
             dim (int, optional): Dimension along which to split tensors.
             *args: Arguments passed to ``decode``.
             **kwargs: Key word arguments passed to ``decode``.
