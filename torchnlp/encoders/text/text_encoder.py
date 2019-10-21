@@ -25,7 +25,7 @@ def pad_tensor(tensor, length, padding_index=DEFAULT_PADDING_INDEX):
     return torch.cat((tensor, padding), dim=0)
 
 
-BatchedSequences = namedtuple('BatchedSequences', ['sequences', 'lengths'])
+BatchedSequences = namedtuple('BatchedSequences', ['tensor', 'lengths'])
 
 
 def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
