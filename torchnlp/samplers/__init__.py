@@ -20,10 +20,8 @@ __all__ = [
     'DistributedBatchSampler',
     'DistributedSampler',
     'get_number_of_elements',
-    'NoisySortedBatchSampler',
     'NoisySortedSampler',
     'OomBatchSampler',
     'RepeatSampler',
-    'ShuffleBatchSampler',
     'SortedSampler',
 ]

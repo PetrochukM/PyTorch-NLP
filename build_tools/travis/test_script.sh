@@ -21,7 +21,7 @@ if [[ "$RUN_FLAKE8" == "true" ]]; then
 fi
 
 run_tests() {
-    TEST_CMD="python -m pytest tests/ torchnlp/ --verbose --durations=20 --cov=torchnlp"
+    TEST_CMD="python -m pytest tests/ torchnlp/ -c /dev/null --verbose --durations=10 --cov=torchnlp"
     if [[ "$RUN_SLOW" == "true" ]]; then
         TEST_CMD="$TEST_CMD --runslow"
     fi
