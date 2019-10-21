@@ -1,4 +1,4 @@
-from third_party.weighted_random_sampler import WeightedRandomSampler
+from torchnlp._third_party.weighted_random_sampler import WeightedRandomSampler
 
 from torchnlp.utils import identity
 

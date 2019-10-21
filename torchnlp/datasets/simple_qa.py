@@ -1,6 +1,6 @@
 import os
 
-from third_party.lazy_loader import LazyLoader
+from torchnlp._third_party.lazy_loader import LazyLoader
 
 pd = LazyLoader('pd', globals(), 'pandas')
 

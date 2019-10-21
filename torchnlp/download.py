@@ -6,7 +6,7 @@ import subprocess
 import urllib.request
 import zipfile
 
-from third_party.lazy_loader import LazyLoader
+from torchnlp._third_party.lazy_loader import LazyLoader
 from tqdm import tqdm
 
 requests = LazyLoader('requests', globals(), 'requests')
