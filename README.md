@@ -20,11 +20,15 @@ _Logo by [Chloe Yeo](http://www.yeochloe.com/)_
 Make sure you have Python 3.5+ and PyTorch 1.0+. You can then install `pytorch-nlp` using
 pip:
 
-    pip install pytorch-nlp
+```python
+pip install pytorch-nlp
+```
 
 Or to install the latest code via:
 
-    pip install git+https://github.com/PetrochukM/PyTorch-NLP.git
+```python
+pip install git+https://github.com/PetrochukM/PyTorch-NLP.git
+```
 
 ## Docs
 
@@ -110,6 +114,32 @@ With your batch in hand, you can use PyTorch to develop and train your model usi
 ### Last But Not Least
 
 PyTorch-NLP has a couple more NLP focused utility packages to support you! 🤗
+
+#### Deterministic Functions
+
+Now you've setup your pipeline, you may want to ensure that some functions run deterministically.
+Wrap any code that's random, with `fork_rng` and you'll be good to go, like so:
+
+```python
+import random
+import numpy
+import torch
+
+from torchnlp.random import fork_rng
+
+with fork_rng(seed=123):  # Ensure determinism
+    print('Random:', random.randint(1, 2**31))
+    print('Numpy:', numpy.random.randint(1, 2**31))
+    print('Torch:', int(torch.randint(1, 2**31, (1,))))
+```
+
+This will always print:
+
+```text
+Random: 224899943
+Numpy: 843828735
+Torch: 843828736
+```
 
 #### Pre-Trained Word Vectors
 
