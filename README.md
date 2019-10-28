@@ -13,9 +13,7 @@ basic text data processing functions.
 [![Build Status](https://img.shields.io/travis/PetrochukM/PyTorch-NLP/master.svg?style=flat-square)](https://travis-ci.org/PetrochukM/PyTorch-NLP)
 [![Twitter: PetrochukM](https://img.shields.io/twitter/follow/MPetrochuk.svg?style=social)](https://twitter.com/MPetrochuk)
 
-_Logo by [Chloe Yeo](http://www.yeochloe.com/)_
-
-_Thanks to our corporate sponsor [WellSaid Labs](https://wellsaidlabs.com/)_
+_Logo by [Chloe Yeo](http://www.yeochloe.com/), Corporate Sponsorship by [WellSaid Labs](https://wellsaidlabs.com/)_
 
 ## Installation 🐾
 
