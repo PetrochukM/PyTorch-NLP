@@ -15,6 +15,8 @@ basic text data processing functions.
 
 _Logo by [Chloe Yeo](http://www.yeochloe.com/)_
 
+_Thanks to our corporate sponsor [WellSaid Labs](https://wellsaidlabs.com/)_
+
 ## Installation 🐾
 
 Make sure you have Python 3.5+ and PyTorch 1.0+. You can then install `pytorch-nlp` using
