@@ -23,9 +23,6 @@ class DistributedSampler(Sampler):
         self.num_replicas = num_replicas
         self.rank = rank
 
-        if self.rank >= self.num_replicas:
-            raise IndexError('`rank` must be smaller than the `num_replicas`.')
-
         if num_replicas is None or rank is None:  # pragma: no cover
             if not torch.distributed.is_initialized():
                 raise RuntimeError('Requires `torch.distributed` to be initialized.')
@@ -33,6 +30,9 @@ class DistributedSampler(Sampler):
             self.num_replicas = (
                 torch.distributed.get_world_size() if num_replicas is None else num_replicas)
             self.rank = torch.distributed.get_rank() if rank is None else rank
+
+        if self.rank >= self.num_replicas:
+            raise IndexError('`rank` must be smaller than the `num_replicas`.')
 
     def __iter__(self):
         return iter(
