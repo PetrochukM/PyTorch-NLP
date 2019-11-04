@@ -76,7 +76,7 @@ Don't worry we'll handle caching for you!
 Tokenize and encode your text as a tensor.
 
 For example, a `WhitespaceEncoder` breaks
-text into terms whenever it encounters a whitespace character.
+text into tokens whenever it encounters a whitespace character.
 
 ```python
 from torchnlp.encoders.text import WhitespaceEncoder
