@@ -1,4 +1,5 @@
 from collections import Counter
+from collections.abc import Iterable
 
 import torch
 
@@ -21,7 +22,7 @@ class StaticTokenizerEncoder(TextEncoder):
     """ Encodes a text sequence using a static tokenizer.
 
     Args:
-        sample (list): Sample of data used to build encoding dictionary.
+        sample (collections.abc.Iterable): Sample of data used to build encoding dictionary.
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
           the encoding dictionary.
         tokenize (callable): :class:`callable` to tokenize a sequence.
@@ -64,8 +65,8 @@ class StaticTokenizerEncoder(TextEncoder):
                  **kwargs):
         super().__init__(**kwargs)
 
-        if not isinstance(sample, list):
-            raise TypeError('Sample must be a list.')
+        if not isinstance(sample, Iterable):
+            raise TypeError('Sample must be a `collections.abc.Iterable`.')
 
         self.eos_index = eos_index
         self.unknown_index = unknown_index
