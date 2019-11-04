@@ -1,9 +1,9 @@
 <p align="center"><img width="55%" src="docs/_static/img/logo.svg" /></p>
 
-<h3 align="center">Basic Utilities for PyTorch NLP Software</h3>
+<h3 align="center">Basic Utilities for PyTorch Natural Language Processing (NLP)</h3>
 
 PyTorch-NLP, or `torchnlp` for short, is a library of basic utilities for PyTorch
-Natural Language Processing (NLP). `torchnlp` extends PyTorch to provide you with
+NLP. `torchnlp` extends PyTorch to provide you with
 basic text data processing functions.
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytorch-nlp.svg?style=flat-square)
@@ -39,7 +39,7 @@ via [our ReadTheDocs website](https://pytorchnlp.readthedocs.io).
 
 Within an NLP data pipeline, you'll want to implement these basic steps:
 
-### Load Your Data 🐿
+### 1. Load your Data 🐿
 
 Load the IMDB dataset, for example:
 
@@ -71,9 +71,11 @@ open(directory_path / train_file_path)
 
 Don't worry we'll handle caching for you!
 
-### Text To Tensor
+### 2. Text to Tensor
 
-Tokenize and encode your text as a tensor. For example, a `WhitespaceEncoder` breaks
+Tokenize and encode your text as a tensor.
+
+For example, a `WhitespaceEncoder` breaks
 text into terms whenever it encounters a whitespace character.
 
 ```python
@@ -84,7 +86,7 @@ encoder = WhitespaceEncoder(loaded_data)
 encoded_data = [encoder.encode(example) for example in loaded_data]
 ```
 
-### Tensor To Batch
+### 3. Tensor to Batch
 
 With your loaded and encoded data in hand, you'll want to batch your dataset.
 
@@ -107,15 +109,17 @@ batches = [collate_tensors(batch, stack_tensors=stack_and_pad_tensors) for batch
 PyTorch-NLP builds on top of PyTorch's existing `torch.utils.data.sampler`, `torch.stack`
 and `default_collate` to support sequential inputs of varying lengths!
 
-### Your Good To Go!
+### 4. Training and Inference
 
 With your batch in hand, you can use PyTorch to develop and train your model using gradient descent.
+For example, check out [this example code](examples/snli/train.py) for training on the Stanford
+Natural Language Inference (SNLI) Corpus.
 
-### Last But Not Least
+## Last But Not Least
 
 PyTorch-NLP has a couple more NLP focused utility packages to support you! 🤗
 
-#### Deterministic Functions
+### Deterministic Functions
 
 Now you've setup your pipeline, you may want to ensure that some functions run deterministically.
 Wrap any code that's random, with `fork_rng` and you'll be good to go, like so:
@@ -141,10 +145,10 @@ Numpy: 843828735
 Torch: 843828736
 ```
 
-#### Pre-Trained Word Vectors
+### Pre-Trained Word Vectors
 
 Now that you've computed your vocabulary, you may want to make use of
-pre-trained word vectors, like so:
+pre-trained word vectors to set your embeddings, like so:
 
 ```python
 import torch
@@ -160,7 +164,7 @@ for i, token in enumerate(encoder.vocab):
     embedding_weights[i] = pretrained_embedding[token]
 ```
 
-#### Neural Networks Layers
+### Neural Networks Layers
 
 For example, from the neural network package, apply the state-of-the-art `LockedDropout`:
 
@@ -175,7 +179,7 @@ dropout = LockedDropout(0.5)
 dropout(input_) # RETURNS: torch.FloatTensor (6x3x10)
 ```
 
-#### Metrics
+### Metrics
 
 Compute common NLP metrics such as the BLEU score.
 
@@ -197,17 +201,25 @@ Need more help? We are happy to answer your questions via [Gitter Chat](https://
 
 ## Contributing
 
-We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in PyTorch. We hope that other organizations can benefit from the project. We are thankful for any contributions from the community.
+We've released PyTorch-NLP because we found a lack of basic toolkits for NLP in PyTorch. We hope
+that other organizations can benefit from the project. We are thankful for any contributions from
+the community.
 
 ### Contributing Guide
 
-Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to PyTorch-NLP.
+Read our [contributing guide](https://github.com/PetrochukM/PyTorch-NLP/blob/master/CONTRIBUTING.md)
+to learn about our development process, how to propose bugfixes and improvements, and how to build
+and test your changes to PyTorch-NLP.
 
 ## Related Work
 
 ### [torchtext](https://github.com/pytorch/text)
 
-torchtext and PyTorch-NLP differ in the architecture and feature set; otherwise, they are similar. torchtext and PyTorch-NLP provide pre-trained word vectors, datasets, iterators and text encoders. PyTorch-NLP also provides neural network modules and metrics. From an architecture standpoint, torchtext is object orientated with external coupling while PyTorch-NLP is object orientated with low coupling.
+torchtext and PyTorch-NLP differ in the architecture and feature set; otherwise, they are similar.
+torchtext and PyTorch-NLP provide pre-trained word vectors, datasets, iterators and text encoders.
+PyTorch-NLP also provides neural network modules and metrics. From an architecture standpoint,
+torchtext is object orientated with external coupling while PyTorch-NLP is object orientated with
+low coupling.
 
 ### [AllenNLP](https://github.com/allenai/allennlp)
 
@@ -220,7 +232,8 @@ AllenNLP is designed to be a platform for research. PyTorch-NLP is designed to b
 
 ## Citing
 
-If you find PyTorch-NLP useful for an academic publication, then please use the following BibTeX to cite it:
+If you find PyTorch-NLP useful for an academic publication, then please use the following BibTeX to
+cite it:
 
 ```
 @misc{pytorch-nlp,
