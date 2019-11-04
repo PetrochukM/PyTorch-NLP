@@ -4,7 +4,6 @@ import io
 import glob
 
 from torchnlp.download import download_file_maybe_extract
-from torchnlp.datasets.dataset import Dataset
 
 
 def iwslt_dataset(
@@ -58,7 +57,7 @@ def iwslt_dataset(
         url (str, optional): URL of the dataset file.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
@@ -103,7 +102,7 @@ def iwslt_dataset(
             for i, example in enumerate(language_specific_examples):
                 examples[i][extension] = example
 
-        ret.append(Dataset(examples))
+        ret.append(examples)
 
     if len(ret) == 1:
         return ret[0]

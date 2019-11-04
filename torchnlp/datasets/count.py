@@ -1,7 +1,5 @@
 import random
 
-from torchnlp.datasets.dataset import Dataset
-
 
 def count_dataset(train=False,
                   dev=False,
@@ -26,13 +24,13 @@ def count_dataset(train=False,
         seq_max_length (int, optional): Maximum sequence length.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
     Example:
-        >>> import random
-        >>> random.seed(321)
+        >>> from torchnlp.random import set_seed
+        >>> set_seed(321)
         >>>
         >>> from torchnlp.datasets import count_dataset
         >>> train = count_dataset(train=True)
@@ -56,7 +54,7 @@ def count_dataset(train=False,
         if not is_requested:
             continue
 
-        ret.append(Dataset(rows))
+        ret.append(rows)
 
     if len(ret) == 1:
         return ret[0]

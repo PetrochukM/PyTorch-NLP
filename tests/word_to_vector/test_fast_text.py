@@ -19,7 +19,7 @@ def test_fasttext_simple(mock_urlretrieve):
 
     # Test cache and `is_include`
     vectors = FastText(language='simple', is_include=lambda w: w == 'the', cache=directory)
-    assert 'the' in vectors.stoi
+    assert 'the' in vectors.token_to_index
     assert len(vectors) == 1
 
     # Test implementation of __contains()__

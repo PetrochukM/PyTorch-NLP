@@ -34,7 +34,7 @@ import io
 import logging
 import os
 
-from third_party.lazy_loader import LazyLoader
+from torchnlp._third_party.lazy_loader import LazyLoader
 from tqdm import tqdm
 
 import torch
@@ -72,12 +72,12 @@ class _PretrainedWordVectors(object):
         self.cache(name, cache, url=url)
 
     def __contains__(self, token):
-        return token in self.stoi
+        return token in self.token_to_index
 
     def _get_token_vector(self, token):
         """Return embedding for token or for UNK if token not in vocabulary"""
-        if token in self.stoi:
-            return self.vectors[self.stoi[token]]
+        if token in self.token_to_index:
+            return self.vectors[self.token_to_index[token]]
         else:
             return self.unk_init(torch.Tensor(self.dim))
 
@@ -113,7 +113,7 @@ class _PretrainedWordVectors(object):
             if not os.path.isfile(path):
                 raise RuntimeError('no vectors found at {}'.format(path))
 
-            itos, vectors, dim = [], None, None
+            index_to_token, vectors, dim = [], None, None
 
             # Try to read the whole file with utf-8 encoding.
             binary_lines = False
@@ -161,17 +161,17 @@ class _PretrainedWordVectors(object):
                 if self.is_include is not None and not self.is_include(word):
                     continue
 
-                vectors[len(itos)] = torch.tensor([float(x) for x in entries])
-                itos.append(word)
+                vectors[len(index_to_token)] = torch.tensor([float(x) for x in entries])
+                index_to_token.append(word)
 
-            self.itos = itos
-            self.stoi = {word: i for i, word in enumerate(itos)}
-            self.vectors = vectors[:len(itos)]
+            self.index_to_token = index_to_token
+            self.token_to_index = {word: i for i, word in enumerate(index_to_token)}
+            self.vectors = vectors[:len(index_to_token)]
             self.dim = dim
             logger.info('Saving vectors to {}'.format(path_pt))
             if not os.path.exists(cache):
                 os.makedirs(cache)
-            torch.save((self.itos, self.stoi, self.vectors, self.dim), path_pt)
+            torch.save((self.index_to_token, self.token_to_index, self.vectors, self.dim), path_pt)
         else:
             logger.info('Loading vectors from {}'.format(path_pt))
-            self.itos, self.stoi, self.vectors, self.dim = torch.load(path_pt)
+            self.index_to_token, self.token_to_index, self.vectors, self.dim = torch.load(path_pt)

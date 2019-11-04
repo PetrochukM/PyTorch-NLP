@@ -29,7 +29,7 @@ def test_moses_encoder(encoder, input_):
     expected_decode = ("This ain't funny. It's actually hillarious, yet double Ls. | [] < > [] & " +
                        "You're gonna shake it off? Don't?")
     tokens = encoder.encode(input_)
-    assert [encoder.itos[i] for i in tokens] == expected_tokens
+    assert [encoder.index_to_token[i] for i in tokens] == expected_tokens
     assert encoder.decode(tokens) == expected_decode
 
 

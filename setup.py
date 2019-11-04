@@ -7,8 +7,8 @@ from setuptools import setup, find_packages
 
 def read(*names, **kwargs):
     with io.open(
-            os.path.join(os.path.dirname(__file__), *names), encoding=kwargs.get(
-                "encoding", "utf8")) as fp:
+            os.path.join(os.path.dirname(__file__), *names),
+            encoding=kwargs.get("encoding", "utf8")) as fp:
         return fp.read()
 
 
@@ -36,13 +36,14 @@ setup_info = dict(
     long_description=long_description,
     long_description_content_type='text/markdown',
     license='BSD',
-    install_requires=['numpy', 'pandas', 'tqdm', 'requests'],
+    install_requires=['numpy', 'tqdm'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Topic :: Scientific/Engineering',
@@ -53,7 +54,7 @@ setup_info = dict(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords='pytorch nlp text torchtext torchnlp',
-    python_requires='>=3.6',
+    python_requires='>=3.5',
 
     # Package info
     packages=find_packages(exclude=['.vscode', 'build_tools', 'docs', 'tests']),

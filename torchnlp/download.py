@@ -6,7 +6,7 @@ import subprocess
 import urllib.request
 import zipfile
 
-from third_party.lazy_loader import LazyLoader
+from torchnlp._third_party.lazy_loader import LazyLoader
 from tqdm import tqdm
 
 requests = LazyLoader('requests', globals(), 'requests')
@@ -127,14 +127,14 @@ def download_file_maybe_extract(url, directory, filename=None, extension=None, c
     """ Download the file at ``url`` to ``directory``. Extract to ``directory`` if tar or zip.
 
     Args:
-        url (str): Url of file.
+        url (str or Path): Url of file.
         directory (str): Directory to download to.
         filename (str, optional): Name of the file to download; Otherwise, a filename is extracted
             from the url.
         extension (str, optional): Extension of the file; Otherwise, attempts to extract extension
             from the filename.
-        check_files (list of str): Check if these files exist, ensuring the download succeeded.
-            If these files exist before the download, the download is skipped.
+        check_files (list of str or Path): Check if these files exist, ensuring the download
+            succeeded. If these files exist before the download, the download is skipped.
 
     Returns:
         (str): Filename of download file.
@@ -145,8 +145,9 @@ def download_file_maybe_extract(url, directory, filename=None, extension=None, c
     if filename is None:
         filename = _get_filename_from_url(url)
 
+    directory = str(directory)
     filepath = os.path.join(directory, filename)
-    check_files = [os.path.join(directory, f) for f in check_files]
+    check_files = [os.path.join(directory, str(f)) for f in check_files]
 
     if len(check_files) > 0 and _check_download(*check_files):
         return filepath

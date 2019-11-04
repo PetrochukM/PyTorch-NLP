@@ -1,7 +1,6 @@
 import os
 
 from torchnlp.download import download_files_maybe_extract
-from torchnlp.datasets.dataset import Dataset
 
 
 def multi30k_dataset(directory='data/multi30k/',
@@ -58,7 +57,7 @@ def multi30k_dataset(directory='data/multi30k/',
         urls (str, optional): URLs to download.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
@@ -92,7 +91,7 @@ def multi30k_dataset(directory='data/multi30k/',
             if en_file[i] != '' and de_file[i] != '':
                 examples.append({'en': en_file[i], 'de': de_file[i]})
 
-        ret.append(Dataset(examples))
+        ret.append(examples)
 
     if len(ret) == 1:
         return ret[0]

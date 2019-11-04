@@ -4,7 +4,6 @@ import io
 import json
 
 from torchnlp.download import download_file_maybe_extract
-from torchnlp.datasets.dataset import Dataset
 
 
 def snli_dataset(directory='data/',
@@ -47,7 +46,7 @@ def snli_dataset(directory='data/',
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
@@ -83,7 +82,7 @@ def snli_dataset(directory='data/',
                     'premise_transitions': get_transitions(line['sentence1_binary_parse']),
                     'hypothesis_transitions': get_transitions(line['sentence2_binary_parse'])
                 })
-        ret.append(Dataset(examples))
+        ret.append(examples)
 
     if len(ret) == 1:
         return ret[0]

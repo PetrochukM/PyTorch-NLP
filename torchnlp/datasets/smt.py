@@ -2,7 +2,6 @@ import os
 import io
 
 from torchnlp.download import download_file_maybe_extract
-from torchnlp.datasets.dataset import Dataset
 
 
 def get_label_str(label, fine_grained=False):
@@ -84,8 +83,9 @@ def smt_dataset(directory='data/',
         fine_grained (bool, optional): Whether to use 5-class instead of 3-class labeling.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset`: Tuple with the training tokens, dev
-        tokens and test tokens in order if their respective boolean argument is true.
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
+        Returns between one and all dataset splits (train, dev and test) depending on if their
+        respective boolean argument is ``True``.
 
     Example:
         >>> from torchnlp.datasets import smt_dataset  # doctest: +SKIP
@@ -111,7 +111,7 @@ def smt_dataset(directory='data/',
                     examples.extend(parse_tree(line, subtrees=subtrees, fine_grained=fine_grained))
                 else:
                     examples.append(parse_tree(line, subtrees=subtrees, fine_grained=fine_grained))
-        ret.append(Dataset(examples))
+        ret.append(examples)
 
     if len(ret) == 1:
         return ret[0]

@@ -50,12 +50,12 @@ class LabelEncoder(Encoder):
 
         self.unknown_index = unknown_index
         self.tokens = Counter(sample)
-        self.itos = reserved_labels.copy()
-        self.stoi = {token: index for index, token in enumerate(reserved_labels)}
+        self.index_to_token = reserved_labels.copy()
+        self.token_to_index = {token: index for index, token in enumerate(reserved_labels)}
         for token, count in self.tokens.items():
             if count >= min_occurrences:
-                self.itos.append(token)
-                self.stoi[token] = len(self.itos) - 1
+                self.index_to_token.append(token)
+                self.token_to_index[token] = len(self.index_to_token) - 1
 
     @property
     def vocab(self):
@@ -63,7 +63,7 @@ class LabelEncoder(Encoder):
         Returns:
             list: List of labels in the dictionary.
         """
-        return self.itos
+        return self.index_to_token
 
     @property
     def vocab_size(self):
@@ -84,7 +84,7 @@ class LabelEncoder(Encoder):
         """
         label = super().encode(label)
 
-        return torch.tensor(self.stoi.get(label, self.unknown_index))
+        return torch.tensor(self.token_to_index.get(label, self.unknown_index))
 
     def batch_encode(self, iterator, *args, dim=0, **kwargs):
         """
@@ -114,7 +114,7 @@ class LabelEncoder(Encoder):
             raise ValueError(
                 '``decode`` decodes one label at a time, use ``batch_decode`` instead.')
 
-        return self.itos[encoded.squeeze().item()]
+        return self.index_to_token[encoded.squeeze().item()]
 
     def batch_decode(self, tensor, *args, dim=0, **kwargs):
         """

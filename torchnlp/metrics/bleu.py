@@ -20,7 +20,7 @@ import subprocess
 import tempfile
 import logging
 
-from third_party.lazy_loader import LazyLoader
+from torchnlp._third_party.lazy_loader import LazyLoader
 
 import numpy as np
 

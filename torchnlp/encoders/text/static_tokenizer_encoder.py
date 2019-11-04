@@ -1,4 +1,5 @@
 from collections import Counter
+from collections.abc import Iterable
 
 import torch
 
@@ -21,7 +22,7 @@ class StaticTokenizerEncoder(TextEncoder):
     """ Encodes a text sequence using a static tokenizer.
 
     Args:
-        sample (list): Sample of data used to build encoding dictionary.
+        sample (collections.abc.Iterable): Sample of data used to build encoding dictionary.
         min_occurrences (int, optional): Minimum number of occurrences for a token to be added to
           the encoding dictionary.
         tokenize (callable): :class:`callable` to tokenize a sequence.
@@ -64,8 +65,8 @@ class StaticTokenizerEncoder(TextEncoder):
                  **kwargs):
         super().__init__(**kwargs)
 
-        if not isinstance(sample, list):
-            raise TypeError('Sample must be a list.')
+        if not isinstance(sample, Iterable):
+            raise TypeError('Sample must be a `collections.abc.Iterable`.')
 
         self.eos_index = eos_index
         self.unknown_index = unknown_index
@@ -79,12 +80,12 @@ class StaticTokenizerEncoder(TextEncoder):
         for sequence in sample:
             self.tokens.update(self.tokenize(sequence))
 
-        self.itos = reserved_tokens.copy()
-        self.stoi = {token: index for index, token in enumerate(reserved_tokens)}
+        self.index_to_token = reserved_tokens.copy()
+        self.token_to_index = {token: index for index, token in enumerate(reserved_tokens)}
         for token, count in self.tokens.items():
             if count >= min_occurrences:
-                self.itos.append(token)
-                self.stoi[token] = len(self.itos) - 1
+                self.index_to_token.append(token)
+                self.token_to_index[token] = len(self.index_to_token) - 1
 
     @property
     def vocab(self):
@@ -92,7 +93,7 @@ class StaticTokenizerEncoder(TextEncoder):
         Returns:
             list: List of tokens in the dictionary.
         """
-        return self.itos
+        return self.index_to_token
 
     @property
     def vocab_size(self):
@@ -113,7 +114,7 @@ class StaticTokenizerEncoder(TextEncoder):
         """
         sequence = super().encode(sequence)
         sequence = self.tokenize(sequence)
-        vector = [self.stoi.get(token, self.unknown_index) for token in sequence]
+        vector = [self.token_to_index.get(token, self.unknown_index) for token in sequence]
         if self.append_eos:
             vector.append(self.eos_index)
         return torch.tensor(vector)
@@ -128,5 +129,5 @@ class StaticTokenizerEncoder(TextEncoder):
             str: Sequence decoded from ``encoded``.
         """
         encoded = super().decode(encoded)
-        tokens = [self.itos[index] for index in encoded]
+        tokens = [self.index_to_token[index] for index in encoded]
         return self.detokenize(tokens)

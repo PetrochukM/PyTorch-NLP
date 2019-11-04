@@ -1,10 +1,9 @@
 import os
 
-from third_party.lazy_loader import LazyLoader
+from torchnlp._third_party.lazy_loader import LazyLoader
 
 pd = LazyLoader('pd', globals(), 'pandas')
 
-from torchnlp.datasets.dataset import Dataset
 from torchnlp.download import download_file_maybe_extract
 
 
@@ -43,7 +42,7 @@ def simple_qa_dataset(
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
@@ -73,13 +72,12 @@ def simple_qa_dataset(
         full_path = os.path.join(directory, extracted_name, filename)
         data = pd.read_csv(
             full_path, header=None, sep='\t', names=['subject', 'relation', 'object', 'question'])
-        ret.append(
-            Dataset([{
-                'question': row['question'],
-                'relation': row['relation'],
-                'object': row['object'],
-                'subject': row['subject'],
-            } for _, row in data.iterrows()]))
+        ret.append([{
+            'question': row['question'],
+            'relation': row['relation'],
+            'object': row['object'],
+            'subject': row['subject'],
+        } for _, row in data.iterrows()])
 
     if len(ret) == 1:
         return ret[0]

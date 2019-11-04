@@ -2,7 +2,6 @@ import os
 import io
 
 from torchnlp.download import download_file_maybe_extract
-from torchnlp.datasets.dataset import Dataset
 
 
 def ud_pos_dataset(directory='data/',
@@ -44,7 +43,7 @@ def ud_pos_dataset(directory='data/',
         url (str, optional): URL of the dataset `tar.gz` file.
 
     Returns:
-        :class:`tuple` of :class:`torchnlp.datasets.Dataset` or :class:`torchnlp.datasets.Dataset`:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
         Returns between one and all dataset splits (train, dev and test) depending on if their
         respective boolean argument is ``True``.
 
@@ -80,7 +79,7 @@ def ud_pos_dataset(directory='data/',
                     sentence['tokens'].append(token)
                     sentence['ud_tags'].append(ud_tag)
                     sentence['ptb_tags'].append(ptb_tag)
-        ret.append(Dataset(examples))
+        ret.append(examples)
 
     if len(ret) == 1:
         return ret[0]

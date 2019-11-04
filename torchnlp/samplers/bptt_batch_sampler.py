@@ -1,10 +1,12 @@
 import math
 
+from torch.utils.data.sampler import Sampler
+
 from torchnlp.samplers.bptt_sampler import BPTTSampler
 
 
-class BPTTBatchSampler(object):
-    """Samples sequentially a batch of source and target slices of size ``bptt_length``.
+class BPTTBatchSampler(Sampler):
+    """ Samples sequentially a batch of source and target slices of size ``bptt_length``.
 
     Typically, such a sampler, is used for language modeling training with backpropagation through
     time (BPTT).
@@ -13,13 +15,13 @@ class BPTTBatchSampler(object):
     https://github.com/pytorch/examples/blob/c66593f1699ece14a4a2f4d314f1afb03c6793d9/word_language_model/main.py#L61
 
     Args:
-        data (iterable): Iterable data.
+        data (iterable)
         bptt_length (int): Length of the slice.
         batch_size (int): Size of mini-batch.
         drop_last (bool): If ``True``, the sampler will drop the last batch if its size would be
             less than ``batch_size``.
         type_ (str, optional): Type of batch ['source'|'target'] to load where a target batch is one
-            timestep ahead
+            timestep ahead.
 
     Example:
         >>> sampler = BPTTBatchSampler(range(100), bptt_length=2, batch_size=3, drop_last=False)

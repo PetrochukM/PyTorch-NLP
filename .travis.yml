@@ -1,12 +1,18 @@
 language: python
 matrix:
   include:
+    - python: 3.5
+      dist: xenial
+      sudo: true
+      env: RUN_DOCTEXT=false # Python 3.5 prints differently from Python 3.6
     - python: 3.6
       dist: xenial
       sudo: true
+      env: RUN_DOCTEXT=true
     - python: 3.7
       dist: xenial
       sudo: true
+      env: RUN_DOCTEXT=true
 
 cache: pip
 
