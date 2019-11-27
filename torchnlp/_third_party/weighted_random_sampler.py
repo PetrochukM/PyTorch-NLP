@@ -6,8 +6,10 @@ from torch._six import int_classes as _int_classes
 
 class WeightedRandomSampler(Sampler):
 
-    def __init__(self, weights, num_samples, replacement=True):
-        # NOTE: Adapted `WeightedRandomSampler` to accept `num_samples=0`.
+    def __init__(self, weights, num_samples=None, replacement=True):
+        # NOTE: Adapted `WeightedRandomSampler` to accept `num_samples=0` and `num_samples=None`.
+        if num_samples is None:
+            num_samples = len(weights)
         if not isinstance(num_samples, _int_classes) or isinstance(num_samples, bool) or \
                 num_samples < 0:
             raise ValueError("num_samples should be a positive integer "

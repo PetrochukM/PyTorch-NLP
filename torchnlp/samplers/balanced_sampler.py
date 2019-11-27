@@ -29,6 +29,4 @@ class BalancedSampler(WeightedRandomSampler):
             k: sum([w for c, w in zip(classified, weighted) if k == c]) for k in set(classified)
         }
         weights = [w / class_totals[c] if w > 0 else 0.0 for c, w in zip(classified, weighted)]
-        if 'num_samples' not in kwargs:
-            kwargs['num_samples'] = len(data_source)
         super().__init__(weights=weights, **kwargs)
