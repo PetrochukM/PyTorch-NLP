@@ -61,9 +61,9 @@ class Attention(nn.Module):
         query_len = context.size(1)
 
         if self.attention_type == "general":
-            query = query.view(batch_size * output_len, dimensions)
+            query = query.reshape(batch_size * output_len, dimensions)
             query = self.linear_in(query)
-            query = query.view(batch_size, output_len, dimensions)
+            query = query.reshape(batch_size, output_len, dimensions)
 
         # TODO: Include mask on PADDING_INDEX?
 
