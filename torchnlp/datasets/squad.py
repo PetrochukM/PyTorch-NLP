@@ -67,11 +67,3 @@ def squad_dataset(directory='data/',
         return ret[0]
     else:
         return tuple(ret)
-
-
-if __name__ == '__main__':
-    directory = 'tests/_test_data/'
-    train, dev = squad_dataset(directory=directory, train=True, dev=True)
-    print(train[5])
-    print(len(train))
-    print(len(dev))
