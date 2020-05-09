@@ -71,5 +71,6 @@ def squad_dataset(directory='data/',
 
 if __name__ == '__main__':
     train, dev = squad_dataset(train=True, dev=True)
+    print(train[5])
     print(len(train))
     print(len(dev))
