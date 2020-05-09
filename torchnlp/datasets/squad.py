@@ -70,7 +70,8 @@ def squad_dataset(directory='data/',
 
 
 if __name__ == '__main__':
-    train, dev = squad_dataset(train=True, dev=True)
+    directory = 'tests/_test_data/'
+    train, dev = squad_dataset(directory=directory, train=True, dev=True)
     print(train[5])
     print(len(train))
     print(len(dev))
