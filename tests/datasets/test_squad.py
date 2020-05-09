@@ -25,6 +25,3 @@ def test_squad_dataset_row(mock_urlretrieve):
         'question': 'In what R&B group was she the lead singer?',
         'answer': ["Destiny's Child"]
     }
-
-    # Clean up
-    shutil.rmtree(os.path.join(directory, 'trees'))
