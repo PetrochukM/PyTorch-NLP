@@ -1,6 +1,3 @@
-import os
-import shutil
-
 import mock
 
 from torchnlp.datasets import squad_dataset
