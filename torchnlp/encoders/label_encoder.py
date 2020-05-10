@@ -84,7 +84,7 @@ class LabelEncoder(Encoder):
         """
         label = super().encode(label)
 
-        return torch.tensor(self.token_to_index.get(label, self.unknown_index))
+        return torch.tensor(self.token_to_index.get(label, self.unknown_index), dtype=torch.long)
 
     def batch_encode(self, iterator, *args, dim=0, **kwargs):
         """
