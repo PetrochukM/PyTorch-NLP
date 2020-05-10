@@ -4,7 +4,7 @@ from torchnlp.encoders.text.static_tokenizer_encoder import StaticTokenizerEncod
 
 
 def _tokenize(s, delimiter):
-    return s.split(delimiter)
+    return s.split(delimiter) if len(s) > 0 else []
 
 
 def _detokenize(s, delimiter):
