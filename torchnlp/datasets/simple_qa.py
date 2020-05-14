@@ -8,16 +8,16 @@ from torchnlp.download import download_file_maybe_extract
 
 
 def simple_qa_dataset(
-        directory='data/',
-        train=False,
-        dev=False,
-        test=False,
-        extracted_name='SimpleQuestions_v2',
-        train_filename='annotated_fb_data_train.txt',
-        dev_filename='annotated_fb_data_valid.txt',
-        test_filename='annotated_fb_data_test.txt',
-        check_files=['SimpleQuestions_v2/annotated_fb_data_train.txt'],
-        url='https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1',
+    directory='data/',
+    train=False,
+    dev=False,
+    test=False,
+    extracted_name='SimpleQuestions_v2',
+    train_filename='annotated_fb_data_train.txt',
+    dev_filename='annotated_fb_data_valid.txt',
+    test_filename='annotated_fb_data_test.txt',
+    check_files=['SimpleQuestions_v2/annotated_fb_data_train.txt'],
+    url='https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz?raw=1',
 ):  # pragma: no cover
     """
     Load the SimpleQuestions dataset.

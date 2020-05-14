@@ -20,7 +20,7 @@ def test_label_encoder_no_reserved():
     label_encoder.encode('people/deceased_person/place_of_death')
 
     # No ``unknown_index`` defined causes ``RuntimeError`` if an unknown label is used.
-    with pytest.raises(RuntimeError):
+    with pytest.raises(TypeError):
         label_encoder.encode('symbols/namesake/named_after')
 
 
