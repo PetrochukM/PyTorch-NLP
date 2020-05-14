@@ -1,5 +1,4 @@
 import codecs
-from typing import List, Any, Tuple
 from subword_nmt import learn_bpe, apply_bpe
 from collections import Counter
 from sacremoses import MosesTokenizer, MosesDetokenizer
@@ -45,7 +44,8 @@ class BPETextTokenizer(object):
 
     def build_from_corpus(self, item_list, min_count=2, num_symbols=10000,
                           total_symbols=False, from_filenames=True):
-        def segment_words(line): return self._segment_words(line, self.pre_tokenize)
+        def segment_words(line):
+            return self._segment_words(line, self.pre_tokenize)
 
         vocab_words = self.get_vocabulary(item_list, segment_words, from_filenames=from_filenames)
 

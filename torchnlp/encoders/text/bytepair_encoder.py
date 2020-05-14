@@ -1,7 +1,7 @@
 import torch
 
-from torchnlp.encoders.text import TextEncoder, DEFAULT_RESERVED_TOKENS, DEFAULT_EOS_INDEX, DEFAULT_UNKNOWN_INDEX, \
-    DEFAULT_PADDING_INDEX
+from torchnlp.encoders.text import TextEncoder, DEFAULT_RESERVED_TOKENS, DEFAULT_EOS_INDEX, \
+    DEFAULT_UNKNOWN_INDEX, DEFAULT_PADDING_INDEX
 from torchnlp.encoders.text.bpe_text_tokenizer import BPETextTokenizer
 
 
