@@ -23,6 +23,7 @@ mock
 # nltk
 # spacy
 # sacremoses
+# subword-nmt
 
 # Optional CUDA Utilties
 # pynvrtc
