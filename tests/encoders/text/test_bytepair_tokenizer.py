@@ -14,14 +14,14 @@ class TestBPETextTokenizer(unittest.TestCase):
         ]
 
     def test_pre_tokenizer(self):
-        expected = ['One morning I shot an elephant in my pajamas . How he got in my pajamas , I don &apos;t',
+        expected = ['One morning I shot an elephant in my pajamas . How he got in my pajamas ,'
+                    ' I don &apos;t',
                     'know .',
                     'Groucho Marx',
                     'I haven &apos;t slept for 10 days ... because that would be too long .',
                     'Mitch Hedberg']
 
         self.assertListEqual(expected, [BPETextTokenizer.pre_tokenize(sen) for sen in self.corpus])
-
 
     def test_get_vocabulary(self):
         # tokenizer = BPETextTokenizer('test_bpe', use_moses=True)
@@ -53,8 +53,8 @@ class TestBPETextTokenizer(unittest.TestCase):
                     ('i', 'n</w>'): 18, ('le', 'p'): 17, ('l', 'e'): 16, ('m', 'y</w>'): 15,
                     ('n', 'g</w>'): 14, ('o', 't</w>'): 13, ('o', 'u'): 12, ('o', 'w</w>'): 11,
                     ('pajama', 's</w>'): 10, ('pajam', 'a'): 9, ('paja', 'm'): 8, ('paj', 'a'): 7,
-                    ('pa', 'j'): 6, ('p', 'a'): 5, ('po', 's;t</w>'): 4, ('p', 'o'): 3, ('s;', 't</w>'): 2,
-                    ('s', ';'): 1, ('h', 'a'): 0}
+                    ('pa', 'j'): 6, ('p', 'a'): 5, ('po', 's;t</w>'): 4, ('p', 'o'): 3,
+                    ('s;', 't</w>'): 2, ('s', ';'): 1, ('h', 'a'): 0}
         self.assertDictEqual(expected, tokenizer.bpe.bpe_codes)
 
     def test_encode_decode(self):
@@ -84,11 +84,13 @@ class TestBPETextTokenizer(unittest.TestCase):
         tokenizer.build_from_corpus(self.corpus, from_filenames=False)
 
         # test the all item in vocab.
-        expect = {'O@@': 1, 'n@@': 4, 'e': 4, 'm@@': 1, 'o@@': 5, 'r@@': 4, 'i@@': 2, 'ng': 2, 'I': 3,
-                  's@@': 3, 'h@@': 3, 'ot': 2, 'a@@': 4, 'n': 3, 'e@@': 3, 'lep@@': 2, 'ha@@': 3, 't': 3,
-                  'in': 2, 'my': 2, 'pajamas': 2, '.': 4, 'H@@': 2, 'ow': 2, 'g@@': 1, ',': 1, 'd@@': 3,
-                  '&apos;t': 2, 'k@@': 1, 'G@@': 1, 'ou@@': 2, 'c@@': 3, 'o': 2, 'M@@': 2, 'x': 1, 'v@@': 1,
-                  'f@@': 1, 'r': 1, '1@@': 1, '0': 1, 'y@@': 1, 's': 1, '.@@': 2, 'be@@': 2, 'u@@': 1, 't@@': 3,
+        expect = {'O@@': 1, 'n@@': 4, 'e': 4, 'm@@': 1, 'o@@': 5, 'r@@': 4, 'i@@': 2,
+                  'ng': 2, 'I': 3, 's@@': 3, 'h@@': 3, 'ot': 2, 'a@@': 4, 'n': 3,
+                  'e@@': 3, 'lep@@': 2, 'ha@@': 3, 't': 3, 'in': 2, 'my': 2,
+                  'pajamas': 2, '.': 4, 'H@@': 2, 'ow': 2, 'g@@': 1, ',': 1, 'd@@': 3,
+                  '&apos;t': 2, 'k@@': 1, 'G@@': 1, 'ou@@': 2, 'c@@': 3, 'o': 2,
+                  'M@@': 2, 'x': 1, 'v@@': 1, 'f@@': 1, 'r': 1, '1@@': 1, '0': 1,
+                  'y@@': 1, 's': 1, '.@@': 2, 'be@@': 2, 'u@@': 1, 't@@': 3,
                   'w@@': 1, 'l@@': 2, 'd': 1, 'b@@': 1, 'h': 1, 'g': 1}
 
         self.assertDictEqual(expect, tokenizer.vocab)

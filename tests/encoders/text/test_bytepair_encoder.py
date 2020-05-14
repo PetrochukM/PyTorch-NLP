@@ -32,14 +32,15 @@ class TestBPETextTokenizer(unittest.TestCase):
         encoder = BPEEncoder(self.corpus, from_filenames=False)
 
         # excepted encode.
-        expect = [5,  6,  6,  7, 56, 32, 43,  1, 14,  1, 34, 42, 47, 32, 41, 36, 14, 17,
-                  42, 49, 50, 51, 33,  9, 52, 53, 15, 14, 53, 26, 21, 54, 44, 55, 37]
+        expect = [5, 6, 6, 7, 56, 32, 43, 1, 14, 1, 34, 42, 47, 32, 41, 36, 14, 17,
+                  42, 49, 50, 51, 33, 9, 52, 53, 15, 14, 53, 26, 21, 54, 44, 55, 37]
 
         self.assertListEqual(expect, encoder.encode(original).numpy().tolist())
 
     def test_decoder(self):
-        encoded = torch.tensor([5,  6,  6,  7, 56, 32, 43,  1, 14,  1, 34, 42, 47, 32, 41, 36, 14, 17,
-                   42, 49, 50, 51, 33,  9, 52, 53, 15, 14, 53, 26, 21, 54, 44, 55, 37])
+        encoded = torch.tensor([5, 6, 6, 7, 56, 32, 43, 1, 14, 1, 34, 42, 47, 32,
+                                41, 36, 14, 17, 42, 49, 50, 51, 33, 9, 52, 53, 15,
+                                14, 53, 26, 21, 54, 44, 55, 37])
 
         encoder = BPEEncoder(self.corpus, from_filenames=False)
 
