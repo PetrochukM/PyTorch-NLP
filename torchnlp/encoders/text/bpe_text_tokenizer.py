@@ -16,7 +16,6 @@ class BPETextTokenizer(object):
         self.separator = separator
         self.bpe = None
         self.vocab = None
-        self.vocab: List[Tuple[Any, int]]
 
     @staticmethod
     def pre_tokenize(line):
