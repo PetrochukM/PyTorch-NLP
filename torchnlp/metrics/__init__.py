@@ -9,4 +9,4 @@ from torchnlp.metrics.bleu import get_moses_multi_bleu
 # TODO: Implement perplexity
 # TODO: Implement rogue metric
 
-__all__ = ['get_accuracy', 'get_token_accuracy', 'get_moses_multi_bleu']
+__all__ = ['get_accuracy', 'get_token_accuracy', 'get_moses_multi_bleu', 'get_rouge_n']
