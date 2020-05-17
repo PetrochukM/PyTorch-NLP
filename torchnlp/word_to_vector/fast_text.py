@@ -48,7 +48,7 @@ class FastText(_PretrainedWordVectors):
     Args:
         name (str or None, optional): The name of the file that contains the vectors
         url (str or None, optional): url for download if vectors not found in cache
-        language (str): language of the vectors (only needed when both url and name 
+        language (str): language of the vectors (only needed when both url and name
             are ignored)
         aligned (bool): if True: use multilingual embeddings where words with
             the same meaning share (approximately) the same position in the
