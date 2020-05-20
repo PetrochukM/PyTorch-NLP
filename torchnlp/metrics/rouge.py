@@ -94,6 +94,7 @@ def _frp_rouge_l(llcs, m, n, beta=None):
         llcs: Length of LCS
         m: number of words in reference summary
         n: number of words in candidate summary
+        beta: beta = P_lcs / R_lcs when ∂ F_lcs / ∂ R_lcs = ∂ F_lcs / ∂ P_lcs. In DUC, beta is set to a very big number, and only R_lcs is considered.
     Returns:
         dictionary. 'f' for F-measure score, 'p' for Precision score and 'r' for recall score.
     """
@@ -113,6 +114,7 @@ def check_inverse(f, inv_f, eps=1e-5):
     Args:
         f: a function
         inv_f: inverse function of f
+        eps: error threshold
     Returns:
         bool, if inv_f is the inverse function of f
     """
@@ -127,7 +129,7 @@ def check_inverse(f, inv_f, eps=1e-5):
 
 def check_increase(f):
     """
-    Check if function f satisfy f(x + y) > f(x) + f(y)
+    Check if function f satisfies f(x + y) > f(x) + f(y)
     Args:
         f: function
     Returns:
@@ -145,11 +147,14 @@ def _frp_rouge_w(wlcs, m, n, f=lambda x: x**2, inv_f=lambda x: math.sqrt(x), bet
     """
     Computes the LCS-based F-measure score.
     Args:
-    llcs: Length of LCS
-    m: number of words in reference summary
-    n: number of words in candidate summary
+       wlcs: wlcs score
+       m: number of words in reference summary
+       n: number of words in candidate summary
+       f: weighting function
+       inv_f: inverse function of weighting function
+       beta: beta = P_lcs / R_lcs when ∂ F_lcs / ∂ R_lcs = ∂ F_lcs / ∂ P_lcs. In DUC, beta is set to a very big number, and only R_lcs is considered.
     Returns:
-    dictionary. WLCS-based F-measure score, P-score and R-score
+       dictionary. WLCS-based F-measure score, P-score and R-score
     """
     if strict:
         assert(check_increase(f))
@@ -216,7 +221,7 @@ def _w_lcs(x, y, func=lambda x: x**2):
 
     Args:
         x, y: List of element
-        func: the weighting function which should satisfy f(x+y) > f(x) + f(y) for any positive integers x and y, and should hava a close form inverse function.
+        func: the weighting function which should satisfies f(x+y) > f(x) + f(y) for any positive integers x and y, and should hava a close form inverse function.
     Returns:
         Float, the WLCS score of x and y
     """
