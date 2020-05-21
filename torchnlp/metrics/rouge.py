@@ -1,8 +1,5 @@
-import itertools
 import math
 import random
-
-import numpy as np
 
 
 class Ngrams(object):
@@ -94,7 +91,8 @@ def _frp_rouge_l(llcs, m, n, beta=None):
         llcs: Length of LCS
         m: number of words in reference summary
         n: number of words in candidate summary
-        beta: beta = P_lcs / R_lcs when ∂ F_lcs / ∂ R_lcs = ∂ F_lcs / ∂ P_lcs. In DUC, beta is set to a very big number, and only R_lcs is considered.
+        beta: beta = P_lcs / R_lcs when ∂ F_lcs / ∂ R_lcs = ∂ F_lcs / ∂ P_lcs.
+            In DUC, beta is set to a very big number, and only R_lcs is considered.
     Returns:
         dictionary. 'f' for F-measure score, 'p' for Precision score and 'r' for recall score.
     """
@@ -122,7 +120,7 @@ def check_inverse(f, inv_f, eps=1e-5):
         x = random.random() * 100000
         y = f(x)
         _x = inv_f(y)
-        if abs(x-_x) > eps:
+        if abs(x - _x) > eps:
             return False
     return True
 
@@ -138,12 +136,13 @@ def check_increase(f):
     for i in range(100000):
         x = random.random() * 100000
         y = random.random() * 100000
-        if f(x)+f(y) <= f(x+y):
+        if f(x) + f(y) <= f(x + y):
             return False
     return True
 
 
-def _frp_rouge_w(wlcs, m, n, f=lambda x: x**2, inv_f=lambda x: math.sqrt(x), beta=None, strict=False):
+def _frp_rouge_w(wlcs, m, n, f=lambda x: x**2, inv_f=lambda x: math.sqrt(x),
+                 beta=None, strict=False):
     """
     Computes the LCS-based F-measure score.
     Args:
@@ -152,15 +151,16 @@ def _frp_rouge_w(wlcs, m, n, f=lambda x: x**2, inv_f=lambda x: math.sqrt(x), bet
        n: number of words in candidate summary
        f: weighting function
        inv_f: inverse function of weighting function
-       beta: beta = P_lcs / R_lcs when ∂ F_lcs / ∂ R_lcs = ∂ F_lcs / ∂ P_lcs. In DUC, beta is set to a very big number, and only R_lcs is considered.
+       beta: beta = P_lcs / R_lcs when ∂ F_lcs / ∂ R_lcs = ∂ F_lcs / ∂ P_lcs.
+           In DUC, beta is set to a very big number, and only R_lcs is considered.
     Returns:
        dictionary. WLCS-based F-measure score, P-score and R-score
     """
     if strict:
         assert(check_increase(f))
         assert(check_inverse(f, inv_f))
-    r_wlcs = inv_f(wlcs/f(m))
-    p_wlcs = inv_f(wlcs/f(n))
+    r_wlcs = inv_f(wlcs / f(m))
+    p_wlcs = inv_f(wlcs / f(n))
     if not beta:
         beta = p_wlcs / (r_wlcs + 1e-12)
     num = (1 + (beta**2)) * r_wlcs * p_wlcs
@@ -175,7 +175,8 @@ def lcs(x, y):
     Args:
         x, y: List of element
     Returns:
-        Dictionary, table[i, j] represent the length of longest common sequence of x[0: i-1] and y[0: j-1]
+        Dictionary, table[i, j] represent the length of
+            the longest common sequence of x[0: i-1] and y[0: j-1]
     """
     n, m = len(x), len(y)
     table = {}
@@ -203,12 +204,12 @@ def lcs_seq(x, y):
     def lcs_seq_wrd(i, j):
         if i == 0 or j == 0:
             return []
-        if x[i-1] == y[j-1]:
-            return lcs_seq_wrd(i-1, j-1) + [x[i-1]]
-        elif table[i-1, j] > table[i, j-1]:
-            return lcs_seq_wrd(i-1, j)
+        if x[i - 1] == y[j - 1]:
+            return lcs_seq_wrd(i - 1, j - 1) + [x[i - 1]]
+        elif table[i - 1, j] > table[i, j - 1]:
+            return lcs_seq_wrd(i - 1, j)
         else:
-            return lcs_seq_wrd(i, j-1)
+            return lcs_seq_wrd(i, j - 1)
     return lcs_seq_wrd(len(x), len(y))
 
 
@@ -216,12 +217,15 @@ def _w_lcs(x, y, func=lambda x: x**2):
     """
     Compute the we of weighted longest common sequence of x and y,
 
-    c is the dynamic programming table, c(i,j) stores the WLCS score ending at word x[i] of X and y[j] of Y.
-    w is the table storing the length of consecutive matches ended at c table position i and j, and f is a function of consecutive matches at the table position, c(i, j).
+    c is the dynamic programming table, c(i,j) stores
+        the WLCS score ending at word x[i] of X and y[j] of Y.
+    w is the table storing the length of consecutive matches ended at c table position i and j,
+        and f is a function of consecutive matches at the table position, c(i, j).
 
     Args:
         x, y: List of element
-        func: the weighting function which should satisfies f(x+y) > f(x) + f(y) for any positive integers x and y, and should hava a close form inverse function.
+        func: the weighting function which should satisfies f(x+y) > f(x) + f(y) for
+            any positive integers x and y, and should hava a close form inverse function.
     Returns:
         Float, the WLCS score of x and y
     """
@@ -275,7 +279,8 @@ def get_rouge_n(evaluated_sentences, reference_sentences, n=2, exclusive=True):
 
 def get_rouge_l_summary_level(evaluated_sentences, reference_sentences):
     """
-    Computes ROUGE-L of two summary-level sentences, namely evaluated_sentences and reference senteces
+    Computes ROUGE-L of two summary-level sentences, namely
+        evaluated_sentences and reference senteces
     Reference: https://www.aclweb.org/anthology/W04-1013.pdf
     Args:
         evaluated_sentences: List of sentences that have been produced by the summarizer
@@ -304,7 +309,8 @@ def get_rouge_l_summary_level(evaluated_sentences, reference_sentences):
     return _frp_rouge_l(llcs, m, n)
 
 
-def get_rouge_w(evaluated_sentence, reference_sentence, f=lambda x: x**2, inv_f=lambda x: math.sqrt(x)):
+def get_rouge_w(evaluated_sentence, reference_sentence,
+                f=lambda x: x**2, inv_f=lambda x: math.sqrt(x)):
     """
     Computes ROUGE-W of two sequences, namely evaluated_sentence and reference sentece
     Reference: https://www.aclweb.org/anthology/W04-1013.pdf

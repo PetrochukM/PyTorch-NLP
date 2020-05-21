@@ -9,4 +9,5 @@ from torchnlp.metrics.rouge import get_rouge_l_summary_level, get_rouge_n, get_r
 # TODO: Implement perplexity
 # TODO: Implement rogue metric
 
-__all__ = ['get_accuracy', 'get_token_accuracy', 'get_moses_multi_bleu', 'get_rouge_n', 'get_rouge_l_summary_level', 'get_rouge_w']
+__all__ = ['get_accuracy', 'get_token_accuracy', 'get_moses_multi_bleu',
+           'get_rouge_n', 'get_rouge_l_summary_level', 'get_rouge_w']

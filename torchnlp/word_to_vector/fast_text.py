@@ -35,27 +35,20 @@ from torchnlp.word_to_vector.pretrained_word_vectors import _PretrainedWordVecto
 
 class FastText(_PretrainedWordVectors):
     """ Enriched word vectors with subword information from Facebook's AI Research (FAIR) lab.
-
     A approach based on the skipgram model, where each word is represented as a bag of character
     n-grams. A vector representation is associated to each character n-gram; words being
     represented as the sum of these representations.
-
     References:
         * https://arxiv.org/abs/1607.04606
         * https://fasttext.cc/
         * https://arxiv.org/abs/1710.04087
-
     Args:
-        name (str or None, optional): The name of the file that contains the vectors
-        url (str or None, optional): url for download if vectors not found in cache
-        language (str): language of the vectors (only needed when both url and name 
-            are ignored)
+        language (str): language of the vectors
         aligned (bool): if True: use multilingual embeddings where words with
             the same meaning share (approximately) the same position in the
             vector space across languages. if False: use regular FastText
             embeddings. All available languages can be found under
-            https://github.com/facebookresearch/MUSE#multilingual-word-embeddings.
-            (only needed when both url and name are ignored)
+            https://github.com/facebookresearch/MUSE#multilingual-word-embeddings
         cache (str, optional): directory for cached vectors
         unk_init (callback, optional): by default, initialize out-of-vocabulary word vectors
             to zero vectors; can be any function that takes in a Tensor and
@@ -63,7 +56,6 @@ class FastText(_PretrainedWordVectors):
         is_include (callable, optional): callable returns True if to include a token in memory
             vectors cache; some of these embedding files are gigantic so filtering it can cut
             down on the memory usage. We do not cache on disk if ``is_include`` is defined.
-
     Example:
         >>> from torchnlp.word_to_vector import FastText  # doctest: +SKIP
         >>> vectors = FastText()  # doctest: +SKIP
@@ -78,12 +70,10 @@ class FastText(_PretrainedWordVectors):
     url_base = 'https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.{}.vec'
     aligned_url_base = 'https://dl.fbaipublicfiles.com/fasttext/vectors-aligned/wiki.{}.align.vec'
 
-    def __init__(self, language="en", url=None, name=None, aligned=False, **kwargs):
-        if not name:
-            if not url:
-                if aligned:
-                    url = self.aligned_url_base.format(language)
-                else:
-                    url = self.url_base.format(language)
-            name = os.path.basename(url)
+    def __init__(self, language="en", aligned=False, **kwargs):
+        if aligned:
+            url = self.aligned_url_base.format(language)
+        else:
+            url = self.url_base.format(language)
+        name = os.path.basename(url)
         super(FastText, self).__init__(name, url=url, **kwargs)
