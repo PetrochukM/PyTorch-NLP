@@ -117,7 +117,7 @@ class StaticTokenizerEncoder(TextEncoder):
         vector = [self.token_to_index.get(token, self.unknown_index) for token in sequence]
         if self.append_eos:
             vector.append(self.eos_index)
-        return torch.tensor(vector)
+        return torch.tensor(vector, dtype=torch.long)
 
     def decode(self, encoded):
         """ Decodes a tensor into a sequence.
