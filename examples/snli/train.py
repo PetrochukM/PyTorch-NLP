@@ -91,7 +91,7 @@ for epoch in range(args.epochs):
 
     train_sampler = SequentialSampler(train)
     train_batch_sampler = BucketBatchSampler(
-        train_sampler, args.batch_size, True, sort_key=lambda r: len(row['premise']))
+        train_sampler, args.batch_size, True, sort_key=lambda r: len(train[r]['premise']))
     train_iterator = DataLoader(
         train,
         batch_sampler=train_batch_sampler,
@@ -142,9 +142,9 @@ for epoch in range(args.epochs):
             # calculate accuracy on validation set
             n_dev_correct, dev_loss = 0, 0
 
-            dev_sampler = SequentialSampler(train)
+            dev_sampler = SequentialSampler(dev)
             dev_batch_sampler = BucketBatchSampler(
-                dev, args.batch_size, True, sort_key=lambda r: len(row['premise']))
+                dev_sampler, args.batch_size, True, sort_key=lambda r: len(dev[r]['premise']))
             dev_iterator = DataLoader(
                 dev,
                 batch_sampler=dev_batch_sampler,
