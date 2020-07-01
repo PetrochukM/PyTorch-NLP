@@ -15,15 +15,13 @@ def squad_dataset(directory='data/',
     """
     Load the Stanford Question Answering Dataset (SQuAD) dataset.
 
-    Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset,
-    consisting of questions posed by crowdworkers on a set of Wikipedia articles,
-    where the answer to every question is a segment of text, or span,
-    from the corresponding reading passage, or the question might be unanswerable.
-    SQuAD2.0 combines the 100,000 questions in SQuAD1.1 with over 50,000 unanswerable
-    questions written adversarially by crowdworkers to look similar to answerable ones.
-    To do well on SQuAD2.0, systems must not only answer questions when possible,
-    but also determine when no answer is supported by the paragraph
-    and abstain from answering.
+    Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of
+    questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every
+    question is a segment of text, or span, from the corresponding reading passage, or the question
+    might be unanswerable. SQuAD2.0 combines the 100,000 questions in SQuAD1.1 with over 50,000
+    unanswerable questions written adversarially by crowdworkers to look similar to answerable
+    ones. To do well on SQuAD2.0, systems must not only answer questions when possible, but also
+    determine when no answer is supported by the paragraph and abstain from answering.
 
     **Reference:** https://rajpurkar.github.io/SQuAD-explorer/
     **Citation:**
@@ -50,8 +48,10 @@ def squad_dataset(directory='data/',
     Example:
         >>> from torchnlp.datasets import squad_dataset  # doctest: +SKIP
         >>> train = squad_dataset(train=True)  # doctest: +SKIP
-        >>> train[0]  # doctest: +SKIP
-        {'question': 'When did Beyonce start becoming popular?', 'answer': ['in the late 1990s']}
+        >>> train[0]['paragraphs'][0]['qas'][0]['question']  # doctest: +SKIP
+        'When did Beyonce start becoming popular?'
+        >>> train[0]['paragraphs'][0]['qas'][0]['answers'][0]  # doctest: +SKIP
+        {'text': 'in the late 1990s', 'answer_start': 269}
     """
     download_file_maybe_extract(url=url_dev, directory=directory, check_files=check_files_dev)
     download_file_maybe_extract(url=url_train, directory=directory, check_files=check_files_train)
@@ -61,17 +61,8 @@ def squad_dataset(directory='data/',
     splits = [f for (requested, f) in splits if requested]
     for filename in splits:
         full_path = os.path.join(directory, filename)
-        examples = []
         with open(full_path, 'r') as temp:
-            dataset = json.load(temp)
-
-        for article in dataset['data']:
-            for paragraph in article['paragraphs']:
-                for qa in paragraph['qas']:
-                    question = qa['question']
-                    answer = [a['text'] for a in qa['answers']]
-                    examples.append({'question': question, 'answer': answer})
-        ret.append(examples)
+            ret.append(json.load(temp)['data'])
 
     if len(ret) == 1:
         return ret[0]

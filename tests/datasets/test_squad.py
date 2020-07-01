@@ -15,10 +15,12 @@ def test_squad_dataset_row(mock_urlretrieve):
     assert len(train) > 0
     assert len(dev) > 0
 
-    assert len(train) == 1450
-    assert len(dev) == 626
+    assert len(train) == 2
+    assert len(dev) == 2
 
-    assert train[5] == {
-        'question': 'In what R&B group was she the lead singer?',
-        'answer': ["Destiny's Child"]
-    }
+    assert train[0]['paragraphs'][0]['qas'][0]['question'] == (
+        'When did Beyonce start becoming popular?')
+    assert train[0]['paragraphs'][0]['qas'][0]['answers'] == [{
+        'text': 'in the late 1990s',
+        'answer_start': 269
+    }]
