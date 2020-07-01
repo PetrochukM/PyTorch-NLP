@@ -15,8 +15,8 @@ def test_squad_dataset_row(mock_urlretrieve):
     assert len(train) > 0
     assert len(dev) > 0
 
-    assert len(train) == 130319
-    assert len(dev) == 11873
+    assert len(train) == 1450
+    assert len(dev) == 626
 
     assert train[5] == {
         'question': 'In what R&B group was she the lead singer?',
