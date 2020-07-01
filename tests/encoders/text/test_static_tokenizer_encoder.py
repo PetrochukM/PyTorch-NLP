@@ -1,6 +1,7 @@
 import pickle
 
 import pytest
+import torch
 
 from torchnlp.encoders.text import StaticTokenizerEncoder
 
@@ -13,6 +14,12 @@ def input_():
 @pytest.fixture
 def encoder(input_):
     return StaticTokenizerEncoder([input_])
+
+
+def test_static_tokenizer_encoder__empty(encoder):
+    tokens = encoder.encode('')
+    assert tokens.dtype == torch.long
+    assert encoder.decode(tokens) == ''
 
 
 def test_static_tokenizer_encoder(encoder, input_):
