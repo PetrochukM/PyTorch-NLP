@@ -13,8 +13,8 @@ def squad_dataset(directory='data/',
                   url_train='https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json',
                   url_dev='https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v2.0.json'):
     """
-
     Load the Stanford Question Answering Dataset (SQuAD) dataset.
+
     Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset,
     consisting of questions posed by crowdworkers on a set of Wikipedia articles,
     where the answer to every question is a segment of text, or span,
@@ -32,17 +32,27 @@ def squad_dataset(directory='data/',
     arXiv preprint arXiv:1806.03822.
 
     Args:
-    directory (str, optional): Directory to cache the dataset.
-    train (bool, optional): If to load the training split of the dataset.
-    dev (bool, optional): If to load the development split of the dataset.
-    train_filename (str, optional): The filename of the training split.
-    dev_filename (str, optional): The filename of the development split.
-    check_files_train (list, optional):All train filenames
-    check_files_dev (list, optional):All development filenames
-    url_train (str, optional): URL of the train dataset `.json` file.
-    url_dev (str, optional): URL of the dev dataset `.json` file.
-    """
+        directory (str, optional): Directory to cache the dataset.
+        train (bool, optional): If to load the training split of the dataset.
+        dev (bool, optional): If to load the development split of the dataset.
+        train_filename (str, optional): The filename of the training split.
+        dev_filename (str, optional): The filename of the development split.
+        check_files_train (list, optional): All train filenames
+        check_files_dev (list, optional): All development filenames
+        url_train (str, optional): URL of the train dataset `.json` file.
+        url_dev (str, optional): URL of the dev dataset `.json` file.
 
+    Returns:
+        :class:`tuple` of :class:`iterable` or :class:`iterable`:
+        Returns between one and all dataset splits (train and dev) depending on if their
+        respective boolean argument is ``True``.
+
+    Example:
+        >>> from torchnlp.datasets import squad_dataset  # doctest: +SKIP
+        >>> train = squad_dataset(train=True)  # doctest: +SKIP
+        >>> train[0]  # doctest: +SKIP
+        {'question': 'When did Beyonce start becoming popular?', 'answer': ['in the late 1990s']}
+    """
     download_file_maybe_extract(url=url_dev, directory=directory, check_files=check_files_dev)
     download_file_maybe_extract(url=url_train, directory=directory, check_files=check_files_train)
 
@@ -60,10 +70,7 @@ def squad_dataset(directory='data/',
                 for qa in paragraph['qas']:
                     question = qa['question']
                     answer = [a['text'] for a in qa['answers']]
-                    examples.append({
-                        'question': question,
-                        'answer': answer
-                    })
+                    examples.append({'question': question, 'answer': answer})
         ret.append(examples)
 
     if len(ret) == 1:
