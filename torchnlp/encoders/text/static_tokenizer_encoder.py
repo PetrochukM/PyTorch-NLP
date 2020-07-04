@@ -3,9 +3,10 @@ from collections.abc import Iterable
 
 import torch
 
-from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_EOS_INDEX, DEFAULT_SOS_INDEX
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_EOS_INDEX
 from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_PADDING_INDEX
 from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_RESERVED_TOKENS
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_SOS_INDEX
 from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_UNKNOWN_INDEX
 from torchnlp.encoders.text.text_encoder import TextEncoder
 
@@ -140,4 +141,8 @@ class StaticTokenizerEncoder(TextEncoder):
         """
         encoded = super().decode(encoded)
         tokens = [self.index_to_token[index] for index in encoded]
+        if self.append_sos:
+            tokens = tokens[1:]
+        if self.append_eos:
+            tokens = tokens[:-1]
         return self.detokenize(tokens)

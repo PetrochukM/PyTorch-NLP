@@ -113,7 +113,7 @@ class SubwordEncoder(TextEncoder):
         sequence = self.tokenizer.encode(sequence)
         vector = [self.token_to_index.get(token, self.unknown_index) for token in sequence]
         if self.append_sos:
-            vector = [self.sos_index, self.token_to_index.get('_')] + vector
+            vector = [self.sos_index] + vector
         if self.append_eos:
             vector.append(self.eos_index)
         return torch.tensor(vector, dtype=torch.long)
@@ -128,9 +128,9 @@ class SubwordEncoder(TextEncoder):
             str: Sequence decoded from ``encoded``.
         """
         encoded = super().decode(encoded)
-        decoded = self.tokenizer.decode([self.index_to_token[index] for index in encoded])
+        tokens = [self.index_to_token[index] for index in encoded]
         if self.append_sos:
-            decoded = decoded[:3] + ' ' + decoded[3:]
+            tokens = tokens[1:]
         if self.append_eos:
-            decoded = decoded[:-4] + ' ' + decoded[-4:]
-        return decoded
+            tokens = tokens[:-1]
+        return self.tokenizer.decode(tokens)

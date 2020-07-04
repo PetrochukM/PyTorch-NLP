@@ -2,12 +2,12 @@ import pickle
 
 import pytest
 
+from torchnlp.encoders.text import DEFAULT_EOS_INDEX
+from torchnlp.encoders.text import DEFAULT_SOS_INDEX
 from torchnlp.encoders.text import SubwordEncoder
-from torchnlp.encoders.text import DEFAULT_EOS_INDEX, DEFAULT_SOS_INDEX, \
-    DEFAULT_SOS_TOKEN, DEFAULT_EOS_TOKEN
 
 
-class TestSubwordEncoder():
+class TestSubwordEncoder:
 
     @pytest.fixture(scope='module')
     def corpus(self):
@@ -33,18 +33,14 @@ class TestSubwordEncoder():
     def test_eos(self, corpus):
         encoder = SubwordEncoder(corpus, append_eos=True)
         input_ = 'This is a sentence'
-        encoded = encoder.encode(input_)
-        assert encoded[-1] == DEFAULT_EOS_INDEX
-        decoded = encoder.decode(encoded)
-        assert decoded.find(DEFAULT_EOS_TOKEN) == len(decoded) - len(DEFAULT_EOS_TOKEN)
+        assert encoder.encode(input_)[-1] == DEFAULT_EOS_INDEX
+        assert encoder.decode(encoder.encode(input_)) == input_
 
     def test_sos(self, corpus):
         encoder = SubwordEncoder(corpus, append_sos=True)
         input_ = 'This is a sentence'
-        encoded = encoder.encode(input_)
-        assert encoded[0] == DEFAULT_SOS_INDEX
-        decoded = encoder.decode(encoded)
-        assert decoded.find(DEFAULT_SOS_TOKEN) == 0
+        assert encoder.encode(input_)[0] == DEFAULT_SOS_INDEX
+        assert encoder.decode(encoder.encode(input_)) == input_
 
     def test_is_pickleable(self, encoder):
         pickle.dumps(encoder)
