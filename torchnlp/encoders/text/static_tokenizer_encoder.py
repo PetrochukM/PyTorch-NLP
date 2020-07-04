@@ -6,6 +6,7 @@ import torch
 from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_EOS_INDEX
 from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_PADDING_INDEX
 from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_RESERVED_TOKENS
+from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_SOS_INDEX
 from torchnlp.encoders.text.default_reserved_tokens import DEFAULT_UNKNOWN_INDEX
 from torchnlp.encoders.text.text_encoder import TextEncoder
 
@@ -27,10 +28,14 @@ class StaticTokenizerEncoder(TextEncoder):
           the encoding dictionary.
         tokenize (callable): :class:`callable` to tokenize a sequence.
         detokenize (callable): :class:`callable` to detokenize a sequence.
+        append_sos (bool, optional): If ``True`` insert SOS token at the start of the encoded
+          vector.
         append_eos (bool, optional): If ``True`` append EOS token onto the end to the encoded
           vector.
         reserved_tokens (list of str, optional): List of reserved tokens inserted in the beginning
             of the dictionary.
+        sos_index (int, optional): The sos token is used to encode the start of a sequence. This is
+          the index that token resides at.
         eos_index (int, optional): The eos token is used to encode the end of a sequence. This is
           the index that token resides at.
         unknown_index (int, optional): The unknown token is used to encode unseen tokens. This is
@@ -55,10 +60,12 @@ class StaticTokenizerEncoder(TextEncoder):
     def __init__(self,
                  sample,
                  min_occurrences=1,
+                 append_sos=False,
                  append_eos=False,
                  tokenize=_tokenize,
                  detokenize=_detokenize,
                  reserved_tokens=DEFAULT_RESERVED_TOKENS,
+                 sos_index=DEFAULT_SOS_INDEX,
                  eos_index=DEFAULT_EOS_INDEX,
                  unknown_index=DEFAULT_UNKNOWN_INDEX,
                  padding_index=DEFAULT_PADDING_INDEX,
@@ -68,12 +75,14 @@ class StaticTokenizerEncoder(TextEncoder):
         if not isinstance(sample, Iterable):
             raise TypeError('Sample must be a `collections.abc.Iterable`.')
 
+        self.sos_index = sos_index
         self.eos_index = eos_index
         self.unknown_index = unknown_index
         self.padding_index = padding_index
         self.reserved_tokens = reserved_tokens
         self.tokenize = tokenize
         self.detokenize = detokenize
+        self.append_sos = append_sos
         self.append_eos = append_eos
         self.tokens = Counter()
 
@@ -115,6 +124,8 @@ class StaticTokenizerEncoder(TextEncoder):
         sequence = super().encode(sequence)
         sequence = self.tokenize(sequence)
         vector = [self.token_to_index.get(token, self.unknown_index) for token in sequence]
+        if self.append_sos:
+            vector = [self.sos_index] + vector
         if self.append_eos:
             vector.append(self.eos_index)
         return torch.tensor(vector, dtype=torch.long)
@@ -130,4 +141,8 @@ class StaticTokenizerEncoder(TextEncoder):
         """
         encoded = super().decode(encoded)
         tokens = [self.index_to_token[index] for index in encoded]
+        if self.append_sos:
+            tokens = tokens[1:]
+        if self.append_eos:
+            tokens = tokens[:-1]
         return self.detokenize(tokens)

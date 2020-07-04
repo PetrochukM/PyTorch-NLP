@@ -2,8 +2,9 @@ import pickle
 
 import pytest
 
-from torchnlp.encoders.text import SubwordEncoder
 from torchnlp.encoders.text import DEFAULT_EOS_INDEX
+from torchnlp.encoders.text import DEFAULT_SOS_INDEX
+from torchnlp.encoders.text import SubwordEncoder
 
 
 class TestSubwordEncoder:
@@ -33,6 +34,13 @@ class TestSubwordEncoder:
         encoder = SubwordEncoder(corpus, append_eos=True)
         input_ = 'This is a sentence'
         assert encoder.encode(input_)[-1] == DEFAULT_EOS_INDEX
+        assert encoder.decode(encoder.encode(input_)) == input_
+
+    def test_sos(self, corpus):
+        encoder = SubwordEncoder(corpus, append_sos=True)
+        input_ = 'This is a sentence'
+        assert encoder.encode(input_)[0] == DEFAULT_SOS_INDEX
+        assert encoder.decode(encoder.encode(input_)) == input_
 
     def test_is_pickleable(self, encoder):
         pickle.dumps(encoder)
