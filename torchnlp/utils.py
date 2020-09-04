@@ -7,10 +7,9 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-def _get_tensors(object_, seen=set()):
+def _get_tensors(object_, seen=None):
     if torch.is_tensor(object_):
         return [object_]
-
     elif isinstance(object_, (str, float, int)) or id(object_) in seen:
         return []
 
@@ -42,7 +41,7 @@ def get_tensors(object_):
     Returns:
         (list of torch.tensor): List of tensors that are associated with ``object_``.
     """
-    return _get_tensors(object_)
+    return _get_tensors(object_, set())
 
 
 def sampler_to_iterator(dataset, sampler):

@@ -1,4 +1,4 @@
-from collections import namedtuple
+import typing
 
 import torch
 
@@ -25,7 +25,9 @@ def pad_tensor(tensor, length, padding_index=DEFAULT_PADDING_INDEX):
     return torch.cat((tensor, padding), dim=0)
 
 
-BatchedSequences = namedtuple('BatchedSequences', ['tensor', 'lengths'])
+class SequenceBatch(typing.NamedTuple):
+    tensor: torch.Tensor
+    lengths: torch.Tensor
 
 
 def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
@@ -37,8 +39,7 @@ def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
         dim (int, optional): Dimension on to which to concatenate the batch of tensors.
 
     Returns
-        BatchedSequences(torch.Tensor, torch.Tensor): Padded tensors and original lengths of
-            tensors.
+        SequenceBatch: Padded tensors and original lengths of tensors.
     """
     lengths = [tensor.shape[0] for tensor in batch]
     max_len = max(lengths)
@@ -48,7 +49,7 @@ def stack_and_pad_tensors(batch, padding_index=DEFAULT_PADDING_INDEX, dim=0):
     for _ in range(dim):
         lengths = lengths.unsqueeze(0)
 
-    return BatchedSequences(padded, lengths)
+    return SequenceBatch(padded, lengths)
 
 
 class TextEncoder(Encoder):
