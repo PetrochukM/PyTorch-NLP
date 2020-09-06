@@ -1,17 +1,21 @@
-from collections import namedtuple
 from contextlib import contextmanager
 
 import functools
 import random
+import typing
 
 import numpy as np
 import torch
 
-RandomGeneratorState = namedtuple('RandomGeneratorState',
-                                  ['random', 'torch', 'numpy', 'torch_cuda'])
+
+class RandomGeneratorState(typing.NamedTuple):
+    random: typing.Tuple[typing.Any]
+    torch: torch.Tensor
+    numpy: typing.Tuple[typing.Any]
+    torch_cuda: typing.Optional[typing.Tuple[typing.Any]]
 
 
-def get_random_generator_state(cuda=torch.cuda.is_available()):
+def get_random_generator_state(cuda: bool = torch.cuda.is_available()) -> RandomGeneratorState:
     """ Get the `torch`, `numpy` and `random` random generator state.
 
     Args:
@@ -26,7 +30,7 @@ def get_random_generator_state(cuda=torch.cuda.is_available()):
                                 torch.cuda.get_rng_state_all() if cuda else None)
 
 
-def set_random_generator_state(state):
+def set_random_generator_state(state: RandomGeneratorState):
     """ Set the `torch`, `numpy` and `random` random generator state.
 
     Args:
