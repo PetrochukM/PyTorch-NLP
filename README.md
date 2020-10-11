@@ -17,7 +17,7 @@ _Logo by [Chloe Yeo](http://www.yeochloe.com/), Corporate Sponsorship by [WellSa
 
 ## Installation 🐾
 
-Make sure you have Python 3.5+ and PyTorch 1.0+. You can then install `pytorch-nlp` using
+Make sure you have Python 3.6+ and PyTorch 1.0+. You can then install `pytorch-nlp` using
 pip:
 
 ```python

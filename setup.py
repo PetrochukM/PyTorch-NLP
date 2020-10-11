@@ -43,7 +43,6 @@ setup_info = dict(
         'Intended Audience :: Education',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: Apache Software License',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Topic :: Scientific/Engineering',
@@ -54,7 +53,7 @@ setup_info = dict(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords='pytorch nlp text torchtext torchnlp',
-    python_requires='>=3.5',
+    python_requires='>=3.6',
 
     # Package info
     packages=find_packages(exclude=['.vscode', 'build_tools', 'docs', 'tests']),
