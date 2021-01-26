@@ -54,7 +54,7 @@ class BucketBatchSampler(BatchSampler):
                  sort_key=identity,
                  bucket_size_multiplier=100):
         super().__init__(sampler, batch_size, drop_last)
-        self.sort_key = sort_key       
+        self.sort_key = sort_key
         _bucket_size = batch_size * bucket_size_multiplier
         if hasattr(sampler, "__len__"):
             _bucket_size = min(_bucket_size, len(sampler))
