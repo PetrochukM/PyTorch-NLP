@@ -93,13 +93,13 @@ def average_rouge ( candidate, references ):
   print("average:" ,avg_rouge)
     
 def main():
-    x = "The quick brown fox jumped over the wall"
-    y = "The fast black dog and fox jumped into the wall"
-    x_words = split_into_words(x)
-    y_words = split_into_words(y)
-    print(x_words)
-    lcs = len_lcs(x_words,y_words)
-    average_rouge(x, y )
-    
-if __main__ == "main":
+	x = "The quick brown fox jumped over the wall"
+	y = "The fast black dog and fox jumped into the wall"
+	x_words = split_into_words(x)
+	y_words = split_into_words(y)
+	print(x_words)
+	lcs = len_lcs(x_words,y_words)
+	average_rouge(x, y )
+   
+if __name__ == "__main__":
     main()
