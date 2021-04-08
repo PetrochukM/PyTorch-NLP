@@ -90,7 +90,7 @@ def average_rouge(candidate, references):
     rouge_2 = rouge_n(candidate, references, 2)
     rouge_lcs = rogue_l(split_into_words(candidate),
                         split_into_words(references))
-    avg_rouge = (rouge_1+rouge_2+rouge_lcs)/3
+    avg_rouge = (rouge_1 + rouge_2 + rouge_lcs) / 3
     print("rouge_1:", rouge_1)
     print("rouge_2:", rouge_2)
     print("rouge_lcs:", rouge_lcs)
