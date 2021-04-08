@@ -1,5 +1,3 @@
-import itertools
-import numpy as np
 
 
 def _get_ngrams(n, text):
@@ -106,6 +104,7 @@ def main():
     y_words = split_into_words(y)
     print(x_words)
     lcs = len_lcs(x_words, y_words)
+    print(lcs)
     average_rouge(x, y)
 
 
