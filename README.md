@@ -1,3 +1,5 @@
+# PyTorch-NLP
+Basic Utilities for PyTorch Natural Language Processing (NLP)
 <p align="center"><img width="55%" src="docs/_static/img/logo.svg" /></p>
 
 <h3 align="center">Basic Utilities for PyTorch Natural Language Processing (NLP)</h3>
@@ -45,7 +47,6 @@ Load the IMDB dataset, for example:
 
 ```python
 from torchnlp.datasets import imdb_dataset
-
 # Load the imdb training dataset
 train = imdb_dataset(train=True)
 train[0]  # RETURNS: {'text': 'For a movie that gets..', 'sentiment': 'pos'}
@@ -55,17 +56,13 @@ Load a custom dataset, for example:
 
 ```python
 from pathlib import Path
-
 from torchnlp.download import download_file_maybe_extract
-
 directory_path = Path('data/')
 train_file_path = Path('trees/train.txt')
-
 download_file_maybe_extract(
     url='http://nlp.stanford.edu/sentiment/trainDevTestTrees_PTB.zip',
     directory=directory_path,
     check_files=[train_file_path])
-
 open(directory_path / train_file_path)
 ```
 
@@ -80,7 +77,6 @@ text into tokens whenever it encounters a whitespace character.
 
 ```python
 from torchnlp.encoders.text import WhitespaceEncoder
-
 loaded_data = ["now this ain't funny", "so don't you dare laugh"]
 encoder = WhitespaceEncoder(loaded_data)
 encoded_data = [encoder.encode(example) for example in loaded_data]
@@ -95,13 +91,10 @@ import torch
 from torchnlp.samplers import BucketBatchSampler
 from torchnlp.utils import collate_tensors
 from torchnlp.encoders.text import stack_and_pad_tensors
-
 encoded_data = [torch.randn(2), torch.randn(3), torch.randn(4), torch.randn(5)]
-
 train_sampler = torch.utils.data.sampler.SequentialSampler(encoded_data)
 train_batch_sampler = BucketBatchSampler(
     train_sampler, batch_size=2, drop_last=False, sort_key=lambda i: encoded_data[i].shape[0])
-
 batches = [[encoded_data[i] for i in batch] for batch in train_batch_sampler]
 batches = [collate_tensors(batch, stack_tensors=stack_and_pad_tensors) for batch in batches]
 ```
@@ -128,9 +121,7 @@ Wrap any code that's random, with `fork_rng` and you'll be good to go, like so:
 import random
 import numpy
 import torch
-
 from torchnlp.random import fork_rng
-
 with fork_rng(seed=123):  # Ensure determinism
     print('Random:', random.randint(1, 2**31))
     print('Numpy:', numpy.random.randint(1, 2**31))
@@ -154,9 +145,7 @@ pre-trained word vectors to set your embeddings, like so:
 import torch
 from torchnlp.encoders.text import WhitespaceEncoder
 from torchnlp.word_to_vector import GloVe
-
 encoder = WhitespaceEncoder(["now this ain't funny", "so don't you dare laugh"])
-
 vocab_set = set(encoder.vocab)
 pretrained_embedding = GloVe(name='6B', dim=100, is_include=lambda w: w in vocab_set)
 embedding_weights = torch.Tensor(encoder.vocab_size, pretrained_embedding.dim)
@@ -171,10 +160,8 @@ For example, from the neural network package, apply the state-of-the-art `Locked
 ```python
 import torch
 from torchnlp.nn import LockedDropout
-
 input_ = torch.randn(6, 3, 10)
 dropout = LockedDropout(0.5)
-
 # Apply a LockedDropout to `input_`
 dropout(input_) # RETURNS: torch.FloatTensor (6x3x10)
 ```
@@ -185,10 +172,8 @@ Compute common NLP metrics such as the BLEU score.
 
 ```python
 from torchnlp.metrics import get_moses_multi_bleu
-
 hypotheses = ["The brown fox jumps over the dog 笑"]
 references = ["The quick brown fox jumps over the lazy dog 笑"]
-
 # Compute BLEU score with the official BLEU perl script
 get_moses_multi_bleu(hypotheses, references, lowercase=True)  # RETURNS: 47.9
 ```
