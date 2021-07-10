@@ -1,7 +1,6 @@
 import torch
 
 from torch.utils.data.sampler import Sampler
-from torch._six import int_classes as _int_classes
 
 
 class WeightedRandomSampler(Sampler):
@@ -10,7 +9,7 @@ class WeightedRandomSampler(Sampler):
         # NOTE: Adapted `WeightedRandomSampler` to accept `num_samples=0` and `num_samples=None`.
         if num_samples is None:
             num_samples = len(weights)
-        if not isinstance(num_samples, _int_classes) or isinstance(num_samples, bool) or \
+        if not isinstance(num_samples, int) or isinstance(num_samples, bool) or \
                 num_samples < 0:
             raise ValueError("num_samples should be a positive integer "
                              "value, but got num_samples={}".format(num_samples))
