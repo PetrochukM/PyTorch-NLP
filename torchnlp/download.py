@@ -6,6 +6,7 @@ import subprocess
 import urllib.request
 import zipfile
 
+
 from torchnlp._third_party.lazy_loader import LazyLoader
 from tqdm import tqdm
 
@@ -147,11 +148,11 @@ def download_file_maybe_extract(url, directory, filename=None, extension=None, c
 
     directory = str(directory)
     filepath = os.path.join(directory, filename)
-    check_files = [os.path.join(directory, str(f)) for f in check_files]
+    check_files = [os.path.exists(os.path.join(directory, str(f))) for f in check_files]
 
-    if len(check_files) > 0 and _check_download(*check_files):
+    if check_files:
         return filepath
-
+ 
     if not os.path.isdir(directory):
         os.makedirs(directory)
 
