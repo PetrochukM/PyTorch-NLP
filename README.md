@@ -1,6 +1,6 @@
 ## :two_hearts: Now Archived :two_hearts:
 
-With the PyTorch toolchain is maturing, it's time to archive repos like this one. You'll be able to find mature options for every part of this toolkit: 
+With the PyTorch toolchain maturing, it's time to archive repos like this one. You'll be able to find mature options for every part of this toolkit: 
 
 - [Hugging Face Datasets (Datasets)](https://github.com/huggingface/datasets)
 - [Hugging Face Tokenizers (Encoders)](https://github.com/huggingface/tokenizers)
