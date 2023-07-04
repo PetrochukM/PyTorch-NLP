@@ -1,4 +1,4 @@
-## Archived
+## :two_hearts: Now Archived :two_hearts:
 
 With the PyTorch toolchain is maturing, it's time to archive repos like this one. You'll be able to find mature options for every part of this toolkit: 
 
@@ -10,7 +10,7 @@ With the PyTorch toolchain is maturing, it's time to archive repos like this one
 - [PyTorch NN (NN)](https://pytorch.org/docs/stable/nn.html)
 - [PyTorch TorchText (All-In-One)](https://pytorch.org/text/stable/transforms.html)
 
-Happy developing! 
+Happy developing! :sparkles:
 
 Feel free to contact me if anyone wants to unarchive this repo and continue developing it. You can reach me at "petrochukm [at] gmail.com".
 
