@@ -1,3 +1,21 @@
+## Archived
+
+With the PyTorch toolchain is maturing, it's time to archive repos like this one. You'll be able to find mature options for every part of this toolkit: 
+
+- [Hugging Face Datasets (Datasets)](https://github.com/huggingface/datasets)
+- [Hugging Face Tokenizers (Encoders)](https://github.com/huggingface/tokenizers)
+- [Hugging Face Metrics (Metrics)](https://github.com/huggingface/evaluate)
+- [PyTorch Datapipes (Download & Samplers)](https://github.com/pytorch/data)
+- [Hugging Face Embeddings (Word Vectors)](https://huggingface.co/blog/getting-started-with-embeddings)
+- [PyTorch NN (NN)](https://pytorch.org/docs/stable/nn.html)
+- [PyTorch TorchText (All-In-One)](https://pytorch.org/text/stable/transforms.html)
+
+Happy developing! 
+
+Feel free to contact me if anyone wants to unarchive this repo and continue developing it. You can reach me at "petrochukm [at] gmail.com".
+
+------
+
 <p align="center"><img width="55%" src="docs/_static/img/logo.svg" /></p>
 
 <h3 align="center">Basic Utilities for PyTorch Natural Language Processing (NLP)</h3>
