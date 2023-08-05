@@ -106,7 +106,7 @@ def decode(tokens):
 def _escape_token(token, alphabet):
     """
     Escape away underscores and OOV characters and append '_'.
-    This allows the token to be experessed as the concatenation of a list
+    This allows the token to be expressed as the concatenation of a list
     of subtokens from the vocabulary. The underscore acts as a sentinel
     which allows us to invertibly concatenate multiple such lists.
     Args:
