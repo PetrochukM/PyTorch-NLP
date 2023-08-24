@@ -31,7 +31,7 @@ class SpacyEncoder(StaticTokenizerEncoder):
 
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, language='en_core_web_sm', **kwargs):
         if 'tokenize' in kwargs:
             raise TypeError('``SpacyEncoder`` does not take keyword argument ``tokenize``.')
 
@@ -41,12 +41,10 @@ class SpacyEncoder(StaticTokenizerEncoder):
             print("Please install spaCy: " "`pip install spacy`")
             raise
 
-        # Use English as default when no language was specified
-        language = kwargs.get('language', 'en')
 
         # All languages supported by spaCy can be found here:
         #   https://spacy.io/models/#available-models
-        supported_languages = ['en', 'de', 'es', 'pt', 'fr', 'it', 'nl', 'xx']
+        supported_languages = ['en', 'de', 'es', 'pt', 'fr', 'it', 'nl', 'xx', 'en_core_web_sm']
 
         if language in supported_languages:
             # Load the spaCy language model if it has been installed
